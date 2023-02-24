@@ -28,4 +28,3 @@ const AdminLoginSchema = new mongoose.Schema({
 
 const AdminCollection = mongoose.model("admin", AdminLoginSchema);
 module.exports = AdminCollection;
-console.log("hello");
