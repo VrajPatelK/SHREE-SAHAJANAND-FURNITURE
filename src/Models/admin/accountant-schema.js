@@ -2,44 +2,40 @@ const mongoose = require('mongoose');
 
 const AccountantShcema = new mongoose.Schema({
 
-    accountant_name: {
-        type: String,
-        required: true,
-    },
-    accountant_email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    accountant_mobile: {
-        type: Number,
-        required: true,
-        unique: true,
-        minLength: 10,
-        maxLength: 10
-    },
-    accountant_img: {
-        type: String,
-    },
-    accountant_address: {
-        type: String,
-        required: true,
+    accountant_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "customer"
     },
     accountant_study: {
-        type: String
+        type: String,
+        required: true,
     },
     accountant_experience: {
         type: Number,
+        required: true,
         min: 0
     },
-    accountant_pass: {
-        type: String,
-        required: true
-    }
+    loginTokens: [{
+        token: {
+            type: String,
+            required: true,
+            unique: true
+        }
+    }],
 });
 
-// Accoutant:-
-// => name, email, mobile ,address, study background, experience
+
+
+AccountantShcema.methods.createToken = async function () {
+    try {
+        let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+        this.loginTokens.push({ token: token });
+        return token;
+
+    } catch (error) {
+        res.status(401).send(error);
+    }
+}
 
 const AccountantCollection = mongoose.model("accountant", AccountantShcema);
 module.exports = AccountantCollection;

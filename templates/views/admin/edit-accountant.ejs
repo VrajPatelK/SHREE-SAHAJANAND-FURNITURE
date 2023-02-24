@@ -42,50 +42,18 @@
 
                 <div class="col-12 px-3 py-3 profile-info-div">
                     <ul class="list-group profile-info-grp">
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Email</p>
-                            <input type="email" class="col-8 p-2" name="update_accountant_email"
-                                value="<%=result.accountant_email%>">
-                        </li>
 
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Name</p>
-                            <input type="text" class="col-8 p-2" name="update_accountant_name"
-                                value="<%=result.accountant_name%>">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Profile Img</p>
-                            <input type="file" type="file" class="col-8 p-2" name="update_accountant_img">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Mobile</p>
-                            <input type="tel" class="col-8 p-2" name="update_accountant_mobile"
-                                value="<%=result.accountant_mobile%>">
-                        </li>
-
-                        <li class="list-group-item my-1 form-floating">
-                            <p class="col-4 key-para">Accountant - Address</p>
-                            <textarea class="col-8 p-2" name="update_accountant_address" id="" cols="30"
-                                rows="5"><%=result.accountant_address%></textarea>
-                        </li>
 
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Accountant - Study</p>
                             <input type="text" class="col-8 p-2" name="update_accountant_study"
-                                value="<%=result.accountant_study%>">
+                                value="<%=result.accountant_study%>" required>
                         </li>
 
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Accountant - Experience</p>
                             <input type="number" min="1" max="100" class="col-8 p-2" name="update_accountant_experience"
-                                value="<%=result.accountant_experience%>">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Password</p>
-                            <input class="col-8 p-2" name="update_accountant_pass" value="<%=result.accountant_pass%>">
+                                value="<%=result.accountant_experience%>" required>
                         </li>
                     </ul>
 

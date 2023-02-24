@@ -1,3 +1,6 @@
+const CustomerCollection = require('../../src/Models/customer-schema');
+
+
 module.exports = {
 
     getAllFileNames: (dir) => {
@@ -43,7 +46,33 @@ module.exports = {
         else if (dir === "seller") return seller;
         else if (dir === "review") return review;
         else if (dir === "quality") return quality;
-    }
+    },
+
+    getAllAccountantData: async (accountants) => {
+        try {
+            let results = new Array();
+            for (i = 0; i < accountants.length; i++) {
+
+                let customer = await CustomerCollection.findOne({ _id: accountants[i].accountant_id });
+
+                let tmpObj = new Object();
+                tmpObj._id = customer._id;
+                tmpObj.accountant_email = customer.customer_email;
+                tmpObj.accountant_name = customer.customer_name;
+                tmpObj.accountant_mobile = customer.customer_address;
+                tmpObj.accountant_img = customer.customer_image;
+                tmpObj.accountant_address = customer.customer_mobile;
+                tmpObj.accountant_experience = accountants[i].accountant_experience;
+                tmpObj.accountant_study = accountants[i].accountant_study;
+                results.push(tmpObj);
+            }
+
+            return results;
+
+        } catch (error) {
+            throw error;
+        }
+    },
 
 
 };

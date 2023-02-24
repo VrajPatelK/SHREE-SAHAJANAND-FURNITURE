@@ -93,13 +93,6 @@
                                         </p>
                                     </li>
 
-                                    <li class="list-group-item my-1">
-                                        <p class="col-sm-4 col-12 key-para">Accountant - Password</p>
-                                        <p class="col-sm-8 col-12 value-para">
-                                            <%= result.accountant_pass%>
-                                        </p>
-                                    </li>
-
                                 </ul>
 
                                 <div class="mt-4 profile-info-btn-div">
@@ -169,30 +162,9 @@
             </div>
             <div class="modal-body">
                 <form action="/admin/accountants" method="post" class="row g-3">
-                    <!-- hidden-inout -->
-                    <input type="hidden" class="form-control" id="add_accountant_pass" name="add_accountant_pass"
-                        value="root" required>
                     <div class="col-12">
                         <input type="email" class="form-control" id="add_accountant_email" name="add_accountant_email"
                             placeholder="Accountant Email..." required>
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control" id="add_accountant_name" name="add_accountant_name"
-                            placeholder="Accountant Name..." required>
-                    </div>
-                    <div class="col-12">
-                        <input type="file" class="form-control" id="add_accountant_img" name="add_accountant_img">
-                    </div>
-                    <div class="col-12">
-                        <input type="tel" class="form-control" id="add_accountant_mobile" name="add_accountant_mobile"
-                            placeholder="Accountant Mobile..." required>
-                        <div id="phone_error" class="error hidden" style="color: red;"> Please enter a valid phone
-                            number</div>
-                    </div>
-                    <div class="col-12 form-floating">
-                        <textarea type="text" class="form-control" id="add_accountant_address" cols="30" rows="10"
-                            name="add_accountant_address" placeholder="Accountant Address..." required> </textarea>
-                        <label for="add_accountant_address">Accountant Address...</label>
                     </div>
                     <div class="col-12">
                         <input type="text" class="form-control" id="add_accountant_study" name="add_accountant_study"
