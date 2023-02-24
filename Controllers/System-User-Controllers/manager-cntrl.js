@@ -41,7 +41,7 @@ module.exports = {
 
             let managers = await ManagerCollection.find({});
             let results = await getAllManagerData(managers);
-            
+
             //render the page
             res.status(201).render("admin/manage-managers", { results: results });
 
@@ -103,7 +103,10 @@ module.exports = {
 
             if (opeartion === "delete" && target_id !== undefined) {
                 await ManagerCollection.deleteOne({ manager_id: target_id });
-                await UserTypeCollection.deleteOne({ user_id: target_id });
+
+                let user = await UserTypeCollection.findOne({ user_id: target_id });
+                user.user_types.splice(user.user_types.indexOf("manager"));
+                await user.save();
             }
 
             return res.status(201).redirect("/admin/managers");

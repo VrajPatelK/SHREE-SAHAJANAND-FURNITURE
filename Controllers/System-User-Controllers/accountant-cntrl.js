@@ -97,7 +97,10 @@ module.exports = {
 
             if (opeartion === "delete" && target_id !== undefined) {
                 await AccountantCollection.deleteOne({ accountant_id: target_id });
-                await UserTypeCollection.deleteOne({ user_id: target_id });
+
+                let user = await UserTypeCollection.findOne({ user_id: target_id });
+                user.user_types.splice(user.user_types.indexOf("accountant"));
+                await user.save();
             }
 
             return res.status(201).redirect("/admin/accountants");
