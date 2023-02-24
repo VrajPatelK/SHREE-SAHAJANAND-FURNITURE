@@ -74,5 +74,31 @@ module.exports = {
         }
     },
 
+    getAllManagerData: async (managers) => {
+        try {
+            let results = new Array();
+            for (i = 0; i < managers.length; i++) {
+
+                let customer = await CustomerCollection.findOne({ _id: managers[i].manager_id });
+
+                let tmpObj = new Object();
+                tmpObj._id = customer._id;
+                tmpObj.manager_email = customer.customer_email;
+                tmpObj.manager_name = customer.customer_name;
+                tmpObj.manager_mobile = customer.customer_address;
+                tmpObj.manager_img = customer.customer_image;
+                tmpObj.manager_address = customer.customer_mobile;
+                tmpObj.manager_skill = managers[i].manager_skill;
+                tmpObj.manager_experience = managers[i].manager_experience;
+                tmpObj.manager_study = managers[i].manager_study;
+                results.push(tmpObj);
+            }
+
+            return results;
+
+        } catch (error) {
+            throw error;
+        }
+    },
 
 };

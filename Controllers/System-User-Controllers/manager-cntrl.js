@@ -1,34 +1,48 @@
 const ManagerCollection = require('../../src/Models/admin/manager-schema');
-
+const CustomerCollection = require('../../src/Models/customer-schema');
+const UserTypeCollection = require('../../src/Models/user-type-schema');
+const { getAllManagerData } = require("../../src/Helpers/other-helpers");
 
 module.exports = {
 
     createManager: async (req, res) => {
         try {
-            console.log(req.body);
-            await ManagerCollection.insertMany([{
-                manager_email: req.body.add_manager_email,
-                manager_name: req.body.add_manager_name,
-                manager_img: req.body.add_manager_img,
-                manager_mobile: req.body.add_manager_mobile,
-                manager_address: req.body.add_manager_address,
+
+
+            //verify email-id as customer
+            let customer = await CustomerCollection.findOne({ customer_email: req.body.add_manager_email });
+            if (customer === null) {
+                return res.status(403).send("manager is not registerd !!!");
+            }
+
+
+            //save the manager data
+            const manager = new ManagerCollection({
+                manager_id: customer._id,
+                manager_skill: req.body.add_manager_skill,
                 manager_study: req.body.add_manager_study,
                 manager_experience: req.body.add_manager_experience,
-                manager_skill: req.body.add_manager_skill,
-                manager_pass: req.body.add_manager_pass
+            });
+            await manager.save();
 
-            }]);
-            return res.status(201).redirect("/admin/managers");
+            //set - user type
+            const user = await UserTypeCollection.findOne({ user_id: customer._id });
+            user.user_types.push("manager");
+            await user.save();
+
+            return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).send(error);
         }
     },
     getManagers: async (req, res) => {
         try {
 
+            let managers = await ManagerCollection.find({});
+            let results = await getAllManagerData(managers);
+            
             //render the page
-            const results = await ManagerCollection.find({});
             res.status(201).render("admin/manage-managers", { results: results });
 
         } catch (error) {
@@ -43,7 +57,13 @@ module.exports = {
 
             if (opeartion === "edit" && target_id !== undefined) {
 
-                const result = await ManagerCollection.findOne({ _id: target_id });
+                let manager = await ManagerCollection.findOne({ manager_id: target_id });
+
+                let result = new Object();
+                result.manager_skill = manager.manager_skill;
+                result.manager_study = manager.manager_study;
+                result.manager_experience = manager.manager_experience;
+
                 return res.status(201).render("admin/edit-manager", { result: result });
             }
 
@@ -55,25 +75,19 @@ module.exports = {
     },
     updateManagerPost: async (req, res) => {
         try {
-
             let updated_data = new Object();
+
             updated_data = {
-                manager_email: req.body.update_manager_email,
-                manager_name: req.body.update_manager_name,
-                manager_mobile: req.body.update_manager_mobile,
-                manager_address: req.body.update_manager_address,
-                manager_pass: req.body.update_manager_pass
+                manager_study: req.body.update_manager_study,
+                manager_experience: req.body.update_manager_experience,
+                manager_skill: req.body.update_manager_skill
             };
 
-            if (req.body.update_accountant_img) { updated_data.accountant_img = req.body.update_accountant_img; }
-            if (req.body.update_accountant_study) { updated_data.accountant_study = req.body.update_accountant_study; }
-            if (req.body.update_accountant_experience) { updated_data.accountant_experience = req.body.update_accountant_experience; }
-            if (req.body.update_accountant_skill) { updated_data.accountant_skill = req.body.update_accountant_skill; }
-
             await ManagerCollection.updateOne(
-                { _id: req.query._id },
+                { manager_id: req.query._id },
                 { $set: updated_data }
             );
+
             console.log("update - manager successfully ...");
             return res.status(201).redirect("/admin/managers");
 
@@ -88,7 +102,8 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "delete" && target_id !== undefined) {
-                await ManagerCollection.deleteOne({ _id: target_id });
+                await ManagerCollection.deleteOne({ manager_id: target_id });
+                await UserTypeCollection.deleteOne({ user_id: target_id });
             }
 
             return res.status(201).redirect("/admin/managers");

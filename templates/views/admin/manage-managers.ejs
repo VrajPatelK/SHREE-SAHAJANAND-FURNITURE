@@ -155,28 +155,9 @@
             </div>
             <div class="modal-body">
                 <form action="/admin/managers" method="post" class="row g-3">
-                    <!-- hidden-inout -->
-                    <input type="hidden" class="form-control" id="add_manager_pass" name="add_manager_pass" value="root"
-                        required>
                     <div class="col-12">
                         <input type="email" class="form-control" id="add_manager_email" name="add_manager_email"
                             placeholder="Manager Email..." required>
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control" id="add_manager_name" name="add_manager_name"
-                            placeholder="Manager Name..." required>
-                    </div>
-                    <div class="col-12">
-                        <input type="file" class="form-control" id="add_manager_img" name="add_manager_img">
-                    </div>
-                    <div class="col-12">
-                        <input type="tel" class="form-control" id="add_manager_mobile" name="add_manager_mobile"
-                            placeholder="Manager Mobile..." required>
-                    </div>
-                    <div class="col-12 form-floating">
-                        <textarea type="text" class="form-control" id="add_manager_address" cols="30" rows="10"
-                            name="add_manager_address" placeholder="Manager Address..." required> </textarea>
-                        <label for="add_manager_address">Manager Address...</label>
                     </div>
                     <div class="col-12 form-floating">
                         <textarea type="text" class="form-control" id="add_manager_skill" cols="30" rows="10"
@@ -185,11 +166,11 @@
                     </div>
                     <div class="col-12">
                         <input type="text" class="form-control" id="add_manager_study" name="add_manager_study"
-                            placeholder="Manager Study...">
+                            placeholder="Manager Study..." required>
                     </div>
                     <div class="col-12">
                         <input type="number" min="1" max="100" class="form-control" id="add_manager_experience"
-                            name="add_manager_experience" placeholder="Manager Experience...">
+                            name="add_manager_experience" placeholder="Manager Experience..." required>
                     </div>
                     <div class="col-12 modal-footer">
                         <button type="submit" id="myform" class="btn add-sbmt-btn">

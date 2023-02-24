@@ -42,56 +42,23 @@
 
                 <div class="col-12 px-3 py-3 profile-info-div">
                     <ul class="list-group profile-info-grp">
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Manager - Email</p>
-                            <input type="email" class="col-8 p-2" name="update_manager_email"
-                                value="<%=result.manager_email%>">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Manager - Name</p>
-                            <input type="text" class="col-8 p-2" name="update_manager_name"
-                                value="<%=result.manager_name%>">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Manager - Profile Img</p>
-                            <input type="file" type="file" class="col-8 p-2" name="update_manager_img">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Manager - Mobile</p>
-                            <input type="tel" class="col-8 p-2" name="update_manager_mobile"
-                                value="<%=result.manager_mobile%>">
-                        </li>
-
-                        <li class="list-group-item my-1 form-floating">
-                            <p class="col-4 key-para">Manager - Address</p>
-                            <textarea class="col-8 p-2" name="update_manager_address" id="" cols="30"
-                                rows="5"><%=result.manager_address%></textarea>
-                        </li>
 
                         <li class="list-group-item my-1 form-floating">
                             <p class="col-4 key-para">Manager - Skills</p>
-                            <textarea class="col-8 p-2" name="update_manager_skill" id="" cols="30"
-                                rows="5"><%=result.manager_skill%></textarea>
+                            <textarea class="col-8 p-2" name="update_manager_skill" id="" cols="30" rows="5"
+                                required><%=result.manager_skill%></textarea>
                         </li>
 
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Manager - Study</p>
                             <input type="text" class="col-8 p-2" name="update_manager_study"
-                                value="<%=result.manager_study%>">
+                                value="<%=result.manager_study%>" required>
                         </li>
 
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Manager - Experience</p>
                             <input type="number" min="1" max="100" class="col-8 p-2" name="update_manager_experience"
-                                value="<%=result.manager_experience%>">
-                        </li>
-
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Manager - Password</p>
-                            <input class="col-8 p-2" name="update_manager_pass" value="<%=result.manager_pass%>">
+                                value="<%=result.manager_experience%>" required>
                         </li>
                     </ul>
 

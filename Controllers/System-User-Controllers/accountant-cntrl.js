@@ -24,8 +24,6 @@ module.exports = {
 
             //set - user type
             const user = await UserTypeCollection.findOne({ user_id: customer._id });
-            console.log(customer);
-            console.log(user);
             user.user_types.push("accountant");
             await user.save();
 
