@@ -99,6 +99,7 @@ module.exports = {
 
             if (opeartion === "delete" && target_id !== undefined) {
                 await AccountantCollection.deleteOne({ accountant_id: target_id });
+                await UserTypeCollection.deleteOne({ user_id: target_id });
             }
 
             return res.status(201).redirect("/admin/accountants");
