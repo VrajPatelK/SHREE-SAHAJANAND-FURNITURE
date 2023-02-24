@@ -24,3 +24,7 @@ const AdminLoginSchema = new mongoose.Schema({
         type: String,
     },
 });
+
+
+const AdminCollection = mongoose.model("admin", AdminLoginSchema);
+module.exports = AdminCollection;
