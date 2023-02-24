@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Shoeracks</title>
+
+    <%- include ('../partials/header-links') %>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+        <style>
+            .plus-btn-div {
+                display: flex;
+                justify-content: right;
+                align-items: center;
+            }
+
+            /* .card-parent-div {
+            border: 2px solid red;
+        } */
+
+            .card {
+                /* border: 2px solid blue; */
+                background: rgb(255 100 39);
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: .5rem;
+                box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            }
+
+            .product-img-div img {
+                border: 3px solid #fff;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            }
+
+            .info-div {
+                border: 2px solid #fff;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                background: #fff;
+                border-radius: 0.5rem;
+                box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+            }
+
+            .info-div p {
+                /* border: 2px solid yellow; */
+                margin: 0px;
+                color: rgb(186, 50, 1);
+            }
+
+            .info-div .key-para {
+                border-radius: .5rem;
+                text-align: left;
+                width: 30%;
+            }
+
+            .info-div .value-para {
+                border-radius: .5rem;
+                text-align: left;
+                width: 70%;
+            }
+
+            /* .card-div {
+            border: 2px solid blue;
+        } */
+
+            .btn-div a {
+                text-decoration: none;
+            }
+
+            .add-btn,
+            .close-form-modal {
+                color: #fff;
+                border: none;
+                background: orangered;
+                border-radius: 0.5rem;
+                border-radius: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+            }
+
+            .add-btn:hover,
+            .close-form-modal:hover {
+                color: orangered;
+                background: rgb(255, 231, 222);
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
+            }
+
+            .edit-btn,
+            .delete-btn,
+            .add-sbmt-btn,
+            .back-btn {
+                background: #fff;
+                color: orangered;
+                border-radius: 0.5rem;
+                border-radius: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            }
+
+            .edit-btn:hover,
+            .delete-btn:hover,
+            .add-sbmt-btn:hover,
+            .back-btn:hover {
+                background: rgb(255, 231, 222);
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
+
+            }
+        </style>
+
+        <link rel="stylesheet" href="../../css/admin/manage-admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Shoeracks
+                <hr>
+            </h4>
+        </div>
+        <div class="container plus-btn-div">
+            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addTvUnitModal">
+                <i class="fa-solid fa-plus"></i> Add Shoeracks
+            </button>
+        </div>
+
+        <div class="container row mx-auto px-0 py-3 card-parent-div">
+
+            <%if(results.length>0){%>
+                <% results.forEach(result=> { %>
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
+                        <div class="card" style="width: 100%;">
+
+                            <div class="product-img-div px-4 pt-4">
+                                <%if(result.manager_img){%>
+                                    <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
+                                    <%}else{%>
+                                        <img src="../../shoerack.jpg" class="card-img-top" alt="">
+                                        <%}%>
+                            </div>
+
+                            <div class="col-11 card-body">
+                                <div class="info-structure">
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-2 py-2">Name : </p>
+                                        <p class="value-para px-2 py-2">
+                                            <%=result.shoerack_name%>
+                                        </p>
+                                    </div>
+
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-1 py-2">Dimensions : </p>
+                                        <p class="value-para px-2 py-2">
+                                            Length : <%=result.dimensions.length%>
+                                                <br>
+                                                Height : <%=result.dimensions.height%>
+                                                    <br>
+                                                    Width : <%=result.dimensions.width%>
+                                        </p>
+                                    </div>
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-2 py-2">Availability : </p>
+                                        <p class="value-para px-2 py-2">
+                                            <%=result.availability%>
+                                        </p>
+                                    </div>
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-2 py-2">#Shelves : </p>
+                                        <p class="value-para px-2 py-2">
+                                            <%=result.no_of_shelves%>
+                                        </p>
+                                    </div>
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-2 py-2">Price : </p>
+                                        <p class="value-para px-2 py-2">
+                                            <%=result.price%>
+                                        </p>
+                                    </div>
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-2 py-2">Discount : </p>
+                                        <p class="value-para px-2 py-2">
+                                            <%=result.discount%>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 btn-div">
+                                    <a href="/admin/product/edit-shoerack?op=edit&_id=<%=result._id%>">
+                                        <button class="btn mx-2 edit-btn">
+                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/admin/product/delete-shoerack?op=delete&_id=<%=result._id%>">
+                                        <button class="btn mx-2 delete-btn">
+                                            Delete <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%})%>
+                        <%}%>
+        </div>
+
+
+        <!-- footer -->
+        <%- include('../partials/footer')%>
+
+</body>
+
+</html>
+
+
+<!-- modal for add shoeracks -->
+
+<div class="modal fade" id="addTvUnitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addTvUnitModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTvUnitModalLabel">Add Tv Unit
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" class="row g-3">
+
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_shoerack_name" name="add_shoerack_name"
+                            placeholder="Name" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="file" class="form-control" id="add_img_link" name="add_img_link">
+                    </div>
+
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_length" name="add_length" placeholder="Length"
+                            required>
+                    </div>
+
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_height" name="add_height" placeholder="Height"
+                            required>
+                    </div>
+
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                            required>
+                    </div>
+
+                    <div class="col-12">
+                        <input type="number" class="form-control" id="add_no_of_shelves" name="add_no_of_shelves"
+                            placeholder="No. Of Shelves" required>
+                    </div>
+
+                    <div class="col-12">
+                        <input type="number" class="form-control" id="add_price" name="add_price" placeholder="Price"
+                            required>
+                    </div>
+
+                    <div class="col-12">
+                        <input type="number" class="form-control" id="add_discount" name="add_discount"
+                            placeholder="Discount" required>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-around align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                id="flexRadioDefault1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                Available
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                Not Available
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 modal-footer">
+                        <button type="submit" id="myform" class="btn add-sbmt-btn">
+                            <i class="fa-solid fa-plus"></i> Add
+                        </button>
+                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

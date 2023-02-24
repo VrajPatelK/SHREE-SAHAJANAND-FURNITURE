@@ -1,0 +1,43 @@
+body {
+    background: rgb(255, 192, 169);
+}
+
+#main-div {
+    /* border: 2px solid red; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-div>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+    background: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: .5rem;
+}
+
+#main-div>button:hover {
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+#icon>i {
+    color: orangered;
+    font-size: x-large;
+}
+
+#text {
+    /* border: 2px solid brown; */
+    background: orangered;
+    font-weight: bold;
+    border-radius: .5rem;
+    letter-spacing: .2rem;
+}
+
+#text>a {
+    text-decoration: none;
+    color: #fff;
+}

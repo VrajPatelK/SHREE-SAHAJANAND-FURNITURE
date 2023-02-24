@@ -1,0 +1,141 @@
+/* #slider-div {
+    border: 2px solid maroon;
+} */
+
+.carousel-item {
+    background-size: cover;
+}
+
+.arrow-icon-div {
+    background: #fff;
+    border-radius: 50%;
+    height: 2rem;
+    max-width: 2rem;
+    position: relative;
+    margin-top: .2rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    cursor: pointer;
+}
+
+.arrow-icon-div i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: orangered;
+}
+
+.carousel-item img {
+    border-radius: 10%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    /* clip-path: inset(20px 50px 10px 0 round 50%); */
+}
+
+/* CARD DIV--------- */
+.index-card {
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.index-card img {
+    border-radius: 10%;
+    width: 15rem;
+    transition: box-shadow, width 1s;
+}
+
+.index-card img:hover {
+    width: 15.3rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+/* #explore {
+    border: 2px solid blue;
+}
+
+
+#trend,
+#quality {
+    border: 2px solid rgb(2, 128, 0);
+}
+
+#seller {
+    border: 2px solid rgb(0, 191, 255);
+}
+
+#discount {
+    border: 2px solid rgb(255, 0, 238);
+} */
+
+#review-div {
+    /* border: 2px solid rgb(255, 162, 0); */
+    padding-top: 30px;
+    padding-bottom: 100px;
+}
+
+/* .reviews-card-parent-div {
+    border: 2px solid red;
+} */
+
+.reviews-card-div {
+    /* border: 2px solid rgb(0, 17, 255); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-card {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(247, 224, 215);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transition: box-shadow .8s;
+}
+
+.review-card:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.review-img-div {
+    border-radius: 50%;
+    /* border: 2px solid rgb(225, 0, 255); */
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+}
+
+.review-img-div img {
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.review-para-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-name {
+    background: rgb(255, 101, 45);
+    color: #fff;
+    border-radius: .5rem;
+    width: 50%;
+}
+
+.review-para {
+    text-align: center;
+    color: rgb(186, 50, 1);
+}
+
+#subscribe-btn {
+    border-radius: 20px;
+}

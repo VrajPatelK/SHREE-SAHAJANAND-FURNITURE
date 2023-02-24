@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Manage Accountants</title>
+    <%- include ('../partials/header-links') %>
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/admin/manage-admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Accountants
+                <hr>
+            </h4>
+        </div>
+        <div class="container plus-btn-div">
+            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addAccountantModal">
+                <i class="fa-solid fa-plus"></i> Add Accountant
+            </button>
+        </div>
+
+
+        <!-- profile-card -->
+        <div class="container-fluid my-5 profile-card-grant-parent-div">
+
+            <div class="container px-sm-2 px-0 profile-card-parent-div">
+                <%if(results.length>0){%>
+                    <% results.forEach(result=> { %>
+
+                        <div class="row mx-auto profie-card-div py-5 mt-5">
+
+                            <div class="col-lg-4 col-12 px-2 py-2 my-sm-0 mb-3 card profile-img-div"
+                                style="width: 15rem;">
+                                <%if(result.accountant_img){%>
+                                    <img src="<%= result.accountant_img%>" class="card-img-top" alt="...">
+                                    <%}else{%>
+                                        <img src="../images/profile-pic.jpg" class="card-img-top" alt="...">
+                                        <!--<img src="<%= result.accountant_img%>" class="card-img-top" alt="...">
+                                    -->
+                                        <%}%>
+                            </div>
+
+                            <div class="col-lg-8 col-12 px-3 py-3 profile-info-div">
+
+                                <ul class="list-group profile-info-grp">
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Email</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_email%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Mobile</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_mobile%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Address</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_address%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Study</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_study%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Experience</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_experience%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Accountant - Password</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.accountant_pass%>
+                                        </p>
+                                    </li>
+
+                                </ul>
+
+                                <div class="mt-4 profile-info-btn-div">
+                                    <a href="/admin/edit-accountant?op=edit&_id=<%=result._id%>">
+                                        <button class="btn mx-2 edit-btn">
+                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/admin/delete-accountant?op=delete&_id=<%=result._id%>">
+                                        <button class="btn mx-2 delete-btn">
+                                            Delete <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <%});%>
+                            <%}else{%>
+                                <p class="py-2"
+                                    style="color: orangered; text-align: center; background: rgb(255, 187, 162);">You
+                                    have not add any accountant yet.</p>
+                                <%}%>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../partials/footer')%>
+
+            <script>
+                function validatePhoneNumber(input_str) {
+                    var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
+                    return re.test(input_str);
+                }
+                function validateForm(event) {
+                    var phone = document.getElementById('add_accountant_mobile').value;
+                    if (!validatePhoneNumber(phone)) {
+
+                        document.getElementById('phone_error').classList.remove('hidden');
+                    } else {
+
+                        document.getElementById('phone_error').classList.add('hidden');
+                        alert("validation success")
+                    }
+                    event.preventDefault();
+                }
+
+                document.getElementById('myform').addEventListener('submit', validateForm);
+            </script>
+</body>
+
+</html>
+
+
+<!-- modal for add accountant -->
+
+<div class="modal fade" id="addAccountantModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addAccountantModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAccountantModalLabel">Add Accountant
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/accountants" method="post" class="row g-3">
+                    <!-- hidden-inout -->
+                    <input type="hidden" class="form-control" id="add_accountant_pass" name="add_accountant_pass"
+                        value="root" required>
+                    <div class="col-12">
+                        <input type="email" class="form-control" id="add_accountant_email" name="add_accountant_email"
+                            placeholder="Accountant Email..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_accountant_name" name="add_accountant_name"
+                            placeholder="Accountant Name..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="file" class="form-control" id="add_accountant_img" name="add_accountant_img">
+                    </div>
+                    <div class="col-12">
+                        <input type="tel" class="form-control" id="add_accountant_mobile" name="add_accountant_mobile"
+                            placeholder="Accountant Mobile..." required>
+                        <div id="phone_error" class="error hidden" style="color: red;"> Please enter a valid phone
+                            number</div>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <textarea type="text" class="form-control" id="add_accountant_address" cols="30" rows="10"
+                            name="add_accountant_address" placeholder="Accountant Address..." required> </textarea>
+                        <label for="add_accountant_address">Accountant Address...</label>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_accountant_study" name="add_accountant_study"
+                            placeholder="Accountant Study...">
+                    </div>
+                    <div class="col-12">
+                        <input type="number" min="1" max="100" class="form-control" id="add_accountant_experience"
+                            name="add_accountant_experience" placeholder="Accountant Experience...">
+                    </div>
+                    <div class="col-12 modal-footer">
+                        <button type="submit" id="myform" class="btn add-sbmt-btn">
+                            <i class="fa-solid fa-plus"></i> Add
+                        </button>
+                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - MANAGER EDITED</title>
+    <%- include ('../partials/header-links') %>
+
+
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/admin/manage-admin.css">
+
+        <style>
+            .list-group-item input {
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                background: rgb(255, 228, 205);
+            }
+        </style>
+</head>
+
+<body>
+    <div class="container edit-form-div">
+
+        <div class="col-12 py-3 mt-4 headingDiv">
+            <h3 class="headings">
+                Edit Manager <i class="fa-solid fa-pen-to-square"></i>
+                <hr>
+            </h3>
+        </div>
+
+        <a href="/admin/managers">
+            <button class="btn mx-2 back-btn">
+                <i class="fa-solid fa-backward"></i> Back
+            </button>
+        </a>
+        <div class="profie-card-div py-3">
+            <form action="" class="col-sm-10 col-12 my-3" method="post">
+
+                <div class="col-12 px-3 py-3 profile-info-div">
+                    <ul class="list-group profile-info-grp">
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Email</p>
+                            <input type="email" class="col-8 p-2" name="update_manager_email"
+                                value="<%=result.manager_email%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Name</p>
+                            <input type="text" class="col-8 p-2" name="update_manager_name"
+                                value="<%=result.manager_name%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Profile Img</p>
+                            <input type="file" type="file" class="col-8 p-2" name="update_manager_img">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Mobile</p>
+                            <input type="tel" class="col-8 p-2" name="update_manager_mobile"
+                                value="<%=result.manager_mobile%>">
+                        </li>
+
+                        <li class="list-group-item my-1 form-floating">
+                            <p class="col-4 key-para">Manager - Address</p>
+                            <textarea class="col-8 p-2" name="update_manager_address" id="" cols="30"
+                                rows="5"><%=result.manager_address%></textarea>
+                        </li>
+
+                        <li class="list-group-item my-1 form-floating">
+                            <p class="col-4 key-para">Manager - Skills</p>
+                            <textarea class="col-8 p-2" name="update_manager_skill" id="" cols="30"
+                                rows="5"><%=result.manager_skill%></textarea>
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Study</p>
+                            <input type="text" class="col-8 p-2" name="update_manager_study"
+                                value="<%=result.manager_study%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Experience</p>
+                            <input type="number" min="1" max="100" class="col-8 p-2" name="update_manager_experience"
+                                value="<%=result.manager_experience%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Manager - Password</p>
+                            <input class="col-8 p-2" name="update_manager_pass" value="<%=result.manager_pass%>">
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 profile-info-btn-div">
+                        <button type="submit" class="btn mx-2 edit-btn">
+                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
