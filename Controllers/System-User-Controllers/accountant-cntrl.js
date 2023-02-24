@@ -11,7 +11,7 @@ module.exports = {
             //verify email-id as customer
             let customer = await CustomerCollection.findOne({ customer_email: req.body.add_accountant_email });
             if (customer === null) {
-                return res.status(200).send("accounatnt is not registerd !!!");
+                return res.status(403).send("accounatnt is not registerd !!!");
             }
 
             //save the accounatant data
@@ -24,8 +24,10 @@ module.exports = {
 
             //set - user type
             const user = await UserTypeCollection.findOne({ user_id: customer._id });
-            user.user_types.push("accountant");
-            await user.save();
+            if (user !== null) {
+                user.user_types.push("accountant");
+                await user.save();
+            }
 
             return res.status(301).redirect("/admin/accountants");
 
@@ -62,7 +64,7 @@ module.exports = {
                 return res.status(201).render("admin/edit-accountant", { result: result });
             }
 
-            return res.status(201).send("page not found ...");
+            return res.status(404).send("page not found ...");
 
         } catch (error) {
             console.log(error);

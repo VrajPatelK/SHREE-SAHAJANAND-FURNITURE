@@ -8,7 +8,6 @@ module.exports = {
     createManager: async (req, res) => {
         try {
 
-
             //verify email-id as customer
             let customer = await CustomerCollection.findOne({ customer_email: req.body.add_manager_email });
             if (customer === null) {
@@ -27,8 +26,10 @@ module.exports = {
 
             //set - user type
             const user = await UserTypeCollection.findOne({ user_id: customer._id });
-            user.user_types.push("manager");
-            await user.save();
+            if (user !== null) {
+                user.user_types.push("manager");
+                await user.save();
+            }
 
             return res.status(301).redirect("/admin/managers");
 
@@ -43,7 +44,7 @@ module.exports = {
             let results = await getAllManagerData(managers);
 
             //render the page
-            res.status(201).render("admin/manage-managers", { results: results });
+            res.status(200).render("admin/manage-managers", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -67,7 +68,7 @@ module.exports = {
                 return res.status(201).render("admin/edit-manager", { result: result });
             }
 
-            res.status(201).send("page not found ...");
+            res.status(404).send("page not found ...");
 
         } catch (error) {
             console.log(error);
@@ -89,7 +90,7 @@ module.exports = {
             );
 
             console.log("update - manager successfully ...");
-            return res.status(201).redirect("/admin/managers");
+            return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
             console.log(error);
@@ -109,7 +110,7 @@ module.exports = {
                 await user.save();
             }
 
-            return res.status(201).redirect("/admin/managers");
+            return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
             console.log(error);
