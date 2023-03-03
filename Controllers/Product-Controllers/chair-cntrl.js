@@ -1,4 +1,4 @@
-const ChairCollection = require('../../src/Models/product/chair-schema');
+const ChairCollection = require('../../Src/Models/products/chair-schema');
 
 module.exports = {
 

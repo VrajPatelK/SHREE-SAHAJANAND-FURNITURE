@@ -1,4 +1,4 @@
-const WardrobeCollection = require('../../src/Models/product/sofa-schema');
+const WardrobeCollection = require('../../Src/Models/products/sofa-schema');
 
 module.exports = {
 

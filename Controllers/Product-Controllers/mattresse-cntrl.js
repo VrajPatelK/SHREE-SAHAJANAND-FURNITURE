@@ -1,4 +1,4 @@
-const MattressesCollection = require('../../src/Models/product/mattresses-schema');
+const MattressesCollection = require('../../Src/Models/products/mattresses-schema');
 
 module.exports = {
 

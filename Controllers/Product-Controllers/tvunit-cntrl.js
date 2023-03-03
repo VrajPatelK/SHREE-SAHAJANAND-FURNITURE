@@ -1,4 +1,4 @@
-const TvUnitCollection = require('../../src/Models/product/tvunit-schema');
+const TvUnitCollection = require('../../Src/Models/products/tvunit-schema');
 
 module.exports = {
 

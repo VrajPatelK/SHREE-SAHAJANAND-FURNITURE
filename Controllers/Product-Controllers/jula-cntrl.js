@@ -1,4 +1,4 @@
-const JulaCollection = require('../../src/Models/product/jula-schema');
+const JulaCollection = require('../../Src/Models/products/jula-schema');
 
 module.exports = {
 

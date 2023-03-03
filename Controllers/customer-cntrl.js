@@ -1,9 +1,11 @@
-const CustomerCollection = require("../src/Models/customer-schema");
+const CustomerCollection = require("../../client/src/Models/customer-schema");
 
 module.exports = {
 
     createCustomer: async (req, res) => {
         try {
+
+            res.end();
 
         } catch (error) {
             console.log(error);

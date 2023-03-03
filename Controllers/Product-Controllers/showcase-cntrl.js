@@ -1,4 +1,4 @@
-const ShowcaseCollection = require('../../src/Models/product/showcase-schema');
+const ShowcaseCollection = require('../../Src/Models/products/showcase-schema');
 
 module.exports = {
 

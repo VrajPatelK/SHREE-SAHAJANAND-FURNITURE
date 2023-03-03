@@ -1,34 +1,10 @@
-const AccountantCollection = require('../../src/Models/admin/accountant-schema');
-const CustomerCollection = require('../../src/Models/customer-schema');
-const UserTypeCollection = require('../../src/Models/user-type-schema');
 const { getAllAccountantData } = require("../../src/Helpers/other-helpers");
+const AccountantCollection = require("../../Src/Models/system-users/accountant-schema");
 
 module.exports = {
 
     createAccountant: async (req, res) => {
         try {
-
-            //verify email-id as customer
-            let customer = await CustomerCollection.findOne({ customer_email: req.body.add_accountant_email });
-            if (customer === null) {
-                return res.status(403).send("accounatnt is not registerd !!!");
-            }
-
-            //save the accounatant data
-            const accountant = new AccountantCollection({
-                accountant_id: customer._id,
-                accountant_study: req.body.add_accountant_study,
-                accountant_experience: req.body.add_accountant_experience,
-            });
-            await accountant.save();
-
-            //set - user type
-            const user = await UserTypeCollection.findOne({ user_id: customer._id });
-            if (user !== null) {
-                user.user_types.push("accountant");
-                await user.save();
-            }
-
             return res.status(301).redirect("/admin/accountants");
 
         } catch (error) {
@@ -42,7 +18,7 @@ module.exports = {
             let results = await getAllAccountantData(accountants);
 
             //render the page
-            res.status(200).render("admin/manage-accountants", { results: results });
+            res.status(200).render("system-users/manage-accountants", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -61,7 +37,7 @@ module.exports = {
                 result.accountant_study = accountant.accountant_study;
                 result.accountant_experience = accountant.accountant_experience;
 
-                return res.status(201).render("admin/edit-accountant", { result: result });
+                return res.status(201).render("system-users/edit-accountant", { result: result });
             }
 
             return res.status(404).send("page not found ...");

@@ -1,4 +1,4 @@
-const TableCollection = require('../../src/Models/product/table-schema');
+const TableCollection = require('../../Src/Models/products/table-schema');
 
 module.exports = {
 

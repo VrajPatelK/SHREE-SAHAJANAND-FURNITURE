@@ -1,4 +1,5 @@
-const ExportCollection = require('../../src/Models/admin/export-schema');
+const ExportCollection = require('../../src/Models/system-users/export-schema');
+const VendorCollection = require('../../src/Models/system-users/vendor-schema');
 const { addVendorDetails } = require('../../src/Helpers/import-export-helpers');
 
 
@@ -45,7 +46,7 @@ module.exports = {
             let results = await ExportCollection.find({});
 
             results = await addVendorDetails(results);
-            res.status(201).render("admin/manage-exports", { results: results });
+            res.status(201).render("system-users/manage-exports", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -60,7 +61,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await ExportCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-export", { result: result });
+                return res.status(201).render("system-users/edit-export", { result: result });
             }
 
             res.status(201).send("page not found ...");

@@ -1,6 +1,4 @@
-const ManagerCollection = require('../../src/Models/admin/manager-schema');
-const CustomerCollection = require('../../src/Models/customer-schema');
-const UserTypeCollection = require('../../src/Models/user-type-schema');
+const ManagerCollection = require('../../src/Models/system-users/manager-schema');
 const { getAllManagerData } = require("../../src/Helpers/other-helpers");
 
 module.exports = {
@@ -44,7 +42,7 @@ module.exports = {
             let results = await getAllManagerData(managers);
 
             //render the page
-            res.status(200).render("admin/manage-managers", { results: results });
+            res.status(200).render("system-users/manage-managers", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -65,7 +63,7 @@ module.exports = {
                 result.manager_study = manager.manager_study;
                 result.manager_experience = manager.manager_experience;
 
-                return res.status(201).render("admin/edit-manager", { result: result });
+                return res.status(201).render("system-users/edit-manager", { result: result });
             }
 
             res.status(404).send("page not found ...");

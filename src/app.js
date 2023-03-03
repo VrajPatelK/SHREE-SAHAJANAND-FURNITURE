@@ -24,16 +24,14 @@ app.use(express.static(path.join(`${__dirname}`, `../public`)));
 app.use(cookie_parser());
 
 
-
 //pre-defined things--------------
 app.set("view engine", "ejs");
 app.set("views", path.join(`${__dirname}`, `../templates/views/`));
 
 
 //routers
-const google_auth_router = require("../src/Routers/google-auth-router");
-
 const static_routers = require("./Routers/static-routers");
+
 const request_manager_routers = require("./Routers/request-manager-routers");
 const admin_routers = require("./Routers/System-User-Routers/admin-routers");
 const accountant_routers = require("./Routers/System-User-Routers/accountant-routers");
@@ -56,28 +54,26 @@ const wardrobe_routers = require("../src/Routers/Product-Routers/wardrobe-router
 const tvunit_routers = require("../src/Routers/Product-Routers/tvunit-routers");
 
 
-//customer-login
-app.get("/auth", google_auth_router);
-app.get("/auth/callback", google_auth_router);
-app.get("/auth/callback/success", google_auth_router);
-app.get("/auth/callback/failure", google_auth_router);
-
 app.use(session({
     secret: process.env.SECRET_SESSION_KEY,
     resave: false,
     saveUninitialized: true
 }));
 
-//static
-app.get("/", static_routers);
-app.get("/about", static_routers);
-app.get("/contact", static_routers);
-app.get("/login", static_routers);
-app.get("/logout", static_routers);
+
+app.use(function (req, res, next) {
+    res.locals.isRegistered = req.session.isRegistered;
+    next();
+});
 
 // sys-user-req ,products-req
 app.get("/admin/manage", request_manager_routers);
 app.get("/admin/product/manage", request_manager_routers);
+
+//static
+app.get("/", static_routers);
+app.get("/about", static_routers);
+app.get("/contact", static_routers);
 
 // admins
 app.post("/admin/admins", admin_routers);
@@ -215,10 +211,6 @@ app.post("/admin/product/edit-tvunit", tvunit_routers);
 app.get("/admin/product/delete-tvunit", tvunit_routers);
 
 
-
-
-
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
 });
-

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - ADMIN EDITED</title>
+    <%- include ('../../partials/header-links') %>
+
+
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/manage-admin.css">
+
+        <style>
+            .list-group-item input {
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                background: rgb(255, 228, 205);
+            }
+        </style>
+</head>
+
+<body>
+    <div class="container edit-form-div">
+
+        <div class="col-12 py-3 mt-4 headingDiv">
+            <h3 class="headings">
+                Edit Admin <i class="fa-solid fa-pen-to-square"></i>
+                <hr>
+            </h3>
+        </div>
+
+        <a href="/admin/admins">
+            <button class="btn mx-2 back-btn">
+                <i class="fa-solid fa-backward"></i> Back
+            </button>
+        </a>
+        <div class="profie-card-div py-3">
+            <form action="" class="col-sm-10 col-12 my-3" method="post">
+
+                <div class="col-12 px-3 py-3 profile-info-div">
+                    <ul class="list-group profile-info-grp">
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Admin - Email</p>
+                            <input class="col-8 p-2" name="update_admin_email" value="<%=result.admin_email%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Admin - Name</p>
+                            <input class="col-8 p-2" name="update_admin_name" value="<%=result.admin_name%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Admin - Password</p>
+                            <input type="text" class="col-8 p-2" name="update_admin_pass"
+                                value="<%=result.admin_pass%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Admin - Profile Img</p>
+                            <input type="file" class="col-8 p-2" name="update_admin_img">
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 profile-info-btn-div">
+                        <button class="btn mx-2 edit-btn">
+                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

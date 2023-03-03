@@ -1,4 +1,4 @@
-const VendorCollection = require('../../src/Models/admin/vendor-schema');
+const VendorCollection = require('../../src/Models/system-users/vendor-schema');
 
 module.exports = {
     createVendor: async (req, res) => {
@@ -24,7 +24,7 @@ module.exports = {
 
             //render the page
             const results = await VendorCollection.find({});
-            res.status(201).render("admin/manage-vendors", { results: results });
+            res.status(201).render("system-users/manage-vendors", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -39,7 +39,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await VendorCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-vendor", { result: result });
+                return res.status(201).render("system-users/edit-vendor", { result: result });
             }
 
             res.status(201).send("page not found ...");

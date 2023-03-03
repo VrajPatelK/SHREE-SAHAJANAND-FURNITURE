@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SSF - TV UNITS EDITED</title>
-    <%- include ('../partials/header-links') %>
+    <%- include ('../../partials/header-links') %>
 
 
 
         <!-- custom css -->
-        <link rel="stylesheet" href="../../css/admin/manage-admin.css">
+        <link rel="stylesheet" href="../../css/manage-admin.css">
 
         <style>
             .list-group-item input {
@@ -45,7 +45,8 @@
                     <ul class="list-group profile-info-grp">
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Name : </p>
-                            <input type="text" class="col-8 p-2" name="update_tvunit_name" value="<%=result.tvunit_name%>">
+                            <input type="text" class="col-8 p-2" name="update_tvunit_name"
+                                value="<%=result.tvunit_name%>">
                         </li>
 
                         <li class="list-group-item my-1">
@@ -73,7 +74,8 @@
 
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">#Drawers : </p>
-                            <input type="number" class="col-8 p-2" name="update_no_of_drawers" value="<%=result.no_of_drawers%>">
+                            <input type="number" class="col-8 p-2" name="update_no_of_drawers"
+                                value="<%=result.no_of_drawers%>">
                         </li>
 
                         <li class="list-group-item my-1">

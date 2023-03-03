@@ -1,4 +1,4 @@
-const ManuFacturerCollection = require('../../src/Models/admin/manufacturer-schema');
+const ManuFacturerCollection = require('../../src/Models/system-users/manufacturer-schema');
 
 module.exports = {
     createManufacturer: async (req, res) => {
@@ -22,7 +22,7 @@ module.exports = {
 
             //render the page
             const results = await ManuFacturerCollection.find({});
-            res.status(201).render("admin/manage-manufacturers", { results: results });
+            res.status(201).render("system-users/manage-manufacturers", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -37,7 +37,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await ManuFacturerCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-manufacturer", { result: result });
+                return res.status(201).render("system-users/edit-manufacturer", { result: result });
             }
 
             res.status(201).send("page not found ...");

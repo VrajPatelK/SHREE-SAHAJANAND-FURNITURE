@@ -1,4 +1,4 @@
-const BedCollection = require('../../src/Models/product/bed-schema');
+const BedCollection = require('../../Src/Models/products/bed-schema');
 
 
 module.exports = {

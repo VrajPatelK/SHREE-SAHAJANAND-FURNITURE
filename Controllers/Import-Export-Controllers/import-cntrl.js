@@ -1,4 +1,5 @@
-const ImportCollection = require('../../src/Models/admin/import-schema');
+const ImportCollection = require('../../src/Models/system-users/import-schema');
+const ManuFacturerCollection = require('../../src/Models/system-users/manufacturer-schema');
 const { addManufacturerDetails } = require('../../src/Helpers/import-export-helpers');
 
 
@@ -43,7 +44,7 @@ module.exports = {
             let results = await ImportCollection.find({});
 
             results = await addManufacturerDetails(results);
-            res.status(201).render("admin/manage-imports", { results: results });
+            res.status(201).render("system-users/manage-imports", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -58,7 +59,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await ImportCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-import", { result: result });
+                return res.status(201).render("system-users/edit-import", { result: result });
             }
 
             res.status(201).send("page not found ...");

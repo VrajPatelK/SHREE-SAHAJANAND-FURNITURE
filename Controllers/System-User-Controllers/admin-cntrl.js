@@ -1,5 +1,4 @@
-const AdminCollection = require('../../src/Models/admin/admin-schema');
-const CustomerCollection = require('../../src/Models/customer-schema');
+const AdminCollection = require('../../src/Models/system-users/admin-schema');
 
 module.exports = {
 
@@ -34,7 +33,7 @@ module.exports = {
         try {
             //render the page
             const result = await AdminCollection.findOne({});
-            res.status(201).render("admin/manage-admins", { results: result.admins });
+            res.status(201).render("system-users/manage-admins", { results: result.admins });
 
         } catch (error) {
             console.log(error);
@@ -50,7 +49,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await AdminCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-admin", { result: result });
+                return res.status(201).render("system-users/edit-admin", { result: result });
             }
 
             res.status(201).send("page not found ...");

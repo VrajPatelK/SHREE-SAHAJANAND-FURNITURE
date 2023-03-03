@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SSF - BED EDITED</title>
-    <%- include ('../partials/header-links') %>
+    <%- include ('../../partials/header-links') %>
 
 
 
         <!-- custom css -->
-        <link rel="stylesheet" href="../../css/admin/manage-admin.css">
+        <link rel="stylesheet" href="../../css/manage-admin.css">
 
         <style>
             .list-group-item input {
@@ -100,16 +100,16 @@
                             <div class="col-12 d-flex justify-content-around align-items-center">
                                 <%if(result.availability){%>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="update_availability" value="on"
-                                            id="flexRadioDefault1" checked>
+                                        <input class="form-check-input" type="radio" name="update_availability"
+                                            value="on" id="flexRadioDefault1" checked>
                                         <label class="form-check-label" for="flexRadioDefault1"
                                             style="color: orangered !important;">
                                             Available
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="update_availability" value="off"
-                                            id="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" name="update_availability"
+                                            value="off" id="flexRadioDefault2">
                                         <label class="form-check-label" for="flexRadioDefault2"
                                             style="color: orangered !important;">
                                             Not Available
@@ -117,16 +117,16 @@
                                     </div>
                                     <%} else{%>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="update_availability" value="on"
-                                                id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="update_availability"
+                                                value="on" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1"
                                                 style="color: orangered !important;">
                                                 Available
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="update_availability" value="off"
-                                                id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" name="update_availability"
+                                                value="off" id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2"
                                                 style="color: orangered !important;">
                                                 Not Available
@@ -157,16 +157,16 @@
                                     </div>
                                     <%} else{%>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="update_storage" value="on"
-                                                id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="update_storage"
+                                                value="on" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1"
                                                 style="color: orangered !important;">
                                                 Have Storage
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="update_storage" value="off"
-                                                id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" name="update_storage"
+                                                value="off" id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2"
                                                 style="color: orangered !important;">
                                                 Haven't Storage

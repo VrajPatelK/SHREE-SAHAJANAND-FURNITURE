@@ -1,4 +1,4 @@
-const TempaleCollection = require('../../src/Models/product/tempale-schema');
+const TempaleCollection = require('../../Src/Models/products/tempale-schema');
 
 module.exports = {
 

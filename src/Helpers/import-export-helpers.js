@@ -1,5 +1,5 @@
-const VendorCollection = require("../Models/admin/vendor-schema");
-const ManuFacturerCollection = require("../Models/admin/manufacturer-schema");
+const VendorCollection = require("../Models/system-users/vendor-schema");
+const ManuFacturerCollection = require("../Models/system-users/manufacturer-schema");
 
 module.exports = {
 

@@ -1,4 +1,4 @@
-const ShoerackCollection = require('../../src/Models/product/shoerack-schema');
+const ShoerackCollection = require('../../Src/Models/products/shoerack-schema');
 
 module.exports = {
     createShoerack: async (req, res) => {
