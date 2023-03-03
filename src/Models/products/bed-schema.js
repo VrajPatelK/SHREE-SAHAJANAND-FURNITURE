@@ -1,5 +1,3 @@
-require("../../../../common/DB/connection");
-
 const mongoose = require('mongoose');
 
 const BedSchema = new mongoose.Schema({
