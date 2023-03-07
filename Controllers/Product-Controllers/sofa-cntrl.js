@@ -88,7 +88,7 @@ module.exports = {
             return res.status(301).redirect("/admin/product/sofas");
 
         } catch (error) {
-            console.log(error);
+            return res.status(401).send(error);
         }
     },
     deleteSofa: async (req, res) => {

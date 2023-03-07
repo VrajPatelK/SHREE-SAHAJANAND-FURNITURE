@@ -13,7 +13,6 @@ module.exports = {
     },
     getAccountants: async (req, res) => {
         try {
-
             let accountants = await AccountantCollection.find({});
             let results = await getAllAccountantData(accountants);
 

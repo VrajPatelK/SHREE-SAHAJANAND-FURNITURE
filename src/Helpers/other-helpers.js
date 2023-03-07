@@ -1,4 +1,4 @@
-const CustomerCollection = require('../../src/Models/customer-schema');
+const CustomerCollection = require('../Models/customers/customer-schema');
 
 
 module.exports = {

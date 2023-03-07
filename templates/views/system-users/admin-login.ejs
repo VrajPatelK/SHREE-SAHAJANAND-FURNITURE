@@ -14,17 +14,48 @@
 
 <body>
     <div class="container-fluid" id="login-admin-form-cnt">
-        <form class="col-xl-5 col-md-8 col-sm-10 col-12 px-2 py-5" method="post" action="admin-login">
+        <form class="col-xl-5 col-md-8 col-sm-10 col-12 px-2 py-5" method="post">
             <div class="mb-3">
-                <input type="text" class="form-control login-input" id="exampleInputPassword1" name="admin_password"
-                    placeholder="password" required>
-                <% if(isWorongPass) {%>
-                    <span style="color: red;"> worng password !!!</span>
+
+                <select class="form-select" size="3" id="system_user" name="system_user" onchange="handleSystemUser()">
+                    <option value="Admin">Admin</option>
+                    <option value="Accountant">Accountant</option>
+                    <option value="Manager">Manager</option>
+                </select>
+
+                <input type="email" class="form-control login-input" id="sys_user_email" name="sys_user_email"
+                    placeholder="email" value="vraj.patel4801@gmail.com" required>
+
+                <input type="password" class="form-control login-input" id="sys_user_pass" name="sys_user_pass"
+                    placeholder="password" value="root">
+
+                <% if(somethingWentWrong) {%>
+                    <span style="color: red;">
+                        <%=errorMsg%> !!!
+                    </span>
                     <%}%>
+
             </div>
-            <button type="submit" class="btn btn-primary" id="proceed" name="proceed">Proceed</button>
+            <button type="submit" class="btn btn-primary" id="proceed" name="proceed">Login</button>
         </form>
     </div>
+
+    <script>
+        $(document).ready(() => {
+            $("#sys_user_pass").hide();
+        });
+
+        function handleSystemUser() {
+            $(document).ready(() => {
+                if ($("#system_user").val() === "Admin") {
+                    $("#sys_user_pass").show();
+                }
+                else {
+                    $("#sys_user_pass").hide();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

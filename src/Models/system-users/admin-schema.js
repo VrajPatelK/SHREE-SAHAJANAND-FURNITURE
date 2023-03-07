@@ -1,30 +1,29 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
+
 
 const AdminLoginSchema = new mongoose.Schema({
 
-    admin_creator: {
-        type: String,
-        unique: true
-    },
-    admins: [{
-        admin_email: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        admin_name: {
-            type: String,
-            required: true,
-        },
-        admin_img: {
-            type: String,
-        },
+    admin_email: { type: String, required: true, unique: true },
+    admin_pass: { type: String, required: true },
+    admin_name: { type: String, },
+    admin_img: { type: String, },
+    loginTokens: [{
+        token: { type: String, required: true },
     }],
-    admin_pass: {
-        type: String,
-    },
 });
 
+AdminLoginSchema.methods.createToken = async function () {
+    try {
+        let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+        this.loginTokens.push({ token: token });
+
+        return token;
+
+    } catch (error) {
+        return res.status(401).send(error);
+    }
+}
 
 const AdminCollection = mongoose.model("admin", AdminLoginSchema);
 module.exports = AdminCollection;

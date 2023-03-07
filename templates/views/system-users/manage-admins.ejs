@@ -16,17 +16,10 @@
 
         <div class="container-fluid mx-auto mt-4 headingDiv">
             <h4 class="headings">
-                Manage Admins
+                Admin
                 <hr>
             </h4>
         </div>
-
-        <div class="container plus-btn-div">
-            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addAdminModal">
-                <i class="fa-solid fa-plus"></i> Add Admin
-            </button>
-        </div>
-
 
         <!-- profile-card -->
         <div class="container-fluid my-5 profile-card-grant-parent-div">
@@ -60,17 +53,12 @@
                                     <li class="list-group-item my-1">
                                         <p class="col-sm-4 col-12 key-para">Admin - Name</p>
                                         <p class="col-sm-8 col-12 value-para">
-                                            <%= result.admin_name%>
+                                            <% if (result.admin_name) {%>
+                                                <%= result.admin_name%>
+                                                    <%} else {%> <span class="text-muted">admin-name</span>
+                                                        <%}%>
                                         </p>
                                     </li>
-
-                                    <li class="list-group-item my-1">
-                                        <p class="col-sm-4 col-12 key-para">Admin - Password</p>
-                                        <p class="col-sm-8 col-12 value-para">
-                                            <%= result.admin_pass%>
-                                        </p>
-                                    </li>
-
                                 </ul>
 
                                 <div class="mt-4 profile-info-btn-div">
@@ -103,6 +91,3 @@
 </body>
 
 </html>
-
-
-<!-- modal for add admin -->

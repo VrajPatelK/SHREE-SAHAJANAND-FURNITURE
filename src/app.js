@@ -3,12 +3,12 @@
 
 require("dotenv").config();
 const path = require('path');
-const bcrypt = require('bcryptjs');
 const jsonwebtoken = require("jsonwebtoken");
 const body_parser = require('body-parser');
 const session = require('express-session');
 const express = require('express');
 const cookie_parser = require("cookie-parser");
+
 const app = express();
 const PORT = process.env.PORT || 8500;
 
@@ -22,15 +22,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(express.static(path.join(`${__dirname}`, `../public`)));
 app.use(cookie_parser());
+app.use(session({
+    secret: process.env.SECRET_SESSION_KEY,
+    resave: false,
+    saveUninitialized: true
+}));
 
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 //pre-defined things--------------
+
 app.set("view engine", "ejs");
 app.set("views", path.join(`${__dirname}`, `../templates/views/`));
 
 
+
 //routers
 const static_routers = require("./Routers/static-routers");
+const customer_routers = require("./Routers/Customer-Routers/customer-routers");
+const system_user_login_routers = require("./Routers/System-User-Routers/system-user-login-routers");
 
 const request_manager_routers = require("./Routers/request-manager-routers");
 const admin_routers = require("./Routers/System-User-Routers/admin-routers");
@@ -52,13 +65,7 @@ const showcase_routers = require("../src/Routers/Product-Routers/showcase-router
 const jula_routers = require("../src/Routers/Product-Routers/jula-routers");
 const wardrobe_routers = require("../src/Routers/Product-Routers/wardrobe-routers");
 const tvunit_routers = require("../src/Routers/Product-Routers/tvunit-routers");
-
-
-app.use(session({
-    secret: process.env.SECRET_SESSION_KEY,
-    resave: false,
-    saveUninitialized: true
-}));
+const sells_routers = require("../src/Routers/sells-routers");
 
 
 app.use(function (req, res, next) {
@@ -75,8 +82,14 @@ app.get("/", static_routers);
 app.get("/about", static_routers);
 app.get("/contact", static_routers);
 
+//customers
+app.post("/create-customer", customer_routers);
+
+//sys-user-login
+app.get("/sys-user/login", system_user_login_routers);
+app.post("/sys-user/login", system_user_login_routers);
+
 // admins
-app.post("/admin/admins", admin_routers);
 app.get("/admin/admins", admin_routers);
 app.get("/admin/edit-admin", admin_routers);
 app.post("/admin/edit-admin", admin_routers);
@@ -210,6 +223,7 @@ app.get("/admin/product/edit-tvunit", tvunit_routers);
 app.post("/admin/product/edit-tvunit", tvunit_routers);
 app.get("/admin/product/delete-tvunit", tvunit_routers);
 
+app.get("/admin/sells", sells_routers)
 
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);

@@ -42,67 +42,12 @@ const CustomerSchema = new mongoose.Schema({
         maxlength: 6
     },
     customer_district: {
-        type: Number,
-        minlength: 6,
-        maxlength: 6
+        type: String,
     },
     customer_state: {
-        type: Number,
-        minlength: 6,
-        maxlength: 6
+        type: String,
     },
 
-    favourites: [{
-        product_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
-    }],
-
-    myOrders: [{
-        peoducts: [{
-            product_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-            },
-            quantity: {
-                type: Number,
-                min: 1,
-                required: true
-            },
-        }],
-        total_bill: {
-            type: Number,
-            min: 1,
-            required: true
-        },
-        onDate: {
-            type: Date,
-            default: new Date(),
-        }
-    }],
-    orderHistory: [{
-        peoducts: [{
-            product_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-            },
-            quantity: {
-                type: Number,
-                min: 1,
-                required: true
-            },
-        }],
-        total_bill: {
-            type: Number,
-            min: 1,
-            required: true
-        },
-        onDate: {
-            type: Date,
-            default: new Date(),
-        }
-    }],
     loginTokens: [{
         token: {
             type: String,
