@@ -21,9 +21,9 @@
             </h4>
         </div>
         <div class="container plus-btn-div">
-            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addAccountantModal">
+            <a class="btn py-2 add-btn" href="/admin/create-accountant">
                 <i class="fa-solid fa-plus"></i> Add Accountant
-            </button>
+            </a>
         </div>
 
 
@@ -147,43 +147,3 @@
 </body>
 
 </html>
-
-
-<!-- modal for add accountant -->
-
-<div class="modal fade" id="addAccountantModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="addAccountantModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addAccountantModalLabel">Add Accountant
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/admin/accountants" method="post" class="row g-3">
-                    <div class="col-12">
-                        <input type="email" class="form-control" id="add_accountant_email" name="add_accountant_email"
-                            placeholder="Accountant Email..." required>
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control" id="add_accountant_study" name="add_accountant_study"
-                            placeholder="Accountant Study...">
-                    </div>
-                    <div class="col-12">
-                        <input type="number" min="1" max="100" class="form-control" id="add_accountant_experience"
-                            name="add_accountant_experience" placeholder="Accountant Experience...">
-                    </div>
-                    <div class="col-12 modal-footer">
-                        <button type="submit" id="myform" class="btn add-sbmt-btn">
-                            <i class="fa-solid fa-plus"></i> Add
-                        </button>
-                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

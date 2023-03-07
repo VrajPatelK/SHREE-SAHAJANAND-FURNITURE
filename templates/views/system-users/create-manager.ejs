@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Manager</title>
+
+    <%- include ('../../partials/header-links') %>
+        <link rel="stylesheet" href="../css/manage-admin.css">
+
+</head>
+
+<body>
+    <div class="container-fluid mx-auto mt-4 headingDiv">
+        <h4 class="headings">
+            Create Manager
+            <hr>
+        </h4>
+    </div>
+    <div class="container">
+        <%if(swr){%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%=errorMsg%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form method="post" class="row g-3">
+                <div class="col-12">
+                    <input type="email" class="form-control" id="manager_email" name="manager_email"
+                        placeholder="Manager Email..." value="<%=result.manager_email%>" required>
+                </div>
+                <div class="col-12">
+                    <input type="password" class="form-control" id="manager_pass" name="manager_pass"
+                        placeholder="Manager Password..." value="<%=result.manager_pass%>" required>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="manager_name" name="manager_name"
+                        placeholder="Manager Name..." value="<%=result.manager_name%>" required>
+                </div>
+                <div class="col-12">
+                    <input type="tel" class="form-control" name="manager_mobile" id="manager_mobile"
+                        placeholder="Manager Mobile..." maxlength="10" pattern="[0-9]{10}"
+                        value="<%=result.manager_mobile%>" required>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="manager_study" name="manager_study"
+                        placeholder="Manager Study..." value="<%=result.manager_study%>" required>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="manager_skill" name="manager_skill"
+                        placeholder="Manager Skills..." value="<%=result.manager_skill%>" required>
+                </div>
+                <div class="col-12">
+                    <input type="number" min="1" max="100" class="form-control" id="manager_experience"
+                        name="manager_experience" placeholder="Manager Experience..."
+                        value="<%=result.manager_experience%>" required>
+                </div>
+                <div class="col-12">
+                    <input class="form-control" type="file" id="manager_image" name="manager_image">
+                </div>
+                <div class="col-12">
+                    <textarea name="manager_address" id="manager_address" class="form-control" cols="30" rows="4"
+                        placeholder="Manager Address..." required><%=result.manager_address%></textarea>
+                </div>
+                <div class="col-12 modal-footer">
+                    <button type="submit" id="myform" class="btn add-sbmt-btn">
+                        <i class="fa-solid fa-plus"></i> Add
+                    </button>
+                    <a class="btn mx-2 back-btn" href="/admin/managers">
+                        <i class="fa-solid fa-backward"></i> Back
+                    </a>
+                </div>
+            </form>
+            <%}else{%>
+                <form method="post" class="row g-3">
+                    <div class="col-12">
+                        <input type="email" class="form-control" id="manager_email" name="manager_email"
+                            placeholder="Manager Email..." value="manager123@gmail.com" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="password" class="form-control" id="manager_pass" name="manager_pass"
+                            placeholder="Manager Password..." value="root" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" maxlength="10" minlength="10" id="manager_name"
+                            name="manager_name" placeholder="Manager Name..." value="man-123" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="tel" class="form-control" name="manager_mobile" id="manager_mobile"
+                            placeholder="Manager Mobile..." maxlength="10" pattern="[0-9]{10}" value="9898989898"
+                            required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="manager_study" name="manager_study"
+                            placeholder="Manager Study..." value="B.COM MSU || MBA IIM" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="manager_skill" name="manager_skill"
+                            placeholder="Manager Skill..." value="Skill1, Skill2, Skill3" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="number" min="1" max="100" class="form-control" id="manager_experience"
+                            name="manager_experience" placeholder="Manager Experience..." value="4" required>
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control" type="file" id="manager_image" name="manager_image">
+                    </div>
+                    <div class="col-12">
+                        <textarea name="manager_address" id="manager_address" class="form-control" cols="30" rows="4"
+                            placeholder="Manager Address..."
+                            required>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, ipsa. Harum quia dolorum quis voluptas. Facere quaerat ad quibusdam doloribus.</textarea>
+                    </div>
+                    <div class="col-12 modal-footer">
+                        <button type="submit" id="myform" class="btn add-sbmt-btn">
+                            <i class="fa-solid fa-plus"></i> Add
+                        </button>
+                        <a class="btn mx-2 back-btn" href="/admin/managers">
+                            <i class="fa-solid fa-backward"></i> Back
+                        </a>
+                    </div>
+                </form>
+                <%}%>
+    </div>
+</body>
+
+</html>

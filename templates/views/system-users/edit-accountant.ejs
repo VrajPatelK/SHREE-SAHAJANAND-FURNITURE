@@ -31,42 +31,77 @@
                 <hr>
             </h3>
         </div>
+        <%if(swr){%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%=errorMsg%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%}%>
 
-        <a href="/admin/accountants">
-            <button class="btn mx-2 back-btn">
-                <i class="fa-solid fa-backward"></i> Back
-            </button>
-        </a>
-        <div class="profie-card-div py-3">
-            <form action="" class="col-sm-10 col-12 my-3" method="post">
+                <a href="/admin/accountants">
+                    <button class="btn mx-2 back-btn">
+                        <i class="fa-solid fa-backward"></i> Back
+                    </button>
+                </a>
+                <div class="profie-card-div py-3">
+                    <form action="" class="col-sm-10 col-12 my-3" method="post">
 
-                <div class="col-12 px-3 py-3 profile-info-div">
-                    <ul class="list-group profile-info-grp">
+                        <div class="col-12 px-3 py-3 profile-info-div">
+                            <ul class="list-group profile-info-grp">
 
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Email</p>
+                                    <input type="email" class="col-8 p-2" name="accountant_email"
+                                        value="<%=result.accountant_email%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Name</p>
+                                    <input type="text" class="col-8 p-2" name="accountant_name"
+                                        value="<%=result.accountant_name%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Mobile</p>
+                                    <input type="tel" class="col-8 p-2" maxlength="10" pattern="[0-9]{10}" name="accountant_mobile"
+                                        value="<%=result.accountant_mobile%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Study</p>
+                                    <input type="text" class="col-8 p-2" name="accountant_study"
+                                        value="<%=result.accountant_study%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Experience</p>
+                                    <input type="number" min="1" max="100" class="col-8 p-2"
+                                        name="accountant_experience" value="<%=result.accountant_experience%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Profile Img</p>
+                                    <input type="file" class="col-8 p-2" name="accountant_image">
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Remove Profile Image</p>
+                                    <span class="col-8">
+                                        <input type="checkbox" class="form-check-input-lg" name="rmvImage"
+                                            id="rmvImage">
+                                    </span>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Accountant - Address</p>
+                                    <textarea name="accountant_address" id="accountant_address" class="form-control"
+                                        cols="30" rows="4" placeholder="Accountant Address..."
+                                        required><%=result.accountant_address%></textarea>
+                                </li>
+                            </ul>
 
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Study</p>
-                            <input type="text" class="col-8 p-2" name="update_accountant_study"
-                                value="<%=result.accountant_study%>" required>
-                        </li>
+                            <div class="mt-4 profile-info-btn-div">
+                                <button type="submit" class="btn mx-2 edit-btn">
+                                    Edit <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </div>
 
-                        <li class="list-group-item my-1">
-                            <p class="col-4 key-para">Accountant - Experience</p>
-                            <input type="number" min="1" max="100" class="col-8 p-2" name="update_accountant_experience"
-                                value="<%=result.accountant_experience%>" required>
-                        </li>
-                    </ul>
-
-                    <div class="mt-4 profile-info-btn-div">
-                        <button type="submit" class="btn mx-2 edit-btn">
-                            Edit <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                    </div>
-
+                    </form>
                 </div>
-
-            </form>
-        </div>
     </div>
 
 </body>

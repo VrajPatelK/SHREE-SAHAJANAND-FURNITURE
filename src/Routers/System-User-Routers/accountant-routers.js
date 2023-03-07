@@ -3,7 +3,8 @@ const router = express.Router();
 
 //controllers
 const {
-    createAccountant,
+    getCreateAccountant,
+    postCreateAccountant,
     getAccountants,
     updateAccountantGet,
     updateAccountantPost,
@@ -12,7 +13,8 @@ const {
 } = require("../../../Controllers/System-User-Controllers/accountant-cntrl");
 
 
-router.post("/admin/accountants", createAccountant);
+router.get("/admin/create-accountant", getCreateAccountant);
+router.post("/admin/create-accountant", postCreateAccountant);
 router.get("/admin/accountants", getAccountants);
 router.get("/admin/edit-accountant", updateAccountantGet);
 router.post("/admin/edit-accountant", updateAccountantPost);

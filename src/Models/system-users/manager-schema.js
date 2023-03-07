@@ -2,30 +2,22 @@ const mongoose = require('mongoose');
 
 const ManagerShcema = new mongoose.Schema({
 
-    manager_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "customer"
-    },
-    manager_skill: {
-        type: String,
-        required: true,
-    },
-    manager_study: {
-        type: String,
-        required: true,
-    },
-    manager_experience: {
+    manager_email: { type: String, required: true, unique: true },
+    manager_pass: { type: String, required: true },
+    manager_name: { type: String, required: true, },
+    manager_image: { type: String },
+    manager_mobile: {
         type: Number,
+        unique: true,
         required: true,
-        min: 0
+        minlength: [10, "Mobile number must be of 10 digits"],
+        maxlength: [10, "Mobile number must be of 10 digits"]
     },
-    loginTokens: [{
-        token: {
-            type: String,
-            required: true,
-            unique: true
-        }
-    }],
+    manager_address: { type: String, required: true },
+    manager_skill: { type: String, required: true, },
+    manager_study: { type: String, required: true, },
+    manager_experience: { type: Number, required: true, min: 0 },
+    loginTokens: [{ token: { type: String, } }],
 },
     { timestamps: true }
 );

@@ -5,7 +5,8 @@ const router = express.Router();
 
 //controllers
 const {
-    createManager,
+    getCreateManager,
+    postCreateManager,
     getManagers,
     updateManagerGet,
     updateManagerPost,
@@ -13,7 +14,8 @@ const {
 
 } = require("../../../Controllers/System-User-Controllers/manager-cntrl");
 
-router.post("/admin/managers", createManager);
+router.get("/admin/create-manager", getCreateManager);
+router.post("/admin/create-manager", postCreateManager);
 router.get("/admin/managers", getManagers);
 router.get("/admin/edit-manager", updateManagerGet);
 router.post("/admin/edit-manager", updateManagerPost);

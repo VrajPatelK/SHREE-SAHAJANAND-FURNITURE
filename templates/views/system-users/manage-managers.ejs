@@ -21,9 +21,9 @@
             </h4>
         </div>
         <div class="container plus-btn-div">
-            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addManagerModal">
+            <a class="btn py-2 add-btn" href="/admin/create-manager">
                 <i class="fa-solid fa-plus"></i> Add Manager
-            </button>
+            </a>
         </div>
 
 
@@ -42,8 +42,6 @@
                                     <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
                                     <%}else{%>
                                         <img src="../images/profile-pic.jpg" class="card-img-top" alt="...">
-                                        <!--<img src="<%= result.manager_img%>" class="card-img-top" alt="...">
-                                    -->
                                         <%}%>
                             </div>
 
@@ -100,13 +98,6 @@
                                         </p>
                                     </li>
 
-                                    <li class="list-group-item my-1">
-                                        <p class="col-sm-4 col-12 key-para">Manager - Password</p>
-                                        <p class="col-sm-8 col-12 value-para">
-                                            <%= result.manager_pass%>
-                                        </p>
-                                    </li>
-
                                 </ul>
 
                                 <div class="mt-4 profile-info-btn-div">
@@ -140,48 +131,3 @@
 </body>
 
 </html>
-
-
-<!-- modal for add manager -->
-
-<div class="modal fade" id="addManagerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="addManagerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addManagerModalLabel">Add Manager
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" class="row g-3">
-                    <div class="col-12">
-                        <input type="email" class="form-control" id="add_manager_email" name="add_manager_email"
-                            placeholder="Manager Email..." required>
-                    </div>
-                    <div class="col-12 form-floating">
-                        <textarea type="text" class="form-control" id="add_manager_skill" cols="30" rows="10"
-                            name="add_manager_skill" placeholder="Manager Skills..." required> </textarea>
-                        <label for="add_manager_skill">Manager Skills...</label>
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control" id="add_manager_study" name="add_manager_study"
-                            placeholder="Manager Study..." required>
-                    </div>
-                    <div class="col-12">
-                        <input type="number" min="1" max="100" class="form-control" id="add_manager_experience"
-                            name="add_manager_experience" placeholder="Manager Experience..." required>
-                    </div>
-                    <div class="col-12 modal-footer">
-                        <button type="submit" id="myform" class="btn add-sbmt-btn">
-                            <i class="fa-solid fa-plus"></i> Add
-                        </button>
-                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

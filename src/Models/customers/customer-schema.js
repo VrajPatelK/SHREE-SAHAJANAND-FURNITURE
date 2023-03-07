@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 const jwt = require("jsonwebtoken");
 
 const CustomerSchema = new mongoose.Schema({
@@ -7,13 +6,7 @@ const CustomerSchema = new mongoose.Schema({
     customer_email: {
         type: String,
         required: true,
-        unique: true,
-        validate: {
-            validator: (email) => {
-                return (validator.isEmail(email));
-            },
-            message: "server : Invalid E-mail !!!"
-        }
+        unique: true
     },
 
     customer_name: {

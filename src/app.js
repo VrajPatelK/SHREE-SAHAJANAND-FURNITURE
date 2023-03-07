@@ -96,14 +96,16 @@ app.post("/admin/edit-admin", admin_routers);
 app.get("/admin/delete-admin", admin_routers);
 
 // Accountants
-app.post("/admin/accountants", accountant_routers);
+app.get("/admin/create-accountant", accountant_routers);
+app.post("/admin/create-accountant", accountant_routers);
 app.get("/admin/accountants", accountant_routers);
 app.get("/admin/edit-accountant", accountant_routers);
 app.post("/admin/edit-accountant", accountant_routers);
 app.get("/admin/delete-accountant", accountant_routers);
 
 // Managers
-app.post("/admin/managers", manager_routers);
+app.get("/admin/create-manager", manager_routers);
+app.post("/admin/create-manager", manager_routers);
 app.get("/admin/managers", manager_routers);
 app.get("/admin/edit-manager", manager_routers);
 app.post("/admin/edit-manager", manager_routers);

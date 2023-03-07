@@ -2,26 +2,21 @@ const mongoose = require('mongoose');
 
 const AccountantShcema = new mongoose.Schema({
 
-    accountant_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "customer"
-    },
-    accountant_study: {
-        type: String,
-        required: true,
-    },
-    accountant_experience: {
+    accountant_email: { type: String, required: true, unique: true },
+    accountant_pass: { type: String, required: true },
+    accountant_name: { type: String, required: true, },
+    accountant_image: { type: String },
+    accountant_mobile: {
         type: Number,
+        unique: true,
         required: true,
-        min: 0
+        minlength: [10, "Mobile number must be of 10 digits"],
+        maxlength: [10, "Mobile number must be of 10 digits"]
     },
-    loginTokens: [{
-        token: {
-            type: String,
-            required: true,
-            unique: true
-        }
-    }],
+    accountant_address: { type: String, required: true },
+    accountant_study: { type: String, required: true, },
+    accountant_experience: { type: Number, required: true, min: 0 },
+    loginTokens: [{ token: { type: String, } }],
 },
     { timestamps: true }
 );

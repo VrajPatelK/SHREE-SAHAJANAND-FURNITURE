@@ -51,7 +51,26 @@ module.exports = {
             }
 
             if (system_user === "Accountant") {
+                let accountant = await AccountantCollection.findOne({ accountant_email: req.body.sys_user_email });
 
+                if (accountant !== null) {
+                    return res.status(200).render("/admin-login", { swr: true, errorMsg: "accountant already exist..." });
+                }
+
+                //check-password
+                if (!Bcrypt.compare(req.body.sys_user_pass, accountant.accountant_pass)) {
+                    return res.status(200).render("/admin-login", { wrongPass: true, errorMsg: "wrong email/password ..." });
+                }
+
+                // create and push token
+                let token = await accountant.createToken();
+                await accountant.save(); //save accountant
+
+                // cerate a cookie & session
+                res.cookie("loginAccountant", token, { httpOnly: true });
+                res.locals.session.userType = "accountant";
+
+                return res.status(200).render("sells");
             }
 
             if (system_user === "Manager") {
