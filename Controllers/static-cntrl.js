@@ -36,7 +36,9 @@ module.exports = {
     getContactPage: async (req, res) => {
         try {
 
-            res.status(201).render("contact", { admin: req.session.isAdmin });
+            // res.status(201).render("contact", { admin: req.session.isAdmin });
+            res.status(201).render("contact");
+            
 
         } catch (error) {
             console.log(error);

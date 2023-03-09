@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 8500;
 
 //db------
-require('./DB/connection');
+// require('./DB/connection');
 
 
 //middleware used-------
@@ -54,17 +54,17 @@ const wardrobe_routers = require("../src/Routers/Product-Routers/wardrobe-router
 const tvunit_routers = require("../src/Routers/Product-Routers/tvunit-routers");
 
 
-app.use(session({
-    secret: process.env.SECRET_SESSION_KEY,
-    resave: false,
-    saveUninitialized: true
-}));
+// app.use(session({
+//     secret: process.env.SECRET_SESSION_KEY,
+//     resave: false,
+//     saveUninitialized: true
+// }));
 
 
-app.use(function (req, res, next) {
-    res.locals.isRegistered = req.session.isRegistered;
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.locals.isRegistered = req.session.isRegistered;
+//     next();
+// });
 
 // sys-user-req ,products-req
 app.get("/admin/manage", request_manager_routers);
