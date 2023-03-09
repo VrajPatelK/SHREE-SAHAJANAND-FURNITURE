@@ -12,6 +12,10 @@ const {
 
 } = require("../../../Controllers/Product-Controllers/tempale-cntrl");
 
+const { isAdmin } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) { isAdmin(req, res, next); });
 
 router.post("/admin/product/tempales", createTempale);
 router.get("/admin/product/tempales", getTempales);

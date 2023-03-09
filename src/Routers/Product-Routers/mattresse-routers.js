@@ -12,6 +12,11 @@ const {
 
 } = require("../../../Controllers/Product-Controllers/mattresse-cntrl");
 
+const { isAdmin } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) { isAdmin(req, res, next); });
+
 
 router.post("/admin/product/mattresses", createMattresses);
 router.get("/admin/product/mattresses", getMattressess);

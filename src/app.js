@@ -65,7 +65,8 @@ const showcase_routers = require("../src/Routers/Product-Routers/showcase-router
 const jula_routers = require("../src/Routers/Product-Routers/jula-routers");
 const wardrobe_routers = require("../src/Routers/Product-Routers/wardrobe-routers");
 const tvunit_routers = require("../src/Routers/Product-Routers/tvunit-routers");
-const sells_routers = require("../src/Routers/sells-routers");
+const sell_routers = require("./Routers/Trading-Routers/sell-routers");
+const order_routers = require("./Routers/Trading-Routers/order-routers");
 
 
 app.use(function (req, res, next) {
@@ -225,8 +226,30 @@ app.get("/admin/product/edit-tvunit", tvunit_routers);
 app.post("/admin/product/edit-tvunit", tvunit_routers);
 app.get("/admin/product/delete-tvunit", tvunit_routers);
 
-app.get("/admin/sells", sells_routers)
+//trading
+app.get("/admin/sells", sell_routers);
+app.get("/admin/orders", order_routers);
+
 
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
 });
+
+
+/*
+                    <%if(session.userType==="Customer"){%>
+                        <%}%>
+                            <%if(session.userType==="Admin" || session.userType==="Accountant" || session.userType==="Manager" ){%>
+                                <%}%>
+                                    <%if(session.userType==="Admin" || session.userType==="Accountant"){%>
+                                        <%}%>
+                                            <%if(session.userType==="Admin" ){%>
+                                                <%}%>
+                                                    <%if(session.userType==="Admin" ){%>
+                                                        <%}%>
+                                                            <%if(session.userType==="Admin" || session.userType==="Manager ){%>
+                                                                <%}%>
+
+
+
+*/

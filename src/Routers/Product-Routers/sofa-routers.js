@@ -12,6 +12,10 @@ const {
 
 } = require("../../../Controllers/Product-Controllers/sofa-cntrl");
 
+const { isAdmin } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) { isAdmin(req, res, next); });
 
 router.post("/admin/product/sofas", createSofa);
 router.get("/admin/product/sofas", getSofas);

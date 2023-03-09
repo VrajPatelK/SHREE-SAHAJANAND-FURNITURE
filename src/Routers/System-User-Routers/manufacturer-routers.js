@@ -11,6 +11,10 @@ const {
 
 } = require("../../../Controllers/System-User-Controllers/manufacturer-cntrl");
 
+const { isAdmin } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) { isAdmin(req, res, next); });
 
 router.post("/admin/manufacturers", createManufacturer);
 router.get("/admin/manufacturers", getManufacturers);

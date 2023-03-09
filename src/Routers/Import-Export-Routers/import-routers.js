@@ -12,6 +12,14 @@ const {
 
 } = require("../../../Controllers/Import-Export-Controllers/import-cntrl");
 
+const { isAdmin,isManager } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) {
+
+    if (res.locals.session.userType === "admin") { isAdmin(req, res, next); }
+    else if (res.locals.session.userType === "manager") { isManager(req, res, next); }
+});
 
 router.post("/admin/imports", createImport);
 router.get("/admin/imports", getImports);

@@ -12,6 +12,10 @@ const {
 
 } = require("../../../Controllers/System-User-Controllers/vendor-cntrl");
 
+const { isAdmin } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) { isAdmin(req, res, next); });
 
 router.post("/admin/vendors", createVendor);
 router.get("/admin/vendors", getVendors);

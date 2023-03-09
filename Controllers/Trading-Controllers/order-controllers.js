@@ -1,13 +1,12 @@
 module.exports = {
 
-
-    getAllSells: async (req, res) => {
+    getAllOrders: async (req, res) => {
         try {
-
-            return res.status(200).render("trading/sells");
+            return res.status(200).render("trading/orders");
 
         } catch (error) {
             return res.status(401).send(error);
         }
     },
+
 };

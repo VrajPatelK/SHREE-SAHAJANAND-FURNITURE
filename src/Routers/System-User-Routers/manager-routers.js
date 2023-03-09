@@ -14,6 +14,11 @@ const {
 
 } = require("../../../Controllers/System-User-Controllers/manager-cntrl");
 
+const { isAdmin } = require('../../Middlewares/isLogin');
+
+//Middlewares
+router.use(function (req, res, next) { isAdmin(req, res, next); });
+
 router.get("/admin/create-manager", getCreateManager);
 router.post("/admin/create-manager", postCreateManager);
 router.get("/admin/managers", getManagers);

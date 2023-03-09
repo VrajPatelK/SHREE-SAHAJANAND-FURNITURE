@@ -46,7 +46,7 @@ module.exports = {
                 res.cookie("loginAdmin", token, { httpOnly: true });
                 res.locals.session.userType = "admin";
 
-                return res.status(200).render("sells");
+                return res.status(301).redirect("/admin/sells");
             }
 
             if (system_user === "Accountant") {

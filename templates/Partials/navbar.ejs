@@ -41,101 +41,152 @@
         <div id="third-nav" class="container px-0 py-2">
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav nav-fill">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ">All Furniture</a>
-                    </li>
-                    <!-- admin - reserved -->
-                    <li class="nav-item">
-                        <a class="nav-link ">Orders</a>
-                    </li>
+                    <%if(session.userType==="customer"){%>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ">All Furniture</a>
+                        </li>
+                        <%}%>
 
-                    <!-- products-drop-down -->
-                    <li class="dropdown items-dropdonw">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuProducts"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Products
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuProducts">
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=sofas">Sofas</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=beds">Beds</a></li>
-                            <li><a class="dropdown-item"
-                                    href="/admin/product/manage?manage_type=mattresses">Mattresses</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=chairs">Chairs</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=tables">Tables</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=tvunits">TV
-                                    Units</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=tempales">Tempales</a>
-                            </li>
-                            <li><a class="dropdown-item"
-                                    href="/admin/product/manage?manage_type=shoeracks">Shoeracks</a></li>
-                            <li><a class="dropdown-item"
-                                    href="/admin/product/manage?manage_type=showcases">Showcases</a></li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=julas">Julas</a>
-                            </li>
-                            <li><a class="dropdown-item"
-                                    href="/admin/product/manage?manage_type=wardrobes">Wardrobes</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/product/manage?manage_type=others">Other</a>
-                            </li>
-                        </ul>
-                    </li>
+                            <!-- admin - reserved -->
+                            <%if(session.userType==="admin" || session.userType==="accountant" ||
+                                session.userType==="manager" ){%>
 
-                    <!-- System-users-drop-down -->
-                    <li class="dropdown items-dropdonw">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuSysUsers"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            System-Users
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuSysUsers">
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=admins">Admin</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=accountants">Accountants</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=managers">Managers</a></li>
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=workers">Workers</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item"
-                                    href="/admin/manage?manage_type=manufacturers">Manufacturers</a></li>
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=vendors">Vendors</a></li>
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=customers">Customers</a>
-                            </li>
-                        </ul>
-                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">Sells</a>
+                                </li>
+                                <%}%>
+                                    <%if(session.userType==="admin" || session.userType==="accountant" ){%>
+                                        <li class="nav-item">
+                                            <a class="nav-link">Orders</a>
+                                        </li>
+                                        <%}%>
 
-                    <li class="dropdown items-dropdonw">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuImportExport"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Import-Export
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuImportExport">
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=import">Import</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/admin/manage?manage_type=export">Export</a></li>
-                        </ul>
-                    </li>
-                    <!-- admin - reserved -->
+                                            <!-- products-drop-down -->
+                                            <%if(session.userType==="admin" ){%>
+                                                <li class="dropdown items-dropdonw">
+                                                    <button class="btn dropdown-toggle" type="button"
+                                                        id="dropdownMenuProducts" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                        Products
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuProducts">
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=sofas">Sofas</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=beds">Beds</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=mattresses">Mattresses</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=chairs">Chairs</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=tables">Tables</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=tvunits">TV
+                                                                Units</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=tempales">Tempales</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=shoeracks">Shoeracks</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=showcases">Showcases</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=julas">Julas</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=wardrobes">Wardrobes</a>
+                                                        </li>
+                                                        <li>
+                                                            <hr class="dropdown-divider">
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/product/manage?manage_type=others">Other</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <%}%>
+
+                                                    <!-- System-users-drop-down -->
+                                                    <%if(session.userType==="admin" ){%>
+                                                        <li class="dropdown items-dropdonw">
+                                                            <button class="btn dropdown-toggle" type="button"
+                                                                id="dropdownMenuSysUsers" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                System-Users
+                                                            </button>
+                                                            <ul class="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuSysUsers">
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=admins">Admin</a>
+                                                                </li>
+                                                                <li>
+                                                                    <hr class="dropdown-divider">
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=accountants">Accountants</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=managers">Managers</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=workers">Workers</a>
+                                                                </li>
+                                                                <li>
+                                                                    <hr class="dropdown-divider">
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=manufacturers">Manufacturers</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=vendors">Vendors</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="/admin/manage?manage_type=customers">Customers</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <%}%>
+
+                                                            <%if(session.userType==="admin" ||
+                                                                session.userType==="manager" ){%>
+                                                                <li class=" dropdown items-dropdonw">
+                                                                    <button class="btn dropdown-toggle" type="button"
+                                                                        id="dropdownMenuImportExport"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        Import-Export
+                                                                    </button>
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuImportExport">
+                                                                        <li><a class="dropdown-item"
+                                                                                href="/admin/manage?manage_type=import">Import</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <hr class="dropdown-divider">
+                                                                        </li>
+                                                                        <li><a class="dropdown-item"
+                                                                                href="/admin/manage?manage_type=export">Export</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                                <%}%>
+                                                                    <!-- admin - reserved -->
                 </ul>
                 <!-- hidden-icons -->
                 <div class="col-md-4 d-md-none struct-div-1">
@@ -152,6 +203,6 @@
         </div>
     </div>
 
-    <%=session.userType===undefined%>
-        <%=session.userType%>
 </nav>
+
+<%=session.userType%>
