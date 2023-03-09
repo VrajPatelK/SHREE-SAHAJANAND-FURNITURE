@@ -8,8 +8,9 @@
     <title>Create Accountant</title>
 
     <%- include ('../../partials/header-links') %>
-        <link rel="stylesheet" href="../css/manage-admin.css">
 
+        <link rel="stylesheet" href="../css/manage-admin.css">
+        <script src="../JS/accountant-script.js" defer></script>
 </head>
 
 <body>
@@ -35,9 +36,8 @@
                         placeholder="Accountant Password..." value="<%=result.accountant_pass%>" required>
                 </div>
                 <div class="col-12">
-                    <input type="text" class="form-control" id="accountant_name"
-                        name="accountant_name" placeholder="Accountant Name..." value="<%=result.accountant_name%>"
-                        required>
+                    <input type="text" class="form-control" id="accountant_name" name="accountant_name"
+                        placeholder="Accountant Name..." value="<%=result.accountant_name%>" required>
                 </div>
                 <div class="col-12">
                     <input type="tel" class="form-control" name="accountant_mobile" id="accountant_mobile"
@@ -54,7 +54,10 @@
                         value="<%=result.accountant_experience%>" required>
                 </div>
                 <div class="col-12">
-                    <input class="form-control" type="file" id="accountant_image" name="accountant_image">
+                    <input class="form-control" type="file" id="image_file" name="image_file" accept=".jpeg, .jpg, .png"
+                        onchange="convertToBase64()">
+                    <input type="text" name="accountant_image" id="accountant_image"
+                        value="<%=result.accountant_image%>" hidden>
                 </div>
                 <div class="col-12">
                     <textarea name="accountant_address" id="accountant_address" class="form-control" cols="30" rows="4"
@@ -64,9 +67,9 @@
                     <button type="submit" id="myform" class="btn add-sbmt-btn">
                         <i class="fa-solid fa-plus"></i> Add
                     </button>
-                    <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
-                        Close
-                    </button>
+                    <a href="/admin/accountants" class="btn mx-2 back-btn">
+                        <i class="fa-solid fa-backward"></i> Back
+                    </a>
                 </div>
             </form>
             <%}else{%>
@@ -97,7 +100,9 @@
                             name="accountant_experience" placeholder="Accountant Experience..." value="4" required>
                     </div>
                     <div class="col-12">
-                        <input class="form-control" type="file" id="accountant_image" name="accountant_image">
+                        <input class="form-control" type="file" id="image_file" name="image_file"
+                            accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                        <input type="text" name="accountant_image" id="accountant_image" hidden>
                     </div>
                     <div class="col-12">
                         <textarea name="accountant_address" id="accountant_address" class="form-control" cols="30"
@@ -108,9 +113,9 @@
                         <button type="submit" id="myform" class="btn add-sbmt-btn">
                             <i class="fa-solid fa-plus"></i> Add
                         </button>
-                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
-                            Close
-                        </button>
+                        <a href="/admin/accountants" class="btn mx-2 back-btn">
+                            <i class="fa-solid fa-backward"></i> Back
+                        </a>
                     </div>
                 </form>
                 <%}%>

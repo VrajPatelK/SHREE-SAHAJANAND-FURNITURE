@@ -3,8 +3,7 @@
 
 require("dotenv").config();
 const path = require('path');
-const jsonwebtoken = require("jsonwebtoken");
-const body_parser = require('body-parser');
+const body_parser = require("body-parser");
 const session = require('express-session');
 const express = require('express');
 const cookie_parser = require("cookie-parser");
@@ -19,7 +18,8 @@ require('./DB/connection');
 //middleware used-------
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(body_parser.urlencoded({ extended: false }));
+app.use(body_parser.json({ limit: '2gb' }));
+app.use(body_parser.urlencoded({ limit: '2gb', extended: true }));
 app.use(express.static(path.join(`${__dirname}`, `../public`)));
 app.use(cookie_parser());
 app.use(session({

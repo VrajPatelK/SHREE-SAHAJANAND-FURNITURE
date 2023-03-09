@@ -9,6 +9,8 @@
 
     <%- include ('../../partials/header-links') %>
         <link rel="stylesheet" href="../css/manage-admin.css">
+        <script src="../JS/manager-script.js" defer></script>
+
 
 </head>
 
@@ -57,7 +59,9 @@
                         value="<%=result.manager_experience%>" required>
                 </div>
                 <div class="col-12">
-                    <input class="form-control" type="file" id="manager_image" name="manager_image">
+                    <input class="form-control" type="file" id="image_file" name="image_file" accept=".jpeg, .jpg, .png"
+                        onchange="convertToBase64()">
+                    <input type="text" name="manager_image" id="manager_image" value="<%=result.manager_image%>" hidden>
                 </div>
                 <div class="col-12">
                     <textarea name="manager_address" id="manager_address" class="form-control" cols="30" rows="4"
@@ -104,7 +108,9 @@
                             name="manager_experience" placeholder="Manager Experience..." value="4" required>
                     </div>
                     <div class="col-12">
-                        <input class="form-control" type="file" id="manager_image" name="manager_image">
+                        <input class="form-control" type="file" id="image_file" name="image_file"
+                            accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                        <input type="text" name="manager_image" id="manager_image" hidden>
                     </div>
                     <div class="col-12">
                         <textarea name="manager_address" id="manager_address" class="form-control" cols="30" rows="4"
