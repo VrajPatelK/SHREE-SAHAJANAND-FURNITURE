@@ -1,7 +1,6 @@
-//.env Constant
-// process.env.PORT
-
 require("dotenv").config();
+require('./DB/connection');
+
 const path = require('path');
 const body_parser = require("body-parser");
 const session = require('express-session');
@@ -10,9 +9,6 @@ const cookie_parser = require("cookie-parser");
 
 const app = express();
 const PORT = process.env.PORT || 8500;
-
-//db------
-require('./DB/connection');
 
 
 //middleware used-------
@@ -234,22 +230,3 @@ app.get("/admin/orders", order_routers);
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
 });
-
-
-/*
-                    <%if(session.userType==="Customer"){%>
-                        <%}%>
-                            <%if(session.userType==="Admin" || session.userType==="Accountant" || session.userType==="Manager" ){%>
-                                <%}%>
-                                    <%if(session.userType==="Admin" || session.userType==="Accountant"){%>
-                                        <%}%>
-                                            <%if(session.userType==="Admin" ){%>
-                                                <%}%>
-                                                    <%if(session.userType==="Admin" ){%>
-                                                        <%}%>
-                                                            <%if(session.userType==="Admin" || session.userType==="Manager ){%>
-                                                                <%}%>
-
-
-
-*/

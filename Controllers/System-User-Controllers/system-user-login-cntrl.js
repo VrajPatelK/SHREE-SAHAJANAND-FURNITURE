@@ -8,7 +8,7 @@ module.exports = {
     getLoginSystemUser: async (req, res) => {
         try {
 
-            return res.status(200).render("system-users/admin-login", { swr: false });
+            return res.status(200).render("system-users/system-user-login", { swr: false });
 
         } catch (error) {
             return res.status(401).send(error);
@@ -22,7 +22,7 @@ module.exports = {
             if (system_user === "Admin") {
                 let admin = await AdminCollection.findOne({ admin_email: req.body.sys_user_email });
                 if (admin === null) {
-                    return res.status(200).render("system-users/admin-login", {
+                    return res.status(200).render("system-users/system-user-login", {
                         swr: true,
                         result: req.body,
                         errorMsg: "Admin doesn't exist with this Email-ID"
@@ -31,7 +31,7 @@ module.exports = {
 
                 //check-password
                 if (!Bcrypt.compareSync(req.body.sys_user_pass, admin.admin_pass)) {
-                    return res.status(200).render("system-users/admin-login", {
+                    return res.status(200).render("system-users/system-user-login", {
                         swr: true,
                         result: req.body,
                         errorMsg: "Wrong Email/Password ..."
@@ -53,7 +53,7 @@ module.exports = {
                 let accountant = await AccountantCollection.findOne({ accountant_email: req.body.sys_user_email });
 
                 if (accountant === null) {
-                    return res.status(200).render("system-users/admin-login", {
+                    return res.status(200).render("system-users/system-user-login", {
                         swr: true,
                         result: req.body,
                         errorMsg: "Accountant doesn't exist with this Email-ID"
@@ -62,7 +62,7 @@ module.exports = {
 
                 //check-password
                 if (!Bcrypt.compareSync(req.body.sys_user_pass, accountant.accountant_pass)) {
-                    return res.status(200).render("system-users/admin-login", {
+                    return res.status(200).render("system-users/system-user-login", {
                         swr: true,
                         result: req.body,
                         errorMsg: "Wrong Email/Password ..."
@@ -84,7 +84,7 @@ module.exports = {
                 let manager = await ManagerCollection.findOne({ manager_email: req.body.sys_user_email });
 
                 if (manager === null) {
-                    return res.status(200).render("system-users/admin-login", {
+                    return res.status(200).render("system-users/system-user-login", {
                         swr: true,
                         result: req.body,
                         errorMsg: "Manager doesn't exist with this Email-ID"
@@ -93,7 +93,7 @@ module.exports = {
 
                 //check-password
                 if (!Bcrypt.compareSync(req.body.sys_user_pass, manager.manager_pass)) {
-                    return res.status(200).render("system-users/admin-login", {
+                    return res.status(200).render("system-users/system-user-login", {
                         swr: true,
                         result: req.body,
                         errorMsg: "Wrong Email/Password ..."

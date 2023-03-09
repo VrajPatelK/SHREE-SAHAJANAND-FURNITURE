@@ -1,0 +1,74 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.headDiv {
+    color: orangered;
+    text-align: center;
+}
+
+.admin-loign-main-div {
+    height: 65vh;
+    display: flex;
+    align-items: end;
+}
+
+#login-admin-form-cnt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    color: #fff;
+    background: rgb(255 100 39);
+
+}
+
+#login-admin-form-cnt>form {
+    text-align: center;
+    /* background: rgb(255 100 39); */
+    /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px,rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px; */
+}
+
+input,
+select {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border: .01rem solid orangered !important;
+    color: orangered !important;
+    background: #fff4dd;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    text-align: center;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset !important;
+}
+
+input:hover,
+select {
+    box-shadow: none;
+}
+
+input::placeholder {
+    color: rgb(134, 133, 133);
+}
+
+.input-group-text {
+    background: #fff !important;
+    color: orangered !important;
+    border: none !important;
+}
+
+#proceed {
+    background: #fff;
+    color: orangered;
+    border-radius: 0.5rem;
+    border-radius: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+#proceed:hover {
+    background: rgb(255, 231, 222);
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset !important;
+}
