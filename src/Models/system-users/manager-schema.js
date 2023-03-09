@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
 
-const ManagerShcema = new mongoose.Schema({
+const ManagerSchema = new mongoose.Schema({
 
     manager_email: { type: String, required: true, unique: true },
     manager_pass: { type: String, required: true },
@@ -22,5 +23,17 @@ const ManagerShcema = new mongoose.Schema({
     { timestamps: true }
 );
 
-const ManagerCollection = mongoose.model("manager", ManagerShcema);
+
+ManagerSchema.methods.createToken = async function () {
+    try {
+        let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+        this.loginTokens.push({ token: token });
+        return token;
+
+    } catch (error) {
+        throw (error);
+    }
+}
+
+const ManagerCollection = mongoose.model("manager", ManagerSchema);
 module.exports = ManagerCollection;

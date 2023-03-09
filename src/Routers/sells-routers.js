@@ -7,6 +7,6 @@ const {
     getAllSells
 } = require("../../Controllers/sells-controllers");
 
-router.get("sells", getAllSells);
+router.get("/admin/sells", getAllSells);
 
 module.exports = router;

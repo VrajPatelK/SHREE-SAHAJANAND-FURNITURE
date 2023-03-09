@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
 
-const AccountantShcema = new mongoose.Schema({
+const AccountantSchema = new mongoose.Schema({
 
     accountant_email: { type: String, required: true, unique: true },
     accountant_pass: { type: String, required: true },
@@ -23,16 +24,16 @@ const AccountantShcema = new mongoose.Schema({
 
 
 
-AccountantShcema.methods.createToken = async function () {
+AccountantSchema.methods.createToken = async function () {
     try {
         let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
         this.loginTokens.push({ token: token });
         return token;
 
     } catch (error) {
-        res.status(401).send(error);
+        throw (error);
     }
 }
 
-const AccountantCollection = mongoose.model("accountant", AccountantShcema);
+const AccountantCollection = mongoose.model("accountant", AccountantSchema);
 module.exports = AccountantCollection;
