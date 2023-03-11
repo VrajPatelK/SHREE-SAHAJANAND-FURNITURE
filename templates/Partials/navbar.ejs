@@ -31,10 +31,12 @@
             <div class="col-md-4 struct-div-1">
                 <div id="iconDiv" class="p-2 d-md-flex justify-content-center align-items-center d-none">
                     <div class="col icon-bar mx-2"><i class="fa-brands fa-meetup" id="meet-i"></i></div>
-                    <div class="col icon-bar mx-2"><i class="fa-solid fa-user" id="profile-i"></i></div>
-                    <div class="col icon-bar mx-2"><i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
-                    </div>
-                    <div class="col icon-bar mx-2"><i class="fa-solid fa-cart-shopping" id="cart-i"></i></div>
+                    <%if(session.userType==="customer"){%>
+                        <div class="col icon-bar mx-2"><i class="fa-solid fa-user" id="profile-i"></i></div>
+                        <div class="col icon-bar mx-2"><i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
+                        </div>
+                        <div class="col icon-bar mx-2"><i class="fa-solid fa-cart-shopping" id="cart-i"></i></div>
+                        <%}%>
                 </div>
             </div>
         </div>

@@ -6,13 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= data.customer_name%> - Profile
+        SSF - <%= result.name%>
     </title>
+    <%- include ('../../partials/header-links') %>
+
 </head>
 
 <body>
-    <h4>Customer Profile-Page</h4>
-    <%= data %>
+    <%- include ('../../partials/navbar') %>
+
+        <div class="container col-md-8 my-3">
+            <h4>Customer Profile-Page</h4>
+            <h5>
+                Session : <%=session.userType%>
+            </h5>
+            <a href="/customer-logout/<%=result._id%>" class="btn btn-primary">Logout</a>
+            <a href="/customer-delete?op=delete&_id=<%=result._id%>" class="btn btn-primary">Delete</a>
+            <hr>
+
+            <div class="dropdown dropdown-hover">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    My Account
+                    <i class="fa-solid fa-user" id="profile-i"></i>
+                </button>
+                <!-- <div class="col icon-bar mx-2"><i class="fa-solid fa-user" id="profile-i"></i></div> -->
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#">My Orders</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="#">Login</a></li>
+                    <li><a class="dropdown-item" href="#">Register</a></li>
+                </ul>
+            </div>
+
+            <%= result.email %>
+                <hr>
+                <%= result.name %>
+                    <hr>
+                    <%= result.mobile %>
+                        <hr>
+                        <%= result.homeNo %>
+                            <hr>
+                            <%= result.street %>
+                                <hr>
+                                <%= result.pincode %>
+                                    <hr>
+                                    <%= result.district %>
+                                        <hr>
+                                        <%= result.state %>
+                                            <hr>
+        </div>
 
 </body>
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer - Login</title>
+    <%- include ('../../partials/header-links') %>
+
+
+</head>
+
+<body>
+    <div class="container-fluid mt-3">
+        <div class="container headDiv">
+            <h3>
+                Customer Login
+                <i class="fa-solid fa-lock"></i>
+            </h3>
+            <hr>
+        </div>
+    </div>
+    <% if(swr) {%>
+        <div class="container alert alert-danger alert-dismissible fade show" role="alert">
+            <%=em%>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <%}%>
+            <div class="container col-md-8">
+
+                <% if(swr) {%>
+                    <form action="#" method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address<span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%=result.email%>"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Password<span class="text-danger">*</span></label>
+                            <input type="passsword" class="form-control" id="pass" name="pass" value="<%=result.pass%>"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <a href="/customer-register">Forgot Password ?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <%}else{%>
+                        <form action="#" method="POST">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address<span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    value="vraj.patel4801@gmail.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pass" class="form-label">Password<span class="text-danger">*</span></label>
+                                <input type="passsword" class="form-control" id="pass" name="pass" value="root"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <a href="/customer-register">Forgot Password ?</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <%}%>
+            </div>
+
+            <div class="container text-center mt-3">
+                <div class="text-center">
+                    <span class="text-primary">Not logged in ?</span>
+                </div>
+                <div class="my-2">
+                    <a href="/customer-register" class="btn btn-primary">Create Account</a>
+                </div>
+            </div>
+</body>
+
+</html>

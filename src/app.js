@@ -80,7 +80,13 @@ app.get("/about", static_routers);
 app.get("/contact", static_routers);
 
 //customers
-app.post("/create-customer", customer_routers);
+app.get("/customer-register", customer_routers);
+app.post("/customer-register", customer_routers);
+app.get("/customer-login", customer_routers);
+app.post("/customer-login", customer_routers);
+app.get("/customer-profile/:id", customer_routers);
+app.get("/customer-logout/:id", customer_routers);
+app.get("/customer-delete", customer_routers);
 
 //sys-user-login
 app.get("/sys-user/login", system_user_login_routers);
