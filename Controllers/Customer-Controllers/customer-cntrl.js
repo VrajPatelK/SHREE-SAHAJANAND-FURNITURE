@@ -1,6 +1,7 @@
 const CustomerCollection = require("../../src/Models/customers/customer-schema");
 const Bcrypt = require("bcryptjs");
-const { render } = require("ejs");
+const axios = require("axios");
+
 
 module.exports = {
     getCreateCustomer: async (req, res) => {
@@ -129,6 +130,11 @@ module.exports = {
             await customer.save();
 
             res.locals.session.userType = "customer";
+            res.locals.session.user = customer;
+
+            const response = await axios.get(`http://127.0.0.1:8500/get-favourites/${customer._id}`);
+            res.locals.session.favourites = response.data;
+
             return res.status(301).redirect("/customer-profile/" + customer._id);
 
         } catch (error) {

@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 8500;
 //middleware used-------
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(body_parser.json({ limit: '2gb' }));
-app.use(body_parser.urlencoded({ limit: '2gb', extended: true }));
+app.use(body_parser.json({ limit: '10mb' }));
+app.use(body_parser.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static(path.join(`${__dirname}`, `../public`)));
 app.use(cookie_parser());
 app.use(session({
@@ -63,16 +63,13 @@ const wardrobe_routers = require("../src/Routers/Product-Routers/wardrobe-router
 const tvunit_routers = require("../src/Routers/Product-Routers/tvunit-routers");
 const sell_routers = require("./Routers/Trading-Routers/sell-routers");
 const order_routers = require("./Routers/Trading-Routers/order-routers");
+const purchase_routers = require("./Routers/Customer-Routers/purchase-routers");
 
-
-app.use(function (req, res, next) {
-    res.locals.isRegistered = req.session.isRegistered;
-    next();
-});
+app.get("/admin/product/:category", sofa_routers);
 
 // sys-user-req ,products-req
 app.get("/admin/manage", request_manager_routers);
-app.get("/admin/product/manage", request_manager_routers);
+// app.get("/admin/product/manage", request_manager_routers);
 
 //static
 app.get("/", static_routers);
@@ -153,7 +150,7 @@ app.get("/admin/delete-export", export_routers);
 
 //Sofa
 app.post("/admin/product/sofas", sofa_routers);
-app.get("/admin/product/sofas", sofa_routers);
+// app.get("/admin/product/sofas", sofa_routers);
 app.get("/admin/product/edit-sofa", sofa_routers);
 app.post("/admin/product/edit-sofa", sofa_routers);
 app.get("/admin/product/delete-sofa", sofa_routers);
@@ -232,6 +229,10 @@ app.get("/admin/product/delete-tvunit", tvunit_routers);
 app.get("/admin/sells", sell_routers);
 app.get("/admin/orders", order_routers);
 
+// purchase
+app.get('/add-to-fav', purchase_routers);
+app.get('/rmv-to-fav', purchase_routers);
+app.get('/get-favourites/:cid', purchase_routers);
 
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);

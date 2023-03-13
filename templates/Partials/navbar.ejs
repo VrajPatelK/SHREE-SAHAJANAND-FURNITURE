@@ -73,7 +73,7 @@
                                         <%}%>
 
                                             <!-- products-drop-down -->
-                                            <%if(session.userType==="admin" ){%>
+                                            <%if(session.userType==="admin" || session.userType==="customer" ){%>
                                                 <li class="dropdown items-dropdonw">
                                                     <button class="btn dropdown-toggle" type="button"
                                                         id="dropdownMenuProducts" data-bs-toggle="dropdown"
@@ -82,7 +82,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuProducts">
                                                         <li><a class="dropdown-item"
-                                                                href="/admin/product/manage?manage_type=sofas">Sofas</a>
+                                                                href="/admin/product/sofa">Sofas</a>
                                                         </li>
                                                         <li><a class="dropdown-item"
                                                                 href="/admin/product/manage?manage_type=beds">Beds</a>
@@ -194,11 +194,14 @@
                 <div class="col-md-4 d-md-none struct-div-1">
                     <div id="iconDiv" class="p-2 d-flex justify-content-center align-items-center d-md-none">
                         <div class="col icon-bar mx-2"><i class="fa-brands fa-meetup" id="meet-i"></i></div>
-                        <div class="col icon-bar mx-2"><i class="fa-solid fa-user" id="profile-i"></i></div>
-                        <div class="col icon-bar mx-2"><i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
-                        </div>
-                        <div class="col icon-bar mx-2"><i class="fa-solid fa-cart-shopping" id="cart-i"></i>
-                        </div>
+                        <%if(session.userType==="customer"){%>
+
+                            <div class="col icon-bar mx-2"><i class="fa-solid fa-user" id="profile-i"></i></div>
+                            <div class="col icon-bar mx-2"><i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
+                            </div>
+                            <div class="col icon-bar mx-2"><i class="fa-solid fa-cart-shopping" id="cart-i"></i>
+                                <%}%>
+                            </div>
                     </div>
                 </div>
             </div>

@@ -29,10 +29,27 @@ module.exports = {
             console.log(error);
         }
     },
+    // getSofas: async (req, res) => {
+    //     try {
+    //         let result = await SofaCollection.find({});
+    //         res.status(200).render("products/manage-sofas", { results: result });
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
     getSofas: async (req, res) => {
         try {
-            let result = await SofaCollection.find({});
-            res.status(200).render("products/manage-sofas", { results: result });
+            let category = req.params.category;
+            let result = null;
+            let sett = new Set();
+
+            if (category === 'sofa') {
+                result = await SofaCollection.find({});
+                res.locals.session.productType = category;
+            }
+
+            res.status(200).render(`products/manage-${category}s`, { results: result });
 
         } catch (error) {
             console.log(error);

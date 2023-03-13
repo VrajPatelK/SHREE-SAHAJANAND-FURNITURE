@@ -12,10 +12,15 @@ const {
 
 } = require("../../../Controllers/Product-Controllers/tvunit-cntrl");
 
-const { isAdmin } = require('../../Middlewares/isLogin');
+const { isAdmin, isCustomer } = require('../../Middlewares/isLogin');
 
 //Middlewares
-router.use(function (req, res, next) { isAdmin(req, res, next); });
+router.use(function (req, res, next) {
+    if (res.locals.session.userType === 'admin')
+        isAdmin(req, res, next);
+    else if (res.locals.session.userType === 'customer')
+        isCustomer(req, res, next);
+});
 
 router.post("/admin/product/tvunits", createTvUnit);
 router.get("/admin/product/tvunits", getTvUnits);

@@ -10,5 +10,5 @@ const LikeSchema = new mongoose.Schema({
 });
 
 
-const LikeCollection = mongoose.model("cart-item", LikeSchema);
+const LikeCollection = mongoose.model("like", LikeSchema);
 module.exports = LikeCollection;

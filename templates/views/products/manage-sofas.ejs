@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SSF - Sofas</title>
+    <script src="../../JS/purchase-script.js" defer></script>
 
     <%- include ('../../partials/header-links') %>
+
         <style>
             .plus-btn-div {
                 display: flex;
@@ -114,131 +116,174 @@
         <link rel="stylesheet" href="../../css/manage-admin.css">
 
 </head>
+<% let favouriteMap=new Map(); session.favourites.forEach((item)=> {
+    let lid = item.likeItem._id.toString()
+    let pid = item.likeItem.product._id.toString();
+    favouriteMap.set(pid, lid);
+    });
+    %>
 
-<body>
-    <%- include('../../partials/navbar')%>
+    <body>
+        <%- include('../../partials/navbar')%>
 
-        <div class="container-fluid mx-auto mt-4 headingDiv">
-            <h4 class="headings">
-                Manage Sofas
-                <hr>
-            </h4>
-        </div>
-        <div class="container plus-btn-div">
-            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addSofaModal">
-                <i class="fa-solid fa-plus"></i> Add Sofa
-            </button>
-        </div>
-
-        <div class="container row mx-auto px-0 py-3 card-parent-div">
-
-            <%if(results.length>0){%>
-                <% results.forEach(result=> { %>
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
-                        <div class="card" style="width: 100%;">
-
-                            <div class="product-img-div px-4 pt-4">
-                                <%if(result.manager_img){%>
-                                    <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
-                                    <%}else{%>
-                                        <img src="../../sofa.jpg" class="card-img-top" alt="">
-                                        <%}%>
-
-                            </div>
-
-
-                            <div class="col-11 card-body">
-                                <div class="info-structure">
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Name : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.sofa_name%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Color : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.color%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-1 py-2">Dimensions : </p>
-                                        <p class="value-para px-2 py-2">
-                                            Length : <%=result.dimensions.length%>
-                                                <br>
-                                                Height : <%=result.dimensions.height%>
-                                                    <br>
-                                                    Width : <%=result.dimensions.width%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Availability : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.availability%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Price : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.price%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Material : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.material%>
-                                        </p>
-                                    </div>
-
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Seaters : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.seaters%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Warrenty : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.warrenty%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Discount : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.discount%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Filler Type : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.filler_type%>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="mt-4 btn-div">
-                                    <a href="/admin/product/edit-sofa?op=edit&_id=<%=result._id%>">
-                                        <button class="btn mx-2 edit-btn">
-                                            Edit <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                    </a>
-                                    <a href="/admin/product/delete-sofa?op=delete&_id=<%=result._id%>">
-                                        <button class="btn mx-2 delete-btn">
-                                            Delete <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%})%>
+            <div class="container-fluid mx-auto mt-4 headingDiv">
+                <h4 class="headings">
+                    <%if(session.userType==="admin"){%>
+                        Manage
                         <%}%>
-        </div>
+                            Sofas
+                            <hr>
+                </h4>
+            </div>
+            <%if(session.userType==="admin" ){%>
+
+                <div class="container plus-btn-div">
+                    <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addSofaModal">
+                        <i class="fa-solid fa-plus"></i> Add Sofa
+                    </button>
+                </div>
+                <%}%>
+                    <div class="container row mx-auto px-0 py-3 card-parent-div">
+
+                        <%if(results.length>0){%>
+                            <% results.forEach(result=> { %>
+                                <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
+                                    <div class="card" style="width: 100%;">
+
+                                        <div class="product-img-div px-4 pt-4">
+                                            <%if(result.manager_img){%>
+                                                <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
+                                                <%}else{%>
+                                                    <img src="../../sofa.jpg" class="card-img-top" alt="">
+                                                    <%}%>
+
+                                        </div>
 
 
-        <!-- footer -->
-        <%- include('../../partials/footer')%>
+                                        <div class="col-11 card-body">
+                                            <div class="info-structure">
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Name : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.sofa_name%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Color : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.color%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-1 py-2">Dimensions : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        Length : <%=result.dimensions.length%>
+                                                            <br>
+                                                            Height : <%=result.dimensions.height%>
+                                                                <br>
+                                                                Width : <%=result.dimensions.width%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Availability : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.availability%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Price : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.price%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Material : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.material%>
+                                                    </p>
+                                                </div>
 
-</body>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Seaters : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.seaters%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Warrenty : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.warrenty%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Discount : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.discount%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Filler Type : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.filler_type%>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <% if(session.userType==="admin" ){%>
+                                                <div class="mt-4 btn-div d-flex justify-content-between">
+                                                    <a href="/admin/product/edit-sofa?op=edit&_id=<%=result._id%>">
+                                                        <button class="btn mx-2 edit-btn">
+                                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="/admin/product/delete-sofa?op=delete&_id=<%=result._id%>">
+                                                        <button class="btn mx-2 delete-btn">
+                                                            Delete <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                <%}else if(session.userType==="customer" ){%>
+                                                    <div class="mt-4 btn-div d-flex justify-content-evenly">
+                                                        <a href="#">
+                                                            <button class="btn mx-2 edit-btn">
+                                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                            </button>
+                                                        </a>
+                                                        <% let pid=result._id; let cid=session.user._id; let
+                                                            lid=favouriteMap.get(result._id.toString());
+                                                            if(favouriteMap.size>0 && lid){%>
+                                                            <a class="btn mx-2"
+                                                                href="/rmv-to-fav?lid=<%=lid%>&cid=<%=cid%>"
+                                                                style="background: red;color: #fff;border:2px solid #fff;">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                            <%}else{%>
+                                                                <a class="btn mx-2"
+                                                                    href="/add-to-fav?pid=<%=pid%>&cid=<%=cid%>"
+                                                                    style="background: #fff;border:2px solid red;">
+                                                                    <i class="fa-solid fa-heart"></i>
+                                                                </a>
+                                                                <%}%>
+                                                                    <a href=" #">
+                                                                        <button class="btn mx-2 delete-btn">
+                                                                            <i class="fa-solid fa-bag-shopping"></i>
+                                                                        </button>
+                                                                    </a>
+                                                    </div>
+                                                    <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%})%>
+                                    <%}%>
+                    </div>
+
+                    <!-- footer -->
+                    <%- include('../../partials/footer')%>
+
+
+
+
+    </body>
 
 </html>
 
