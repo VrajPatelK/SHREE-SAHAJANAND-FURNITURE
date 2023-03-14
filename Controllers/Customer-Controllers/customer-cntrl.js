@@ -132,8 +132,10 @@ module.exports = {
             res.locals.session.userType = "customer";
             res.locals.session.user = customer;
 
-            const response = await axios.get(`http://127.0.0.1:8500/get-favourites/${customer._id}`);
-            res.locals.session.favourites = response.data;
+            const response1 = await axios.get(`http://127.0.0.1:8500/get-favourites/${customer._id}`);
+            const response2 = await axios.get(`http://127.0.0.1:8500/get-carts/${customer._id}`);
+            res.locals.session.favourites = response1.data;
+            res.locals.session.orders = response2.data;
 
             return res.status(301).redirect("/customer-profile/" + customer._id);
 

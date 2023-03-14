@@ -230,9 +230,16 @@ app.get("/admin/sells", sell_routers);
 app.get("/admin/orders", order_routers);
 
 // purchase
-app.get('/add-to-fav', purchase_routers);
-app.get('/rmv-to-fav', purchase_routers);
+//fav
+app.post('/add-to-fav', purchase_routers);
+app.post('/rmv-to-fav', purchase_routers);
 app.get('/get-favourites/:cid', purchase_routers);
+//cart
+app.get('/add-to-cart', purchase_routers);
+app.get('/rmv-to-cart', purchase_routers);
+app.get('/get-carts/:cid', purchase_routers);
+
+
 
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
