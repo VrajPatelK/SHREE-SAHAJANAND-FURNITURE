@@ -233,14 +233,51 @@ app.get("/admin/orders", order_routers);
 //fav
 app.post('/add-to-fav', purchase_routers);
 app.post('/rmv-to-fav', purchase_routers);
-app.get('/get-favourites/:cid', purchase_routers);
+app.get('/get-favourites', purchase_routers);
 //cart
 app.post('/add-to-cart', purchase_routers);
 app.post('/rmv-to-cart', purchase_routers);
-app.get('/get-carts/:cid', purchase_routers);
+app.get('/get-carts', purchase_routers);
+app.get('/carts', purchase_routers);
+app.post('/update-cart', purchase_routers);
 
 
 
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
 });
+
+/*
+                        <% carts.forEach((item, indx)=>{ %>
+                            <tr>
+                                <th scope="row">
+                                    <%=indx+1%>
+                                </th>
+                                <td>
+                                    <%=item.cartItem.product.sofa_name%>
+                                </td>
+                                <td>
+                                    <%= new Date()%>
+                                </td>
+                                <td>
+                                    <select name="quantity" id="qauntity">
+                                        <% for(let i=1; i <=20; i++){ %>
+                                            <% if(item.cartItem.quantity===i){ %>
+                                                <option value="<%=i%>" selected>
+                                                    <%=i%>
+                                                </option>
+                                                <%}else{%>
+                                                    <option value="<%=i%>">
+                                                        <%=i%>
+                                                    </option>
+                                                    <%}%>
+                                                        <%}%>
+
+                                    </select>
+                                </td>
+                                <td>
+                                    <%=item.cartItem.product.price * item.cartItem.quantity%>
+                                </td>
+                            </tr>
+                            <%});%>
+*/

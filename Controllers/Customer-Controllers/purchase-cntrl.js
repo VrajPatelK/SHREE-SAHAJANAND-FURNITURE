@@ -5,9 +5,6 @@ const FavouriteCollection = require("../../Src/Models/customers/favourites-schem
 const CartItemCollection = require("../../Src/Models/customers/cartItems-schema");
 const CartCollection = require("../../Src/Models/customers/cart-schema");
 
-const axios = require("axios");
-
-
 module.exports = {
 
 
@@ -33,8 +30,6 @@ module.exports = {
             else { favourite.likeItems.push({ likeItem: like._id }); await favourite.save(); }
 
             // ---
-            const response = await axios.get(`http://127.0.0.1:8500/get-favourites/${cid}`);
-            res.locals.session.favourites = response.data;
             return res.status(201).json(like);
 
         } catch (error) {
@@ -43,8 +38,8 @@ module.exports = {
     },
     getFavouriteByCustomer: async (req, res) => {
         try {
-            let cid = req.params.cid;
 
+            let cid = res.locals.session.user._id.toString();
             let favourites = await FavouriteCollection.findOne({ customer: cid })
                 .populate({
                     path: 'likeItems.likeItem',
@@ -84,8 +79,6 @@ module.exports = {
             await LikeCollection.deleteOne({ _id: lid });
 
             // ---
-            const response = await axios.get(`http://127.0.0.1:8500/get-favourites/${cid}`);
-            res.locals.session.favourites = response.data;
             return res.status(201).json(product);
 
         } catch (error) {
@@ -132,17 +125,15 @@ module.exports = {
             }
 
             // ---
-            const response = await axios.get(`http://127.0.0.1:8500/get-carts/${cid}`);
-            res.locals.session.carts = response.data;
             return res.status(201).json(cartItem);
 
         } catch (error) {
             return res.status(401).send(error);
         }
     },
-    getCartByCustomer: async (req, res) => {
+    getCartsByCustomer: async (req, res) => {
         try {
-            let cid = req.params.cid;
+            let cid = res.locals.session.user._id.toString();
 
             let cart = await CartCollection.findOne({ customer: cid })
                 .populate({
@@ -160,14 +151,39 @@ module.exports = {
             return res.status(401).send(error);
         }
     },
+    displayCarts: async (req, res) => {
+        try {
+            return res.status(200).render("customer/add-to-cart");
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    updateCart: async (req, res) => {
+        try {
+
+            let cartid = req.body.cartid;
+            let quantity = req.body.quantity;
+            let cartItem = null;
+
+            cartItem = await CartItemCollection.findOne({ _id: cartid });
+            if (cartItem === null) return res.status(200).send("cart doesn't found:)");
+
+            cartItem.quantity = quantity;
+            await cartItem.save();
+            return res.status(201).json(cartItem);
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
     removeCart: async (req, res) => {
         try {
             let cartItem = null;
             let customer = null;
 
-            let cartid = req.query.cartid;
-            let cid = req.query.cid;
-            let category = res.locals.session.productType;
+            let cartid = req.body.cartid;
+            let cid = res.locals.session.user._id.toString();
 
             cartItem = await CartItemCollection.findOne({ _id: cartid });
             if (cartItem === null) return res.status(200).send("product doesn't found:)");
@@ -181,12 +197,10 @@ module.exports = {
             cart.cartItems = remains;
             await cart.save();
 
-            await CartItemCollection.deleteOne({ _id: cartid });
+            let result = await CartItemCollection.deleteOne({ _id: cartid });
 
             // ---
-            const response = await axios.get(`http://127.0.0.1:8500/get-carts/${cid}`);
-            res.locals.session.carts = response.data;
-            return res.status(301).redirect("/admin/product/" + category);
+            return res.status(201).json(result);
 
         } catch (error) {
             return res.status(401).send(error);

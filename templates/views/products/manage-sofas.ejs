@@ -126,7 +126,7 @@
                 $(document).ready(() => {
 
                     getFavourites = new Promise((resolve, reject) => {
-                        $.get('/get-favourites/<%=session.user._id%>', (data, status) => {
+                        $.get('/get-favourites', (data, status) => {
 
                             let favourites = data;
                             favourites.forEach((item) => {
@@ -140,7 +140,7 @@
                     });
 
                     getCarts = new Promise((resolve, reject) => {
-                        $.get('/get-carts/<%=session.user._id%>', (data, status) => {
+                        $.get('/get-carts', (data, status) => {
 
                             let carts = data;
                             carts.forEach((item) => {
@@ -149,6 +149,8 @@
                                 cartMap.set(pid, cartid);
                             });
 
+                            $("#no_of_carts_badge").text(carts.length);
+                            console.log($("#no_of_carts_badge").text());
                             resolve(cartMap);
                         });
                     });
