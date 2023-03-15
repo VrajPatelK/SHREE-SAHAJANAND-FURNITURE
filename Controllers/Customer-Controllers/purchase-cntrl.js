@@ -95,10 +95,13 @@ module.exports = {
     createCart: async (req, res) => {
         try {
 
-            let pid = req.query.pid;
-            let cid = req.query.cid;
-            let cartid = req.query.cartid;
+            let pid = req.body.pid;
+            let cartid = undefined;
+            let cid = res.locals.session.user._id.toString();
             let category = res.locals.session.productType;
+
+            if (req.body.cartid)
+                cartid = req.body.cartid;
 
             let cart = null;
             let cartItem = null;
@@ -119,19 +122,19 @@ module.exports = {
             }
             else if (cart !== null && cartItem === null) {
                 cartItem = await CartItemCollection.create({ product: pid, productType: category, quantity: 1 });
+                cart.cartItems.push({ cartItem: cartItem._id });
+                await cart.save();
             }
             else if (cart !== null && cartItem !== null) {
                 cartItem = await CartItemCollection.findOne({ _id: cartid });
                 cartItem.quantity += 1;
                 await cartItem.save();
             }
-            else { cart.cartItems.push({ cartItem: cartItem._id }); await cart.save(); }
 
             // ---
             const response = await axios.get(`http://127.0.0.1:8500/get-carts/${cid}`);
             res.locals.session.carts = response.data;
-
-            return res.status(301).redirect("/admin/product/" + category);
+            return res.status(201).json(cartItem);
 
         } catch (error) {
             return res.status(401).send(error);
@@ -151,7 +154,7 @@ module.exports = {
             if (!cart)
                 return res.status(200).json([]);
 
-            return res.status(200).json(cart.cartItems);
+            return res.status(201).json(cart.cartItems);
 
         } catch (error) {
             return res.status(401).send(error);

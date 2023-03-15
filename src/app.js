@@ -235,8 +235,8 @@ app.post('/add-to-fav', purchase_routers);
 app.post('/rmv-to-fav', purchase_routers);
 app.get('/get-favourites/:cid', purchase_routers);
 //cart
-app.get('/add-to-cart', purchase_routers);
-app.get('/rmv-to-cart', purchase_routers);
+app.post('/add-to-cart', purchase_routers);
+app.post('/rmv-to-cart', purchase_routers);
 app.get('/get-carts/:cid', purchase_routers);
 
 

@@ -116,23 +116,40 @@
         <script>
 
             let favouriteMap = new Map();
+            let cartMap = new Map();
             let getFavourites;
+            let getCarts;
 
             express_session_update(); // calling ...
 
             function express_session_update() { //declare ...
                 $(document).ready(() => {
+
                     getFavourites = new Promise((resolve, reject) => {
-                        $.get('/get-favourites/640c984d08a3e51047b2419c', (data, status) => {
+                        $.get('/get-favourites/<%=session.user._id%>', (data, status) => {
 
                             let favourites = data;
                             favourites.forEach((item) => {
-                                let lid = item.likeItem._id.toString();
-                                let pid = item.likeItem.product._id.toString();
+                                let lid = item.likeItem._id;
+                                let pid = item.likeItem.product._id;
                                 favouriteMap.set(pid, lid);
                             });
 
                             resolve(favouriteMap);
+                        });
+                    });
+
+                    getCarts = new Promise((resolve, reject) => {
+                        $.get('/get-carts/<%=session.user._id%>', (data, status) => {
+
+                            let carts = data;
+                            carts.forEach((item) => {
+                                let cartid = item.cartItem._id;
+                                let pid = item.cartItem.product._id;
+                                cartMap.set(pid, cartid);
+                            });
+
+                            resolve(cartMap);
                         });
                     });
                 });
@@ -143,11 +160,11 @@
 
                 $.post("/add-to-fav", body, function (data, status) {
 
-                    let pid = data.product.toString();
-                    let lid = data._id.toString();
-                    
+                    let pid = data.product;
+                    let lid = data._id;
+
                     let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-${pid}" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
-                    $(`#user-btn-div-${pid}`).html(rmv_fav_btn);
+                    $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
                     express_session_update();
                 });
             }
@@ -157,9 +174,40 @@
 
                 $.post("/rmv-to-fav", body, function (data, status) {
 
+                    console.log(data);
+
                     let pid = data.toString(); // data = ObjectId(pid)
                     let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
-                    $(`#user-btn-div-${pid}`).html(add_fav_btn);
+                    $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+
+                    express_session_update();
+                });
+            }
+
+            function addCart(pid) {
+                let body = { pid: pid }
+
+                $.post("/add-to-cart", body, function (data, status) {
+
+                    let pid = data.product;
+                    let cartid = data._id;
+
+                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                    express_session_update();
+                });
+            }
+
+            function addMoreCart(cartid, pid) {
+                let body = { cartid: cartid, pid: pid }
+
+                $.post("/add-to-cart", body, function (data, status) {
+
+                    let pid = data.product;
+                    let cartid = data._id;
+
+                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
 
                     express_session_update();
                 });
@@ -278,45 +326,66 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        <% if(session.userType==="customer" ){%>
 
-                                        <!-- script -->
-                                        <script>
-                                            $(document).ready(() => {
-                                                getFavourites.then((favouriteMap) => {
-                                                    let pid = "<%=result._id%>";
-                                                    let lid = favouriteMap.get(pid);
+                                            <!-- script -->
+                                            <script>
+                                                $(document).ready(() => {
+                                                    getFavourites.then((favouriteMap) => {
+                                                        let pid = "<%=result._id%>";
+                                                        let lid = favouriteMap.get(pid);
 
-                                                    if (lid) {
+                                                        if (lid) {
 
-                                                        let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
-                                                        $(`#user-btn-div-${pid}`).html(rmv_fav_btn);
-                                                    }
-                                                    else {
-                                                        let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
-                                                        $(`#user-btn-div-${pid}`).html(add_fav_btn);
-                                                    }
+                                                            let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
+                                                            $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                                                        }
+                                                        else {
+                                                            let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
+                                                            $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+                                                        }
+                                                    });
+
+                                                    getCarts.then((cartMap) => {
+                                                        let pid = "<%=result._id%>";
+                                                        let cartid = cartMap.get(pid);
+
+                                                        if (cartid) {
+                                                            let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                                                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                        }
+                                                        else {
+                                                            let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')">Add Cart</button>`;
+                                                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                        }
+                                                    });
                                                 });
-                                            });
+                                            </script>
+                                            <!-- script -->
 
-                                        </script>
-                                        <!-- script -->
+                                            <div class="mt-4 btn-div d-flex justify-content-between"
+                                                id="fav-btn-div-<%=result._id%>">
+                                            </div>
 
-                                        <div class="mt-4 btn-div d-flex justify-content-between"
-                                            id="user-btn-div-<%=result._id%>">
-                                        </div>
+                                            <div class="mt-4 btn-div d-flex justify-content-between"
+                                                id="cart-btn-div-<%=result._id%>">
+                                            </div>
 
-                                        <div class="mt-4 btn-div d-flex justify-content-between">
-                                            <a href="/admin/product/edit-sofa?op=edit&_id=<%=result._id%>">
-                                                <button class="btn mx-2 edit-btn">
-                                                    Edit <i class="fa-solid fa-pen-to-square"></i>
-                                                </button>
-                                            </a>
-                                            <a href="/admin/product/delete-sofa?op=delete&_id=<%=result._id%>">
-                                                <button class="btn mx-2 delete-btn">
-                                                    Delete <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </a>
-                                        </div>
+                                            <%}else if(session.userType==="admin" ){%>
+                                                <div class="mt-4 btn-div d-flex justify-content-between">
+                                                    <a href="/admin/product/edit-sofa?op=edit&_id=<%=result._id%>">
+                                                        <button class="btn mx-2 edit-btn">
+                                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="/admin/product/delete-sofa?op=delete&_id=<%=result._id%>">
+                                                        <button class="btn mx-2 delete-btn">
+                                                            Delete <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                <%}%>
+
                                     </div>
                                 </div>
                             </div>
