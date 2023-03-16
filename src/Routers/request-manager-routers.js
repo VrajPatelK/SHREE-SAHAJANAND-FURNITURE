@@ -10,6 +10,5 @@ const {
 } = require("../../Controllers/request-manager-cntrl");
 
 router.get("/admin/manage", systemUserRequest);
-router.get("/admin/product/manage", productRequest);
 
 module.exports = router;

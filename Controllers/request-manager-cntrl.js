@@ -35,49 +35,4 @@ module.exports = {
             console.log(error);
         }
     },
-
-    productRequest: async (req, res) => {
-
-        try {
-            if (req.query.manage_type === "sofas") {
-                res.status(301).redirect("/admin/product/sofas");
-            }
-            else if (req.query.manage_type === "beds") {
-                res.status(301).redirect("/admin/product/beds");
-            }
-            else if (req.query.manage_type === "mattresses") {
-                res.status(301).redirect("/admin/product/mattresses");
-            }
-            else if (req.query.manage_type === "chairs") {
-                res.status(301).redirect("/admin/product/chairs");
-            }
-            else if (req.query.manage_type === "tables") {
-                res.status(301).redirect("/admin/product/tables");
-            }
-            else if (req.query.manage_type === "tvunits") {
-                res.status(301).redirect("/admin/product/tvunits");
-            }
-            else if (req.query.manage_type === "tempales") {
-                res.status(301).redirect("/admin/product/tempales");
-            }
-            else if (req.query.manage_type === "shoeracks") {
-                res.status(301).redirect("/admin/product/shoeracks");
-            }
-            else if (req.query.manage_type === "showcases") {
-                res.status(301).redirect("/admin/product/showcases");
-            }
-            else if (req.query.manage_type === "julas") {
-                res.status(301).redirect("/admin/product/julas");
-            }
-            else if (req.query.manage_type === "wardrobes") {
-                res.status(301).redirect("/admin/product/wardrobes");
-            }
-            else if (req.query.manage_type === "others") {
-                res.status(301).redirect("/admin/product/others");
-            }
-
-        } catch (error) {
-            console.log(error);
-        }
-    },
 };

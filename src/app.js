@@ -65,11 +65,11 @@ const sell_routers = require("./Routers/Trading-Routers/sell-routers");
 const order_routers = require("./Routers/Trading-Routers/order-routers");
 const purchase_routers = require("./Routers/Customer-Routers/purchase-routers");
 
-app.get("/admin/product/:category", sofa_routers);
+const product_read_routers = require("./Routers/Product-Routers/product-read-routers");
+
 
 // sys-user-req ,products-req
 app.get("/admin/manage", request_manager_routers);
-// app.get("/admin/product/manage", request_manager_routers);
 
 //static
 app.get("/", static_routers);
@@ -147,80 +147,71 @@ app.post("/admin/edit-export", export_routers);
 app.get("/admin/delete-export", export_routers);
 
 // -------- for products --------
+app.get("/product/:category", product_read_routers);
+
 
 //Sofa
 app.post("/admin/product/sofas", sofa_routers);
-// app.get("/admin/product/sofas", sofa_routers);
 app.get("/admin/product/edit-sofa", sofa_routers);
 app.post("/admin/product/edit-sofa", sofa_routers);
 app.get("/admin/product/delete-sofa", sofa_routers);
 
 // Beds
 app.post("/admin/product/beds", bed_routers);
-app.get("/admin/product/beds", bed_routers);
 app.get("/admin/product/edit-bed", bed_routers);
 app.post("/admin/product/edit-bed", bed_routers);
 app.get("/admin/product/delete-bed", bed_routers);
 
 //Mattresse
 app.post("/admin/product/mattresses", mattresse_routers);
-app.get("/admin/product/mattresses", mattresse_routers);
 app.get("/admin/product/edit-mattresses", mattresse_routers);
 app.post("/admin/product/edit-mattresses", mattresse_routers);
 app.get("/admin/product/delete-mattresses", mattresse_routers);
 
 //Chair
 app.post("/admin/product/chairs", chair_routers);
-app.get("/admin/product/chairs", chair_routers);
 app.get("/admin/product/edit-chair", chair_routers);
 app.post("/admin/product/edit-chair", chair_routers);
 app.get("/admin/product/delete-chair", chair_routers);
 
 // Table
 app.post("/admin/product/tables", table_routers);
-app.get("/admin/product/tables", table_routers);
 app.get("/admin/product/edit-table", table_routers);
 app.post("/admin/product/edit-table", table_routers);
 app.get("/admin/product/delete-table", table_routers);
 
 // Tempale
 app.post("/admin/product/tempales", tempale_routers);
-app.get("/admin/product/tempales", tempale_routers);
 app.get("/admin/product/edit-tempale", tempale_routers);
 app.post("/admin/product/edit-tempale", tempale_routers);
 app.get("/admin/product/delete-tempale", tempale_routers);
 
 // Shoerack 
 app.post("/admin/product/shoeracks", shoerack_routers);
-app.get("/admin/product/shoeracks", shoerack_routers);
 app.get("/admin/product/edit-shoerack", shoerack_routers);
 app.post("/admin/product/edit-shoerack", shoerack_routers);
 app.get("/admin/product/delete-shoerack", shoerack_routers);
 
 //Showcase
 app.post("/admin/product/showcases", showcase_routers);
-app.get("/admin/product/showcases", showcase_routers);
 app.get("/admin/product/edit-showcase", showcase_routers);
 app.post("/admin/product/edit-showcase", showcase_routers);
 app.get("/admin/product/delete-showcase", showcase_routers);
 
 // Julas
 app.post("/admin/product/julas", jula_routers);
-app.get("/admin/product/julas", jula_routers);
 app.get("/admin/product/edit-jula", jula_routers);
 app.post("/admin/product/edit-jula", jula_routers);
 app.get("/admin/product/delete-jula", jula_routers);
 
 // Wardrobe
 app.post("/admin/product/wardrobes", wardrobe_routers);
-app.get("/admin/product/wardrobes", wardrobe_routers);
 app.get("/admin/product/edit-wardrobe", wardrobe_routers);
 app.post("/admin/product/edit-wardrobe", wardrobe_routers);
 app.get("/admin/product/delete-wardrobe", wardrobe_routers);
 
 // Tv unit
 app.post("/admin/product/tvunits", tvunit_routers);
-app.get("/admin/product/tvunits", tvunit_routers);
 app.get("/admin/product/edit-tvunit", tvunit_routers);
 app.post("/admin/product/edit-tvunit", tvunit_routers);
 app.get("/admin/product/delete-tvunit", tvunit_routers);
@@ -246,38 +237,3 @@ app.post('/update-cart', purchase_routers);
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
 });
-
-/*
-                        <% carts.forEach((item, indx)=>{ %>
-                            <tr>
-                                <th scope="row">
-                                    <%=indx+1%>
-                                </th>
-                                <td>
-                                    <%=item.cartItem.product.sofa_name%>
-                                </td>
-                                <td>
-                                    <%= new Date()%>
-                                </td>
-                                <td>
-                                    <select name="quantity" id="qauntity">
-                                        <% for(let i=1; i <=20; i++){ %>
-                                            <% if(item.cartItem.quantity===i){ %>
-                                                <option value="<%=i%>" selected>
-                                                    <%=i%>
-                                                </option>
-                                                <%}else{%>
-                                                    <option value="<%=i%>">
-                                                        <%=i%>
-                                                    </option>
-                                                    <%}%>
-                                                        <%}%>
-
-                                    </select>
-                                </td>
-                                <td>
-                                    <%=item.cartItem.product.price * item.cartItem.quantity%>
-                                </td>
-                            </tr>
-                            <%});%>
-*/
