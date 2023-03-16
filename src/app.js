@@ -65,6 +65,7 @@ const sell_routers = require("./Routers/Trading-Routers/sell-routers");
 const order_routers = require("./Routers/Trading-Routers/order-routers");
 const purchase_routers = require("./Routers/Customer-Routers/purchase-routers");
 
+const product_create_routers = require("./Routers/Product-Routers/product-create-routers");
 const product_read_routers = require("./Routers/Product-Routers/product-read-routers");
 
 
@@ -147,6 +148,18 @@ app.post("/admin/edit-export", export_routers);
 app.get("/admin/delete-export", export_routers);
 
 // -------- for products --------
+app.post("/product/bed", product_create_routers);
+app.post("/product/chair", product_create_routers);
+app.post("/product/jula", product_create_routers);
+app.post("/product/mattresses", product_create_routers);
+app.post("/product/shoerack", product_create_routers);
+app.post("/product/showcase", product_create_routers);
+app.post("/product/sofa", product_create_routers);
+app.post("/product/table", product_create_routers);
+app.post("/product/tempale", product_create_routers);
+app.post("/product/tvunit", product_create_routers);
+app.post("/product/wardrobe", product_create_routers);
+
 app.get("/product/:category", product_read_routers);
 
 
