@@ -115,6 +115,106 @@
 
         <link rel="stylesheet" href="../../css/manage-admin.css">
 
+        <script>
+
+            let favouriteMap = new Map();
+            let cartMap = new Map();
+            let getFavourites;
+            let getCarts;
+
+            express_session_update(); // calling ...
+
+            function express_session_update() { //declare ...
+                $(document).ready(() => {
+
+                    getFavourites = new Promise((resolve, reject) => {
+                        $.get('/get-favourites', (data, status) => {
+
+                            let favourites = data;
+                            favourites.forEach((item) => {
+                                let lid = item.likeItem._id;
+                                let pid = item.likeItem.product._id;
+                                favouriteMap.set(pid, lid);
+                            });
+
+                            resolve(favouriteMap);
+                        });
+                    });
+
+                    getCarts = new Promise((resolve, reject) => {
+                        $.get('/get-carts', (data, status) => {
+
+                            let carts = data;
+                            carts.forEach((item) => {
+                                let cartid = item.cartItem._id;
+                                let pid = item.cartItem.product._id;
+                                cartMap.set(pid, cartid);
+                            });
+
+                            $("#no_of_carts_badge").text(carts.length);
+                            resolve(cartMap);
+                        });
+                    });
+                });
+            }
+
+            function addFav(pid) {
+                let body = { pid: pid }
+
+                $.post("/add-to-fav", body, function (data, status) {
+
+                    let pid = data.product;
+                    let lid = data._id;
+
+                    let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-${pid}" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
+                    $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                    express_session_update();
+                });
+            }
+
+            function rmvFav(lid, pid) {
+                let body = { lid: lid, pid: pid }
+
+                $.post("/rmv-to-fav", body, function (data, status) {
+
+                    let pid = data.toString(); // data = ObjectId(pid)
+                    let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
+                    $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+
+                    express_session_update();
+                });
+            }
+
+            function addCart(pid) {
+                let body = { pid: pid }
+
+                $.post("/add-to-cart", body, function (data, status) {
+
+                    let pid = data.product;
+                    let cartid = data._id;
+
+                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                    express_session_update();
+                });
+            }
+
+            function addMoreCart(cartid, pid) {
+                let body = { cartid: cartid, pid: pid }
+
+                $.post("/add-to-cart", body, function (data, status) {
+
+                    let pid = data.product;
+                    let cartid = data._id;
+
+                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+
+                    express_session_update();
+                });
+            }
+
+        </script>
 </head>
 
 <body>
@@ -216,18 +316,65 @@
                                     </div>
 
                                 </div>
-                                <div class="mt-4 btn-div">
-                                    <a href="/product/chiar/edit/<%=result._id%>">
-                                        <button class="btn mx-2 edit-btn">
-                                            Edit <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                    </a>
-                                    <a href="/product/chair/delete/<%=result._id%>">
-                                        <button class="btn mx-2 delete-btn">
-                                            Delete <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
+                                <% if(session.userType==="customer" ){%>
+
+                                    <!-- script -->
+                                    <script>
+                                        $(document).ready(() => {
+                                            getFavourites.then((favouriteMap) => {
+                                                let pid = "<%=result._id%>";
+                                                let lid = favouriteMap.get(pid);
+
+                                                if (lid) {
+
+                                                    let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
+                                                    $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                                                }
+                                                else {
+                                                    let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
+                                                    $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+                                                }
+                                            });
+
+                                            getCarts.then((cartMap) => {
+                                                let pid = "<%=result._id%>";
+                                                let cartid = cartMap.get(pid);
+
+                                                if (cartid) {
+                                                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                                                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                }
+                                                else {
+                                                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')">Add Cart</button>`;
+                                                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <!-- script -->
+
+                                    <div class="mt-4 btn-div d-flex justify-content-between"
+                                        id="fav-btn-div-<%=result._id%>">
+                                    </div>
+
+                                    <div class="mt-4 btn-div d-flex justify-content-between"
+                                        id="cart-btn-div-<%=result._id%>">
+                                    </div>
+
+                                    <%}else if(session.userType==="admin" ){%>
+                                        <div class="mt-4 btn-div">
+                                            <a href="/product/chiar/edit/<%=result._id%>">
+                                                <button class="btn mx-2 edit-btn">
+                                                    Edit <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            </a>
+                                            <a href="/product/chair/delete/<%=result._id%>">
+                                                <button class="btn mx-2 delete-btn">
+                                                    Delete <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <%}%>
                             </div>
                         </div>
                     </div>

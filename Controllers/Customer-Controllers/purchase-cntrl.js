@@ -1,5 +1,16 @@
-const CustomerCollection = require("../../src/Models/customers/customer-schema");
+const BedCollection = require("../../Src/Models/products/bed-schema");
+const ChairCollection = require("../../Src/Models/products/chair-schema");
+const JulaCollection = require("../../Src/Models/products/jula-schema");
+const MattressesCollection = require("../../Src/Models/products/mattresses-schema");
+const ShoerackCollection = require("../../Src/Models/products/shoerack-schema");
+const ShowcaseCollection = require("../../Src/Models/products/showcase-schema");
 const SofaCollection = require("../../Src/Models/products/sofa-schema");
+const TableCollection = require("../../Src/Models/products/table-schema");
+const TempaleCollection = require("../../Src/Models/products/tempale-schema");
+const TvUnitCollection = require("../../Src/Models/products/tvunit-schema");
+const WardrobeCollection = require("../../Src/Models/products/wardrobe-schema");
+
+const CustomerCollection = require("../../src/Models/customers/customer-schema");
 const LikeCollection = require("../../Src/Models/customers/like-schema");
 const FavouriteCollection = require("../../Src/Models/customers/favourites-schema");
 const CartItemCollection = require("../../Src/Models/customers/cartItems-schema");
@@ -14,9 +25,20 @@ module.exports = {
             let customer = null;
             let pid = req.body.pid;
             let cid = res.locals.session.user._id.toString();
-
             let category = res.locals.session.productType;
-            if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
+
+            if (category === 'bed') product = await BedCollection.findOne({ _id: pid });
+            else if (category === 'chair') product = await ChairCollection.findOne({ _id: pid });
+            else if (category === 'jula') product = await JulaCollection.findOne({ _id: pid });
+            else if (category === 'mattresse') { product = await MattressesCollection.findOne({ _id: pid }); category = (category + 's'); }
+            else if (category === 'shoerack') product = await ShoerackCollection.findOne({ _id: pid });
+            else if (category === 'showcase') product = await ShowcaseCollection.findOne({ _id: pid });
+            else if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
+            else if (category === 'table') product = await TableCollection.findOne({ _id: pid });
+            else if (category === 'tempale') product = await TempaleCollection.findOne({ _id: pid });
+            else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
+            else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
+
             if (product === null) return res.status(200).send("product doesn't found:)");
 
             customer = await CustomerCollection.findOne({ _id: cid });
@@ -26,7 +48,6 @@ module.exports = {
             let favourite = await FavouriteCollection.findOne({ customer: cid });
 
             if (favourite === null) favourite = await FavouriteCollection.create({ customer: cid, likeItems: [{ likeItem: like._id }] });
-
             else { favourite.likeItems.push({ likeItem: like._id }); await favourite.save(); }
 
             // ---
@@ -104,7 +125,18 @@ module.exports = {
             cart = await CartCollection.findOne({ customer: cid });
             cartItem = await CartItemCollection.findOne({ _id: cartid });
             customer = await CustomerCollection.findOne({ _id: cid });
-            if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
+
+            if (category === 'bed') product = await BedCollection.findOne({ _id: pid });
+            else if (category === 'chair') product = await ChairCollection.findOne({ _id: pid });
+            else if (category === 'jula') product = await JulaCollection.findOne({ _id: pid });
+            else if (category === 'mattresse') { product = await MattressesCollection.findOne({ _id: pid }); category = (category + 's'); }
+            else if (category === 'shoerack') product = await ShoerackCollection.findOne({ _id: pid });
+            else if (category === 'showcase') product = await ShowcaseCollection.findOne({ _id: pid });
+            else if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
+            else if (category === 'table') product = await TableCollection.findOne({ _id: pid });
+            else if (category === 'tempale') product = await TempaleCollection.findOne({ _id: pid });
+            else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
+            else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
 
             if (customer === null) return res.status(200).send("account doesn't found:)");
             if (product === null) return res.status(200).send("product doesn't found:)");
