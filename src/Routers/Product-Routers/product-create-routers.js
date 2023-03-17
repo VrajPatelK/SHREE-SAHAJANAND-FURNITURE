@@ -17,6 +17,13 @@ const {
 
 } = require('../../../Controllers/Product-Controllers/product-create-cntrl');
 
+const { isAdmin,isManager } = require('../../Middlewares/isLogin');
+
+router.use(function (req, res, next) {
+    if (res.locals.session.userType === 'admin') { isAdmin(req, res, next); }
+    else if (res.locals.session.userType === 'manager') { isManager(req, res, next); }
+});
+
 router.post("/product/bed", createBed);
 router.post("/product/chair", createChair);
 router.post("/product/jula", createJula);

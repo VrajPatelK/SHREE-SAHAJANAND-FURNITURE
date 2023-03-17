@@ -19,6 +19,13 @@ const {
 
 } = require('../../../Controllers/Product-Controllers/product-update-cntrl');
 
+const { isAdmin, isManager } = require('../../Middlewares/isLogin');
+
+router.use(function (req, res, next) {
+    if (res.locals.session.userType === 'admin') { isAdmin(req, res, next); }
+    else if (res.locals.session.userType === 'manager') { isManager(req, res, next); }
+});
+
 router.get("/product/:category/edit/:pid", updateProductGet);
 
 router.post("/product/bed/edit/:pid", updateBedPost);
