@@ -73,8 +73,10 @@ app.get("/customer-register", customer_routers);
 app.post("/customer-register", customer_routers);
 app.get("/customer-login", customer_routers);
 app.post("/customer-login", customer_routers);
-app.get("/customer-profile/:id", customer_routers);
-app.get("/customer-logout/:id", customer_routers);
+app.get("/customer-profile", customer_routers);
+app.get("/customer-profile/edit", customer_routers);
+app.post("/customer-profile/edit", customer_routers);
+app.get("/customer-logout", customer_routers);
 app.get("/customer-delete", customer_routers);
 
 //sys-user-login

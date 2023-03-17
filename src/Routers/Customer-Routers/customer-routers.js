@@ -8,6 +8,8 @@ const {
     getLoginCustomer,
     postLoginCustomer,
     getCustomer,
+    getUpdateCustomer,
+    postUpdateCustomer,
     logoutCustomer,
     deleteCustomer
 
@@ -20,8 +22,10 @@ router.post("/customer-register", postCreateCustomer);
 router.get("/customer-login", customerNotLoggedIn, getLoginCustomer);
 router.post("/customer-login", postLoginCustomer);
 
-router.get("/customer-profile/:id", isCustomer, getCustomer);
-router.get("/customer-logout/:id", isCustomer, logoutCustomer);
+router.get("/customer-profile", isCustomer, getCustomer);
+router.get("/customer-profile/edit", isCustomer, getUpdateCustomer);
+router.post("/customer-profile/edit", isCustomer, postUpdateCustomer);
+router.get("/customer-logout", isCustomer, logoutCustomer);
 router.get("/customer-delete", isCustomer, deleteCustomer);
 
 module.exports = router;

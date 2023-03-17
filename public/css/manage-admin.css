@@ -28,7 +28,7 @@
 }
 
 .profile-img-div {
-    border: 3px solid #fff;
+    background: #fff !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -146,4 +146,20 @@ textarea {
 
 .modal-body input::placeholder {
     color: orangered;
+}
+
+
+@media (max-width:991px) {
+    .list-group-item {
+        display: block !important;
+    }
+
+    .profile-info-div {
+        border: none !important;
+    }
+
+    .value-para,
+    .list-group-item input {
+        width: 100% !important;
+    }
 }

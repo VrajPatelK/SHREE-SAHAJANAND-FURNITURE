@@ -564,16 +564,21 @@ border: 2px solid red;
     color: rgb(186, 50, 1);
 }
 
-.info-div .key-para {
+.key-para {
     border-radius: .5rem;
     text-align: left;
     width: 30%;
 }
 
-.info-div .value-para {
+.value-para,
+.list-group-item input {
     border-radius: .5rem;
     text-align: left;
     width: 70%;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: rgb(255, 228, 205) !important;
 }
 
 /* .card-div {

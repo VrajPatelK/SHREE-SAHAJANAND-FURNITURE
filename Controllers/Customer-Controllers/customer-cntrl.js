@@ -31,7 +31,7 @@ module.exports = {
                 });
             }
 
-            req.body.pass = Bcrypt.hashSync(req.body.pass);
+            req.body.pass = Bcrypt.hashSync(req.body.pass); console.log(req.body.image);
             customer = await CustomerCollection.create(req.body);
             return res.status(301).redirect("/customer-login");
 
@@ -51,7 +51,7 @@ module.exports = {
         try {
             let customer = await CustomerCollection.findOne({
                 $or: [
-                    { _id: req.params.id },
+                    { _id: res.locals.session.user._id },
                     { email: req.body.email },
                     { mobile: req.body.mobile },
                 ]
@@ -68,9 +68,53 @@ module.exports = {
             console.log(error);
         }
     },
-    updateCustomer: async (req, res) => {
+    getUpdateCustomer: async (req, res) => {
         try {
 
+            let target_id = res.locals.session.user._id.toString();
+
+            if (target_id !== undefined) {
+                let customer = await CustomerCollection.findOne({ _id: target_id });
+                return res.status(201).render("customer/customer-edit", { result: customer, swr: false });
+            }
+
+            return res.status(404).send("page not found ...");
+
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    postUpdateCustomer: async (req, res) => {
+        try {
+
+            let cid = res.locals.session.user._id.toString();
+
+            let customer = await CustomerCollection.findOne({ email: req.body.email });
+            if (customer !== null && customer._id.toString() !== cid)
+                return res.status(200).render("customer/customer-edit", {
+                    result: req.body,
+                    swr: true,
+                    errorMsg: "Customer is already with this Email-Id..."
+                });
+
+            customer = await CustomerCollection.findOne({ mobile: req.body.mobile });
+            if (customer !== null && customer._id.toString() !== cid)
+                return res.status(200).render("customer/customer-edit", {
+                    result: req.body,
+                    swr: true,
+                    errorMsg: "Customer is already with this Mobile number..."
+                });
+
+            customer = req.body;
+            if (req.body.rmvImage)
+                customer.image = "";
+
+            await CustomerCollection.updateOne(
+                { _id: cid },
+                { $set: customer }
+            );
+
+            return res.status(301).redirect("/customer-profile");
 
         } catch (error) {
             console.log(error);
@@ -79,10 +123,9 @@ module.exports = {
     deleteCustomer: async (req, res) => {
         try {
 
-            let opeartion = req.query.op;
-            let target_id = req.query._id;
+            let target_id = res.locals.session.user._id.toString();
 
-            if (opeartion === "delete" && target_id !== undefined) {
+            if (target_id !== undefined) {
                 res.clearCookie("loginCustomer");
                 await CustomerCollection.deleteOne({ _id: target_id });
             }
@@ -130,7 +173,7 @@ module.exports = {
             res.locals.session.userType = "customer";
             res.locals.session.user = customer;
 
-            return res.status(301).redirect("/customer-profile/" + customer._id);
+            return res.status(301).redirect("/customer-profile");
 
         } catch (error) {
             console.log(error);

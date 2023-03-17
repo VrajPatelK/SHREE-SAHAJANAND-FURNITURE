@@ -67,7 +67,7 @@ module.exports = {
         try {
             let token = req.cookies.loginCustomer;
             let customer = jwt.verify(token, process.env.SECRET_KEY);
-            return res.status(301).redirect("/customer-profile/" + customer._id);
+            return res.status(301).redirect("/customer-profile");
 
         } catch (error) {
             if (error.name === "JsonWebTokenError") {
