@@ -179,61 +179,6 @@ app.post("/product/wardrobe/edit/:pid", product_update_routers);
 
 app.get("/product/:category/delete/:pid", product_delete_routers);
 
-//Sofa
-app.get("/admin/product/edit-sofa", sofa_routers);
-app.post("/admin/product/edit-sofa", sofa_routers);
-app.get("/admin/product/delete-sofa", sofa_routers);
-
-// Beds
-app.get("/admin/product/edit-bed", bed_routers);
-app.post("/admin/product/edit-bed", bed_routers);
-app.get("/admin/product/delete-bed", bed_routers);
-
-//Mattresse
-app.get("/admin/product/edit-mattresses", mattresse_routers);
-app.post("/admin/product/edit-mattresses", mattresse_routers);
-app.get("/admin/product/delete-mattresses", mattresse_routers);
-
-//Chair
-app.get("/admin/product/edit-chair", chair_routers);
-app.post("/admin/product/edit-chair", chair_routers);
-app.get("/admin/product/delete-chair", chair_routers);
-
-// Table
-app.get("/admin/product/edit-table", table_routers);
-app.post("/admin/product/edit-table", table_routers);
-app.get("/admin/product/delete-table", table_routers);
-
-// Tempale
-app.get("/admin/product/edit-tempale", tempale_routers);
-app.post("/admin/product/edit-tempale", tempale_routers);
-app.get("/admin/product/delete-tempale", tempale_routers);
-
-// Shoerack 
-app.get("/admin/product/edit-shoerack", shoerack_routers);
-app.post("/admin/product/edit-shoerack", shoerack_routers);
-app.get("/admin/product/delete-shoerack", shoerack_routers);
-
-//Showcase
-app.get("/admin/product/edit-showcase", showcase_routers);
-app.post("/admin/product/edit-showcase", showcase_routers);
-app.get("/admin/product/delete-showcase", showcase_routers);
-
-// Julas
-app.get("/admin/product/edit-jula", jula_routers);
-app.post("/admin/product/edit-jula", jula_routers);
-app.get("/admin/product/delete-jula", jula_routers);
-
-// Wardrobe
-app.get("/admin/product/edit-wardrobe", wardrobe_routers);
-app.post("/admin/product/edit-wardrobe", wardrobe_routers);
-app.get("/admin/product/delete-wardrobe", wardrobe_routers);
-
-// Tv unit
-app.get("/admin/product/edit-tvunit", tvunit_routers);
-app.post("/admin/product/edit-tvunit", tvunit_routers);
-app.get("/admin/product/delete-tvunit", tvunit_routers);
-
 //trading
 app.get("/admin/sells", sell_routers);
 app.get("/admin/orders", order_routers);
