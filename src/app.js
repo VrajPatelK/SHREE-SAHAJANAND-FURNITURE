@@ -67,6 +67,8 @@ const purchase_routers = require("./Routers/Customer-Routers/purchase-routers");
 
 const product_create_routers = require("./Routers/Product-Routers/product-create-routers");
 const product_read_routers = require("./Routers/Product-Routers/product-read-routers");
+const product_update_routers = require("./Routers/Product-Routers/product-update-routers");
+const product_delete_routers = require("./Routers/Product-Routers/product-delete-routers");
 
 
 // sys-user-req ,products-req
@@ -162,69 +164,72 @@ app.post("/product/wardrobe", product_create_routers);
 
 app.get("/product/:category", product_read_routers);
 
+app.get("/product/:category/edit/:pid", product_update_routers);
+app.post("/product/bed/edit/:pid", product_update_routers);
+app.post("/product/chair/edit/:pid", product_update_routers);
+app.post("/product/jula/edit/:pid", product_update_routers);
+app.post("/product/mattresses/edit/:pid", product_update_routers);
+app.post("/product/shoerack/edit/:pid", product_update_routers);
+app.post("/product/showcase/edit/:pid", product_update_routers);
+app.post("/product/sofa/edit/:pid", product_update_routers);
+app.post("/product/table/edit/:pid", product_update_routers);
+app.post("/product/tempale/edit/:pid", product_update_routers);
+app.post("/product/tvunit/edit/:pid", product_update_routers);
+app.post("/product/wardrobe/edit/:pid", product_update_routers);
+
+app.get("/product/:category/delete/:pid", product_delete_routers);
 
 //Sofa
-app.post("/admin/product/sofas", sofa_routers);
 app.get("/admin/product/edit-sofa", sofa_routers);
 app.post("/admin/product/edit-sofa", sofa_routers);
 app.get("/admin/product/delete-sofa", sofa_routers);
 
 // Beds
-app.post("/admin/product/beds", bed_routers);
 app.get("/admin/product/edit-bed", bed_routers);
 app.post("/admin/product/edit-bed", bed_routers);
 app.get("/admin/product/delete-bed", bed_routers);
 
 //Mattresse
-app.post("/admin/product/mattresses", mattresse_routers);
 app.get("/admin/product/edit-mattresses", mattresse_routers);
 app.post("/admin/product/edit-mattresses", mattresse_routers);
 app.get("/admin/product/delete-mattresses", mattresse_routers);
 
 //Chair
-app.post("/admin/product/chairs", chair_routers);
 app.get("/admin/product/edit-chair", chair_routers);
 app.post("/admin/product/edit-chair", chair_routers);
 app.get("/admin/product/delete-chair", chair_routers);
 
 // Table
-app.post("/admin/product/tables", table_routers);
 app.get("/admin/product/edit-table", table_routers);
 app.post("/admin/product/edit-table", table_routers);
 app.get("/admin/product/delete-table", table_routers);
 
 // Tempale
-app.post("/admin/product/tempales", tempale_routers);
 app.get("/admin/product/edit-tempale", tempale_routers);
 app.post("/admin/product/edit-tempale", tempale_routers);
 app.get("/admin/product/delete-tempale", tempale_routers);
 
 // Shoerack 
-app.post("/admin/product/shoeracks", shoerack_routers);
 app.get("/admin/product/edit-shoerack", shoerack_routers);
 app.post("/admin/product/edit-shoerack", shoerack_routers);
 app.get("/admin/product/delete-shoerack", shoerack_routers);
 
 //Showcase
-app.post("/admin/product/showcases", showcase_routers);
 app.get("/admin/product/edit-showcase", showcase_routers);
 app.post("/admin/product/edit-showcase", showcase_routers);
 app.get("/admin/product/delete-showcase", showcase_routers);
 
 // Julas
-app.post("/admin/product/julas", jula_routers);
 app.get("/admin/product/edit-jula", jula_routers);
 app.post("/admin/product/edit-jula", jula_routers);
 app.get("/admin/product/delete-jula", jula_routers);
 
 // Wardrobe
-app.post("/admin/product/wardrobes", wardrobe_routers);
 app.get("/admin/product/edit-wardrobe", wardrobe_routers);
 app.post("/admin/product/edit-wardrobe", wardrobe_routers);
 app.get("/admin/product/delete-wardrobe", wardrobe_routers);
 
 // Tv unit
-app.post("/admin/product/tvunits", tvunit_routers);
 app.get("/admin/product/edit-tvunit", tvunit_routers);
 app.post("/admin/product/edit-tvunit", tvunit_routers);
 app.get("/admin/product/delete-tvunit", tvunit_routers);

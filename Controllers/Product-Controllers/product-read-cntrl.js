@@ -7,7 +7,7 @@ const ShowcaseCollection = require("../../Src/Models/products/showcase-schema");
 const SofaCollection = require("../../Src/Models/products/sofa-schema");
 const TableCollection = require("../../Src/Models/products/table-schema");
 const TempaleCollection = require("../../Src/Models/products/tempale-schema");
-const TvunitCollection = require("../../Src/Models/products/tvunit-schema");
+const TvUnitCollection = require("../../Src/Models/products/tvunit-schema");
 const WardrobeCollection = require("../../Src/Models/products/wardrobe-schema");
 
 module.exports = {
@@ -44,7 +44,7 @@ module.exports = {
                 result = await TempaleCollection.find({});
             }
             else if (category === 'tvunit') {
-                result = await TvunitCollection.find({});
+                result = await TvUnitCollection.find({});
             }
             else if (category === 'wardrobe') {
                 result = await WardrobeCollection.find({});

@@ -7,7 +7,7 @@ const ShowcaseCollection = require("../../Src/Models/products/showcase-schema");
 const SofaCollection = require("../../Src/Models/products/sofa-schema");
 const TableCollection = require("../../Src/Models/products/table-schema");
 const TempaleCollection = require("../../Src/Models/products/tempale-schema");
-const TvunitCollection = require("../../Src/Models/products/tvunit-schema");
+const TvUnitCollection = require("../../Src/Models/products/tvunit-schema");
 const WardrobeCollection = require("../../Src/Models/products/wardrobe-schema");
 
 module.exports = {
@@ -272,7 +272,7 @@ module.exports = {
 
             const availability = (req.body.add_availability === "on") ? true : false;
 
-            await TvunitCollection.insertMany([{
+            await TvUnitCollection.insertMany([{
                 tvunit_name: req.body.add_tvunit_name,
                 img_link: req.body.add_img_link,
                 dimensions: {

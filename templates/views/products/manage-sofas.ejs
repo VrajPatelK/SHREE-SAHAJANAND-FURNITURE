@@ -375,12 +375,12 @@
 
                                             <%}else if(session.userType==="admin" ){%>
                                                 <div class="mt-4 btn-div d-flex justify-content-between">
-                                                    <a href="/admin/product/edit-sofa?op=edit&_id=<%=result._id%>">
+                                                    <a href="/product/sofa/edit/<%=result._id%>">
                                                         <button class="btn mx-2 edit-btn">
                                                             Edit <i class="fa-solid fa-pen-to-square"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="/admin/product/delete-sofa?op=delete&_id=<%=result._id%>">
+                                                    <a href="/product/sofa/delete/<%=result._id%>">
                                                         <button class="btn mx-2 delete-btn">
                                                             Delete <i class="fa-solid fa-trash"></i>
                                                         </button>
