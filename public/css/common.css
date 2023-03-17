@@ -142,19 +142,40 @@ h3 {
     color: #fff;
 }
 
-.nav-link {
-    color: orangered;
-    font-weight: 500;
+.nav-item {
+    border-radius: .3rem;
 }
 
+.nav-link {
+    color: orangered !important;
+    font-weight: 500;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+
+.nav-link:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
+}
+
+/* 
 #dropdownMenuProducts,
 #dropdownMenuSysUsers,
-#dropdownMenuImportExport {
+#dropdownMenuImportExport,
+#dropdownMenuProfile {
     color: orangered;
     font-weight: 500;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
+} */
+
+#dropdownMenuProducts:hover,
+#dropdownMenuSysUsers:hover,
+#dropdownMenuImportExport:hover,
+#dropdownMenuProfile:hover {
+    color: orangered !important;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset !important;
 }
 
 .dropdown-item:hover,
@@ -163,16 +184,6 @@ h3 {
     background: rgb(255, 212, 196);
 }
 
-
-.nav-link:hover {
-    color: black;
-}
-
-.nav-link.active {
-    /* background: #ffc048; */
-    border-radius: 20px;
-    color: black;
-}
 
 
 /* HEADINGS----------------- */
@@ -588,6 +599,17 @@ border: 2px solid blue;
     color: orangered;
     background: rgb(255, 231, 222);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
+}
+
+.btn-type-1-inverse {
+    color: orangered;
+    background: rgb(255, 231, 222);
+    border: none;
+    border-radius: 0.5rem;
+    border-radius: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
 }
 
 .btn-type-2 {

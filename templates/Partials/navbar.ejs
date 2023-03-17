@@ -53,17 +53,17 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav nav-fill">
                     <%if(session.userType==="customer"){%>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link" aria-current="page" href="/">Home <i class="fa-solid fa-house"></i></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About Us</a>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link" href="/about">About Us <i class="fa-solid fa-address-card"></i></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact Us</a>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link" href="/contact">Contact Us <i class="fa-solid fa-phone"></i></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link ">All Furniture</a>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link ">All Furniture <i class="fa-solid fa-chair"></i></a>
                         </li>
                         <%}%>
 
@@ -71,31 +71,33 @@
                             <%if(session.userType==="admin" || session.userType==="accountant" ||
                                 session.userType==="manager" ){%>
 
-                                <li class="nav-item">
+                                <li class="nav-item btn-type-1-inverse mx-2">
                                     <a class="nav-link">Sells</a>
                                 </li>
                                 <%}%>
                                     <%if(session.userType==="admin" || session.userType==="accountant" ){%>
-                                        <li class="nav-item">
+                                        <li class="nav-item btn-type-1-inverse mx-2">
                                             <a class="nav-link">Orders</a>
                                         </li>
                                         <%}%>
 
-                                            <!-- products-drop-down -->
                                             <%if(session.userType==="admin" || session.userType==="customer" ){%>
-                                                <li class="dropdown items-dropdonw">
-                                                    <button class="btn dropdown-toggle" type="button"
-                                                        id="dropdownMenuProducts" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        Products
+
+                                                <!-- products-drop-down -->
+                                                <li class="dropdown items-dropdown">
+                                                    <button class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
+                                                        type="button" id="dropdownMenuProducts"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Products <i class="fa-brands fa-product-hunt"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuProducts">
-                                                        <li><a class="dropdown-item" href="/product/sofa">Sofas</a>
+                                                        <li><a class="dropdown-item" href="/product/sofa">Sofas </a>
                                                         </li>
-                                                        <li><a class="dropdown-item" href="/product/bed">Beds</a>
+                                                        <li><a class="dropdown-item" href="/product/bed">Beds </a>
                                                         </li>
                                                         <li><a class="dropdown-item"
-                                                                href="/product/mattresse">Mattresses</a>
+                                                                href="/product/mattresse">Mattresses <i
+                                                                    class="fa-solid fa-mattress-pillow"></i></a>
                                                         </li>
                                                         <li><a class="dropdown-item" href="/product/chair">Chairs</a>
                                                         </li>
@@ -124,14 +126,54 @@
                                                         </li>
                                                     </ul>
                                                 </li>
+
+                                                <!-- profile-dropdown -->
+                                                <li class="dropdown items-dropdown">
+                                                    <button class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
+                                                        type="button" id="dropdownMenuProfile" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                        Profile <i class="fa-solid fa-user"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
+                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                href="#">My Account <i
+                                                                    class="fa-solid fa-file-invoice"></i></a>
+                                                        </li>
+                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                href="#">My Orders <i
+                                                                    class="fa-solid fa-bag-shopping"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <hr class="dropdown-divider">
+                                                        </li>
+                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                href="#">Register <i
+                                                                    class="fa-solid fa-keyboard"></i></a>
+                                                        </li>
+                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                href="#">Login<i
+                                                                    class="fa-solid fa-right-from-bracket"></i></a>
+                                                        </li>
+                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                href="#">Logout <i
+                                                                    class="fa-solid fa-right-to-bracket"></i></a>
+                                                        </li>
+                                                        <li><a class="dropdown-item text-danger d-flex justify-content-between align-items-center"
+                                                                href="#">
+                                                                Delete Account <i class="fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
                                                 <%}%>
 
                                                     <!-- System-users-drop-down -->
                                                     <%if(session.userType==="admin" ){%>
-                                                        <li class="dropdown items-dropdonw">
-                                                            <button class="btn dropdown-toggle" type="button"
-                                                                id="dropdownMenuSysUsers" data-bs-toggle="dropdown"
-                                                                aria-expanded="false">
+                                                        <li class="dropdown items-dropdown">
+                                                            <button
+                                                                class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
+                                                                type="button" id="dropdownMenuSysUsers"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
                                                                 System-Users
                                                             </button>
                                                             <ul class="dropdown-menu"
@@ -169,9 +211,10 @@
 
                                                             <%if(session.userType==="admin" ||
                                                                 session.userType==="manager" ){%>
-                                                                <li class=" dropdown items-dropdonw">
-                                                                    <button class="btn dropdown-toggle" type="button"
-                                                                        id="dropdownMenuImportExport"
+                                                                <li class=" dropdown items-dropdown">
+                                                                    <button
+                                                                        class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
+                                                                        type="button" id="dropdownMenuImportExport"
                                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                                         Import-Export
                                                                     </button>
