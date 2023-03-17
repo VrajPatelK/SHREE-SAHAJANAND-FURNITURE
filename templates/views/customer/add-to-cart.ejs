@@ -20,16 +20,16 @@
 
                     getCarts = new Promise((resolve, reject) => {
                         $.get('/get-carts', (data, status) => {
-                            let carts = data;
-                            $("#no_of_carts_badge").text(carts.length);
+                            let cartItems = data;
+                            $("#no_of_carts_badge").text(cartItems.length);
 
                             //options
                             let optionsArr = new Array();
-                            carts.forEach((item, indx) => {
+                            cartItems.forEach((cartItem, indx) => {
 
                                 let optionsTags = "";
                                 for (let i = 1; i <= 20; i++) {
-                                    optionsTags += (item.cartItem.quantity === i) ?
+                                    optionsTags += (cartItem.quantity === i) ?
                                         `<option value="${i}" selected>${i}</option>` :
                                         `<option value="${i}">${i}</option>`;
                                 }
@@ -41,11 +41,11 @@
                             let Carts = 0;
                             let Discounts = 0;
 
-                            carts.forEach((item, indx) => {
+                            cartItems.forEach((cartItem, indx) => {
 
                                 //billing ...
-                                let cart_total = Math.ceil(item.cartItem.product.price * item.cartItem.quantity);
-                                let cart_discount = Math.floor(cart_total * (item.cartItem.product.discount / 100));
+                                let cart_total = Math.ceil(cartItem.product.price * cartItem.quantity);
+                                let cart_discount = Math.floor(cart_total * (cartItem.product.discount / 100));
 
                                 Carts += cart_total;
                                 Discounts += cart_discount;
@@ -54,11 +54,11 @@
                                 all_carts +=
                                     `<tr>
                                         <th scope="row">${indx + 1}</th>
-                                        <td>${item.cartItem.product.sofa_name}</td>
+                                        <td>${cartItem.product.sofa_name}</td>
                                         <td>${new Date()}</td>
-                                        <td><select name="quantity" id="quantity-${item.cartItem._id}" onchange="updateCart('${item.cartItem._id}')">${optionsArr[indx]}</select></td>
+                                        <td><select name="quantity" id="quantity-${cartItem._id}" onchange="updateCart('${cartItem._id}')">${optionsArr[indx]}</select></td>
                                         <td>${cart_total - cart_discount}</td>
-                                        <td><button class="btn btn-outline-danger" onclick=rmvCart('${item.cartItem._id}')><i class="fa-solid fa-trash"></i></button></td>
+                                        <td><button class="btn btn-outline-danger" onclick=rmvCart('${cartItem._id}')><i class="fa-solid fa-trash"></i></button></td>
                                     </tr>`
                             });
 

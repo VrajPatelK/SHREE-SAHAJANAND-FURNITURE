@@ -10,6 +10,9 @@ const TempaleCollection = require("../../Src/Models/products/tempale-schema");
 const TvUnitCollection = require("../../Src/Models/products/tvunit-schema");
 const WardrobeCollection = require("../../Src/Models/products/wardrobe-schema");
 
+const CartItemCollection = require("../../Src/Models/customers/cartItems-schema");
+const LikeCollection = require("../../Src/Models/customers/like-schema");
+
 module.exports = {
 
     deleteProduct: async (req, res) => {
@@ -60,6 +63,11 @@ module.exports = {
 
             if (result === null)
                 return res.status(401).json({ error: true, em: "delete operation failed, product is not found:)" });
+
+            //cascading handle
+            await CartItemCollection.deleteMany({ product: target_id });
+            await LikeCollection.deleteMany({ product: target_id });
+
             return res.status(301).redirect(`/product/${category}`);
 
 

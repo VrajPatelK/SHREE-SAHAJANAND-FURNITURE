@@ -129,10 +129,10 @@
                     getFavourites = new Promise((resolve, reject) => {
                         $.get('/get-favourites', (data, status) => {
 
-                            let favourites = data;
-                            favourites.forEach((item) => {
-                                let lid = item.likeItem._id;
-                                let pid = item.likeItem.product._id;
+                            let likeItems = data;
+                            likeItems.forEach((likeItem) => {
+                                let lid = likeItem._id;
+                                let pid = likeItem.product._id;
                                 favouriteMap.set(pid, lid);
                             });
 
@@ -143,14 +143,14 @@
                     getCarts = new Promise((resolve, reject) => {
                         $.get('/get-carts', (data, status) => {
 
-                            let carts = data;
-                            carts.forEach((item) => {
-                                let cartid = item.cartItem._id;
-                                let pid = item.cartItem.product._id;
+                            let cartItems = data;
+                            cartItems.forEach((cartItem) => {
+                                let cartid = cartItem._id;
+                                let pid = cartItem.product._id;
                                 cartMap.set(pid, cartid);
                             });
 
-                            $("#no_of_carts_badge").text(carts.length);
+                            $("#no_of_carts_badge").text(cartItems.length);
                             resolve(cartMap);
                         });
                     });

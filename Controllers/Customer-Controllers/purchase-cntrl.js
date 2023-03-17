@@ -44,11 +44,10 @@ module.exports = {
             customer = await CustomerCollection.findOne({ _id: cid });
             if (customer === null) return res.status(200).send("account doesn't found:)");
 
-            let like = await LikeCollection.create({ product: pid, productType: category });
             let favourite = await FavouriteCollection.findOne({ customer: cid });
+            if (favourite === null) favourite = await FavouriteCollection.create({ customer: cid });
 
-            if (favourite === null) favourite = await FavouriteCollection.create({ customer: cid, likeItems: [{ likeItem: like._id }] });
-            else { favourite.likeItems.push({ likeItem: like._id }); await favourite.save(); }
+            let like = await LikeCollection.create({ product: pid, favourite: favourite._id, productType: category });
 
             // ---
             return res.status(201).json(like);
@@ -61,16 +60,13 @@ module.exports = {
         try {
 
             let cid = res.locals.session.user._id.toString();
-            let favourites = await FavouriteCollection.findOne({ customer: cid })
-                .populate({
-                    path: 'likeItems.likeItem',
-                    model: 'like',
-                    populate: { path: 'product' }
-                });
+            let favourite = await FavouriteCollection.findOne({ customer: cid });
 
-            if (!favourites)
+            if (!favourite)
                 return res.status(200).json([]);
-            return res.status(200).json(favourites.likeItems);
+
+            let likeItems = await LikeCollection.find({ favourite: favourite._id }).populate('product');
+            return res.status(200).json(likeItems);
 
         } catch (error) {
             return res.status(401).send(error);
@@ -79,27 +75,14 @@ module.exports = {
     removeFavourite: async (req, res) => {
         try {
             let likeItem = null;
-            let customer = null;
 
             let lid = req.body.lid;
-            let cid = res.locals.session.user._id.toString();
 
             likeItem = await LikeCollection.findOne({ _id: lid });
             if (likeItem === null) return res.status(200).send("product doesn't found:)");
-            let product = likeItem.product._id; //for res
-
-            customer = await CustomerCollection.findOne({ _id: cid });
-            if (customer === null) return res.status(200).send("account doesn't found:)");
-
-            let favourite = await FavouriteCollection.findOne({ customer: cid });
-
-            let remains = favourite.likeItems.filter((currItem) => { return currItem.likeItem.toString() !== lid });
-            favourite.likeItems = remains;
-            await favourite.save();
+            let product = likeItem.product; //for res
 
             await LikeCollection.deleteOne({ _id: lid });
-
-            // ---
             return res.status(201).json(product);
 
         } catch (error) {
@@ -142,13 +125,11 @@ module.exports = {
             if (product === null) return res.status(200).send("product doesn't found:)");
 
             if (cart === null && cartItem === null) {
-                cartItem = await CartItemCollection.create({ product: pid, productType: category, quantity: 1 });
-                cart = await CartCollection.create({ customer: cid, cartItems: [{ cartItem: cartItem._id }] });
+                cart = await CartCollection.create({ customer: cid });
+                cartItem = await CartItemCollection.create({ product: pid, cart: cart._id, productType: category, quantity: 1 });
             }
             else if (cart !== null && cartItem === null) {
-                cartItem = await CartItemCollection.create({ product: pid, productType: category, quantity: 1 });
-                cart.cartItems.push({ cartItem: cartItem._id });
-                await cart.save();
+                cartItem = await CartItemCollection.create({ product: pid, cart: cart._id, productType: category, quantity: 1 });
             }
             else if (cart !== null && cartItem !== null) {
                 cartItem = await CartItemCollection.findOne({ _id: cartid });
@@ -167,17 +148,12 @@ module.exports = {
         try {
             let cid = res.locals.session.user._id.toString();
 
-            let cart = await CartCollection.findOne({ customer: cid })
-                .populate({
-                    path: 'cartItems.cartItem',
-                    model: 'cart-item',
-                    populate: { path: 'product' }
-                });
-
+            let cart = await CartCollection.findOne({ customer: cid });
             if (!cart)
                 return res.status(200).json([]);
 
-            return res.status(201).json(cart.cartItems);
+            let cartItems = await CartItemCollection.find({ cart: cart._id }).populate('product');
+            return res.status(201).json(cartItems);
 
         } catch (error) {
             return res.status(401).send(error);
@@ -212,27 +188,15 @@ module.exports = {
     removeCart: async (req, res) => {
         try {
             let cartItem = null;
-            let customer = null;
 
             let cartid = req.body.cartid;
-            let cid = res.locals.session.user._id.toString();
 
             cartItem = await CartItemCollection.findOne({ _id: cartid });
             if (cartItem === null) return res.status(200).send("product doesn't found:)");
+            let product = cartItem.product;
 
-            customer = await CustomerCollection.findOne({ _id: cid });
-            if (customer === null) return res.status(200).send("account doesn't found:)");
-
-            let cart = await CartCollection.findOne({ customer: cid });
-
-            let remains = cart.cartItems.filter((currItem) => { return currItem.cartItem.toString() !== cartid });
-            cart.cartItems = remains;
-            await cart.save();
-
-            let result = await CartItemCollection.deleteOne({ _id: cartid });
-
-            // ---
-            return res.status(201).json(result);
+            await CartItemCollection.deleteOne({ _id: cartid });
+            return res.status(201).json(product);
 
         } catch (error) {
             return res.status(401).send(error);
