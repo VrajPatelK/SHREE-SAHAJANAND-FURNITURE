@@ -8,213 +8,111 @@
 
     <%- include ('../../partials/header-links') %>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="../../../CSS/manage-admin.css">
 
-        <style>
-            .plus-btn-div {
-                display: flex;
-                justify-content: right;
-                align-items: center;
-            }
 
-            /* .card-parent-div {
-            border: 2px solid red;
-        } */
+        <%if(session.userType==="customer" ){%>
+            <script>
 
-            .card {
-                /* border: 2px solid blue; */
-                background: rgb(255 100 39);
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                border-radius: .5rem;
-                box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-            }
+                let favouriteMap = new Map();
+                let cartMap = new Map();
+                let getFavourites;
+                let getCarts;
 
-            .product-img-div img {
-                border: 3px solid #fff;
-                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            }
+                express_session_update(); // calling ...
 
-            .info-div {
-                border: 2px solid #fff;
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                background: #fff;
-                border-radius: 0.5rem;
-                box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
-            }
+                function express_session_update() { //declare ...
+                    $(document).ready(() => {
 
-            .info-div p {
-                /* border: 2px solid yellow; */
-                margin: 0px;
-                color: rgb(186, 50, 1);
-            }
+                        getFavourites = new Promise((resolve, reject) => {
+                            $.get('/get-favourites', (data, status) => {
 
-            .info-div .key-para {
-                border-radius: .5rem;
-                text-align: left;
-                width: 30%;
-            }
+                                let likeItems = data;
+                                likeItems.forEach((likeItem) => {
+                                    let lid = likeItem._id;
+                                    let pid = likeItem.product._id;
+                                    favouriteMap.set(pid, lid);
+                                });
 
-            .info-div .value-para {
-                border-radius: .5rem;
-                text-align: left;
-                width: 70%;
-            }
-
-            /* .card-div {
-            border: 2px solid blue;
-        } */
-
-            .btn-div a {
-                text-decoration: none;
-            }
-
-            .add-btn,
-            .close-form-modal {
-                color: #fff;
-                border: none;
-                background: orangered;
-                border-radius: 0.5rem;
-                border-radius: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-                box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
-            }
-
-            .add-btn:hover,
-            .close-form-modal:hover {
-                color: orangered;
-                background: rgb(255, 231, 222);
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
-            }
-
-            .edit-btn,
-            .delete-btn,
-            .add-sbmt-btn,
-            .back-btn {
-                background: #fff;
-                color: orangered;
-                border-radius: 0.5rem;
-                border-radius: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-                box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-            }
-
-            .edit-btn:hover,
-            .delete-btn:hover,
-            .add-sbmt-btn:hover,
-            .back-btn:hover {
-                background: rgb(255, 231, 222);
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
-
-            }
-        </style>
-
-        <link rel="stylesheet" href="../../css/manage-admin.css">
-
-        <script>
-
-            let favouriteMap = new Map();
-            let cartMap = new Map();
-            let getFavourites;
-            let getCarts;
-
-            express_session_update(); // calling ...
-
-            function express_session_update() { //declare ...
-                $(document).ready(() => {
-
-                    getFavourites = new Promise((resolve, reject) => {
-                        $.get('/get-favourites', (data, status) => {
-
-                            let likeItems = data;
-                            likeItems.forEach((likeItem) => {
-                                let lid = likeItem._id;
-                                let pid = likeItem.product._id;
-                                favouriteMap.set(pid, lid);
+                                resolve(favouriteMap);
                             });
+                        });
 
-                            resolve(favouriteMap);
+                        getCarts = new Promise((resolve, reject) => {
+                            $.get('/get-carts', (data, status) => {
+
+                                let cartItems = data;
+                                cartItems.forEach((cartItem) => {
+                                    let cartid = cartItem._id;
+                                    let pid = cartItem.product._id;
+                                    cartMap.set(pid, cartid);
+                                });
+
+                                $("#no_of_carts_badge").text(cartItems.length);
+                                resolve(cartMap);
+                            });
                         });
                     });
+                }
 
-                    getCarts = new Promise((resolve, reject) => {
-                        $.get('/get-carts', (data, status) => {
+                function addFav(pid) {
+                    let body = { pid: pid }
 
-                            let cartItems = data;
-                            cartItems.forEach((cartItem) => {
-                                let cartid = cartItem._id;
-                                let pid = cartItem.product._id;
-                                cartMap.set(pid, cartid);
-                            });
+                    $.post("/add-to-fav", body, function (data, status) {
 
-                            $("#no_of_carts_badge").text(cartItems.length);
-                            resolve(cartMap);
-                        });
+                        let pid = data.product;
+                        let lid = data._id;
+
+                        let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-${pid}" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
+                        $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                        express_session_update();
                     });
-                });
-            }
+                }
 
-            function addFav(pid) {
-                let body = { pid: pid }
+                function rmvFav(lid, pid) {
+                    let body = { lid: lid, pid: pid }
 
-                $.post("/add-to-fav", body, function (data, status) {
+                    $.post("/rmv-to-fav", body, function (data, status) {
 
-                    let pid = data.product;
-                    let lid = data._id;
+                        let pid = data.toString(); // data = ObjectId(pid)
+                        let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
+                        $(`#fav-btn-div-${pid}`).html(add_fav_btn);
 
-                    let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-${pid}" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
-                    $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
-                    express_session_update();
-                });
-            }
+                        express_session_update();
+                    });
+                }
 
-            function rmvFav(lid, pid) {
-                let body = { lid: lid, pid: pid }
+                function addCart(pid) {
+                    let body = { pid: pid }
 
-                $.post("/rmv-to-fav", body, function (data, status) {
+                    $.post("/add-to-cart", body, function (data, status) {
 
-                    let pid = data.toString(); // data = ObjectId(pid)
-                    let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
-                    $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+                        let pid = data.product;
+                        let cartid = data._id;
 
-                    express_session_update();
-                });
-            }
+                        let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                        $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                        express_session_update();
+                    });
+                }
 
-            function addCart(pid) {
-                let body = { pid: pid }
+                function addMoreCart(cartid, pid) {
+                    let body = { cartid: cartid, pid: pid }
 
-                $.post("/add-to-cart", body, function (data, status) {
+                    $.post("/add-to-cart", body, function (data, status) {
 
-                    let pid = data.product;
-                    let cartid = data._id;
+                        let pid = data.product;
+                        let cartid = data._id;
 
-                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
-                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
-                    express_session_update();
-                });
-            }
+                        let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                        $(`#cart-btn-div-${pid}`).html(add_cart_btn);
 
-            function addMoreCart(cartid, pid) {
-                let body = { cartid: cartid, pid: pid }
+                        express_session_update();
+                    });
+                }
 
-                $.post("/add-to-cart", body, function (data, status) {
-
-                    let pid = data.product;
-                    let cartid = data._id;
-
-                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
-                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
-
-                    express_session_update();
-                });
-            }
-
-        </script>
+            </script>
+            <%}%>
 </head>
 
 <body>
@@ -227,7 +125,7 @@
             </h4>
         </div>
         <div class="container plus-btn-div">
-            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addBedModal">
+            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addBedModal">
                 <i class="fa-solid fa-plus"></i> Add Bed
             </button>
         </div>
@@ -366,12 +264,12 @@
                                     <%}else if(session.userType==="admin" ){%>
                                         <div class="mt-4 btn-div">
                                             <a href="/product/bed/edit/<%=result._id%>">
-                                                <button class="btn mx-2 edit-btn">
+                                                <button class="btn mx-2 btn-type-2">
                                                     Edit <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
                                             </a>
                                             <a href="/product/bed/delete/<%=result._id%>">
-                                                <button class="btn mx-2 delete-btn">
+                                                <button class="btn mx-2 btn-type-2">
                                                     Delete <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </a>
@@ -490,10 +388,10 @@
 
 
                     <div class="col-12 modal-footer">
-                        <button type="submit" id="myform" class="btn add-sbmt-btn">
+                        <button type="submit" id="myform" class="btn btn-type-2">
                             <i class="fa-solid fa-plus"></i> Add
                         </button>
-                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
                             Close
                         </button>
                     </div>

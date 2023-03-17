@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(body_parser.json({ limit: '10mb' }));
 app.use(body_parser.urlencoded({ limit: '10mb', extended: true }));
-app.use(express.static(path.join(`${__dirname}`, `../public`)));
+app.use(express.static(path.join(`${__dirname}`, `../Public`)));
 app.use(cookie_parser());
 app.use(session({
     secret: process.env.SECRET_SESSION_KEY,
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 //pre-defined things--------------
 
 app.set("view engine", "ejs");
-app.set("views", path.join(`${__dirname}`, `../templates/views/`));
+app.set("views", path.join(`${__dirname}`, `../Templates/Views/`));
 
 
 

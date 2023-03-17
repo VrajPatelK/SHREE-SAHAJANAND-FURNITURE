@@ -22,7 +22,7 @@
             </h4>
         </div>
         <div class="container plus-btn-div">
-            <button class="btn py-2 add-btn" data-bs-toggle="modal" data-bs-target="#addExportModal">
+            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addExportModal">
                 <i class="fa-solid fa-plus"></i> Add Exports
             </button>
         </div>
@@ -129,12 +129,12 @@
 
                                 <div class="mt-4 profile-info-btn-div">
                                     <a href="/admin/edit-export?op=edit&_id=<%=result._id%>">
-                                        <button class="btn mx-2 edit-btn">
+                                        <button class="btn mx-2 btn-type-2">
                                             Edit <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
                                     </a>
                                     <a href="/admin/delete-export?op=delete&_id=<%=result._id%>">
-                                        <button class="btn mx-2 delete-btn">
+                                        <button class="btn mx-2 btn-type-2">
                                             Delete <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </a>
@@ -210,10 +210,10 @@
                     </div>
 
                     <div class="col-12 modal-footer">
-                        <button type="submit" id="myform" class="btn add-sbmt-btn">
+                        <button type="submit" id="myform" class="btn btn-type-2">
                             <i class="fa-solid fa-plus"></i> Add
                         </button>
-                        <button type="button" class="btn close-form-modal" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
                             Close
                         </button>
                     </div>

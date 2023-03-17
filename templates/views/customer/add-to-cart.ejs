@@ -10,49 +10,49 @@
     </title>
     <%- include ('../../partials/header-links') %>
 
+        <%if(session.userType==="customer" ){%>
+            <script>
 
-        <script>
+                display_carts(); // calling ...
 
-            display_carts(); // calling ...
+                function display_carts() { //declare ...
+                    $(document).ready(() => {
 
-            function display_carts() { //declare ...
-                $(document).ready(() => {
+                        getCarts = new Promise((resolve, reject) => {
+                            $.get('/get-carts', (data, status) => {
+                                let cartItems = data;
+                                $("#no_of_carts_badge").text(cartItems.length);
 
-                    getCarts = new Promise((resolve, reject) => {
-                        $.get('/get-carts', (data, status) => {
-                            let cartItems = data;
-                            $("#no_of_carts_badge").text(cartItems.length);
+                                //options
+                                let optionsArr = new Array();
+                                cartItems.forEach((cartItem, indx) => {
 
-                            //options
-                            let optionsArr = new Array();
-                            cartItems.forEach((cartItem, indx) => {
+                                    let optionsTags = "";
+                                    for (let i = 1; i <= 20; i++) {
+                                        optionsTags += (cartItem.quantity === i) ?
+                                            `<option value="${i}" selected>${i}</option>` :
+                                            `<option value="${i}">${i}</option>`;
+                                    }
+                                    optionsArr.push(optionsTags);
+                                });
 
-                                let optionsTags = "";
-                                for (let i = 1; i <= 20; i++) {
-                                    optionsTags += (cartItem.quantity === i) ?
-                                        `<option value="${i}" selected>${i}</option>` :
-                                        `<option value="${i}">${i}</option>`;
-                                }
-                                optionsArr.push(optionsTags);
-                            });
+                                //all carts
+                                let all_carts = "";
+                                let Carts = 0;
+                                let Discounts = 0;
 
-                            //all carts
-                            let all_carts = "";
-                            let Carts = 0;
-                            let Discounts = 0;
+                                cartItems.forEach((cartItem, indx) => {
 
-                            cartItems.forEach((cartItem, indx) => {
+                                    //billing ...
+                                    let cart_total = Math.ceil(cartItem.product.price * cartItem.quantity);
+                                    let cart_discount = Math.floor(cart_total * (cartItem.product.discount / 100));
 
-                                //billing ...
-                                let cart_total = Math.ceil(cartItem.product.price * cartItem.quantity);
-                                let cart_discount = Math.floor(cart_total * (cartItem.product.discount / 100));
+                                    Carts += cart_total;
+                                    Discounts += cart_discount;
 
-                                Carts += cart_total;
-                                Discounts += cart_discount;
-
-                                //rows ...
-                                all_carts +=
-                                    `<tr>
+                                    //rows ...
+                                    all_carts +=
+                                        `<tr>
                                         <th scope="row">${indx + 1}</th>
                                         <td>${cartItem.product.sofa_name}</td>
                                         <td>${new Date()}</td>
@@ -60,45 +60,46 @@
                                         <td>${cart_total - cart_discount}</td>
                                         <td><button class="btn btn-outline-danger" onclick=rmvCart('${cartItem._id}')><i class="fa-solid fa-trash"></i></button></td>
                                     </tr>`
-                            });
+                                });
 
-                            let Total = Carts - Discounts;
-                            let bill =
-                                `
+                                let Total = Carts - Discounts;
+                                let bill =
+                                    `
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Cart</span><span class="amount">${Carts}</span></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Discounts</span><span class="amount">${Discounts}</span></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Delivery Charges</span><span class="amount text-success"><b>FREE</b></span></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Total Amount</span><span class="amount text-success">${Total}</span></li>`;
 
-                            $("#table-body").html(all_carts);
-                            $("#bill-body").html(bill);
+                                $("#table-body").html(all_carts);
+                                $("#bill-body").html(bill);
 
+                            });
                         });
                     });
-                });
-            }
+                }
 
 
-            function updateCart(cartid) {
-                let quantity = $(`#quantity-${cartid}`).val();
-                let body = { cartid: cartid, quantity: quantity };
+                function updateCart(cartid) {
+                    let quantity = $(`#quantity-${cartid}`).val();
+                    let body = { cartid: cartid, quantity: quantity };
 
-                $.post("/update-cart", body, function (data, status) {
+                    $.post("/update-cart", body, function (data, status) {
 
-                    display_carts();
-                });
-            }
+                        display_carts();
+                    });
+                }
 
-            function rmvCart(cartid) {
-                let body = { cartid: cartid };
+                function rmvCart(cartid) {
+                    let body = { cartid: cartid };
 
-                $.post("/rmv-to-cart", body, function (data, status) {
-                    console.log(body);
-                    display_carts();
-                });
-            }
+                    $.post("/rmv-to-cart", body, function (data, status) {
+                        console.log(body);
+                        display_carts();
+                    });
+                }
 
-        </script>
+            </script>
+            <%}%>
 </head>
 
 

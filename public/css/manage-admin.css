@@ -68,8 +68,8 @@
     text-decoration: none;
 }
 
-.add-btn,
-.close-form-modal {
+.btn-type-1,
+.btn-type-1 {
     color: #fff;
     border: none;
     background: orangered;
@@ -80,17 +80,17 @@
     box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
 }
 
-.add-btn:hover,
-.close-form-modal:hover {
+.btn-type-1:hover,
+.btn-type-1:hover {
     color: orangered;
     background: rgb(255, 231, 222);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 }
 
-.edit-btn,
-.delete-btn,
-.add-sbmt-btn,
-.back-btn {
+.btn-type-2,
+.btn-type-2,
+.btn-type-2,
+.btn-type-2 {
     background: #fff;
     color: orangered;
     border-radius: 0.5rem;
@@ -100,10 +100,10 @@
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
-.edit-btn:hover,
-.delete-btn:hover,
-.add-sbmt-btn:hover ,
-.back-btn:hover {
+.btn-type-2:hover,
+.btn-type-2:hover,
+.btn-type-2:hover,
+.btn-type-2:hover {
     background: rgb(255, 231, 222);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 
@@ -118,7 +118,7 @@
     background: rgba(255, 165, 0, 0.3)
 }
 
-.modal-content { 
+.modal-content {
     color: #fff;
 }
 

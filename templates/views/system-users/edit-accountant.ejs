@@ -40,7 +40,7 @@
             <%}%>
 
                 <a href="/admin/accountants">
-                    <button class="btn mx-2 back-btn">
+                    <button class="btn mx-2 btn-type-2">
                         <i class="fa-solid fa-backward"></i> Back
                     </button>
                 </a>
@@ -62,8 +62,8 @@
                                 </li>
                                 <li class="list-group-item my-1">
                                     <p class="col-4 key-para">Accountant - Mobile</p>
-                                    <input type="tel" class="col-8 p-2" maxlength="10" pattern="[0-9]{10}" name="accountant_mobile"
-                                        value="<%=result.accountant_mobile%>" required>
+                                    <input type="tel" class="col-8 p-2" maxlength="10" pattern="[0-9]{10}"
+                                        name="accountant_mobile" value="<%=result.accountant_mobile%>" required>
                                 </li>
                                 <li class="list-group-item my-1">
                                     <p class="col-4 key-para">Accountant - Study</p>
@@ -78,10 +78,10 @@
                                 <li class="list-group-item my-1">
                                     <p class="col-4 key-para">Accountant - Profile Img</p>
                                     <!-- <input type="file" class="col-8 p-2" name="accountant_image"> -->
-                                    <input class="form-control" type="file" id="image_file" name="image_file" accept=".jpeg, .jpg, .png"
-                                    onchange="convertToBase64()">
-                                <input type="text" name="accountant_image" id="accountant_image"
-                                    value="<%=result.accountant_image%>" hidden>
+                                    <input class="form-control" type="file" id="image_file" name="image_file"
+                                        accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                                    <input type="text" name="accountant_image" id="accountant_image"
+                                        value="<%=result.accountant_image%>" hidden>
                                 </li>
                                 <li class="list-group-item my-1">
                                     <p class="col-4 key-para">Accountant - Remove Profile Image</p>
@@ -99,7 +99,7 @@
                             </ul>
 
                             <div class="mt-4 profile-info-btn-div">
-                                <button type="submit" class="btn mx-2 edit-btn">
+                                <button type="submit" class="btn mx-2 btn-type-2">
                                     Edit <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                             </div>
