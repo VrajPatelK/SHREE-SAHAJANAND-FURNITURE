@@ -7,7 +7,9 @@
     <title>SSF - Sofas</title>
 
     <%- include ('../../partials/header-links') %>
+
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../JS/image-script.js" defer></script>
 
 
         <%if(session.userType==="customer" ){%>
@@ -144,144 +146,143 @@
                             <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
                                 <p id="target"></p>
                                 <div class="card" style="width: 100%;">
-
-                                    <div class="product-img-div px-4 pt-4">
-                                        <%if(result.manager_img){%>
-                                            <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
-                                            <%}else{%>
-                                                <img src="../../sofa.jpg" class="card-img-top" alt="">
-                                                <%}%>
-                                    </div>
-
-                                    <div class="col-11 card-body">
-                                        <div class="info-structure">
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Name : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.sofa_name%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Color : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.color%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-1 py-2">Dimensions : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    Length : <%=result.dimensions.length%>
-                                                        <br>
-                                                        Height : <%=result.dimensions.height%>
-                                                            <br>
-                                                            Width : <%=result.dimensions.width%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Availability : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.availability%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Price : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.price%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Material : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.material%>
-                                                </p>
-                                            </div>
-
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Seaters : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.seaters%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Warrenty : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.warrenty%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Discount : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.discount%>
-                                                </p>
-                                            </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Filler Type : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.filler_type%>
-                                                </p>
-                                            </div>
+                                        <div class="product-img-div px-4 pt-4">
+                                            <%if(result.img_link){%>
+                                                <img src="<%= result.img_link%>" class="card-img-top" alt="...">
+                                                <%}else{%>
+                                                    <img src="../../sofa.jpg" class="card-img-top" alt="">
+                                                    <%}%>
                                         </div>
-                                        <% if(session.userType==="customer" ){%>
 
-                                            <!-- script -->
-                                            <script>
-                                                $(document).ready(() => {
-                                                    getFavourites.then((favouriteMap) => {
-                                                        let pid = "<%=result._id%>";
-                                                        let lid = favouriteMap.get(pid);
-
-                                                        if (lid) {
-
-                                                            let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
-                                                            $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
-                                                        }
-                                                        else {
-                                                            let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
-                                                            $(`#fav-btn-div-${pid}`).html(add_fav_btn);
-                                                        }
-                                                    });
-
-                                                    getCarts.then((cartMap) => {
-                                                        let pid = "<%=result._id%>";
-                                                        let cartid = cartMap.get(pid);
-
-                                                        if (cartid) {
-                                                            let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
-                                                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
-                                                        }
-                                                        else {
-                                                            let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')">Add Cart</button>`;
-                                                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                            <!-- script -->
-
-                                            <div class="mt-4 btn-div d-flex justify-content-between"
-                                                id="fav-btn-div-<%=result._id%>">
-                                            </div>
-
-                                            <div class="mt-4 btn-div d-flex justify-content-between"
-                                                id="cart-btn-div-<%=result._id%>">
-                                            </div>
-
-                                            <%}else if(session.userType==="admin" ){%>
-                                                <div class="mt-4 btn-div d-flex justify-content-between">
-                                                    <a href="/product/sofa/edit/<%=result._id%>">
-                                                        <button class="btn mx-2 btn-type-2">
-                                                            Edit <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </a>
-                                                    <a href="/product/sofa/delete/<%=result._id%>">
-                                                        <button class="btn mx-2 btn-type-2">
-                                                            Delete <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </a>
+                                        <div class="col-11 card-body">
+                                            <div class="info-structure">
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Name : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.sofa_name%>
+                                                    </p>
                                                 </div>
-                                                <%}%>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Color : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.color%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-1 py-2">Dimensions : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        Length : <%=result.dimensions.length%>
+                                                            <br>
+                                                            Height : <%=result.dimensions.height%>
+                                                                <br>
+                                                                Width : <%=result.dimensions.width%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Availability : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.availability%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Price : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.price%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Material : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.material%>
+                                                    </p>
+                                                </div>
 
-                                    </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Seaters : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.seaters%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Warrenty : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.warrenty%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Discount : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.discount%>
+                                                    </p>
+                                                </div>
+                                                <div class="info-div my-2">
+                                                    <p class="key-para px-2 py-2">Filler Type : </p>
+                                                    <p class="value-para px-2 py-2">
+                                                        <%=result.filler_type%>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <% if(session.userType==="customer" ){%>
+
+                                                <!-- script -->
+                                                <script>
+                                                    $(document).ready(() => {
+                                                        getFavourites.then((favouriteMap) => {
+                                                            let pid = "<%=result._id%>";
+                                                            let lid = favouriteMap.get(pid);
+
+                                                            if (lid) {
+
+                                                                let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
+                                                                $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                                                            }
+                                                            else {
+                                                                let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
+                                                                $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+                                                            }
+                                                        });
+
+                                                        getCarts.then((cartMap) => {
+                                                            let pid = "<%=result._id%>";
+                                                            let cartid = cartMap.get(pid);
+
+                                                            if (cartid) {
+                                                                let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                                                                $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                            }
+                                                            else {
+                                                                let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')">Add Cart</button>`;
+                                                                $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                                <!-- script -->
+
+                                                <div class="mt-4 btn-div d-flex justify-content-between"
+                                                    id="fav-btn-div-<%=result._id%>">
+                                                </div>
+
+                                                <div class="mt-4 btn-div d-flex justify-content-between"
+                                                    id="cart-btn-div-<%=result._id%>">
+                                                </div>
+
+                                                <%}else if(session.userType==="admin" ){%>
+                                                    <div class="mt-4 btn-div d-flex justify-content-between">
+                                                        <a href="/product/sofa/edit/<%=result._id%>">
+                                                            <button class="btn mx-2 btn-type-2">
+                                                                Edit <i class="fa-solid fa-pen-to-square"></i>
+                                                            </button>
+                                                        </a>
+                                                        <a href="/product/sofa/delete/<%=result._id%>">
+                                                            <button class="btn mx-2 btn-type-2">
+                                                                Delete <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                    <%}%>
+
+                                        </div>
                                 </div>
                             </div>
                             <%})%>
@@ -319,7 +320,10 @@
                     </div>
 
                     <div class="col-12">
-                        <input type="file" class="form-control" id="add_img_link" name="add_img_link">
+                        <!-- <input type="file" class="form-control" id="image" name="image"> -->
+                        <input class="form-control" type="file" id="image_file" name="image_file"
+                            accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                        <input type="text" name="image" id="image" hidden>
                     </div>
 
                     <div class="col-12">

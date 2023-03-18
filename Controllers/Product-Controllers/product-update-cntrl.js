@@ -76,7 +76,7 @@ module.exports = {
 
             updated_data = {
                 bed_name: req.body.update_bed_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -113,7 +113,7 @@ module.exports = {
 
             updated_data = {
                 chair_name: req.body.update_chair_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -149,7 +149,7 @@ module.exports = {
 
             updated_data = {
                 jula_name: req.body.update_jula_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 color: req.body.update_color,
                 dimensions: {
                     length: req.body.update_length,
@@ -183,7 +183,7 @@ module.exports = {
 
             updated_data = {
                 mattresses_name: req.body.update_mattresses_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 color: req.body.update_color,
                 dimensions: {
                     length: req.body.update_length,
@@ -217,7 +217,7 @@ module.exports = {
 
             updated_data = {
                 shoerack_name: req.body.update_shoerack_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -250,7 +250,7 @@ module.exports = {
 
             updated_data = {
                 showcase_name: req.body.update_showcase_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -282,7 +282,7 @@ module.exports = {
 
             updated_data = {
                 sofa_name: req.body.update_sofa_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 color: req.body.update_color,
                 dimensions: {
                     length: req.body.update_length,
@@ -318,7 +318,7 @@ module.exports = {
 
             updated_data = {
                 table_name: req.body.update_sofa_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -353,7 +353,7 @@ module.exports = {
 
             updated_data = {
                 tempale_name: req.body.update_tempale_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -385,7 +385,7 @@ module.exports = {
 
             updated_data = {
                 tvunit_name: req.body.update_tvunit_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
@@ -418,7 +418,7 @@ module.exports = {
 
             updated_data = {
                 wardrobe_name: req.body.update_wardrobe_name,
-                img_link: req.body.update_img_link,
+                img_link: req.body.image,
                 color: req.body.update_color,
                 dimensions: {
                     length: req.body.update_length,

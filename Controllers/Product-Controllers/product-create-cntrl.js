@@ -20,7 +20,7 @@ module.exports = {
 
             await BedCollection.insertMany([{
                 bed_name: req.body.add_bed_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -51,7 +51,7 @@ module.exports = {
 
             await ChairCollection.insertMany([{
                 chair_name: req.body.add_chair_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -80,7 +80,7 @@ module.exports = {
 
             await JulaCollection.insertMany([{
                 jula_name: req.body.add_jula_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 color: req.body.add_color,
                 dimensions: {
                     length: req.body.add_length,
@@ -108,7 +108,7 @@ module.exports = {
 
             await MattressesCollection.insertMany([{
                 mattresses_name: req.body.add_mattresses_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 color: req.body.add_color,
                 dimensions: {
                     length: req.body.add_length,
@@ -135,7 +135,7 @@ module.exports = {
 
             await ShoerackCollection.insertMany([{
                 shoerack_name: req.body.add_shoerack_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -161,7 +161,7 @@ module.exports = {
 
             await ShowcaseCollection.insertMany([{
                 showcase_name: req.body.add_showcase_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -187,7 +187,7 @@ module.exports = {
 
             await SofaCollection.insertMany([{
                 sofa_name: req.body.add_sofa_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 color: req.body.add_color,
                 dimensions: {
                     length: req.body.add_length,
@@ -218,7 +218,7 @@ module.exports = {
 
             await TableCollection.insertMany([{
                 table_name: req.body.add_table_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -248,7 +248,7 @@ module.exports = {
 
             await TempaleCollection.insertMany([{
                 tempale_name: req.body.add_tempale_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -274,7 +274,7 @@ module.exports = {
 
             await TvUnitCollection.insertMany([{
                 tvunit_name: req.body.add_tvunit_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 dimensions: {
                     length: req.body.add_length,
                     width: req.body.add_width,
@@ -301,7 +301,7 @@ module.exports = {
 
             await WardrobeCollection.insertMany([{
                 wardrobe_name: req.body.add_wardrobe_name,
-                img_link: req.body.add_img_link,
+                img_link: req.body.image,
                 color: req.body.add_color,
                 dimensions: {
                     length: req.body.add_length,
