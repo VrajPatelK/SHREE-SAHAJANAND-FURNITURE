@@ -7,8 +7,8 @@
     <title>SSF - Wardrobes</title>
 
     <%- include ('../../partials/header-links') %>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../JS/image-script.js" defer></script>
 
 
         <%if(session.userType==="customer" ){%>
@@ -124,155 +124,157 @@
                 <hr>
             </h4>
         </div>
-        <div class="container plus-btn-div">
-            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addTvUnitModal">
-                <i class="fa-solid fa-plus"></i> Add Wardrobes
-            </button>
-        </div>
+        <%if(session.userType==="admin" ){%>
+            <div class="container plus-btn-div">
+                <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addTvUnitModal">
+                    <i class="fa-solid fa-plus"></i> Add Wardrobes
+                </button>
+            </div>
+            <%}%>
 
-        <div class="container row mx-auto px-0 py-3 card-parent-div">
+                <div class="container row mx-auto px-0 py-3 card-parent-div">
 
-            <%if(results.length>0){%>
-                <% results.forEach(result=> { %>
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
-                        <div class="card" style="width: 100%;">
+                    <%if(results.length>0){%>
+                        <% results.forEach(result=> { %>
+                            <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
+                                <div class="card" style="width: 100%;">
 
-                            <div class="product-img-div px-4 pt-4">
-                                <%if(result.manager_img){%>
-                                    <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
-                                    <%}else{%>
-                                        <img src="../../wardrobe.jpg" class="card-img-top" alt="">
-                                        <%}%>
-                            </div>
-
-                            <div class="col-11 card-body">
-                                <div class="info-structure">
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Name : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.wardrobe_name%>
-                                        </p>
+                                    <div class="product-img-div px-4 pt-4">
+                                        <%if(result.img_link){%>
+                                            <img src="<%=result.img_link%>" class="card-img-top" alt="...">
+                                            <%}else{%>
+                                                <img src="../../wardrobe.jpg" class="card-img-top" alt="">
+                                                <%}%>
                                     </div>
 
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Color : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.color%>
-                                        </p>
-                                    </div>
+                                    <div class="col-11 card-body">
+                                        <div class="info-structure">
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">Name : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.wardrobe_name%>
+                                                </p>
+                                            </div>
 
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-1 py-2">Dimensions : </p>
-                                        <p class="value-para px-2 py-2">
-                                            Length : <%=result.dimensions.length%>
-                                                <br>
-                                                Height : <%=result.dimensions.height%>
-                                                    <br>
-                                                    Width : <%=result.dimensions.width%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Availability : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.availability%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">#Drawers : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.no_of_drawers%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">#Cupboards : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.no_of_cupboards%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Price : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.price%>
-                                        </p>
-                                    </div>
-                                    <div class="info-div my-2">
-                                        <p class="key-para px-2 py-2">Discount : </p>
-                                        <p class="value-para px-2 py-2">
-                                            <%=result.discount%>
-                                        </p>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">Color : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.color%>
+                                                </p>
+                                            </div>
+
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-1 py-2">Dimensions : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    Length : <%=result.dimensions.length%>
+                                                        <br>
+                                                        Height : <%=result.dimensions.height%>
+                                                            <br>
+                                                            Width : <%=result.dimensions.width%>
+                                                </p>
+                                            </div>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">Availability : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.availability%>
+                                                </p>
+                                            </div>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">#Drawers : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.no_of_drawers%>
+                                                </p>
+                                            </div>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">#Cupboards : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.no_of_cupboards%>
+                                                </p>
+                                            </div>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">Price : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.price%>
+                                                </p>
+                                            </div>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">Discount : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.discount%>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <% if(session.userType==="customer" ){%>
+
+                                            <!-- script -->
+                                            <script>
+                                                $(document).ready(() => {
+                                                    getFavourites.then((favouriteMap) => {
+                                                        let pid = "<%=result._id%>";
+                                                        let lid = favouriteMap.get(pid);
+
+                                                        if (lid) {
+
+                                                            let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
+                                                            $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                                                        }
+                                                        else {
+                                                            let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
+                                                            $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+                                                        }
+                                                    });
+
+                                                    getCarts.then((cartMap) => {
+                                                        let pid = "<%=result._id%>";
+                                                        let cartid = cartMap.get(pid);
+
+                                                        if (cartid) {
+                                                            let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
+                                                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                        }
+                                                        else {
+                                                            let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')">Add Cart</button>`;
+                                                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                            <!-- script -->
+
+                                            <div class="mt-4 btn-div d-flex justify-content-between"
+                                                id="fav-btn-div-<%=result._id%>">
+                                            </div>
+
+                                            <div class="mt-4 btn-div d-flex justify-content-between"
+                                                id="cart-btn-div-<%=result._id%>">
+                                            </div>
+
+                                            <%}else if(session.userType==="admin" ){%>
+                                                <div class="mt-4 btn-div">
+                                                    <a href="/product/wardrobe/edit/<%=result._id%>">
+                                                        <button class="btn mx-2 btn-type-2">
+                                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="/product/wardrobe/delete/<%=result._id%>">
+                                                        <button class="btn mx-2 btn-type-2">
+                                                            Delete <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                <%}%>
+
                                     </div>
                                 </div>
-
-                                <% if(session.userType==="customer" ){%>
-
-                                    <!-- script -->
-                                    <script>
-                                        $(document).ready(() => {
-                                            getFavourites.then((favouriteMap) => {
-                                                let pid = "<%=result._id%>";
-                                                let lid = favouriteMap.get(pid);
-
-                                                if (lid) {
-
-                                                    let rmv_fav_btn = `<button class="btn mx-2" id="rmv-to-fav-<%=result._id%>" onclick="rmvFav('${lid}','${pid}')">Rmv Fav</button>`;
-                                                    $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
-                                                }
-                                                else {
-                                                    let add_fav_btn = `<button class="btn mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')">Add Fav</button>`;
-                                                    $(`#fav-btn-div-${pid}`).html(add_fav_btn);
-                                                }
-                                            });
-
-                                            getCarts.then((cartMap) => {
-                                                let pid = "<%=result._id%>";
-                                                let cartid = cartMap.get(pid);
-
-                                                if (cartid) {
-                                                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')">Add More Time</button>`;
-                                                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
-                                                }
-                                                else {
-                                                    let add_cart_btn = `<button class="btn mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')">Add Cart</button>`;
-                                                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                    <!-- script -->
-
-                                    <div class="mt-4 btn-div d-flex justify-content-between"
-                                        id="fav-btn-div-<%=result._id%>">
-                                    </div>
-
-                                    <div class="mt-4 btn-div d-flex justify-content-between"
-                                        id="cart-btn-div-<%=result._id%>">
-                                    </div>
-
-                                    <%}else if(session.userType==="admin" ){%>
-                                        <div class="mt-4 btn-div">
-                                            <a href="/product/wardrobe/edit/<%=result._id%>">
-                                                <button class="btn mx-2 btn-type-2">
-                                                    Edit <i class="fa-solid fa-pen-to-square"></i>
-                                                </button>
-                                            </a>
-                                            <a href="/product/wardrobe/delete/<%=result._id%>">
-                                                <button class="btn mx-2 btn-type-2">
-                                                    Delete <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </a>
-                                        </div>
-                                        <%}%>
-
                             </div>
-                        </div>
-                    </div>
-                    <%})%>
-                        <%}%>
-        </div>
+                            <%})%>
+                                <%}%>
+                </div>
 
 
-        <!-- footer -->
-        <%- include('../../partials/footer')%>
+                <!-- footer -->
+                <%- include('../../partials/footer')%>
 
 </body>
 
@@ -298,7 +300,9 @@
                             placeholder="Name" required>
                     </div>
                     <div class="col-12">
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input class="form-control" type="file" id="image_file" name="image_file"
+                            accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                        <input type="text" name="image" id="image" hidden>
                     </div>
 
                     <div class="col-12">

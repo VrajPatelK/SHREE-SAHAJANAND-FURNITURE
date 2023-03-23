@@ -7,113 +7,8 @@
     <title>SSF - CHAIRS</title>
 
     <%- include ('../../partials/header-links') %>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-        <style>
-            .plus-btn-div {
-                display: flex;
-                justify-content: right;
-                align-items: center;
-            }
-
-            /* .card-parent-div {
-            border: 2px solid red;
-        } */
-
-            .card {
-                /* border: 2px solid blue; */
-                background: rgb(255 100 39);
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                border-radius: .5rem;
-                box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-            }
-
-            .product-img-div img {
-                border: 3px solid #fff;
-                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            }
-
-            .info-div {
-                border: 2px solid #fff;
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                background: #fff;
-                border-radius: 0.5rem;
-                box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
-            }
-
-            .info-div p {
-                /* border: 2px solid yellow; */
-                margin: 0px;
-                color: rgb(186, 50, 1);
-            }
-
-            .info-div .key-para {
-                border-radius: .5rem;
-                text-align: left;
-                width: 40%;
-            }
-
-            .info-div .value-para {
-                border-radius: .5rem;
-                text-align: left;
-                width: 60%;
-            }
-
-            /* .card-div {
-            border: 2px solid blue;
-        } */
-
-            .btn-div a {
-                text-decoration: none;
-            }
-
-            .btn-type-1,
-            .btn-type-1 {
-                color: #fff;
-                border: none;
-                background: orangered;
-                border-radius: 0.5rem;
-                border-radius: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-                box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
-            }
-
-            .btn-type-1:hover,
-            .btn-type-1:hover {
-                color: orangered;
-                background: rgb(255, 231, 222);
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
-            }
-
-            .btn-type-2,
-            .btn-type-2,
-            .btn-type-2,
-            .btn-type-2 {
-                background: #fff;
-                color: orangered;
-                border-radius: 0.5rem;
-                border-radius: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-                box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-            }
-
-            .btn-type-2:hover,
-            .btn-type-2:hover,
-            .btn-type-2:hover,
-            .btn-type-2:hover {
-                background: rgb(255, 231, 222);
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
-
-            }
-        </style>
-
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../JS/image-script.js" defer></script>
 
         <%if(session.userType==="customer" ){%>
             <script>
@@ -244,8 +139,8 @@
                                 <div class="card" style="width: 100%;">
 
                                     <div class="product-img-div px-4 pt-4">
-                                        <%if(result.chair_img){%>
-                                            <img src="<%= result.chair_img%>" class="card-img-top" alt="...">
+                                        <%if(result.img_link){%>
+                                            <img src="<%= result.img_link%>" class="card-img-top" alt="...">
                                             <%}else{%>
                                                 <img src="../../chair.jpg" class="card-img-top" alt="">
                                                 <%}%>
@@ -413,7 +308,9 @@
                             placeholder="Name" required>
                     </div>
                     <div class="col-12">
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input class="form-control" type="file" id="image_file" name="image_file"
+                            accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                        <input type="text" name="image" id="image" hidden>
                     </div>
 
                     <div class="col-12">

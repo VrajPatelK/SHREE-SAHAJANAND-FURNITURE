@@ -7,8 +7,8 @@
     <title>SSF - Beds</title>
 
     <%- include ('../../partials/header-links') %>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../JS/image-script.js" defer></script>
 
 
         <%if(session.userType==="customer" ){%>
@@ -140,8 +140,8 @@
                                 <div class="card" style="width: 100%;">
 
                                     <div class="product-img-div px-4 pt-4">
-                                        <%if(result.manager_img){%>
-                                            <img src="<%= result.manager_img%>" class="card-img-top" alt="...">
+                                        <%if(result.img_link){%>
+                                            <img src="<%= result.img_link%>" class="card-img-top" alt="...">
                                             <%}else{%>
                                                 <img src="../../bed.jpg" class="card-img-top" alt="">
                                                 <%}%>
@@ -311,7 +311,9 @@
                             required>
                     </div>
                     <div class="col-12">
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input class="form-control" type="file" id="image_file" name="image_file"
+                            accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                        <input type="text" name="image" id="image" hidden>
                     </div>
 
                     <div class="col-12">
