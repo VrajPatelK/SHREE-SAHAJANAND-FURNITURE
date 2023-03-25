@@ -150,10 +150,11 @@
                                 <div class="card" style="width: 100%;">
 
                                     <div class="product-img-div px-4 pt-4">
-                                        <%if(result.img_link){%>
-                                            <img src="<%= result.img_link%>" class="card-img-top" alt="...">
+                                        <%if(result.image){%>
+                                            <img src="<%= result.image%>" class="card-img-top" alt="...">
                                             <%}else{%>
-                                                <img src="../../jula.jpg" class="card-img-top" alt="">
+                                                <img src="../../../Images/other-images/no-product.png"
+                                                    class="card-img-top" alt="">
                                                 <%}%>
 
                                     </div>
@@ -164,7 +165,13 @@
                                             <div class="info-div my-2">
                                                 <p class="key-para px-2 py-2">Name : </p>
                                                 <p class="value-para px-2 py-2">
-                                                    <%=result.jula_name%>
+                                                    <%=result.name%>
+                                                </p>
+                                            </div>
+                                            <div class="info-div my-2">
+                                                <p class="key-para px-2 py-2">Description : </p>
+                                                <p class="value-para px-2 py-2">
+                                                    <%=result.description%>
                                                 </p>
                                             </div>
                                             <div class="info-div my-2">
@@ -276,8 +283,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <%})%>
-                                <%}%>
+                            <%});%>
+                                <%}else{%>
+                                    <p class="py-2"
+                                        style="color: orangered; text-align: center; background: rgb(255, 187, 162);">
+                                        You
+                                        have not add any item yet.</p>
+                                    <%}%>
                 </div>
 
 
@@ -304,14 +316,19 @@
                 <form method="post" class="row g-3">
 
                     <div class="col-12">
-                        <input type="text" class="form-control" id="add_jula_name" name="add_jula_name"
-                            placeholder="Name" required>
+                        <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                            required>
                     </div>
 
                     <div class="col-12">
                         <input class="form-control" type="file" id="image_file" name="image_file"
                             accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
                         <input type="text" name="image" id="image" hidden>
+                    </div>
+
+                    <div class="col-12">
+                        <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                            required="required" placeholder="Description"></textarea>
                     </div>
 
                     <div class="col-12">

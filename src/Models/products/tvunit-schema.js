@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
 const TvUnitsSchema = new mongoose.Schema({
-    tvunit_name: {
+    name: {
         type: String,
         require: true
     },
-    img_link: {
+    description: {
         type: String,
-        require: true
+        default: ""
+    },
+    image: {
+        type: String,
+        default: ""
     },
     dimensions: {
         length: {

@@ -3,13 +3,15 @@ const mongoose = require('mongoose');
 
 const SofaSchema = new mongoose.Schema({
 
-    sofa_name: {
+    name: {
         type: String,
         require: true
     },
-    img_link: {
+    description: {
         type: String,
-        require: true,
+    },
+    image: {
+        type: String,
         default: ""
     },
     color: {

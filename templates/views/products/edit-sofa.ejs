@@ -35,7 +35,7 @@
                     <ul class="list-group profile-info-grp">
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Name : </p>
-                            <input type="text" class="col-8 p-2" name="update_sofa_name" value="<%=result.sofa_name%>">
+                            <input type="text" class="col-8 p-2" name="update_name" value="<%=result.name%>">
                         </li>
 
                         <li class="list-group-item my-1">
@@ -43,6 +43,11 @@
                             <input class="form-control col-8 p-2" type="file" id="image_file" name="image_file"
                                 accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
                             <input type="text" name="image" id="image" hidden>
+                        </li>
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Description : </p>
+                            <textarea id="update_description" name="update_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"><%=result.description%></textarea>
                         </li>
                         <li class="list-group-item my-1">
                             <p class="col-4 key-para">Remove Image</p>

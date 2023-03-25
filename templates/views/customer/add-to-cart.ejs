@@ -54,7 +54,7 @@
                                     all_carts +=
                                         `<tr>
                                         <th scope="row">${indx + 1}</th>
-                                        <td>${cartItem.product.sofa_name}</td>
+                                        <td>${cartItem.product.name}</td>
                                         <td>${new Date()}</td>
                                         <td><select name="quantity" id="quantity-${cartItem._id}" onchange="updateCart('${cartItem._id}')">${optionsArr[indx]}</select></td>
                                         <td>${cart_total - cart_discount}</td>

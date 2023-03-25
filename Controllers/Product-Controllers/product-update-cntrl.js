@@ -69,19 +69,20 @@ module.exports = {
 
     updateBedPost: async (req, res) => {
         try {
-
+            console.log(req.body.image);
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
             const storage = (req.body.update_storage === "on") ? true : false;
 
             updated_data = {
-                bed_name: req.body.update_bed_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 warrenty: req.body.update_warrenty,
@@ -90,6 +91,9 @@ module.exports = {
                 storage: storage,
                 capacity: req.body.update_capacity
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await BedCollection.updateOne(
                 { _id: req.params.pid },
@@ -112,13 +116,14 @@ module.exports = {
             const hasWheels = (req.body.update_hasWheels === "on") ? true : false;
 
             updated_data = {
-                chair_name: req.body.update_chair_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 material: req.body.update_material,
@@ -127,6 +132,9 @@ module.exports = {
                 backrest_type: backrest_type,
                 hasWheels: hasWheels
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await ChairCollection.updateOne(
                 { _id: req.params.pid },
@@ -142,26 +150,29 @@ module.exports = {
 
     updateJulaPost: async (req, res) => {
         try {
-            console.log(req.body);
 
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                jula_name: req.body.update_jula_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
                 color: req.body.update_color,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 discount: req.body.update_discount,
                 seaters: req.body.update_seaters,
                 max_load: req.body.update_max_load
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await JulaCollection.updateOne(
                 { _id: req.params.pid },
@@ -182,19 +193,23 @@ module.exports = {
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                mattresses_name: req.body.update_mattresses_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
                 color: req.body.update_color,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 material: req.body.update_material,
                 discount: req.body.update_discount
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await MattressesCollection.updateOne(
                 { _id: req.params.pid },
@@ -210,24 +225,27 @@ module.exports = {
 
     updateShoerackPost: async (req, res) => {
         try {
-            console.log(req.body);
 
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                shoerack_name: req.body.update_shoerack_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 discount: req.body.update_discount,
                 no_of_shelves: req.body.update_no_of_shelves
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await ShoerackCollection.updateOne(
                 { _id: req.params.pid },
@@ -243,24 +261,27 @@ module.exports = {
 
     updateShowcasePost: async (req, res) => {
         try {
-            console.log(req.body);
 
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                showcase_name: req.body.update_showcase_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 discount: req.body.update_discount,
                 no_of_cupboards: req.body.update_no_of_cupboards
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await ShowcaseCollection.updateOne(
                 { _id: req.params.pid },
@@ -281,14 +302,15 @@ module.exports = {
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                sofa_name: req.body.update_sofa_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
                 color: req.body.update_color,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 material: req.body.update_material,
@@ -296,6 +318,9 @@ module.exports = {
                 warrenty: req.body.update_warrenty,
                 discount: req.body.update_discount
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await SofaCollection.updateOne(
                 { _id: req.params.pid },
@@ -317,13 +342,14 @@ module.exports = {
             const storage = (req.body.update_storage === "on") ? true : false;
 
             updated_data = {
-                table_name: req.body.update_sofa_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 material: req.body.update_material,
@@ -332,6 +358,9 @@ module.exports = {
                 max_load: req.body.update_max_load,
                 storage: storage
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await TableCollection.updateOne(
                 { _id: req.params.pid },
@@ -352,18 +381,22 @@ module.exports = {
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                tempale_name: req.body.update_tempale_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 discount: req.body.update_discount,
                 no_of_drawers: req.body.update_no_of_drawers
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await TempaleCollection.updateOne(
                 { _id: req.params.pid },
@@ -384,19 +417,23 @@ module.exports = {
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                tvunit_name: req.body.update_tvunit_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 warrenty: req.body.update_warrenty,
                 discount: req.body.update_discount,
                 no_of_drawers: req.body.update_no_of_drawers
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await TvUnitCollection.updateOne(
                 { _id: req.params.pid },
@@ -417,20 +454,24 @@ module.exports = {
             const availability = (req.body.update_availability === "on") ? true : false;
 
             updated_data = {
-                wardrobe_name: req.body.update_wardrobe_name,
-                img_link: req.body.image,
+                name: req.body.update_name,
                 color: req.body.update_color,
+                description: req.body.update_description,
                 dimensions: {
                     length: req.body.update_length,
                     width: req.body.update_width,
                     height: req.body.update_height
                 },
+
                 availability: availability,
                 price: req.body.update_price,
                 discount: req.body.update_discount,
                 no_of_drawers: req.body.update_no_of_drawers,
                 no_of_cupboards: req.body.update_no_of_cupboards
             };
+
+            if (req.body.image) updated_data.image = req.body.image;
+            else if (req.body.rmvImage === "on") updated_data.image = "";
 
             await WardrobeCollection.updateOne(
                 { _id: req.params.pid },

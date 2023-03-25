@@ -3,13 +3,17 @@ const mongoose = require('mongoose');
 
 const ShoerackSchema = new mongoose.Schema({
 
-    shoerack_name: {
+    name: {
         type: String,
         require: true
     },
-    img_link: {
+    description: {
         type: String,
-        require: true
+        default: ""
+    },
+    image: {
+        type: String,
+        default: ""
     },
     dimensions: {
         length: {

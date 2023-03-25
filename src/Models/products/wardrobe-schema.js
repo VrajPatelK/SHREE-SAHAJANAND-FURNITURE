@@ -2,13 +2,17 @@ const mongoose = require('mongoose');
 
 const WardrobeSchema = new mongoose.Schema({
 
-    wardrobe_name: {
+    name: {
         type: String,
         require: true
     },
-    img_link: {
+    description: {
         type: String,
-        require: true
+        default: ""
+    },
+    image: {
+        type: String,
+        default: ""
     },
     color: {
         type: Array,

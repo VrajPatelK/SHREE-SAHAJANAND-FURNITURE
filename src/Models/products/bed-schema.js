@@ -2,17 +2,21 @@ const mongoose = require('mongoose');
 
 const BedSchema = new mongoose.Schema({
 
-    bed_name: {
+    name: {
         type: String,
         require: true
+    },
+    description: {
+        type: String,
+        default: ""
     },
     brand: {
         type: String,
         default: "Wood-Tag" //don't take from admin
     },
-    img_link: {
+    image: {
         type: String,
-        require: true
+        default: ""
     },
     dimensions: {
         length: {

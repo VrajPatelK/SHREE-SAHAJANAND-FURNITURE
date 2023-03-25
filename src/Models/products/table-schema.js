@@ -2,13 +2,17 @@ const mongoose = require('mongoose');
 
 const TableSchema = new mongoose.Schema({
 
-    table_name: {
+    name: {
         type: String,
         require: true
     },
-    img_link: {
+    description: {
         type: String,
-        require: true
+        default: ""
+    },
+    image: {
+        type: String,
+        default: ""
     },
     dimensions: {
         length: {
