@@ -115,4 +115,37 @@ module.exports = {
             console.log(error);
         }
     },
+    logoutSystemUser: async (req, res) => {
+        try {
+            if (res.locals.session.userType === 'admin') {
+                let remains = req.admin.loginTokens.filter((currentToken) => {
+                    return currentToken.token !== req.token
+                });
+
+                req.admin.loginTokens = remains;
+                await req.admin.save();
+
+                res.clearCookie("loginAdmin");
+                res.locals.session = null;
+                return res.status(301).redirect("/sys-user/login");
+
+            }
+            else if (res.locals.session.userType === 'manager') {
+                let remains = req.manager.loginTokens.filter((currentToken) => {
+                    return currentToken.token !== req.token
+                });
+
+                req.manager.loginTokens = remains;
+                await req.manager.save();
+
+                res.clearCookie("loginManager");
+                res.locals.session = null;
+                return res.status(301).redirect("/sys-user/login");
+            }
+            // else if (res.locals.session.userType === 'accountant){}
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
 };

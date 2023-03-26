@@ -190,6 +190,7 @@ module.exports = {
             await req.customer.save();
 
             res.clearCookie("loginCustomer");
+            res.locals.session = null;
             return res.status(301).redirect("/customer-login");
 
         } catch (error) {
