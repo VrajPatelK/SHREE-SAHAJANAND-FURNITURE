@@ -52,7 +52,7 @@ body {
     align-items: center;
 }
 
-#search-bar {
+#search_bar {
     border: 1px solid orangered;
     border-bottom: 2px solid orangered;
     color: darkblue;
@@ -62,7 +62,7 @@ body {
     font-weight: 500;
 }
 
-#search-bar::placeholder {
+#search_bar::placeholder {
     color: rgba(255, 68, 0, 0.551);
 }
 
