@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Manage Imports</title>
+    <%- include ('../../partials/header-links') %>
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/manage-admin.css">
+</head>
+<!--  -->
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Imports
+                <hr>
+            </h4>
+        </div>
+        <div class="container plus-btn-div">
+            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addImportModal">
+                <i class="fa-solid fa-plus"></i> Add Imports
+            </button>
+        </div>
+
+
+        <!-- profile-card -->
+        <div class="container-fluid my-5 profile-card-grant-parent-div">
+
+            <div class="container px-sm-2 px-0 profile-card-parent-div">
+                <%if(results.length>0){%>
+                    <% results.forEach(result=> { %>
+
+                        <div class="row mx-auto profie-card-div py-5 mt-5">
+
+                            <div class="col-lg-10 col-12 px-3 py-3 profile-info-div">
+
+                                <ul class="list-group profile-info-grp">
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Manufacturer - Email</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.manufacturer.manufacturer_email%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Manufacturer - Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.manufacturer.manufacturer_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Manufacturer - Factory Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.manufacturer.manufacturer_factory_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Manufacturer - Address</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.manufacturer.manufacturer_factory_address%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Manufacturer - Mobile</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            +91&nbsp;<%= result.manufacturer.manufacturer_mobile%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Import Product Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.item_info.item_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Import Product Quantity</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.item_info.item_quantity%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Import Product Price (<i
+                                                class="fa-solid fa-indian-rupee-sign"></i>)</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.item_info.item_price%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">On Date & Time</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.date_and_time%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Total Bill (<i
+                                                class="fa-solid fa-indian-rupee-sign"></i>)</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.total_bill%>
+                                        </p>
+                                    </li>
+
+                                </ul>
+
+                                <div class="mt-4 profile-info-btn-div">
+                                    <a href="/admin/edit-import?op=edit&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/admin/delete-import?op=delete&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Delete <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <%});%>
+                            <%}else{%>
+                                <p class="py-2"
+                                    style="color: orangered; text-align: center; background: rgb(255, 187, 162);">You
+                                    have not add any import data yet.</p>
+                                <%}%>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <%- include('../../partials/footer')%>
+</body>
+
+</html>
+
+<!-- modal for add import data -->
+
+<div class="modal fade" id="addImportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addImportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addImportModalLabel">Add Import Data
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/imports" method="post" class="row g-3">
+
+                    <div class="col-12">
+                        <input type="email" class="form-control" id="key_manufacturer_email"
+                            name="key_manufacturer_email" placeholder="Manufacturer Email..." required>
+                    </div>
+                    <div class="col-12" style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="col-6 my-2">
+                            <select name="add_item_name" id="add_item_name" class="form-select" aria-label="example"
+                                required>
+                                <option value="Sofas">Sofas</option>
+                                <option value="Beds">Beds</option>
+                                <option value="Mattrases">Mattrases</option>
+                                <option value="Chairs">Chairs</option>
+                                <option value="Tables">Tables</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mx-2 my-2">
+                            <input type="number" min="1" class="form-control" id="add_item_quantity"
+                                name="add_item_quantity" placeholder="Item Quantity..." required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 my-2">
+                        <input type="number" min="1" class="form-control" id="add_item_price" name="add_item_price"
+                            placeholder="Item Price..." required>
+                    </div>
+
+                    <div class="col-12 modal-footer">
+                        <button type="submit" id="myform" class="btn btn-type-2">
+                            <i class="fa-solid fa-plus"></i> Add
+                        </button>
+                        <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

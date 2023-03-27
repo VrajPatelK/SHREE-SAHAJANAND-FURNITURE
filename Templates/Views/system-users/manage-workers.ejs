@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Manage Workers</title>
+    <%- include ('../../partials/header-links') %>
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/manage-admin.css">
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Workers
+                <hr>
+            </h4>
+        </div>
+        <div class="container plus-btn-div">
+            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addWorkerModal">
+                <i class="fa-solid fa-plus"></i> Add Worker
+            </button>
+        </div>
+
+
+        <!-- profile-card -->
+        <div class="container-fluid my-5 profile-card-grant-parent-div">
+
+            <div class="container px-sm-2 px-0 profile-card-parent-div">
+                <%if(results.length>0){%>
+                    <% results.forEach(result=> { %>
+
+                        <div class="row mx-auto profie-card-div py-5 mt-5">
+
+                            <div class="col-lg-4 col-12 px-2 py-2 my-sm-0 mb-3 card profile-img-div"
+                                style="width: 15rem;">
+                                <%if(result.worker_img){%>
+                                    <img src="<%= result.worker_img%>" class="card-img-top" alt="...">
+                                    <%}else{%>
+                                        <img src="../Images/temporary/profile-pic.jpg" class="card-img-top" alt="...">
+                                        <!--<img src="<%= result.worker_img%>" class="card-img-top" alt="...">
+                                    -->
+                                        <%}%>
+                            </div>
+
+                            <div class="col-lg-8 col-12 px-3 py-3 profile-info-div">
+
+                                <ul class="list-group profile-info-grp">
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Worker - Email</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.worker_email%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Worker - Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.worker_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Worker - Mobile</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.worker_mobile%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Worker - Address</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.worker_address%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Worker - Study</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.worker_study%>
+                                        </p>
+                                    </li>
+
+                                </ul>
+
+                                <div class="mt-4 profile-info-btn-div">
+                                    <a href="/admin/edit-worker?op=edit&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/admin/delete-worker?op=delete&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Delete <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <%});%>
+                            <%}else{%>
+                                <p class="py-2"
+                                    style="color: orangered; text-align: center; background: rgb(255, 187, 162);">You
+                                    have not add any worker yet.</p>
+                                <%}%>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <%- include('../../partials/footer')%>
+</body>
+
+</html>
+
+
+<!-- modal for add worker -->
+
+<div class="modal fade" id="addWorkerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addWorkerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWorkerModalLabel">Add Worker
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/workers" method="post" class="row g-3">
+
+                    <div class="col-12">
+                        <input type="email" class="form-control" id="add_worker_email" name="add_worker_email"
+                            placeholder="Worker Email..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_worker_name" name="add_worker_name"
+                            placeholder="Worker Name..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="file" class="form-control" id="add_worker_img" name="add_worker_img">
+                    </div>
+                    <div class="col-12">
+                        <input type="tel" class="form-control" id="add_worker_mobile" name="add_worker_mobile"
+                            placeholder="Worker Mobile..." required>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <textarea type="text" class="form-control" id="add_worker_address" cols="30" rows="10"
+                            name="add_worker_address" placeholder="Worker Address..." required> </textarea>
+                        <label for="add_worker_address">Worker Address...</label>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_worker_study" name="add_worker_study"
+                            placeholder="Worker Study...">
+                    </div>
+
+                    <div class="col-12 modal-footer">
+                        <button type="submit" id="myform" class="btn btn-type-2">
+                            <i class="fa-solid fa-plus"></i> Add
+                        </button>
+                        <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

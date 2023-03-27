@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - MATTRESSES EDITED</title>
+    <%- include ('../../partials/header-links') %>
+
+        <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../../../JS/image-script.js" defer></script>
+
+
+</head>
+
+<body>
+    <div class="container edit-form-div">
+
+        <div class="col-12 py-3 mt-4 headingDiv">
+            <h3 class="headings">
+                Edit Mattresses <i class="fa-solid fa-pen-to-square"></i>
+                <hr>
+            </h3>
+        </div>
+
+        <a href="/product/mattresse">
+            <button class="btn mx-2 btn-type-2">
+                <i class="fa-solid fa-backward"></i> Back
+            </button>
+        </a>
+
+        <div class="profie-card-div py-3">
+            <form action="" class="col-sm-10 col-12 my-3" method="post">
+
+                <div class="col-12 px-3 py-3 profile-info-div">
+                    <ul class="list-group profile-info-grp">
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Name : </p>
+                            <input type="text" class="col-8 p-2" name="update_name" value="<%=result.name%>">
+                        </li>
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Img - Link : </p>
+                            <input class="form-control col-8 p-2" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </li>
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Description : </p>
+                            <textarea id="update_description" name="update_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"><%=result.description%></textarea>
+                        </li>
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Remove Image</p>
+                            <input type="checkbox" class="form-check-input-lg" name="rmvImage" id="rmvImage">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Color : </p>
+                            <input type="text" class="col-8 p-2" name="update_color" value="<%=result.color%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Dimensions : </p>
+                            <div class="col-8 d-flex flex-column justify-content-right align-item-center">
+                                <label for="update_length">Length :</label>
+                                <input type="text" class="col-6 py-2 text-center" id="update_length"
+                                    name="update_length" value="<%=result.dimensions.length%>">
+                                <hr>
+                                <label for="update_length">Height :</label>
+                                <input type="text" class="col-6 py-2 text-center" id="update_height"
+                                    name="update_height" value="<%=result.dimensions.height%>">
+                                <hr>
+                                <label for="update_length">Width :</label>
+                                <input type="text" class="col-6 py-2 text-center" id="update_width" name="update_width"
+                                    value="<%=result.dimensions.width%>">
+                            </div>
+                            <br>
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Price : </p>
+                            <input type="number" class="col-8 p-2" name="update_price" value="<%=result.price%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Material : </p>
+                            <input type="text" class="col-8 p-2" name="update_material" value="<%=result.material%>">
+                        </li>
+
+                        <li class="list-group-item my-1">
+                            <p class="col-4 key-para">Discount : </p>
+                            <input type="number" class="col-8 p-2" name="update_discount" value="<%=result.discount%>">
+                        </li>
+
+
+                        <li class="list-group-item my-1">
+                            <div class="col-12 d-flex justify-content-around align-items-center">
+                                <%if(result.availability){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="update_availability"
+                                            id="flexRadioDefault1" value="on" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1"
+                                            style="color: orangered !important;">
+                                            Available
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="update_availability"
+                                            id="flexRadioDefault2" value="off">
+                                        <label class="form-check-label" for="flexRadioDefault2"
+                                            style="color: orangered !important;">
+                                            Not Available
+                                        </label>
+                                    </div>
+                                    <%} else{%>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="update_availability"
+                                                id="flexRadioDefault1" value="on">
+                                            <label class="form-check-label" for="flexRadioDefault1"
+                                                style="color: orangered !important;">
+                                                Available
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="update_availability"
+                                                id="flexRadioDefault2" value="off" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2"
+                                                style="color: orangered !important;">
+                                                Not Available
+                                            </label>
+                                        </div>
+                                        <%}%>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <div class="mt-4 profile-info-btn-div">
+                        <button type="submit" class="btn mx-2 btn-type-2">
+                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

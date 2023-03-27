@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Manage Admins</title>
+    <%- include ('../../partials/header-links') %>
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/manage-admin.css">
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Admin
+                <hr>
+            </h4>
+        </div>
+
+        <!-- profile-card -->
+        <div class="container-fluid my-5 profile-card-grant-parent-div">
+
+            <div class="container px-sm-2 px-0 profile-card-parent-div">
+                <%if(results.length>0){%>
+                    <% results.forEach(result=> { %>
+
+                        <div class="row mx-auto profie-card-div py-5 mt-5">
+
+                            <div class="col-lg-4 col-12 px-2 py-2 my-sm-0 mb-3 card profile-img-div"
+                                style="width: 15rem;">
+                                <%if(result.admin_img){%>
+                                    <img src="<%= result.admin_img%>" class="card-img-top" alt="...">
+                                    <%}else{%>
+                                        <img src="../Images/temporary/profile-pic.jpg" class="card-img-top" alt="...">
+                                        <%}%>
+                            </div>
+
+                            <div class="col-lg-8 col-12 px-3 py-3 profile-info-div">
+
+                                <ul class="list-group profile-info-grp">
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Admin - Email</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.admin_email%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Admin - Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <% if (result.admin_name) {%>
+                                                <%= result.admin_name%>
+                                                    <%} else {%> <span class="text-muted">admin-name</span>
+                                                        <%}%>
+                                        </p>
+                                    </li>
+                                </ul>
+
+                                <div class="mt-4 profile-info-btn-div">
+                                    <a href="/admin/edit-admin?op=edit&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/admin/delete-admin?op=delete&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Delete <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <%});%>
+                            <%}else{%>
+                                <p class="py-2"
+                                    style="color: orangered; text-align: center; background: rgb(255, 187, 162);">You
+                                    have not add any admin yet.</p>
+                                <%}%>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../../partials/footer')%>
+</body>
+
+</html>

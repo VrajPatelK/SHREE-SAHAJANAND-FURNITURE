@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - HOME</title>
+    <%- include ('../Partials/header-links') %>
+
+        <link rel="stylesheet" href="../CSS/index.css">
+
+</head>
+
+<body>
+    <%- include('../Partials/navbar')%>
+
+        <!-- SLIDER -->
+        <div id="slider-div" class="container pt-4">
+            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="true">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner py-2">
+                    <div class="carousel-item">
+                        <img src="./Images/temporary/poster-1.jpg" class="d-block mx-auto" alt="...">
+                    </div>
+                    <div class="carousel-item active">
+                        <img src="./Images/temporary/poster-2.jpg" class="d-block mx-auto" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./Images/temporary/poster-3.jpg" class="d-block mx-auto" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                    <div class="col arrow-icon-div mx-2"><i class="fa-solid fa-arrow-left arrow"></i></div>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                    <div class="col arrow-icon-div mx-2"><i class="fa-solid fa-arrow-right arrow"></i></div>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- EXPLORE FURNITURE-->
+        <div id="explore-div" class="container-fluid my-5">
+            <div class="col-12 py-3 headingDiv">
+                <h1 class="headings">
+                    Explore Furnitures
+                    <hr>
+                </h1>
+            </div>
+            <div class="row mx-auto card-parent-div">
+
+                <% exploreImg.forEach(element=> { %>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 my-2 card-div">
+                        <div class="card index-card">
+                            <img src="<%=element%>" class="card-img-top" alt="...">
+                        </div>
+                    </div>
+                    <%});%>
+            </div>
+        </div>
+
+        <!-- TRENDING FURNITURE -->
+        <div id="trend-div" class="container-fluid my-5">
+            <div class="col-12 py-3 headingDiv">
+                <h1 class="headings">
+                    Trending Furnitures
+                    <hr>
+                </h1>
+            </div>
+            <div class="row mx-auto card-parent-div">
+
+                <% trendingImg.forEach(element=> { %>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 my-2 card-div">
+                        <div class="card index-card">
+                            <img src="<%=element%>" class="card-img-top" alt="...">
+                        </div>
+                    </div>
+                    <%});%>
+            </div>
+        </div>
+
+        <!-- BEST SELLER FURNITURE -->
+        <div id="trend-div" class="container-fluid my-5">
+            <div class="col-12 py-3 headingDiv">
+                <h1 class="headings">
+                    Best Seller Furnitures
+                    <hr>
+                </h1>
+            </div>
+            <div class="row mx-auto card-parent-div">
+
+                <% sellerImg.forEach(element=> { %>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 my-2 card-div">
+                        <div class="card index-card">
+                            <img src="<%=element%>" class="card-img-top" alt="...">
+                        </div>
+                    </div>
+                    <%});%>
+            </div>
+        </div>
+        <!-- BIG DISCOUNT FURNITURE id="discount" -->
+
+        <!-- REVIEW -->
+        <div id="review-div" class="container-fluid">
+            <div class="col-12 py-3 headingDiv">
+                <h1 class="headings">
+                    Customer Reviews
+                    <hr>
+                </h1>
+            </div>
+            <div class="row reviews-card-parent-div">
+
+                <% reviewImg.forEach(element=> { %>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 my-2 reviews-card-div">
+                        <div class="card col-10 review-card p-3">
+                            <div class="my-3 review-img-div">
+                                <img src="<%=element.link%>" class="card-img-top" alt="..." height="200px"
+                                    width="200px">
+                            </div>
+                            <div class="review-para-div">
+                                <h5 class="text-center review-name py-2">
+                                    <%=element.name%>
+                                </h5>
+                                <p class="review-para">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore ut
+                                    inventore perspiciatis
+                                    dolores impedit enim modi. Voluptate hic nesciunt facere, inventore
+                                    pariatur,
+                                    commodi
+                                    ea,
+                                    nisi quibusdam harum rerum dolores in.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <%});%>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../partials/footer')%>
+
+            <%- include('../partials/script-link')%>
+</body>
+
+</html>
