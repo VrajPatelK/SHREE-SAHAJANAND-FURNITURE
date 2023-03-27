@@ -215,6 +215,10 @@ app.get('/autocomplete/', (req, res) => {
     })
 });
 
+app.post("/filter-products", product_read_routers);
+
+
+
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);
 });

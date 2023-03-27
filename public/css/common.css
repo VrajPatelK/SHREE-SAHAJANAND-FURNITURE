@@ -173,7 +173,8 @@ h3 {
 #dropdownMenuProducts:hover,
 #dropdownMenuSysUsers:hover,
 #dropdownMenuImportExport:hover,
-#dropdownMenuProfile:hover {
+#dropdownMenuProfile:hover,
+#dropdownMenuPrizes:hover {
     color: orangered !important;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset !important;
 }
