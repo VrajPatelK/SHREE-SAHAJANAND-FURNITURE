@@ -25,6 +25,9 @@
     "passport": "^0.5.3",
     "passport-google": "^0.3.0",
     "passport-google-oauth2": "^0.2.0",
+    "qrcode": "^1.5.1",
+    "util": "^0.12.5",
+    "uuid": "^9.0.0",
     "validator": "^13.9.0"
   }
 }
