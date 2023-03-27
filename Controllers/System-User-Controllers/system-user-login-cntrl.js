@@ -1,5 +1,5 @@
 const AdminCollection = require("../../src/Models/system-users/admin-schema");
-const AccountantCollection = require("../../Src/Models/system-users/accountant-schema");
+const AccountantCollection = require("../../src/Models/system-users/accountant-schema");
 const ManagerCollection = require("../../src/Models/system-users/manager-schema");
 const Bcrypt = require("bcryptjs");
 
@@ -142,7 +142,18 @@ module.exports = {
                 res.locals.session = null;
                 return res.status(301).redirect("/sys-user/login");
             }
-            // else if (res.locals.session.userType === 'accountant){}
+            else if (res.locals.session.userType === 'accountant') {
+                let remains = req.accountant.loginTokens.filter((currentToken) => {
+                    return currentToken.token !== req.token
+                });
+
+                req.accountant.loginTokens = remains;
+                await req.accountant.save();
+
+                res.clearCookie("loginAccountant");
+                res.locals.session = null;
+                return res.status(301).redirect("/sys-user/login");
+            }
 
         } catch (error) {
             return res.status(401).send(error);
