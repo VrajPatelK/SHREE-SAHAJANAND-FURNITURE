@@ -1,11 +1,9 @@
+const ExportCollection = require('../../src/Models/system-users/export-schema');
 const VendorCollection = require('../../src/Models/system-users/vendor-schema');
 
 module.exports = {
     createVendor: async (req, res) => {
         try {
-            console.log(req.body);
-            console.log("hello");
-
             await VendorCollection.insertMany([{
                 vendor_email: req.body.add_vendor_email,
                 vendor_name: req.body.add_vendor_name,
@@ -64,7 +62,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - vendor successfully ...");
             return res.status(201).redirect("/admin/vendors");
 
         } catch (error) {
@@ -78,6 +75,9 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "delete" && target_id !== undefined) {
+
+                // cascading handle
+                await ExportCollection.deleteMany({ vendor: target_id });
                 await VendorCollection.deleteOne({ _id: target_id });
             }
 

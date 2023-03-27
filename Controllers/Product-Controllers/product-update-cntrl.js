@@ -109,7 +109,7 @@ module.exports = {
 
     updateChairPost: async (req, res) => {
         try {
-            console.log(req.body);
+
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
             const backrest_type = (req.body.update_backrest_type === "on") ? true : false;
@@ -376,7 +376,7 @@ module.exports = {
 
     updateTempalePost: async (req, res) => {
         try {
-            console.log(req.body);
+
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
 
@@ -412,7 +412,7 @@ module.exports = {
 
     updateTvUnitPost: async (req, res) => {
         try {
-            console.log(req.body);
+
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
 
@@ -449,7 +449,7 @@ module.exports = {
 
     updateWardrobePost: async (req, res) => {
         try {
-            console.log(req.body);
+
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
 

@@ -1,9 +1,10 @@
+const ImportCollection = require('../../src/Models/system-users/import-schema');
 const ManuFacturerCollection = require('../../src/Models/system-users/manufacturer-schema');
 
 module.exports = {
     createManufacturer: async (req, res) => {
         try {
-            console.log(req.body);
+
             await ManuFacturerCollection.insertMany([{
                 manufacturer_email: req.body.add_manufacturer_email,
                 manufacturer_name: req.body.add_manufacturer_name,
@@ -62,7 +63,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - manufacturer successfully ...");
             return res.status(201).redirect("/admin/manufacturers");
 
         } catch (error) {
@@ -76,6 +76,8 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "delete" && target_id !== undefined) {
+                //cascading handle
+                await ImportCollection.deleteMany({ manufacturer: target_id });
                 await ManuFacturerCollection.deleteOne({ _id: target_id });
             }
 

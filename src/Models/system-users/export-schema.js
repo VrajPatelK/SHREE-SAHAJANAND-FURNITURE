@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const ExportSchema = new mongoose.Schema({
 
-    key_vendor_email: {
-        type: String,
-        required: true
+    vendor: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "vendor"
     },
     item_info: {
         item_name: {
@@ -40,7 +41,7 @@ const ExportSchema = new mongoose.Schema({
     },
     date_and_time: { //not taken from admin
         type: String,
-        required:true
+        required: true
     }
 });
 

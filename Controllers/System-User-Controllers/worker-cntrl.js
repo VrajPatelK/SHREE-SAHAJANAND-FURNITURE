@@ -5,7 +5,7 @@ module.exports = {
 
     createWorker: async (req, res) => {
         try {
-            console.log(req.body);
+
             await WorkerCollection.insertMany([{
                 worker_email: req.body.add_worker_email,
                 worker_name: req.body.add_worker_name,
@@ -67,7 +67,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - worker successfully ...");
             return res.status(201).redirect("/admin/workers");
 
         } catch (error) {

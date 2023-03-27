@@ -1,6 +1,5 @@
 const ImportCollection = require('../../src/Models/system-users/import-schema');
 const ManuFacturerCollection = require('../../src/Models/system-users/manufacturer-schema');
-const { addManufacturerDetails } = require('../../src/Helpers/import-export-helpers');
 
 
 module.exports = {
@@ -8,9 +7,9 @@ module.exports = {
         try {
 
             //check whether manufacturer is exist
-            let manufacturer_data = await ManuFacturerCollection.findOne({ manufacturer_email: req.body.key_manufacturer_email });
+            let manufacturer = await ManuFacturerCollection.findOne({ manufacturer_email: req.body.key_manufacturer_email });
 
-            if (manufacturer_data === null) {
+            if (manufacturer === null) {
                 return res.send("manufacturer doesn't exist ...");
             }
 
@@ -21,7 +20,7 @@ module.exports = {
             // insert a data
             await ImportCollection.insertMany([{
 
-                key_manufacturer_email: req.body.key_manufacturer_email,
+                manufacturer: manufacturer._id,
                 item_info: {
                     item_name: req.body.add_item_name,
                     item_price: req.body.add_item_price,
@@ -41,9 +40,7 @@ module.exports = {
         try {
 
             //render the page
-            let results = await ImportCollection.find({});
-
-            results = await addManufacturerDetails(results);
+            let results = await ImportCollection.find({}).populate('manufacturer');
             res.status(201).render("system-users/manage-imports", { results: results });
 
         } catch (error) {
@@ -72,9 +69,9 @@ module.exports = {
         try {
 
             //check whether manufacturer is exist
-            let manufacturer_data = await ManuFacturerCollection.findOne({ manufacturer_email: req.body.update_key_manufacturer_email });
+            let manufacturer = await ManuFacturerCollection.findOne({ manufacturer_email: req.body.update_key_manufacturer_email });
 
-            if (manufacturer_data === null) {
+            if (manufacturer === null) {
                 return res.send("manufacturer doesn't exist ...");
             }
 
@@ -83,7 +80,7 @@ module.exports = {
 
             let updated_data = new Object();
             updated_data = {
-                key_manufacturer_email: req.body.update_key_manufacturer_email,
+                manufacturer: manufacturer._id,
                 item_info: {
                     item_name: req.body.update_item_name,
                     item_price: req.body.update_item_price,
@@ -96,7 +93,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - imports-data successfully ...");
             return res.status(201).redirect("/admin/imports");
 
         } catch (error) {

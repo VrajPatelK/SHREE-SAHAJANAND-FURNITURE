@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const ImportSchema = new mongoose.Schema({
 
-    key_manufacturer_email: {
-        type: String,
-        required: true
+    manufacturer: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "manufacturer"
     },
     item_info: {
         item_name: {
@@ -28,7 +29,7 @@ const ImportSchema = new mongoose.Schema({
     },
     date_and_time: { //not taken from admin
         type: String,
-        required:true
+        required: true
     }
 });
 
