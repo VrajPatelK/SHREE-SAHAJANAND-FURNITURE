@@ -148,8 +148,24 @@ module.exports = {
                     discount: { $lte: discount }
                 });
             }
+            else if (category === 'all') {
+                result = new Array();
+                let tmp = new Array();
+
+                tmp = await BedCollection.find({}); result = result.concat(tmp);
+                tmp = await ChairCollection.find({}); result = result.concat(tmp);
+                tmp = await JulaCollection.find({}); result = result.concat(tmp);
+                tmp = await MattressesCollection.find({}); result = result.concat(tmp);
+                tmp = await ShoerackCollection.find({}); result = result.concat(tmp);
+                tmp = await ShowcaseCollection.find({}); result = result.concat(tmp);
+                tmp = await SofaCollection.find({}); result = result.concat(tmp);
+                tmp = await TableCollection.find({}); result = result.concat(tmp);
+                tmp = await TempaleCollection.find({}); result = result.concat(tmp);
+                tmp = await TvUnitCollection.find({}); result = result.concat(tmp);
+                tmp = await WardrobeCollection.find({}); result = result.concat(tmp);
+            }
             else {
-                return res.status(401).json({ error: true, em: "page not found" });
+                return res.status(401).json([{ error: true, em: "page not found" }]);
             }
 
             res.status(200).json(result);
@@ -177,6 +193,7 @@ module.exports = {
             tmp = await WardrobeCollection.find({}); results = results.concat(tmp);
 
             res.status(200).render(`products/manage-all`, { results: results });
+            // return res.status(200).json(results);
 
         } catch (error) {
             console.log(error);

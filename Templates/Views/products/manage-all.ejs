@@ -4,33 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SSF - Sofas</title>
+    <title>SSF - All Products</title>
 
     <%- include ('../../partials/header-links') %>
-
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
-        <script src="../JS/image-script.js" defer></script>
 
 
         <%if(session.userType==="customer" || session.userType==="admin" ){%>
-            <script>
-
-                //regexp
-                function handleFilter() {
-
-                    let f1 = $("#prize-filter").val().split("-");
-                    let f2 = $("#material-filter").val();
-                    let f3 = $("#discount-filter").val();
-                    let category = window.location.pathname.split("/")[2];
-                    let body = { f1, f2, f3, category };
-
-                    console.log(body);
-                    $.post("/filter-products", body, function (data, status) {
-                        console.log(data);
-                    });
-                }
-
-            </script>
+            <script src="../JS/product-script.js" defer></script>
             <%}%>
 
 </head>
@@ -91,6 +72,18 @@
                                             <%}%>
                                     </select>
                                 </button>
+                                <button class="btn category-filter-btn">
+                                    <select class="form-select" id="category-filter">
+                                        <option value="all" selected>all</option>
+                                        <% let products=[ "sofa" , "bed" , "chair" , "table" , "tvunit" , "tempale"
+                                            , "shoerack" , "showcase" , "jula" , "wardrobes" ];%>
+                                            <%products.forEach((product)=>{%>
+                                                <option value="<%=product%>">
+                                                    <%=product%>
+                                                </option>
+                                                <%})%>
+                                    </select>
+                                </button>
                             </div>
 
                             <div class="filter-req-btn-div">
@@ -106,56 +99,9 @@
         </div>
         <div class="container row mx-auto px-0 py-3 card-parent-div">
 
-            <%if(results.length>0){%>
-                <%results.forEach((result,indx)=> { %>
-
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
-                        <div class="card d-block" style="width: 18rem;">
-                            <div class="img-div" style="max-height: 12rem;">
-
-                                <%if(result.image){%>
-                                    <img src="<%= result.image%>" class="card-img-top" alt="...">
-                                    <%}else{%>
-                                        <img src="../../../Images/other-images/no-product.png" class="card-img-top"
-                                            alt="">
-                                        <%}%>
-                            </div>
-                            <div class="card-header">
-                                <h5 class="card-title">
-                                    <%=result.name%>
-                                </h5>
-                                <p class="card-text">
-                                    <%=result.description%>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, velit!
-                                </p>
-                                <p class="card-text d-flex justify-content-between align-item-center">
-                                    <span class="badge bg-white" style="font-size: .9rem; color: #1A120B;">
-                                        &#x20b9;&nbsp; <%=result.price%>
-                                    </span>
-                                    <span class="badge bg-white" style="font-size: .9rem; color: #1A120B;">
-                                        <%=result.discount%>% &nbsp;<span class="text-success">Off</span>
-                                    </span>
-                                    <span class="badge bg-white text-success" style="font-size: .9rem;">
-                                        <i class="fa-solid fa-check fa-beat"></i> Available
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="card-footer d-flex justify-content-end align-items-center">
-                                <a href="#" class="btn btn-type-1 card-link">
-                                    <i class="fa-solid fa-eye fa-beat"></i> &nbsp; Product
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <%});%>
-                        <%}else{%>
-                            <p class="py-2" style="color: #1A120B; text-align: center; background: #E5E5CB;">
-                                You
-                                have not add any item yet.</p>
-                            <%}%>
         </div>
+
+
         <!-- footer -->
         <%- include('../../partials/footer')%>
 
