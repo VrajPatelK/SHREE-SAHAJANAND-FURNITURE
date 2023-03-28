@@ -158,4 +158,28 @@ module.exports = {
             console.log(error);
         }
     },
+    getAllProducts: async (req, res) => {
+        try {
+
+            let results = new Array();
+            let tmp = new Array();
+
+            tmp = await BedCollection.find({}); results = results.concat(tmp);
+            tmp = await ChairCollection.find({}); results = results.concat(tmp);
+            tmp = await JulaCollection.find({}); results = results.concat(tmp);
+            tmp = await MattressesCollection.find({}); results = results.concat(tmp);
+            tmp = await ShoerackCollection.find({}); results = results.concat(tmp);
+            tmp = await ShowcaseCollection.find({}); results = results.concat(tmp);
+            tmp = await SofaCollection.find({}); results = results.concat(tmp);
+            tmp = await TableCollection.find({}); results = results.concat(tmp);
+            tmp = await TempaleCollection.find({}); results = results.concat(tmp);
+            tmp = await TvUnitCollection.find({}); results = results.concat(tmp);
+            tmp = await WardrobeCollection.find({}); results = results.concat(tmp);
+
+            res.status(200).render(`products/manage-all`, { results: results });
+
+        } catch (error) {
+            console.log(error);
+        }
+    },
 };

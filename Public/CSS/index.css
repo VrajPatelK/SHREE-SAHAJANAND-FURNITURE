@@ -22,7 +22,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: orangered;
+    color: #1A120B;
 }
 
 .carousel-item img {
@@ -53,7 +53,6 @@
 /* #explore {
     border: 2px solid blue;
 }
-
 
 #trend,
 #quality {
@@ -90,7 +89,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(247, 224, 215);
+    background: #E5E5CB;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     transition: box-shadow .8s;
 }
@@ -125,7 +124,7 @@
 }
 
 .review-name {
-    background: rgb(255, 101, 45);
+    background: #3C2A21;
     color: #fff;
     border-radius: .5rem;
     width: 50%;
@@ -133,7 +132,7 @@
 
 .review-para {
     text-align: center;
-    color: rgb(186, 50, 1);
+    color: #1A120B;
 }
 
 #subscribe-btn {

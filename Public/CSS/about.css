@@ -7,8 +7,8 @@
 
 #about-para-div {
     /* border: 2px solid blue; */
-    background: rgb(247, 224, 215);
-    color: rgb(186, 50, 1);
+    background: #E5E5CB;
+    color: #1A120B;
     border-radius: .9rem;
     width: 100% !important;
     text-align: justify;
