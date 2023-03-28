@@ -33,11 +33,11 @@ body {
 }
 
 .cart-icon-div a {
-    background: #9d61ea;
+    background: #E5E5CB;
 }
 
 #favourite-i {
-    color: #a21ebc !important;
+    color: #1A120B !important;
 }
 
 #cart-i {
@@ -46,13 +46,13 @@ body {
 
 #no_of_favs_badge {
     color: #fff;
-    background: #a21ebc;
+    background: #3C2A21;
 }
 
 #no_of_carts_badge {
-    color: #a21ebc;
+    color: #1A120B;
     background: #fff;
-    border: 1px solid #a21ebc;
+    border: 1px solid #3C2A21;
 }
 
 #parent-navs {
@@ -69,14 +69,6 @@ body {
     display: flex;
 }
 
-/* .struct-div-1 {
-    border: 2px solid green;
-} */
-
-/* #searchDiv {
-    background-color: rgb(255, 0, 0);
-} */
-
 #searchForm {
     display: flex;
     justify-content: center;
@@ -87,13 +79,13 @@ body {
     border: .5px solid;
     outline: none !important;
     box-shadow: none !important;
-    color: #650578;
+    color: #1A120B;
     background: #fff;
     font-weight: 500;
 }
 
 #search_bar::placeholder {
-    color: #b69ef2;
+    color: #E5E5CB;
 }
 
 /* #iconDiv {
@@ -123,22 +115,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-#meet-i {
-    color: orange;
-}
-
-#profile-i {
-    color: darkblue;
-}
-
-#favourite-i {
-    color: red;
-}
-
-#cart-i {
-    color: orangered;
-}
-
 h3 {
     text-decoration: none;
     letter-spacing: .1rem;
@@ -151,7 +127,7 @@ h3 {
 }
 
 .nav-link {
-    color: #a21ebc !important;
+    color: #1A120B !important;
     font-weight: 500;
     border-radius: .3rem;
     cursor: pointer;
@@ -159,7 +135,7 @@ h3 {
 
 
 .nav-link:hover {
-    background: #ffeefd;
+    background: #E5E5CB;
 }
 
 #dropdownMenuProducts:hover,
@@ -167,14 +143,14 @@ h3 {
 #dropdownMenuImportExport:hover,
 #dropdownMenuProfile:hover,
 #dropdownMenuPrizes:hover {
-    color: #a21ebc !important;
-    background: #ffeefd !important;
+    color: #1A120B !important;
+    background: #E5E5CB !important;
 }
 
 .dropdown-item:hover,
 .dropdown-item:hover {
-    color: #a21ebc;
-    background: #ffeefd;
+    color: #1A120B;
+    background: #E5E5CB;
 }
 
 
@@ -187,7 +163,7 @@ h3 {
 }
 
 .headings {
-    color: #700086;
+    color: #1A120B;
     text-align: center;
 }
 
@@ -210,7 +186,7 @@ h3 {
 /* FOOTER------------- */
 #footer-main-div {
     /* border: 2px solid red; */
-    background: #a21ebc;
+    background: #3C2A21;
     color: #fff !important;
 }
 
@@ -240,7 +216,7 @@ h3 {
 
 .footer-item a:hover {
     border-radius: .5rem;
-    color: #a21ebc;
+    color: #1A120B;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 }
 
@@ -249,7 +225,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #c98de3;
+    background: #E5E5CB;
     border-radius: .5rem;
 }
 
@@ -265,14 +241,14 @@ h3 {
 .subscribe-bar {
     background: rgb(255, 242, 237) !important;
     border: 2px solid #fff !important;
-    color: #a21ebc;
+    color: #1A120B;
     outline: unset !important;
     box-shadow: unset !important;
     font-weight: 500;
 }
 
 .subscribe-bar::placeholder {
-    color: #700086;
+    color: #1A120B;
 }
 
 #footer-icon-downDiv {
@@ -280,7 +256,7 @@ h3 {
     display: flex;
     justify-content: right;
     align-items: center;
-    background: #c98de3;
+    background: #E5E5CB;
     border-radius: .5rem;
 }
 
@@ -508,7 +484,7 @@ border: 2px solid red;
 
 .card {
     /* border: 2px solid blue; */
-    background: #f7d6f3;
+    background: #E5E5CB;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -517,7 +493,7 @@ border: 2px solid red;
 
 .product-img-div img {
     border: 3px solid #fff;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
 }
 
 .info-div {
@@ -533,7 +509,7 @@ border: 2px solid red;
 .info-div p {
     /* border: 2px solid yellow; */
     margin: 0px;
-    color: #700086;
+    color: #1A120B;
 }
 
 .key-para {
@@ -562,21 +538,23 @@ border: 2px solid blue;
 
 .btn-type-1 {
     color: #fff;
-    border: none;
+    /* border: 2px solid #3C2A21; */
+    border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    background: #a21ebc;
+    background: #3C2A21;
     border-radius: 0.5rem;
 }
 
 .btn-type-1:hover {
-    color: #a21ebc;
-    background: #ffeefd;
+    color: #1A120B;
+    background: #D5CEA3;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .btn-type-1-inverse {
-    color: #a21ebc;
-    border: none;
+    color: #1A120B;
+    border: 2px solid #3C2A21;
     border-radius: 0.5rem;
     border-radius: none !important;
     outline: none !important;
@@ -586,7 +564,8 @@ border: 2px solid blue;
 
 .btn-type-2 {
     background: #fff;
-    color: #a21ebc;
+    color: #1A120B;
+    border: 2px solid #3C2A21;
     border-radius: 0.5rem;
     border-radius: none !important;
     outline: none !important;
@@ -595,6 +574,6 @@ border: 2px solid blue;
 }
 
 .btn-type-2:hover {
-    background: #c98de3;
+    background: #E5E5CB;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 }
