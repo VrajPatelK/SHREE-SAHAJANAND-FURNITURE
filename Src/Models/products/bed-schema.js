@@ -6,6 +6,14 @@ const BedSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "bed"
+    },
     description: {
         type: String,
         default: ""

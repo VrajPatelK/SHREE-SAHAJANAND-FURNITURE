@@ -20,6 +20,7 @@ module.exports = {
 
             await BedCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -52,6 +53,7 @@ module.exports = {
 
             await ChairCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -82,6 +84,7 @@ module.exports = {
 
             await JulaCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 color: req.body.add_color,
                 description: req.body.add_description,
@@ -111,6 +114,7 @@ module.exports = {
 
             await MattressesCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 color: req.body.add_color,
                 description: req.body.add_description,
@@ -139,6 +143,7 @@ module.exports = {
 
             await ShoerackCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -166,6 +171,7 @@ module.exports = {
 
             await ShowcaseCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -193,6 +199,7 @@ module.exports = {
 
             await SofaCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 color: req.body.add_color,
                 description: req.body.add_description,
@@ -225,6 +232,7 @@ module.exports = {
 
             await TableCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -256,6 +264,7 @@ module.exports = {
 
             await TempaleCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -283,6 +292,7 @@ module.exports = {
 
             await TvUnitCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
@@ -311,6 +321,7 @@ module.exports = {
 
             await WardrobeCollection.create({
                 name: req.body.add_name,
+                stock: req.body.add_stock,
                 image: req.body.image,
                 color: req.body.add_color,
                 description: req.body.add_description,

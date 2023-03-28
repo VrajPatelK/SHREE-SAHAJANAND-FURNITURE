@@ -6,6 +6,14 @@ const MattressesSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "mattress"
+    },
     description: {
         type: String,
         default: ""

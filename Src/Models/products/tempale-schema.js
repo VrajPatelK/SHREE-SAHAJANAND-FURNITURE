@@ -7,6 +7,14 @@ const TempaleSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "tempale"
+    },
     description: {
         type: String,
         default: ""

@@ -6,6 +6,14 @@ const WardrobeSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "wardrobe"
+    },
     description: {
         type: String,
         default: ""

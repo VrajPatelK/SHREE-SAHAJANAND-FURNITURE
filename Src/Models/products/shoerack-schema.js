@@ -7,6 +7,14 @@ const ShoerackSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "shoerack"
+    },
     description: {
         type: String,
         default: ""

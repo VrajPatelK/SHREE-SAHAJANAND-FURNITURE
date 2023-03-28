@@ -6,6 +6,14 @@ const TableSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "table"
+    },
     description: {
         type: String,
         default: ""

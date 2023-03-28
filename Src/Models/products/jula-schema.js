@@ -6,6 +6,14 @@ const JulaSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "jula"
+    },
     description: {
         type: String,
         default: ""

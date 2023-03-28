@@ -7,6 +7,14 @@ const SofaSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    stock: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        default: "sofa"
+    },
     description: {
         type: String,
     },
