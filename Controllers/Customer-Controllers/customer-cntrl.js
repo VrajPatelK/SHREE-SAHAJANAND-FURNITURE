@@ -33,7 +33,7 @@ module.exports = {
 
             req.body.pass = Bcrypt.hashSync(req.body.pass); console.log(req.body.image);
             customer = await CustomerCollection.create(req.body);
-            return res.status(301).redirect("/customer-login");
+            return res.status(301).redirect("/");
 
         } catch (error) {
             console.log(error);
@@ -139,7 +139,7 @@ module.exports = {
     getLoginCustomer: async (req, res) => {
         try {
 
-            return res.status(200).render("customer/customer-login", { swr: false });
+            return res.status(200).render("index", { swr: false });
         } catch (error) {
             console.log(error);
         }
@@ -147,11 +147,10 @@ module.exports = {
     postLoginCustomer: async (req, res) => {
         try {
 
-
             let customer = await CustomerCollection.findOne({ email: req.body.email });
 
             if (customer === null) {
-                return res.status(200).render("customer/customer-login", {
+                return res.status(200).render("index", {
                     swr: true,
                     em: "account doesn't exist.Need to register",
                     result: req.body
@@ -159,7 +158,7 @@ module.exports = {
             }
 
             if (!Bcrypt.compareSync(req.body.pass, customer.pass)) {
-                return res.status(200).render("customer/customer-login", {
+                return res.status(200).render("index", {
                     swr: true,
                     em: "email/password is wrong",
                     result: req.body
@@ -191,7 +190,7 @@ module.exports = {
 
             res.clearCookie("loginCustomer");
             res.locals.session = null;
-            return res.status(301).redirect("/customer-login");
+            return res.status(301).redirect("/");
 
         } catch (error) {
             console.log(error);

@@ -6,7 +6,7 @@ module.exports = {
     getIndexPage: async (req, res) => {
 
         try {
-            res.status(201).render("index", {
+            res.status(201).render("home", {
 
                 // admin: req.session.isAdmin,
                 exploreImg: getAllFileNames("explore"),
@@ -38,8 +38,17 @@ module.exports = {
 
             // res.status(201).render("contact", { admin: req.session.isAdmin });
             res.status(201).render("contact");
-            
 
+
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    getLandingPage: async (req, res) => {
+
+        try {
+            res.status(201).render("index");
         } catch (error) {
             console.log(error);
         }

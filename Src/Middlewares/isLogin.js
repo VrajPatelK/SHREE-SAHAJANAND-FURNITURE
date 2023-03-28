@@ -74,7 +74,7 @@ module.exports = {
 
         } catch (error) {
             if (error.name === "JsonWebTokenError") {
-                return res.status(301).redirect("/customer-login");
+                return res.status(301).redirect("/");
             }
             console.log(error);
             return res.status(401).json(error);
@@ -93,8 +93,8 @@ module.exports = {
                 if (url === '/customer-register')
                     return res.status(201).render("customer/customer-register", { swr: false })
 
-                if (url === '/customer-login')
-                    return res.status(201).render("customer/customer-login", { swr: false });
+                if (url === '/')
+                    return res.status(201).render("index", { swr: false });
 
             }
             return res.status(401).send(error);

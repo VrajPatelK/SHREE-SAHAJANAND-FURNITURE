@@ -65,15 +65,15 @@ const ManagerCollection = require("./Models/system-users/manager-schema");
 app.get("/admin/manage", request_manager_routers);
 
 //static
-app.get("/", static_routers);
+app.get("/home", static_routers);
 app.get("/about", static_routers);
 app.get("/contact", static_routers);
 
 //customers
 app.get("/customer-register", customer_routers);
 app.post("/customer-register", customer_routers);
-app.get("/customer-login", customer_routers);
-app.post("/customer-login", customer_routers);
+app.get("/", customer_routers);
+app.post("/", customer_routers);
 app.get("/customer-profile", customer_routers);
 app.get("/customer-profile/edit", customer_routers);
 app.post("/customer-profile/edit", customer_routers);

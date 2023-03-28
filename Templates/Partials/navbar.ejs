@@ -51,7 +51,7 @@
                 <ul class="navbar-nav nav-fill">
                     <%if(session.userType==="customer"){%>
                         <li class="nav-item btn-type-1-inverse mx-2">
-                            <a class="nav-link" aria-current="page" href="/">Home <i class="fa-solid fa-house"></i></a>
+                            <a class="nav-link" aria-current="page" href="/home">Home <i class="fa-solid fa-house"></i></a>
                         </li>
                         <li class="nav-item btn-type-1-inverse mx-2">
                             <a class="nav-link" href="/about">About Us <i class="fa-solid fa-address-card"></i></a>
@@ -124,50 +124,6 @@
                                                     </ul>
                                                 </li>
 
-                                                <!-- profile-dropdown -->
-                                                <li class="dropdown items-dropdown">
-                                                    <button class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
-                                                        type="button" id="dropdownMenuProfile" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        Profile <i class="fa-solid fa-user"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
-                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                href="/customer-profile">
-                                                                My Account <i class="fa-solid fa-file-invoice"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                href="#">
-                                                                My Orders <i class="fa-solid fa-bag-shopping"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                href="/customer-register">
-                                                                Register <i class="fa-solid fa-keyboard"></i></a>
-                                                        </li>
-                                                        <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                href="/customer-login">Login
-                                                                <i class="fa-solid fa-right-to-bracket"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item d-flex justify-content-between
-                                                                align-items-center" href="/customer-logout">
-                                                                Logout<i class="fa-solid fa-right-from-bracket"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><a class="dropdown-item text-danger d-flex justify-content-between align-items-center"
-                                                                href="/customer-delete">
-                                                                Delete Account <i class="fa-solid fa-trash"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
                                                 <%}%>
 
                                                     <!-- profile-dropdown -->
@@ -207,7 +163,7 @@
                                                                                         class="fa-solid fa-keyboard"></i></a>
                                                                             </li>
                                                                             <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                                    href="/customer-login">Login
+                                                                                    href="/">Login
                                                                                     <i
                                                                                         class="fa-solid fa-right-to-bracket"></i>
                                                                                 </a>

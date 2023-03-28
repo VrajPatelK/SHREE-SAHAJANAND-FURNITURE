@@ -6,11 +6,12 @@ const {
     getIndexPage,
     getAboutPage,
     getContactPage,
-
+    getLandingPage
 } = require("../../Controllers/static-cntrl");
 
 
-router.get("/", getIndexPage);
+router.get("/", getLandingPage);
+router.get("/home", getIndexPage);
 router.get("/about", getAboutPage);
 router.get("/contact", getContactPage);
 

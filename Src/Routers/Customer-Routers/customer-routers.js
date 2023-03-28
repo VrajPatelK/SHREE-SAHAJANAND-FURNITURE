@@ -19,8 +19,8 @@ const { isCustomer, customerNotLoggedIn } = require('../../Middlewares/isLogin')
 
 router.get("/customer-register", customerNotLoggedIn, getCreateCustomer);
 router.post("/customer-register", postCreateCustomer);
-router.get("/customer-login", customerNotLoggedIn, getLoginCustomer);
-router.post("/customer-login", postLoginCustomer);
+router.get("/", customerNotLoggedIn, getLoginCustomer);
+router.post("/", postLoginCustomer);
 
 router.get("/customer-profile", isCustomer, getCustomer);
 router.get("/customer-profile/edit", isCustomer, getUpdateCustomer);

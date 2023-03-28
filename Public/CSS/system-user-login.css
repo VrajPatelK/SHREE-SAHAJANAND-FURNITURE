@@ -15,19 +15,19 @@
 }
 
 #login-form-cnt {
+    /* border: 2px solid red; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: none;
     color: #fff;
-    background: #E5E5CB;
-
 }
 
 #login-form-cnt>form {
+    /* border: 2px solid blue; */
+    background: #E5E5CB;
     text-align: center;
-    /* background: #E5E5CB; */
-    /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px,rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px; */
 }
 
 input,
@@ -54,4 +54,48 @@ input::placeholder {
     background: #fff !important;
     color: #1A120B !important;
     border: none !important;
+}
+
+
+/* customer-login */
+
+.main-login-div {
+    height: 100vh !important;
+}
+
+.img-div {
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.img-div img {
+    height: inherit;
+}
+
+.caption {
+    color: #1A120B;
+    font-size: 1.2rem;
+}
+
+.btn-outline-primary {
+    background: #fff;
+    color: #1A120B;
+    border-color: #3C2A21;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary:hover {
+    background-color: #3C2A21 !important;
+    color: #fff !important;
+    border-color: #3C2A21 !important;
+}
+
+.btn-check:checked+.btn-outline-primary {
+    background-color: #3C2A21 !important;
+    color: #fff !important;
+    border-color: #3C2A21 !important;
 }
