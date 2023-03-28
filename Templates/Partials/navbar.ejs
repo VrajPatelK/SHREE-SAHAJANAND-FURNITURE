@@ -1,9 +1,38 @@
 <!-- FIRST HEADER -->
-<div class="top-header">
-    <div id="top-most-heading" class="container-fluid py-3 d-flex justify-content-center align-items-center">
-        <i class="fa-sharp fa-solid fa-loveseat"></i>
-        <i class="fa-regular fa-sparkles"></i>
-        <h3>Shree Sahjanand Furniture</h3>
+<div class="top-header row mx-auto px-2 py-3">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="col-1 logo-div d-flex justify-content-center align-items-center">
+            <img src="..." alt="logo..." srcset="">
+        </div>
+        <div class="col-8 head-div d-flex justify-content-center align-items-center">
+            <div class="col-lg-6 col-md-10 col-12 p-2 mx-auto">
+                <div class="input-group">
+                    <input id="search_bar" type="text" class="form-control" placeholder="search" aria-label="search"
+                        aria-describedby="button-addon2">
+                    <button class="btn btn-type-1 search_btn" type="button" id="button-addon2">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 header-icon-div d-flex justify-content-evenly align-items-center">
+            <div class="fav-icon-div">
+                <a type="button" class="btn bg-none outline-none rounded border position-relative">
+                    <i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                        id="no_of_favs_badge">99
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </a>
+            </div>
+            <div class="cart-icon-div">
+                <a type="button" class="btn bg-none outline-none rounded border position-relative">
+                    <i class="fa-solid fa-cart-shopping" id="cart-i"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                        id="no_of_carts_badge">99
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -16,36 +45,6 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navbar">
                 <span class="navbar-toggler-icon mi-auto d-md-block d-lg-none "></span>
             </button>
-
-            <!-- serach-bar-->
-            <div class="col-md-8 col-10 struct-div-1">
-                <div class="col-lg-6 col-md-10 col-12 p-2 mx-auto" id="searchDiv">
-                    <input id="search_bar" class="form-control me-2" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button id="search-sbmt-btn" class="btn " type="button">Search</button>
-                </div>
-            </div>
-            <!-- icons -->
-            <div class="col-md-4 struct-div-1">
-                <div id="iconDiv" class="p-2 d-md-flex justify-content-center align-items-center d-none">
-                    <div class="col icon-bar mx-2"><i class="fa-brands fa-meetup" id="meet-i"></i></div>
-                    <%if(session.userType==="customer"){%>
-                        <div class="col icon-bar mx-2"><i class="fa-solid fa-user" id="profile-i"></i></div>
-                        <div class="col icon-bar mx-2"><i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
-                        </div>
-                        <div class="col icon-bar mx-2">
-                            <a href="/carts" class="btn position-relative" target="_blank">
-                                <i class="fa-solid fa-cart-shopping" id="cart-i"></i>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                    id="no_of_carts_badge">
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
-                            </a>
-                        </div>
-                        <%}%>
-                </div>
-            </div>
         </div>
         <div id="third-nav" class="container px-0 py-2">
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">

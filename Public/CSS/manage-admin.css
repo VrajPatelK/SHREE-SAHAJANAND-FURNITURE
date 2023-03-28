@@ -19,7 +19,7 @@
 
 .profie-card-div {
     /* border: 2px solid blue; */
-    background: rgb(255 100 39);
+    background: #f7d6f3;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -48,8 +48,7 @@
 }
 
 .profile-info-grp>li>p {
-    color: orangered;
-    color: rgb(186, 50, 1);
+    color: #a21ebc;
     font-size: large;
     margin: 0px;
 }
