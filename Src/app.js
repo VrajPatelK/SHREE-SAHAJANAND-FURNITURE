@@ -1,5 +1,5 @@
 require("dotenv").config();
-require('./DB/connection'); 
+require('./DB/connection');
 
 const path = require('path');
 const body_parser = require("body-parser");
