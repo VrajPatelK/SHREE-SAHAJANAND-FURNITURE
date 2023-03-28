@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Sofas</title>
+
+    <%- include ('../../partials/header-links') %>
+
+        <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../JS/image-script.js" defer></script>
+
+
+        <%if(session.userType==="customer" || session.userType==="admin" ){%>
+            <script>
+
+                //regexp
+                function handleFilter() {
+
+                    let f1 = $("#prize-filter").val().split("-");
+                    let f2 = $("#material-filter").val();
+                    let f3 = $("#discount-filter").val();
+                    let category = window.location.pathname.split("/")[2];
+                    let body = { f1, f2, f3, category };
+
+                    console.log(body);
+                    $.post("/filter-products", body, function (data, status) {
+                        console.log(data);
+                    });
+                }
+
+            </script>
+            <%}%>
+
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                <%if(session.userType==="admin"){%>
+                    Manage
+                    <%}%>
+                        All Products
+                        <hr>
+            </h4>
+        </div>
+        <div class="container-fluid">
+            <div class="accordion container accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Filter
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                        <!-- content -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="filter-btn-div">
+                                <button class="btn prize-filter-btn">
+                                    <select class="form-select" id="prize-filter">
+                                        <option value="500 - 1000" selected>&#x20b9; 500 - 1000</option>
+                                        <%for(let i=3; i<=20; i+=2) {%>
+                                            <option value="<%=500*i%> - <%=500*(i+2)%>">
+                                                &#x20b9; <%=500*i%> - <%=500*(i+2)%>
+                                            </option>
+                                            <%}%>
+                                    </select>
+                                </button>
+                                <button class="btn material-filter-btn">
+                                    <select class="form-select" id="material-filter">
+                                        <option value="Material-1" selected>Material-1</option>
+                                        <%for(let i=2; i<=10; i++) {%>
+                                            <option value="Material-<%=i%>">
+                                                Material-<%=i%>
+                                            </option>
+                                            <%}%>
+                                    </select>
+                                </button>
+                                <button class="btn discount-filter-btn">
+                                    <select class="form-select" id="discount-filter">
+                                        <option value="10" selected>Up to 10%</option>
+                                        <%for(let i=2; i<=8; i++) {%>
+                                            <option value="<%=i*10%>">
+                                                Up to <%=i*10%>%
+                                            </option>
+                                            <%}%>
+                                    </select>
+                                </button>
+                            </div>
+
+                            <div class="filter-req-btn-div">
+                                <button class="btn btn-type-1" onclick="handleFilter()">
+                                    Filter <i class="fa-solid fa-filter fa-beat"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container row mx-auto px-0 py-3 card-parent-div">
+
+            <%if(results.length>0){%>
+                <%results.forEach((result,indx)=> { %>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
+                        <div class="card d-block" style="width: 18rem;">
+                            <div class="img-div" style="max-height: 12rem;">
+
+                                <%if(result.image){%>
+                                    <img src="<%= result.image%>" class="card-img-top" alt="...">
+                                    <%}else{%>
+                                        <img src="../../../Images/other-images/no-product.png" class="card-img-top"
+                                            alt="">
+                                        <%}%>
+                            </div>
+                            <div class="card-header">
+                                <h5 class="card-title">
+                                    <%=result.name%>
+                                </h5>
+                                <p class="card-text">
+                                    <%=result.description%>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, velit!
+                                </p>
+                                <p class="card-text d-flex justify-content-between align-item-center">
+                                    <span class="badge bg-white" style="font-size: .9rem; color: #1A120B;">
+                                        &#x20b9;&nbsp; <%=result.price%>
+                                    </span>
+                                    <span class="badge bg-white" style="font-size: .9rem; color: #1A120B;">
+                                        <%=result.discount%>% &nbsp;<span class="text-success">Off</span>
+                                    </span>
+                                    <span class="badge bg-white text-success" style="font-size: .9rem;">
+                                        <i class="fa-solid fa-check fa-beat"></i> Available
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="card-footer d-flex justify-content-end align-items-center">
+                                <a href="#" class="btn btn-type-1 card-link">
+                                    <i class="fa-solid fa-eye fa-beat"></i> &nbsp; Product
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%});%>
+                        <%}else{%>
+                            <p class="py-2" style="color: #1A120B; text-align: center; background: #E5E5CB;">
+                                You
+                                have not add any item yet.</p>
+                            <%}%>
+        </div>
+        <!-- footer -->
+        <%- include('../../partials/footer')%>
+
+
+</body>
+
+</html>
