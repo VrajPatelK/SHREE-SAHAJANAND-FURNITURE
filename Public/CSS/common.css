@@ -33,7 +33,7 @@ body {
 }
 
 .cart-icon-div a {
-    background: #E5E5CB;
+    background: #D5CEA3;
 }
 
 #favourite-i {
@@ -528,18 +528,13 @@ border: 2px solid red;
     box-shadow: none !important;
 }
 
-/* .card-div {
-border: 2px solid blue;
-} */
-
 .btn-div a {
     text-decoration: none;
 }
 
 .btn-type-1 {
     color: #fff;
-    /* border: 2px solid #3C2A21; */
-    border: none !important;
+    border: 1px solid #3C2A21;
     outline: none !important;
     box-shadow: none !important;
     background: #3C2A21;
@@ -554,7 +549,7 @@ border: 2px solid blue;
 
 .btn-type-1-inverse {
     color: #1A120B;
-    border: 2px solid #3C2A21;
+    border: none !important;
     border-radius: 0.5rem;
     border-radius: none !important;
     outline: none !important;
@@ -565,7 +560,7 @@ border: 2px solid blue;
 .btn-type-2 {
     background: #fff;
     color: #1A120B;
-    border: 2px solid #3C2A21;
+    border: 1px solid #3C2A21;
     border-radius: 0.5rem;
     border-radius: none !important;
     outline: none !important;
