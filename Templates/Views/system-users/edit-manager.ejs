@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - MANAGER EDITED</title>
+    <%- include ('../../partials/header-links') %>
+
+
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/manage-admin.css">
+        <script src="../JS/manager-script.js" defer></script>
+
+
+
+</head>
+
+<body>
+    <div class="container edit-form-div">
+
+        <div class="col-12 py-3 mt-4 headingDiv">
+            <h3 class="headings">
+                Edit Manager <i class="fa-solid fa-pen-to-square"></i>
+                <hr>
+            </h3>
+        </div>
+
+        <%if(swr){%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%=errorMsg%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%}%>
+
+                <a href="/admin/managers">
+                    <button class="btn mx-2 btn-type-2">
+                        <i class="fa-solid fa-backward"></i> Back
+                    </button>
+                </a>
+                <div class="profie-card-div py-3">
+                    <form action="" class="col-sm-10 col-12 my-3" method="post">
+
+                        <div class="col-12 px-3 py-3 profile-info-div">
+                            <ul class="list-group profile-info-grp">
+
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Email</p>
+                                    <input type="email" class="col-8 p-2" name="manager_email"
+                                        value="<%=result.manager_email%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Name</p>
+                                    <input type="text" class="col-8 p-2" name="manager_name"
+                                        value="<%=result.manager_name%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Mobile</p>
+                                    <input type="tel" class="col-8 p-2" maxlength="10" pattern="[0-9]{10}"
+                                        name="manager_mobile" value="<%=result.manager_mobile%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Study</p>
+                                    <input type="text" class="col-8 p-2" name="manager_study"
+                                        value="<%=result.manager_study%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Skill</p>
+                                    <input type="text" class="col-8 p-2" name="manager_skill"
+                                        value="<%=result.manager_skill%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Experience</p>
+                                    <input type="number" min="1" max="100" class="col-8 p-2" name="manager_experience"
+                                        value="<%=result.manager_experience%>" required>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Profile Img</p>
+                                    <input class="form-control" type="file" id="image_file" name="image_file"
+                                        accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                                    <input type="text" name="manager_image" id="manager_image"
+                                        value="<%=result.manager_image%>" hidden>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Remove Profile Image</p>
+                                    <span class="col-8">
+                                        <input type="checkbox" class="form-check-input-lg" name="rmvImage"
+                                            id="rmvImage">
+                                    </span>
+                                </li>
+                                <li class="list-group-item my-1">
+                                    <p class="col-4 key-para">Manager - Address</p>
+                                    <textarea name="manager_address" id="manager_address" class="form-control" cols="30"
+                                        rows="4" placeholder="Manager Address..."
+                                        required><%=result.manager_address%></textarea>
+                                </li>
+                            </ul>
+
+                            <div class="mt-4 profile-info-btn-div">
+                                <button type="submit" class="btn mx-2 btn-type-2">
+                                    Edit <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+    </div>
+
+</body>
+
+</html>
