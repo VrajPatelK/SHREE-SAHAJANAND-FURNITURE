@@ -34,7 +34,7 @@ module.exports = {
 
             req.body.pass = Bcrypt.hashSync(req.body.pass); console.log(req.body.image);
             customer = await CustomerCollection.create(req.body);
-            return res.status(301).redirect("/");
+            return res.status(301).redirect("/customer-login");
 
         } catch (error) {
             console.log(error);
@@ -191,7 +191,7 @@ module.exports = {
 
             res.clearCookie("loginCustomer");
             res.locals.session = null;
-            return res.status(301).redirect("/");
+            return res.status(301).redirect("/customer-login");
 
         } catch (error) {
             console.log(error);

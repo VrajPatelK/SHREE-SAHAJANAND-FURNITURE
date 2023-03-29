@@ -65,7 +65,7 @@ const ManagerCollection = require("./Models/system-users/manager-schema");
 app.get("/admin/manage", request_manager_routers);
 
 //static
-app.get("/home", static_routers);
+app.get("/", static_routers);
 app.get("/about", static_routers);
 app.get("/contact", static_routers);
 app.post("/contact", static_routers);
@@ -75,8 +75,8 @@ app.post("/subscribe", static_routers);
 //customers
 app.get("/customer-register", customer_routers);
 app.post("/customer-register", customer_routers);
-app.get("/", customer_routers);
-app.post("/", customer_routers);
+app.get("/customer-login", customer_routers);
+app.post("/customer-login", customer_routers);
 app.post("/payment", customer_routers);
 app.get("/customer-profile", customer_routers);
 app.get("/customer-profile/edit", customer_routers);
@@ -160,6 +160,7 @@ app.post("/product/tvunit", product_create_routers);
 app.post("/product/wardrobe", product_create_routers);
 
 app.get("/product/:category/:pid", product_read_routers);
+app.get("/product/:category", product_read_routers);
 app.get("/product", product_read_routers);
 
 app.get("/product/:category/edit/:pid", product_update_routers);
