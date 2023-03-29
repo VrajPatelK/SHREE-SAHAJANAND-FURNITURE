@@ -68,6 +68,9 @@ app.get("/admin/manage", request_manager_routers);
 app.get("/home", static_routers);
 app.get("/about", static_routers);
 app.get("/contact", static_routers);
+app.post("/contact", static_routers);
+app.post("/subscribe", static_routers);
+
 
 //customers
 app.get("/customer-register", customer_routers);

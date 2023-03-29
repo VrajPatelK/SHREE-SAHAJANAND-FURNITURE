@@ -63,8 +63,8 @@
 }
 
 
-#contact-mobile,
-#contact-email {
+#contact_mobile,
+#contact_email {
     background: #fff;
     border-radius: .5rem;
     color: #1A120B;
@@ -72,8 +72,8 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-#contact-email:hover,
-#contact-mobile:hover {
+#contact_email:hover,
+#contact_mobile:hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 15px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
 }
 

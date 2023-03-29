@@ -8,6 +8,7 @@
     <%- include ('../partials/header-links') %>
         <!-- custom-css -->
         <link rel="stylesheet" href="./css/contact.css">
+
 </head>
 
 <body>
@@ -20,74 +21,86 @@
                     <hr>
                 </h1>
             </div>
-            <div id="contact-card-div" class="container-fluid row px-0">
-                <div id="contact-card-left-div" class="col-md-5 px-md-2 px-0 mx-0 mb-md-0 mb-3 order-md-1">
-                    <div id="box1" class="col-lg-8 col-md-12 col-sm-8 col-12 my-3 py-2">
-                        <div id="mail" class="icon my-2 box1-icon-container">
-                            <i class="fa-sharp fa-solid fa-envelope"></i>
-                        </div>
-                        <hr>
-                        <a id="contact-email" class="px-3 py-1" href="https://www.google.com">abcd@google.com</a>
-                        <hr>
-                        <h6> Send A Message </h7>
-                    </div>
-
-                    <div id="box2" class="col-lg-8 col-md-12 col-sm-8 col-12 my-3 py-2">
-                        <div class="py-1" id="box2-icon-container">
-                            <div class="icon mx-2 mt-2 whatsapp-container">
-                                <a href="https://wa.me/918732937702/" target="_blank">
-                                    <button class="btn btnIcon"><i class="fa-brands fa-whatsapp"></i></button>
-                                </a>
-                            </div>
-                            <div class="icon mx-2 mt-2 facebook-container">
-                                <a href="https://www.facebook.com/profile.php?id=100073303742732" target="_blank">
-                                    <button class="btn btnIcon"><i class="fa-brands fa-facebook-f"></i></button>
-                                </a>
-                            </div>
-                            <div class="icon mx-2 mt-2 instragram-container">
-                                <a href="https://www.instagram.com/vrajpatel__010/" target="_blank">
-                                    <button class="btn btnIcon"><i class="fa-brands fa-instagram"></i></button>
-                                </a>
-                            </div>
-                            <div class="icon mx-2 mt-2 linkedIn-container">
-                                <a href="https://www.linkedin.com/in/vraj-patel-397696214" target="_blank">
-                                    <button class="btn btnIcon"><i class="fa-brands fa-linkedin-in"></i></button>
-                                </a>
-                            </div>
-                        </div>
-                        <hr>
-                        <a id="contact-mobile" class="px-3 py-1" href="https://www.google.com">+91 98765 12345</a>
-                        <hr>
-                        <h6> Send A Message </h7>
-                    </div>
+            <% if(msg) {%>
+                <div class="container alert alert-success alert-dismissible fade show" role="alert">
+                    <%=msg%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <%}%>
 
-                <div id="contact-card-right-div" class="col-md-7 px-md-2 px-0 mx-0 order-md-2">
-                    <form class="col-lg-10 col-12 form-control-lg">
-                        <div class="col-12 my-4">
-                            <input type="text" class="form-control" id="inputAddress" name="contact-name"
-                                placeholder="Name">
-                        </div>
-                        <div class="col-12 my-4 d-flex justify-content-space-between align-items-center">
-                            <div class="col me-2">
-                                <input type="email" class="form-control" id="inputEmail4" name="contact-email"
-                                    placeholder=" E-mail">
+                    <div id="contact-card-div" class="container-fluid row px-0">
+                        <div id="contact-card-left-div" class="col-md-5 px-md-2 px-0 mx-0 mb-md-0 mb-3 order-md-1">
+                            <div id="box1" class="col-lg-8 col-md-12 col-sm-8 col-12 my-3 py-2">
+                                <div id="mail" class="icon my-2 box1-icon-container">
+                                    <i class="fa-sharp fa-solid fa-envelope"></i>
+                                </div>
+                                <hr>
+                                <a id="contact_email" class="px-3 py-1"
+                                    href="https://www.google.com">abcd@google.com</a>
+                                <hr>
+                                <h6> Send A Message </h7>
                             </div>
-                            <div class="col ms-2">
-                                <input type="password" class="form-control" id="inputPassword4" name="contact-mobile"
-                                    placeholder="Mobile">
+
+                            <div id="box2" class="col-lg-8 col-md-12 col-sm-8 col-12 my-3 py-2">
+                                <div class="py-1" id="box2-icon-container">
+                                    <div class="icon mx-2 mt-2 whatsapp-container">
+                                        <a href="https://wa.me/918732937702/" target="_blank">
+                                            <button class="btn btnIcon"><i class="fa-brands fa-whatsapp"></i></button>
+                                        </a>
+                                    </div>
+                                    <div class="icon mx-2 mt-2 facebook-container">
+                                        <a href="https://www.facebook.com/profile.php?id=100073303742732"
+                                            target="_blank">
+                                            <button class="btn btnIcon"><i class="fa-brands fa-facebook-f"></i></button>
+                                        </a>
+                                    </div>
+                                    <div class="icon mx-2 mt-2 instragram-container">
+                                        <a href="https://www.instagram.com/vrajpatel__010/" target="_blank">
+                                            <button class="btn btnIcon"><i class="fa-brands fa-instagram"></i></button>
+                                        </a>
+                                    </div>
+                                    <div class="icon mx-2 mt-2 linkedIn-container">
+                                        <a href="https://www.linkedin.com/in/vraj-patel-397696214" target="_blank">
+                                            <button class="btn btnIcon"><i
+                                                    class="fa-brands fa-linkedin-in"></i></button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <a id="contact_mobile" class="px-3 py-1" href="https://www.google.com">+91 98765
+                                    12345</a>
+                                <hr>
+                                <h6> Send A Message </h7>
                             </div>
                         </div>
-                        <div class=" col-12 my-4">
-                            <textarea class="form-control" name="contact-msg" id="" cols="30" rows="4"
-                                placeholder="Leave a comment here..."></textarea>
+
+                        <div id="contact-card-right-div" class="col-md-7 px-md-2 px-0 mx-0 order-md-2">
+                            <form class="col-lg-10 col-12 form-control-lg" method="post">
+                                <div class="col-12 my-4">
+                                    <input type="text" class="form-control" id="inputAddress" name="contact_name"
+                                        placeholder="Name">
+                                </div>
+                                <div class="col-12 my-4 d-flex justify-content-space-between align-items-center">
+                                    <div class="col me-2">
+                                        <input type="email" class="form-control" id="inputEmail4" name="contact_email"
+                                            placeholder="E-mail">
+                                    </div>
+                                    <div class="col ms-2">
+                                        <input type="tel" class="form-control" id="inputMobile" name="contact_mobile"
+                                            pattern="[0-9]{10}" min="10" max="10" placeholder="Mobile">
+                                    </div>
+                                </div>
+                                <div class=" col-12 my-4">
+                                    <textarea class="form-control" name="contact_msg" id="" cols="30" rows="4"
+                                        placeholder="Leave a comment here..."></textarea>
+                                </div>
+                                <div class="col-12 my-4">
+                                    <button type="submit" class="btn" id="contact-sbmt-btn">Do
+                                        not Touch</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="col-12 my-4">
-                            <button type="submit" class="btn" id="contact-sbmt-btn">Do not Touch</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                    </div>
         </div>
 
         <!-- Google Map -->
@@ -105,8 +118,6 @@
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-
-
         <!-- Footer -->
         <%- include('../partials/footer')%>
 

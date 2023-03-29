@@ -1,3 +1,19 @@
+<script>
+    function handleSubscriber() {
+        $(document).ready(() => {
+            let email = (".subscribe-bar").valueOf();
+            let body = { email };
+            $.post("/subscribe", body, (data, status) => {
+                let html =
+                    `<div class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+                        Successfully Subscribe ...
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+                $(".succ-msg-div").html(html);
+            });
+        });
+    }
+</script>
 <div class="container-fluid" id="footer-main-div">
     <div class="container px-0">
 
@@ -62,14 +78,16 @@
                 <div class="col-md-5" id="footer-subscribe-form-div">
                     <form action="#" method="get">
                         <h5 class="footer-h5-heading">Subscribe to our newsletter</h5>
-                        <p class="footer-para px-2">Monthly digest of what's new and exciting from us.</p>
+                        <p class="footer-para px-2" style="color: #3C2A21;">Monthly digest of what's new and exciting
+                            from us.</p>
+                        <div class="mx-auto succ-msg-div"></div>
                         <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-
                             <div class="input-group mb-3 px-2">
                                 <input type="text" class="form-control subscribe-bar" placeholder="Your Email"
                                     aria-label="Your Email" aria-describedby="button-addon2">
 
-                                <button class="btn btn-type-1" type="submit" id="button-addon2" style="border: 1px solid #3C2A21;">Subscribe</button>
+                                <button class="btn btn-type-1" type="button" id="button-addon2"
+                                    style="border: 1px solid #3C2A21;" onclick="handleSubscriber()">Subscribe</button>
                             </div>
 
                         </div>
