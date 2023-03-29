@@ -66,7 +66,7 @@ function makeProductCards(products) {
                         </div>
 
                         <div class="card-footer d-flex justify-content-end align-items-center">
-                            <a href="#" class="btn btn-type-1 card-link">
+                            <a href="/product/${product.category}/${product._id}" class="btn btn-type-1 card-link">
                                 <i class="fa-solid fa-eye fa-beat"></i> &nbsp; Product
                             </a>
                         </div>

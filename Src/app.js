@@ -155,7 +155,7 @@ app.post("/product/tempale", product_create_routers);
 app.post("/product/tvunit", product_create_routers);
 app.post("/product/wardrobe", product_create_routers);
 
-app.get("/product/:category", product_read_routers);
+app.get("/product/:category/:pid", product_read_routers);
 app.get("/product", product_read_routers);
 
 app.get("/product/:category/edit/:pid", product_update_routers);

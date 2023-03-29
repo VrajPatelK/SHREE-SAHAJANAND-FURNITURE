@@ -14,40 +14,41 @@ module.exports = {
     getProduct: async (req, res) => {
         try {
             let category = req.params.category;
+            let pid = req.params.pid;
             let result = null;
 
             if (category === 'bed') {
-                result = await BedCollection.find({});
+                result = await BedCollection.find({ _id: pid });
             }
             else if (category === 'chair') {
-                result = await ChairCollection.find({});
+                result = await ChairCollection.find({ _id: pid });
             }
             else if (category === 'jula') {
-                result = await JulaCollection.find({});
+                result = await JulaCollection.find({ _id: pid });
             }
             else if (category === 'mattresse') {
-                result = await MattressesCollection.find({});
+                result = await MattressesCollection.find({ _id: pid });
             }
             else if (category === 'shoerack') {
-                result = await ShoerackCollection.find({});
+                result = await ShoerackCollection.find({ _id: pid });
             }
             else if (category === 'showcase') {
-                result = await ShowcaseCollection.find({});
+                result = await ShowcaseCollection.find({ _id: pid });
             }
             else if (category === 'sofa') {
-                result = await SofaCollection.find({});
+                result = await SofaCollection.find({ _id: pid });
             }
             else if (category === 'table') {
-                result = await TableCollection.find({});
+                result = await TableCollection.find({ _id: pid });
             }
             else if (category === 'tempale') {
-                result = await TempaleCollection.find({});
+                result = await TempaleCollection.find({ _id: pid });
             }
             else if (category === 'tvunit') {
-                result = await TvUnitCollection.find({});
+                result = await TvUnitCollection.find({ _id: pid });
             }
             else if (category === 'wardrobe') {
-                result = await WardrobeCollection.find({});
+                result = await WardrobeCollection.find({ _id: pid });
             }
             else {
                 return res.status(401).json({ error: true, em: "page not found" });

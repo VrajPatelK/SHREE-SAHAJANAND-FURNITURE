@@ -491,17 +491,40 @@ border: 2px solid red;
     border-radius: .5rem;
 }
 
+.product-card-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    border: 1px solid #D5CEA3;
+}
+
 .product-img-div img {
     border: 3px solid #fff;
     box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
 }
 
+.inner-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inner-div>.info-div {
+    width: 100%;
+}
+
+.inner-div>.info-div>.key-para,
+.inner-div>.info-div>.value-para {
+    text-align: center;
+}
+
 .info-div {
     border: 2px solid #fff;
-    display: flex;
+    /* display: flex;
     justify-content: space-evenly;
-    align-items: center;
-    background: #fff;
+    align-items: center; */
+    background: #E5E5CB;
     border-radius: 0.5rem;
     box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
 }
@@ -515,10 +538,22 @@ border: 2px solid red;
 .key-para {
     border-radius: .5rem;
     text-align: left;
-    width: 30%;
+    /* width: 30%; */
 }
 
-.value-para,
+.value-para {
+    border-radius: .5rem;
+    text-align: right;
+    /* width: 70%; */
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.desc-para {
+    text-align: justify;
+}
+
 .list-group-item input {
     border-radius: .5rem;
     text-align: left;
