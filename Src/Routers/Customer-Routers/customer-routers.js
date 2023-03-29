@@ -11,7 +11,9 @@ const {
     getUpdateCustomer,
     postUpdateCustomer,
     logoutCustomer,
-    deleteCustomer
+    deleteCustomer,
+
+    Payment
 
 } = require("../../../Controllers/Customer-Controllers/customer-cntrl");
 
@@ -21,6 +23,7 @@ router.get("/customer-register", customerNotLoggedIn, getCreateCustomer);
 router.post("/customer-register", postCreateCustomer);
 router.get("/", customerNotLoggedIn, getLoginCustomer);
 router.post("/", postLoginCustomer);
+router.post("/payment", isCustomer, Payment);
 
 router.get("/customer-profile", isCustomer, getCustomer);
 router.get("/customer-profile/edit", isCustomer, getUpdateCustomer);

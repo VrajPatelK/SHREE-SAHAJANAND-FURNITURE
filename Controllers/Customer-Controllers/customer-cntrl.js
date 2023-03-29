@@ -1,5 +1,6 @@
 const CustomerCollection = require("../../src/Models/customers/customer-schema");
 const Bcrypt = require("bcryptjs");
+const { payment } = require("../../Src/Helpers/payment");
 
 module.exports = {
     getCreateCustomer: async (req, res) => {
@@ -197,4 +198,15 @@ module.exports = {
         }
     },
 
+    Payment: async (req, res) => {
+
+        let amount = req.body.amount;
+        payment(amount)
+            .then((data) => {
+                return res.status(200).send(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 };

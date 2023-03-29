@@ -13,7 +13,6 @@ module.exports = {
         const toBuffer = promisify(qrcode.toBuffer);
         return toBuffer(upiLink, options)
             .then(buffer => {
-                console.log('QR code generated successfully');
                 const base64 = buffer.toString('base64');
                 const imgSrc = `data:image/png;base64,${base64}`;
                 return imgSrc;
