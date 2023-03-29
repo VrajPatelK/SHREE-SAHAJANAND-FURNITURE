@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
         <script src="../JS/image-script.js" defer></script>
 
-
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
         <%if(session.userType==="customer" ){%>
             <script>
 
@@ -120,19 +120,42 @@
                         express_session_update();
                     });
                 }
+                function initPayment(image, name, pid, data) {
+                    const options = {
+                        key: "rzp_test_UH2jjfYOR8enLr",
+                        amount: data.amount,
+                        currency: data.currency,
+                        name: name,
+                        description: "Test Transaction",
+                        image: image,
+                        order_id: data.id,
+                        handler: async (response) => {
+                            try {
+                                response.pid = pid;
+                                $.post("/api/payment/verify", response, (data, status) => {
+                                    console.log(data);
+                                });
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        },
+                        theme: {
+                            color: "#3399cc",
+                        },
+                    };
+                    const rzp1 = new window.Razorpay(options);
+                    rzp1.open();
+                    console.log("paymanet succesfuly sone :)");
+                }
 
-                function handlePayment(amount, pid) {
+                function handlePayment(image, name, amount, pid) {
 
                     $(document).ready(() => {
                         let body = { amount };
 
-                        $.post("/payment", body, (data, status) => {
-                            let qrCode =
-                                `<div class="qr-div py-3 rounded text-center">
-                                <img src="${data}" class="qr-code" alt="" srcset="">
-                                </div>`;
-
-                            $(`#modal-body-${pid}`).html(qrCode);
+                        $.post("/api/payment/orders", body, (data, status) => {
+                            console.log(data);
+                            initPayment(image, name, pid, data.data);
                         });
                     });
                 }
@@ -301,15 +324,14 @@
                                                 </div>
 
                                                 <div class="mt-4 ms-auto btn-div" id="#">
-                                                    <button class="btn btn-outline-success" data-bs-toggle="modal"
-                                                        data-bs-target="#paymentModal"
-                                                        onclick="handlePayment('<%=result.price%>','<%=result._id%>' )">
+                                                    <button class="btn btn-outline-success"
+                                                        onclick="handlePayment('<%=result.image%>','<%=result.name%>','<%=result.price%>','<%=result._id%>' )">
                                                         <i class="fa-solid fa-bag-shopping fa-beat fa-sm"></i>
                                                         Buy</button>
                                                 </div>
                                             </div>
 
-                                            <!--  -->
+                                            <!-- data-bs-toggle="modal" data-bs-target="#paymentModal" -->
                                             <!-- Modal payment -->
                                             <div class="modal fade" id="paymentModal" data-bs-backdrop="static"
                                                 data-bs-keyboard="false" tabindex="-1"

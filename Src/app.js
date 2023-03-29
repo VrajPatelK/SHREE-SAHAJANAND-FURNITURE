@@ -273,9 +273,13 @@ app.post("/api/payment/verify", async (req, res) => {
             .createHmac("sha256", process.env.KEY_SECRET)
             .update(sign.toString())
             .digest("hex");
+        let pid = req.body.pid;
+
 
         if (razorpay_signature === expectedSign) {
-            return res.status(200).json({ message: "Payment verified successfully" });
+            res.status(200).json({ message: "Payment verified successfully" });
+            
+
         } else {
             return res.status(400).json({ message: "Invalid signature sent!" });
         }
