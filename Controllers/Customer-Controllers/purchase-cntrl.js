@@ -15,6 +15,9 @@ const LikeCollection = require("../../Src/Models/customers/like-schema");
 const FavouriteCollection = require("../../Src/Models/customers/favourites-schema");
 const CartItemCollection = require("../../Src/Models/customers/cartItems-schema");
 const CartCollection = require("../../Src/Models/customers/cart-schema");
+const { default: axios } = require("axios");
+const OrderItemCollection = require("../../Src/Models/customers/orderItems-schema");
+const OrderCollection = require("../../Src/Models/customers/orders-schema");
 
 module.exports = {
 
@@ -197,6 +200,115 @@ module.exports = {
 
             await CartItemCollection.deleteOne({ _id: cartid });
             return res.status(201).json(product);
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+
+    createOrder: async (req, res) => {
+        try {
+
+            let cartid = req.body.cartid;
+            let cid = res.locals.session.user._id.toString();
+
+            let cart = await CartCollection.findOne({ customer: cid });
+            if (cart === null) return res.json({ msg: "cartnot found :)" });
+
+            let cartItems = await CartItemCollection.find({ cart: cartid }).populate('product');
+
+            let order = await OrderCollection.create({ customer: cid });
+            let totalBill = 0;
+            let totalDiscount = 0;
+
+            for (let i = 0; i < cartItems.length; i++) {
+
+                let item = cartItems[i];
+
+                // billing...
+                let order_total = Math.ceil(item.product.price * item.quantity);
+                let order_discount = Math.floor(order_total * (item.product.discount / 100));
+                totalBill += order_total;
+                totalDiscount += order_discount;
+
+                let orderItem = await OrderItemCollection.create({
+                    order: order._id.toString(),
+                    product: item.product._id.toString(),
+                    productType: item.productType,
+                    quantity: item.quantity
+                });
+            }
+
+
+            order.totalBill = totalBill;
+            order.totalDiscount = totalDiscount;
+            order.orderDate = new Date();
+            await order.save();
+
+            // let product = null;
+            // let pid = req.body.pid;
+            // let category = res.locals.session.productType;
+
+            // if (category === 'bed') product = await BedCollection.findOne({ _id: pid });
+            // else if (category === 'chair') product = await ChairCollection.findOne({ _id: pid });
+            // else if (category === 'jula') product = await JulaCollection.findOne({ _id: pid });
+            // else if (category === 'mattresse') { product = await MattressesCollection.findOne({ _id: pid }); category = (category + 's'); }
+            // else if (category === 'shoerack') product = await ShoerackCollection.findOne({ _id: pid });
+            // else if (category === 'showcase') product = await ShowcaseCollection.findOne({ _id: pid });
+            // else if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
+            // else if (category === 'table') product = await TableCollection.findOne({ _id: pid });
+            // else if (category === 'tempale') product = await TempaleCollection.findOne({ _id: pid });
+            // else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
+            // else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
+
+            // if (product === null) return res.status(200).send("product doesn't found:)");
+            // if (customer === null) return res.status(200).send("account doesn't found:)");
+
+            // if (cart === null && cartItem === null) {
+            //     cart = await CartCollection.create({ customer: cid });
+            //     cartItem = await CartItemCollection.create({ product: pid, cart: cart._id, productType: category, quantity: 1 });
+            // }
+            // else if (cart !== null && cartItem === null) {
+            //     cartItem = await CartItemCollection.create({ product: pid, cart: cart._id, productType: category, quantity: 1 });
+            // }
+            // else if (cart !== null && cartItem !== null) {
+            //     cartItem = await CartItemCollection.findOne({ _id: cartid });
+            //     cartItem.quantity += 1;
+            //     await cartItem.save();
+            // }
+
+            // ---
+            return res.status(201).json(order);
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    getOrdersByCustomer: async (req, res) => {
+        try {
+            let cid = res.locals.session.user._id.toString();
+
+            let temp = await OrderCollection.find({ customer: cid });
+            let orders = temp;
+
+            if (orders.length == 0)
+                return res.status(200).json([]);
+
+            let items = [];
+            for (let i = 0; i < orders.length; i++) {
+                let orderItems = await OrderItemCollection.find({ order: orders[i]._id }).populate('product');
+                items.push({ oid: orders[i]._id.toString(), orderItems: orderItems });
+            }
+
+            return res.status(201).json({ orders: orders, itemArr: items });
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    displayOrders: async (req, res) => {
+        try {
+            return res.status(200).render("customer/my-orders");
 
         } catch (error) {
             return res.status(401).send(error);

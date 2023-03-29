@@ -12,8 +12,11 @@ const {
     removeCart,
     getCartsByCustomer,
     updateCart,
-
     displayCarts,
+
+    createOrder,
+    getOrdersByCustomer,
+    displayOrders,
 
 } = require("../../../Controllers/Customer-Controllers/purchase-cntrl");
 
@@ -28,5 +31,9 @@ router.post('/rmv-to-cart', removeCart);
 router.post('/update-cart', updateCart);
 
 router.get('/carts', displayCarts);
+
+router.post('/create-order', createOrder);
+router.get('/get-orders', getOrdersByCustomer);
+router.get('/my-orders', displayOrders);
 
 module.exports = router;

@@ -131,9 +131,16 @@
                         order_id: data.id,
                         handler: async (response) => {
                             try {
-                                response.pid = pid;
+                                // response.pid = pid;
                                 $.post("/api/payment/verify", response, (data, status) => {
-                                    console.log(data);
+
+                                    if (data.paymentStatus) { // if payment successfull ...
+                                        console.log(data);
+                                        let body = { cartid: "64207609a416020ff785188b" };
+                                        $.post("/create-order", body, (data, status) => {
+                                            console.log(data);
+                                        });
+                                    }
                                 });
                             } catch (error) {
                                 console.log(error);
@@ -159,7 +166,8 @@
                         });
                     });
                 }
-            </script>
+           
+           </script>
             <%}%>
 </head>
 

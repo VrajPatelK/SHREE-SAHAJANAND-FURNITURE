@@ -193,6 +193,10 @@ app.post('/rmv-to-cart', purchase_routers);
 app.get('/get-carts', purchase_routers);
 app.get('/carts', purchase_routers);
 app.post('/update-cart', purchase_routers);
+//order
+app.post('/create-order', purchase_routers);
+app.get('/get-orders', purchase_routers);
+app.get('/my-orders', purchase_routers);
 
 
 //searchin ...
@@ -277,9 +281,7 @@ app.post("/api/payment/verify", async (req, res) => {
 
 
         if (razorpay_signature === expectedSign) {
-            res.status(200).json({ message: "Payment verified successfully" });
-            
-
+            res.status(200).json({ message: "Payment verified successfully", paymentStatus: true });
         } else {
             return res.status(400).json({ message: "Invalid signature sent!" });
         }
