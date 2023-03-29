@@ -57,7 +57,7 @@ body {
 
 #parent-navs {
     /* border: 3px solid black; */
-    background: rgb(255, 251, 235);
+    background: #E5E5CB;
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -204,7 +204,8 @@ h3 {
 
 .footer-h5-heading {
     color: #fff;
-    text-shadow: 1px 1px #000;
+    text-shadow: 1px 1px #ffffff;
+    color: #1A120B;
 }
 
 .footer-item a {
@@ -248,6 +249,10 @@ h3 {
 }
 
 .subscribe-bar::placeholder {
+    color: #1A120B;
+}
+
+.footer-para {
     color: #1A120B;
 }
 

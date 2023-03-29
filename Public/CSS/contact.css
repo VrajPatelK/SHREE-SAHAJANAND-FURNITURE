@@ -25,12 +25,12 @@
 #box1,
 #box2 {
     /* border: 2px solid rgb(199, 170, 40); */
-    background: rgb(255, 95, 32);
-    color: #fff;
+    background: #D5CEA3;
+    color: #1A120B;
     border-radius: .5rem;
     text-shadow: 10px 20px 15px 10px;
     text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 #box1-icon-container,
@@ -54,8 +54,8 @@
 }
 
 #contact-card-right-div form {
-    background: rgb(255, 95, 32);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background: #D5CEA3;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,8 +153,7 @@
     outline: none;
     box-shadow: none;
     border: none;
-    /* border: 3px solid #fff; */
-    background: rgb(255, 231, 222);
+    background: #fff;
 }
 
 #contact-sbmt-btn {
@@ -164,7 +163,7 @@
 }
 
 #contact-sbmt-btn:hover {
-    background: rgb(255, 231, 222);
+    background: #fff;
 }
 
 /* GOOGLE MAP */

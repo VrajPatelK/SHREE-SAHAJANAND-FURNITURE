@@ -70,7 +70,7 @@
 
 .btn-type-1:hover {
     color: #1A120B;
-    background: rgb(255, 231, 222);
+    background: #fff;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .btn-type-2:hover {
-    background: rgb(255, 231, 222);
+    background: #fff;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 
 } */

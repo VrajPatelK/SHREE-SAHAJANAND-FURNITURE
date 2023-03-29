@@ -29,12 +29,13 @@
 }
 
 .about-card {
-    background: rgb(255, 251, 235);
+    background: #ffffff;
     border-radius: 50%;
     height: 15rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .about-card {
@@ -42,6 +43,8 @@
 }
 
 .about-card:hover {
+    background: #E5E5CB;
+    cursor: pointer;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
@@ -52,6 +55,7 @@
 
 #showroom-div {
     /* border: 2px solid rgb(17, 255, 0); */
+    background: #E5E5CB;
     padding-top: 30px;
     padding-bottom: 100px;
 }
