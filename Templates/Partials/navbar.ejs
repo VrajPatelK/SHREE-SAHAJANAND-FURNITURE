@@ -20,7 +20,8 @@
                 <%if(session.userType==="customer"){%>
                     <div class="col-1 header-icon-div d-flex justify-content-evenly align-items-center">
                         <div class="fav-icon-div">
-                            <a type="button" class="btn bg-none outline-none rounded border position-relative">
+                            <a href="/favourites" type="button"
+                                class="btn bg-none outline-none rounded border position-relative">
                                 <i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
                                     id="no_of_favs_badge">0

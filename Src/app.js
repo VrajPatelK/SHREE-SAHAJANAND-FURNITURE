@@ -187,6 +187,7 @@ app.get("/admin/orders", order_routers);
 app.post('/add-to-fav', purchase_routers);
 app.post('/rmv-to-fav', purchase_routers);
 app.get('/get-favourites', purchase_routers);
+app.get('/favourites', purchase_routers);
 //cart
 app.post('/add-to-cart', purchase_routers);
 app.post('/rmv-to-cart', purchase_routers);

@@ -75,6 +75,14 @@ module.exports = {
             return res.status(401).send(error);
         }
     },
+    displayFavourites: async (req, res) => {
+        try {
+            return res.status(200).render("customer/my-favs");
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
     removeFavourite: async (req, res) => {
         try {
             let likeItem = null;
