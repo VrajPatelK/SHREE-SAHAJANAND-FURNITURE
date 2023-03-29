@@ -15,7 +15,6 @@ const LikeCollection = require("../../Src/Models/customers/like-schema");
 const FavouriteCollection = require("../../Src/Models/customers/favourites-schema");
 const CartItemCollection = require("../../Src/Models/customers/cartItems-schema");
 const CartCollection = require("../../Src/Models/customers/cart-schema");
-const { default: axios } = require("axios");
 const OrderItemCollection = require("../../Src/Models/customers/orderItems-schema");
 const OrderCollection = require("../../Src/Models/customers/orders-schema");
 
@@ -294,7 +293,7 @@ module.exports = {
     },
     getOrdersByCustomer: async (req, res) => {
         try {
-            let cid = res.locals.session.user._id.toString();
+            let cid = res.locals.session.user._id.toString() || "640c984d08a3e51047b2419c";
 
             let temp = await OrderCollection.find({ customer: cid });
             let orders = temp;

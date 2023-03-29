@@ -19,7 +19,8 @@
 
                 function display_carts() { //declare ...
                     $(document).ready(() => {
-
+                        let amnt = 0;
+                        let id = 0;
                         getCarts = new Promise((resolve, reject) => {
                             $.get('/get-carts', (data, status) => {
                                 let cartItems = data;
@@ -75,11 +76,9 @@
                                 $("#table-body").html(all_carts);
                                 $("#bill-body").html(bill);
 
-                                let tmpHTML = $(".card-footer").html();
-                                tmpHTML +=
-                                    `<button class="btn btn-outline-success col-5" onclick="handlePayment(${Total},'${cartItems[0].cart}')">checkout</button>`;
-                                $(".card-footer").html(tmpHTML);
-
+                                let tmpHTML =
+                                    `<button class="btn btn-outline-success col-5" onclick="handlePayment(${Total},'${cartItems[0].cart}')" style="width:100%;">checkout</button>`;
+                                $(".123btn-div").html(tmpHTML);
                             });
                         });
                     });
@@ -191,9 +190,12 @@
                     <div class="card-header">
                         Bill
                     </div>
-                    <ul class="list-group list-group-flush" id="bill-body"></ul>
+                    <ul class="list-group list-group-flush" id="bill-body" style="width: 100%;"></ul>
                     <div class="card-footer text-center">
                         <a href="/products" class="col-5 me-2">continue shopping</a>
+                        <div class="123btn-div" style="width: 100%;">
+
+                        </div>
                     </div>
                 </div>
             </div>

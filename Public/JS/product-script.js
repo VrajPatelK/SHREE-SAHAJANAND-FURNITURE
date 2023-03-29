@@ -41,7 +41,7 @@ function makeProductCards(products) {
         let html =
             `<div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
                     <div class="card d-block" style="width: 18rem;">
-                        <div class="img-div" style="max-height: 12rem;">
+                        <div class="img-div" style="max-height: 12rem;overflow: hidden;">
                             ${image}
                         </div>
                         <div class="card-header">
@@ -50,7 +50,6 @@ function makeProductCards(products) {
                             </h5>
                             <p class="card-text">
                                 ${product.description}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, velit!
                             </p>
                             <p class="card-text d-flex justify-content-between align-item-center">
                                 <span class="badge bg-white" style="font-size: .9rem; color: #1A120B;">

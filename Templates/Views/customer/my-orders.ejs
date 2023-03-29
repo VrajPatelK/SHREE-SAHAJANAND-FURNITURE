@@ -10,7 +10,7 @@
     </title>
     <%- include ('../../partials/header-links') %>
 
-        <%if(session.userType==="customer" ){%>
+        <%if(session.userType==="customer" ||session.userType==="admin" ){%>
             <script>
 
                 display_orders(); // calling ...
@@ -75,9 +75,21 @@
                                         `<div class="order-div d-flex justify-content-between align-items-start" style="width=100%;background:#D5CEA3;">
                                             <div class="item-parent-div d-flex justify-content-center align-items-center col-6">${left_cards}</div>
                                             <div class="bill-parent-div d-flex justify-content-center align-items-center col-6">${bill}</div>
+                                            <% if(session.userType === "admin"){%>
+                                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" onclick="handleDelivery()">
+                                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btncheck1" class="delivery">Not Delivered</label>
+                                            </div>
+                                            <%}%>
                                         </div>`;
                                     console.log(html);
 
+                                }
+
+                                function handleDelivery() {
+                                    $(".delivery").text("Delivered");
+                                    $(".delivery").removeClass("btn-outline-danger");
+                                    $(".delivery").addClass("btn-outline-success");
                                 }
 
                                 $(".my-orders-div").html(html);

@@ -74,18 +74,7 @@
                         <%}%>
 
                             <!-- admin - reserved -->
-                            <%if(session.userType==="admin" || session.userType==="accountant" ||
-                                session.userType==="manager" ){%>
-
-                                <li class="nav-item btn-type-1-inverse mx-2">
-                                    <a class="nav-link">Sells</a>
-                                </li>
-                                <%}%>
-                                    <%if(session.userType==="admin" || session.userType==="accountant" ){%>
-                                        <li class="nav-item btn-type-1-inverse mx-2">
-                                            <a class="nav-link">Orders</a>
-                                        </li>
-                                        <%}%>
+                            
 
                                             <%if(session.userType==="admin" || session.userType==="customer" ){%>
 
