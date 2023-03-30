@@ -336,25 +336,6 @@
                                                 </div>
                                             </div>
 
-                                            <!-- data-bs-toggle="modal" data-bs-target="#paymentModal" -->
-                                            <!-- Modal payment -->
-                                            <div class="modal fade" id="paymentModal" data-bs-backdrop="static"
-                                                data-bs-keyboard="false" tabindex="-1"
-                                                aria-labelledby="paymentModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="paymentModalLabel">QR San Code
-                                                            </h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body" id="modal-body-<%=result._id%>">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <%}else if(session.userType==="admin" ){%>
                                                 <div class="mt-4 btn-div">
                                                     <a href="/product/bed/edit/<%=result._id%>">
@@ -428,13 +409,13 @@
                     </div>
 
                     <div class="col-12">
-                        <input type="text" class="form-control" id="add_width" value="23" name="add_width" placeholder="Width"
-                            required>
+                        <input type="text" class="form-control" id="add_width" value="23" name="add_width"
+                            placeholder="Width" required>
                     </div>
 
                     <div class="col-12">
-                        <input type="number" class="form-control" id="add_price" value="120" name="add_price" placeholder="Price"
-                            required>
+                        <input type="number" class="form-control" id="add_price" value="120" name="add_price"
+                            placeholder="Price" required>
                     </div>
 
                     <div class="col-12">

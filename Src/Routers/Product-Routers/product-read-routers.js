@@ -4,7 +4,6 @@ const router = express.Router();
 //controllers
 const {
     getProduct,
-    getProducts,
     getProductByFilter,
     getAllProducts
 
@@ -19,7 +18,6 @@ router.use(function (req, res, next) {
 });
 
 router.get("/product/:category/:pid", getProduct);
-router.get("/product/:category", getProducts);
 router.get("/product", getAllProducts);
 router.post("/filter-products", getProductByFilter);
 

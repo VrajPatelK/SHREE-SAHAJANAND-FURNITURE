@@ -102,8 +102,7 @@ function handleFilter() {
 function filterDisplayManager() {
     $(document).ready(() => {
         let category = $("#category-filter").val();
-        console.log(category);
-        
+
         if (category === "all") {
             $(".prize-filter-btn").hide();
             $(".material-filter-btn").hide();

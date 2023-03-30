@@ -61,57 +61,6 @@ module.exports = {
             console.log(error);
         }
     },
-    getProducts: async (req, res) => {
-        try {
-            let category = req.params.category;
-            let pid = req.params.pid;
-            let result = null;
-
-            if (category === 'bed') {
-                result = await BedCollection.find({});
-            }
-            else if (category === 'chair') {
-                result = await ChairCollection.find({});
-            }
-            else if (category === 'jula') {
-                result = await JulaCollection.find({});
-            }
-            else if (category === 'mattresse') {
-                result = await MattressesCollection.find({});
-            }
-            else if (category === 'shoerack') {
-                result = await ShoerackCollection.find({});
-            }
-            else if (category === 'showcase') {
-                result = await ShowcaseCollection.find({});
-            }
-            else if (category === 'sofa') {
-                result = await SofaCollection.find({});
-            }
-            else if (category === 'table') {
-                result = await TableCollection.find({});
-            }
-            else if (category === 'tempale') {
-                result = await TempaleCollection.find({});
-            }
-            else if (category === 'tvunit') {
-                result = await TvUnitCollection.find({});
-            }
-            else if (category === 'wardrobe') {
-                result = await WardrobeCollection.find({});
-            }
-            else {
-                return res.status(401).json({ error: true, em: "page not found" });
-            }
-
-            res.locals.session.productType = category;
-            res.status(200).render(`products/manage-${category}s`, { results: result });
-
-        } catch (error) {
-            console.log(error);
-        }
-    },
-
     getProductByFilter: async (req, res) => {
         try {
             let min = parseInt(req.body.f1[0]);
