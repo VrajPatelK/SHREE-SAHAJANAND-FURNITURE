@@ -19,6 +19,9 @@ const {
     getOrdersByCustomer,
     displayOrders,
 
+    paymentOrder,
+    paymentVerify
+
 } = require("../../../Controllers/Customer-Controllers/purchase-cntrl");
 
 
@@ -37,5 +40,12 @@ router.get('/carts', displayCarts);
 router.post('/create-order', createOrder);
 router.get('/get-orders', getOrdersByCustomer);
 router.get('/my-orders', displayOrders);
+
+
+// payment
+const cors = require("cors");
+router.use(cors());
+router.post("/api/payment/orders", paymentOrder)
+router.post("/api/payment/verify", paymentVerify)
 
 module.exports = router;
