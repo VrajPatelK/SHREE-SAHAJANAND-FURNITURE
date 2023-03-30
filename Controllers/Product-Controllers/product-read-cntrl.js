@@ -123,81 +123,224 @@ module.exports = {
             let result = null;
 
             if (category === 'bed') {
-                result = await BedCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await BedCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await BedCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await BedCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await BedCollection.find({});
+                }
             }
             else if (category === 'chair') {
-                result = await ChairCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await ChairCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await ChairCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await ChairCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await ChairCollection.find({});
+                }
             }
             else if (category === 'jula') {
-                result = await JulaCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await JulaCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await JulaCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await JulaCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await JulaCollection.find({});
+                }
             }
             else if (category === 'mattresse') {
-                result = await MattressesCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await MattressesCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await MattressesCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await MattressesCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await MattressesCollection.find({});
+                }
             }
             else if (category === 'shoerack') {
-                result = await ShoerackCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await ShoerackCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await ShoerackCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await ShoerackCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await ShoerackCollection.find({});
+                }
             }
             else if (category === 'showcase') {
-                result = await ShowcaseCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await ShowcaseCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await ShowcaseCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await ShowcaseCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await ShowcaseCollection.find({});
+                }
             }
             else if (category === 'sofa') {
-                result = await SofaCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await SofaCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await SofaCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await SofaCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await ChairCollection.find({});
+                }
             }
             else if (category === 'table') {
-                result = await TableCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await TableCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await TableCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await TableCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await TableCollection.find({});
+                }
             }
             else if (category === 'tempale') {
-                result = await TempaleCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await TempaleCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await TempaleCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await TempaleCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await TempaleCollection.find({});
+                }
             }
             else if (category === 'tvunit') {
-                result = await TvUnitCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await TvUnitCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await TvUnitCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await TvUnitCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await TvUnitCollection.find({});
+                }
             }
             else if (category === 'wardrobe') {
-                result = await WardrobeCollection.find({
-                    price: { $gte: min, $lte: max },
-                    material: material,
-                    discount: { $lte: discount }
-                });
+                if (min === -1 && max === -1 && discount > -1) {
+                    result = await WardrobeCollection.find({
+                        discount: { $lte: discount }
+                    });
+                }
+                else if (min != -1 && max != -1 && discount === -1) {
+                    result = await WardrobeCollection.find({
+                        price: { $gte: min, $lte: max },
+                    });
+                }
+                else if (min != -1 && max != -1 && discount > -1) {
+                    result = await WardrobeCollection.find({
+                        price: { $gte: min, $lte: max },
+                        discount: { $lte: discount }
+                    });
+                } else { //(min === -1 && max === -1 && discount === -1)
+                    result = await WardrobeCollection.find({});
+                }
             }
             else if (category === 'all') {
                 result = new Array();
@@ -245,7 +388,7 @@ module.exports = {
 
             res.status(200).render(`products/manage-all`, { results: results });
             // return res.status(200).json(results);
-
+            fun(ChairCollection);
         } catch (error) {
             console.log(error);
         }

@@ -44,9 +44,9 @@
                             <div class="filter-btn-div">
                                 <button class="btn prize-filter-btn">
                                     <select class="form-select" id="prize-filter">
-                                        <option value="500 - 1000" selected>&#x20b9; 500 - 1000</option>
-                                        <%for(let i=3; i<=20; i+=2) {%>
-                                            <option value="<%=500*i%> - <%=500*(i+2)%>">
+                                        <option value="-1|-1" selected>&#x20b9; Price</option>
+                                        <%for(let i=1; i<=20; i+=2) {%>
+                                            <option value="<%=500*i%>|<%=500*(i+2)%>">
                                                 &#x20b9; <%=500*i%> - <%=500*(i+2)%>
                                             </option>
                                             <%}%>
@@ -54,8 +54,8 @@
                                 </button>
                                 <button class="btn material-filter-btn">
                                     <select class="form-select" id="material-filter">
-                                        <option value="Material-1" selected>Material-1</option>
-                                        <%for(let i=2; i<=10; i++) {%>
+                                        <option value="undefined" selected>Material</option>
+                                        <%for(let i=1; i<=10; i++) {%>
                                             <option value="Material-<%=i%>">
                                                 Material-<%=i%>
                                             </option>
@@ -64,8 +64,8 @@
                                 </button>
                                 <button class="btn discount-filter-btn">
                                     <select class="form-select" id="discount-filter">
-                                        <option value="10" selected>Up to 10%</option>
-                                        <%for(let i=2; i<=8; i++) {%>
+                                        <option value="-1" selected>Discount</option>
+                                        <%for(let i=1; i<=8; i++) {%>
                                             <option value="<%=i*10%>">
                                                 Up to <%=i*10%>%
                                             </option>

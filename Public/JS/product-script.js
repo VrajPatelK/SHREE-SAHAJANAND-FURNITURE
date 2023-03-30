@@ -78,8 +78,11 @@ function makeProductCards(products) {
 }
 
 function handleFilter() {
+
+    filterDisplayManager();
+
     $(document).ready(() => {
-        let f1 = $("#prize-filter").val().split("-");
+        let f1 = $("#prize-filter").val().split("|");
         let f2 = $("#material-filter").val();
         let f3 = $("#discount-filter").val();
         let category = $("#category-filter").val();
@@ -93,5 +96,31 @@ function handleFilter() {
                 $(".card-parent-div").html(inner_html);
             });
         });
+    });
+}
+
+function filterDisplayManager() {
+    $(document).ready(() => {
+        let category = $("#category-filter").val();
+        console.log(category);
+        
+        if (category === "all") {
+            $(".prize-filter-btn").hide();
+            $(".material-filter-btn").hide();
+            $(".discount-filter-btn").hide();
+        }
+        else {
+
+            if (category === "sofa" || category === "table" || category === "mattress") {
+                $(".prize-filter-btn").show();
+                $(".material-filter-btn").show();
+                $(".discount-filter-btn").show();
+            }
+            else {
+                $(".material-filter-btn").hide();
+                $(".prize-filter-btn").show();
+                $(".discount-filter-btn").show();
+            }
+        }
     });
 }
