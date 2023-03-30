@@ -42,7 +42,7 @@
                                         let prc = item.quantity * item.product.price;
 
                                         left_cards +=
-                                            `<div class="card my-2 mx-1" style="width: 18rem;">
+                                            `<div class="col-3 card pt-3 my-2 mx-1" style="width: 18rem;">
                                                 <ul class="list-group list-group-flush" style="width:100%;">
                                                     <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Name</span><span class="amount">${item.product.name}</span></li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Price</span><span class="amount">${item.product.price}</span></li>
@@ -50,13 +50,13 @@
                                                     <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Dioscounts</span><span class="amount">${dis}</span></li>
                                                 </ul>
                                                 <div class="card-footer text-success">
-                                                    ${prc - dis}
+                                                   ${prc - dis}
                                                 </div>
                                             </div>`;
                                     }
 
                                     let bill =
-                                        `<div class="container  d-flex justify-content-center align-items-center">
+                                        `<div class="container d-flex justify-content-end align-items-center">
                                             <div class="card my-2" style="width: 18rem;">
                                                 <div class="card-header">
                                                     Bill
@@ -72,8 +72,8 @@
                                     console.log(bill);
 
                                     html +=
-                                        `<div class="order-div d-flex justify-content-between align-items-start" style="width=100%;background:#D5CEA3;">
-                                            <div class="item-parent-div d-flex justify-content-center align-items-center col-6">${left_cards}</div>
+                                        `<div class="order-div d-flex justify-content-between align-items-start my-3 py-2 px-2 rounded" style="width=100%;background:#D5CEA3;">
+                                            <div class="row item-parent-div d-flex justify-content-start align-items-center col-6">${left_cards}</div>
                                             <div class="bill-parent-div d-flex justify-content-center align-items-center col-6">${bill}</div>
                                             <% if(session.userType === "admin"){%>
                                             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" onclick="handleDelivery()">

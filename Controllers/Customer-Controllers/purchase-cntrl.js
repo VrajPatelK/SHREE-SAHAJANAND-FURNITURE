@@ -27,7 +27,7 @@ module.exports = {
             let customer = null;
             let pid = req.body.pid;
             let cid = res.locals.session.user._id.toString();
-            let category = res.locals.session.productType;
+            let category = res.locals.session.page;
 
             if (category === 'bed') product = await BedCollection.findOne({ _id: pid });
             else if (category === 'chair') product = await ChairCollection.findOne({ _id: pid });
@@ -105,7 +105,7 @@ module.exports = {
             let pid = req.body.pid;
             let cartid = undefined;
             let cid = res.locals.session.user._id.toString();
-            let category = res.locals.session.productType;
+            let category = res.locals.session.page;
 
             if (req.body.cartid)
                 cartid = req.body.cartid;
@@ -171,6 +171,7 @@ module.exports = {
     },
     displayCarts: async (req, res) => {
         try {
+            res.locals.session.page = "cart";
             return res.status(200).render("customer/add-to-cart");
 
         } catch (error) {
@@ -216,75 +217,87 @@ module.exports = {
     createOrder: async (req, res) => {
         try {
 
-            let cartid = req.body.cartid;
+            let category = res.locals.session.page;
             let cid = res.locals.session.user._id.toString();
 
-            let cart = await CartCollection.findOne({ customer: cid });
-            if (cart === null) return res.json({ msg: "cartnot found :)" });
+            let items = [];
+            let cart = null;
+            if (category === "cart") {
+                cart = await CartCollection.findOne({ customer: cid });
+                if (cart === null) return res.json({ error: "cart doesn't found" });
 
-            let cartItems = await CartItemCollection.find({ cart: cartid }).populate('product');
+                // delete the cart on success payment
+                await CartCollection.findByIdAndDelete(cart._id);
+
+                let cartid = req.body.id;
+                items = await CartItemCollection.find({ cart: cartid }).populate('product');
+
+            }
+            else {
+
+                let product = null;
+                let pid = req.body.id;
+
+                if (category === 'bed') product = await BedCollection.findOne({ _id: pid });
+                else if (category === 'chair') product = await ChairCollection.findOne({ _id: pid });
+                else if (category === 'jula') product = await JulaCollection.findOne({ _id: pid });
+                else if (category === 'mattresse') { product = await MattressesCollection.findOne({ _id: pid }); category = (category + 's'); }
+                else if (category === 'shoerack') product = await ShoerackCollection.findOne({ _id: pid });
+                else if (category === 'showcase') product = await ShowcaseCollection.findOne({ _id: pid });
+                else if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
+                else if (category === 'table') product = await TableCollection.findOne({ _id: pid });
+                else if (category === 'tempale') product = await TempaleCollection.findOne({ _id: pid });
+                else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
+                else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
+
+                items.push(product);
+            }
 
             let order = await OrderCollection.create({ customer: cid });
             let totalBill = 0;
             let totalDiscount = 0;
 
-            for (let i = 0; i < cartItems.length; i++) {
+            for (let i = 0; i < items.length; i++) {
 
-                let item = cartItems[i];
+                let item = items[i];
 
                 // billing...
-                let order_total = Math.ceil(item.product.price * item.quantity);
-                let order_discount = Math.floor(order_total * (item.product.discount / 100));
-                totalBill += order_total;
-                totalDiscount += order_discount;
+                if (category === "cart") {
+                    let order_total = Math.ceil(item.product.price * item.quantity);
+                    let order_discount = Math.floor(order_total * (item.product.discount / 100));
+                    totalBill += order_total;
+                    totalDiscount += order_discount;
 
-                let orderItem = await OrderItemCollection.create({
-                    order: order._id.toString(),
-                    product: item.product._id.toString(),
-                    productType: item.productType,
-                    quantity: item.quantity
-                });
+                    let orderItem = await OrderItemCollection.create({
+                        order: order._id.toString(),
+                        product: item.product._id.toString(),
+                        productType: item.productType,
+                        quantity: item.quantity
+                    });
+
+                    // delete the cart-items on success payment
+                    await CartItemCollection.findByIdAndDelete(item._id);
+
+                } else {
+                    let order_total = Math.ceil(item.price * 1);
+                    let order_discount = Math.floor(order_total * (item.discount / 100));
+                    totalBill += order_total;
+                    totalDiscount += order_discount;
+
+                    let orderItem = await OrderItemCollection.create({
+                        order: order._id.toString(),
+                        product: item._id.toString(),
+                        productType: item.category,
+                        quantity: 1
+                    });
+                }
             }
-
 
             order.totalBill = totalBill;
             order.totalDiscount = totalDiscount;
             order.orderDate = new Date();
             await order.save();
 
-            // let product = null;
-            // let pid = req.body.pid;
-            // let category = res.locals.session.productType;
-
-            // if (category === 'bed') product = await BedCollection.findOne({ _id: pid });
-            // else if (category === 'chair') product = await ChairCollection.findOne({ _id: pid });
-            // else if (category === 'jula') product = await JulaCollection.findOne({ _id: pid });
-            // else if (category === 'mattresse') { product = await MattressesCollection.findOne({ _id: pid }); category = (category + 's'); }
-            // else if (category === 'shoerack') product = await ShoerackCollection.findOne({ _id: pid });
-            // else if (category === 'showcase') product = await ShowcaseCollection.findOne({ _id: pid });
-            // else if (category === 'sofa') product = await SofaCollection.findOne({ _id: pid });
-            // else if (category === 'table') product = await TableCollection.findOne({ _id: pid });
-            // else if (category === 'tempale') product = await TempaleCollection.findOne({ _id: pid });
-            // else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
-            // else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
-
-            // if (product === null) return res.status(200).send("product doesn't found:)");
-            // if (customer === null) return res.status(200).send("account doesn't found:)");
-
-            // if (cart === null && cartItem === null) {
-            //     cart = await CartCollection.create({ customer: cid });
-            //     cartItem = await CartItemCollection.create({ product: pid, cart: cart._id, productType: category, quantity: 1 });
-            // }
-            // else if (cart !== null && cartItem === null) {
-            //     cartItem = await CartItemCollection.create({ product: pid, cart: cart._id, productType: category, quantity: 1 });
-            // }
-            // else if (cart !== null && cartItem !== null) {
-            //     cartItem = await CartItemCollection.findOne({ _id: cartid });
-            //     cartItem.quantity += 1;
-            //     await cartItem.save();
-            // }
-
-            // ---
             return res.status(201).json(order);
 
         } catch (error) {

@@ -9,8 +9,8 @@
     <%- include ('../../partials/header-links') %>
         <link rel="stylesheet" href="../../../CSS/manage-admin.css">
         <script src="../JS/image-script.js" defer></script>
+        <script src="../JS/product-script.js" defer></script>
 
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
         <%if(session.userType==="customer" ){%>
             <script>
 
@@ -120,53 +120,6 @@
                         express_session_update();
                     });
                 }
-                function initPayment(image, name, pid, data) {
-                    const options = {
-                        key: "rzp_test_UH2jjfYOR8enLr",
-                        amount: data.amount,
-                        currency: data.currency,
-                        name: name,
-                        description: "Test Transaction",
-                        image: image,
-                        order_id: data.id,
-                        handler: async (response) => {
-                            try {
-                                // response.pid = pid;
-                                $.post("/api/payment/verify", response, (data, status) => {
-
-                                    if (data.paymentStatus) { // if payment successfull ...
-                                        console.log(data);
-                                        let body = { cartid: "64207609a416020ff785188b" };
-                                        $.post("/create-order", body, (data, status) => {
-                                            console.log(data);
-                                        });
-                                    }
-                                });
-                            } catch (error) {
-                                console.log(error);
-                            }
-                        },
-                        theme: {
-                            color: "#3399cc",
-                        },
-                    };
-                    const rzp1 = new window.Razorpay(options);
-                    rzp1.open();
-                    console.log("paymanet succesfuly sone :)");
-                }
-
-                function handlePayment(image, name, amount, pid) {
-
-                    $(document).ready(() => {
-                        let body = { amount };
-
-                        $.post("/api/payment/orders", body, (data, status) => {
-                            console.log(data);
-                            initPayment(image, name, pid, data.data);
-                        });
-                    });
-                }
-
             </script>
             <%}%>
 </head>
@@ -330,7 +283,7 @@
 
                                                 <div class="mt-4 ms-auto btn-div" id="#">
                                                     <button class="btn btn-outline-success"
-                                                        onclick="handlePayment('<%=result.image%>','<%=result.name%>','<%=result.price%>','<%=result._id%>' )">
+                                                        onclick="handlePayment('<%=result._id%>','<%=result.price%>')">
                                                         <i class="fa-solid fa-bag-shopping fa-beat fa-sm"></i>
                                                         Buy</button>
                                                 </div>

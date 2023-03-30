@@ -5,7 +5,7 @@ const router = express.Router();
 const {
     getProduct,
     getProductByFilter,
-    getAllProducts
+    displayProducts
 
 } = require('../../../Controllers/Product-Controllers/product-read-cntrl');
 
@@ -18,7 +18,7 @@ router.use(function (req, res, next) {
 });
 
 router.get("/product/:category/:pid", getProduct);
-router.get("/product", getAllProducts);
+router.get("/product", displayProducts);
 router.post("/filter-products", getProductByFilter);
 
 module.exports = router;
