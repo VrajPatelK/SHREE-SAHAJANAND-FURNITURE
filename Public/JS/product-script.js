@@ -208,7 +208,7 @@ if (window.location.pathname === "/sells") {
                 dataY.push(key);
             });
 
-            const ctx = document.getElementById('myChart');
+            let ctx = $('.myChart');
 
             new Chart(ctx, {
                 type: 'bar',
