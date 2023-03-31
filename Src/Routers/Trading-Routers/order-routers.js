@@ -3,7 +3,11 @@ const router = express.Router();
 
 //controllers
 const {
-    getAllOrders
+    displayOrders,
+    getAllOrders,
+    deliverOrder,
+    deliverOrderUncheck
+
 } = require("../../../Controllers/Trading-Controllers/order-controllers");
 
 
@@ -15,6 +19,9 @@ router.use(function (req, res, next) {
     else if (res.locals.session.userType === "accountant") { isAccountant(req, res, next); }
 });
 
-router.get("/admin/orders", getAllOrders);
+router.get("/orders", displayOrders);
+router.get('/get-all-orders', getAllOrders);
+router.post('/deliver-order', deliverOrder);
+router.post('/deliver-order-uncheck', deliverOrderUncheck);
 
 module.exports = router;

@@ -332,7 +332,7 @@ module.exports = {
         try {
             let cid = res.locals.session.user._id.toString();
 
-            let orders = await OrderCollection.find({ customer: cid });
+            let orders = await OrderCollection.find({ customer: cid, isReached: false });
 
             if (orders.length == 0)
                 return res.status(200).json([]);
@@ -352,6 +352,29 @@ module.exports = {
     displayOrders: async (req, res) => {
         try {
             return res.status(200).render("customer/my-orders");
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    cancelOrder: async (req, res) => {
+        try {
+            let oid = req.body.oid;
+
+            // clear orders
+            let result = await OrderCollection.deleteOne({ _id: oid });
+            if (result.deletedCount === 0) return res.json({ error: "order doesn't found" });
+
+            await OrderItemCollection.deleteMany({ order: oid });
+
+            // clear sellings
+            let sell = await SellCollection.findOne({ order: oid });
+            if (sell === null) return res.json({ error: "order doesn't found" });
+
+            await SellCollection.deleteOne({ order: oid });
+            await SellItemCollection.deleteMany({ sell: sell._id });
+
+            return res.json({ msg: "Order Cancelled !!!", oid });
 
         } catch (error) {
             return res.status(401).send(error);

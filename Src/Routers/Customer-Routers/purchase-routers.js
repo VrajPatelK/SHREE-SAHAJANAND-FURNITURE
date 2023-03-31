@@ -16,8 +16,10 @@ const {
     displayCarts,
 
     createOrder,
+    getAllOrders,
     getOrdersByCustomer,
     displayOrders,
+    cancelOrder,
 
     paymentOrder,
     paymentVerify
@@ -40,6 +42,7 @@ router.get('/carts', displayCarts);
 router.post('/create-order', createOrder);
 router.get('/get-orders', getOrdersByCustomer);
 router.get('/my-orders', displayOrders);
+router.post('/cancel-order', cancelOrder);
 
 
 // payment

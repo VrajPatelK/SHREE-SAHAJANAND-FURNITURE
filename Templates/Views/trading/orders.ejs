@@ -1,17 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
+    <title>
+        SSF - My Orders
+    </title>
     <%- include ('../../partials/header-links') %>
 
+        <script>
 
+            display_orders(); // calling ...
+
+            function display_orders() { //declare ...
+                $(document).ready(() => {
+
+                    getOrders = new Promise((resolve, reject) => {
+                        $.get('/get-all-orders', (data, status) => {
+
+                            let itemMap = new Map();
+
+                            for (let i = 0; i < data.itemArr.length; i++) {
+                                let item = data.itemArr[i];
+                                itemMap.set(item.oid, item.orderItems);
+                            }
+
+                            let orders = data.orders;
+                            let html1 = "";
+                            let html2 = "";
+
+                            console.log(orders);
+
+                            for (let i = 0; i < orders.length; i++) {
+                                let order = orders[i];
+                                let left_cards = "";
+                                let orderItems = itemMap.get(order._id);
+
+                                for (let i = 0; i < orderItems.length; i++) {
+                                    let item = orderItems[i];
+                                    let dis = item.quantity * item.product.discount;
+                                    let prc = item.quantity * item.product.price;
+
+                                    left_cards +=
+                                        `<div class="col-3 card pt-3 my-2 mx-1" style="width: 18rem;">
+                                                <ul class="list-group list-group-flush" style="width:100%;">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Name</span><span class="amount">${item.product.name}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Price</span><span class="amount">${item.product.price}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Bill</span><span class="amount">${prc}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Dioscounts</span><span class="amount">${dis}</span></li>
+                                                </ul>
+                                                <div class="card-footer text-success">
+                                                   ${prc - dis}
+                                                </div>
+                                            </div>`;
+                                }
+
+                                let bill =
+                                    `<div class="container d-flex justify-content-end align-items-center">
+                                            <div class="card my-2" style="width: 18rem;">
+                                                <div class="card-header">
+                                                    Bill
+                                                </div>
+                                                <ul class="list-group list-group-flush" id="bill-body" style="width:100%;">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Cart</span><span class="amount">${order.totalBill}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Discounts</span><span class="amount">${order.totalDiscount}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Delivery Charges</span><span class="amount text-success"><b>FREE</b></span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Total Amount</span><span class="amount text-success">${order.totalBill - order.totalDiscount}</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>`;
+                                if (!order.isReached) {
+                                    html1 +=
+                                        `<div class="order-div my-3 py-2 px-2 rounded" style="width=100%;background:#D5CEA3;">
+                                            <div class="row d-flex justify-content-between align-items-start">
+                                                <div class="row item-parent-div d-flex justify-content-start align-items-center col-6">${left_cards}</div>
+                                                <div class="row bill-parent-div d-flex justify-content-center align-items-center col-6">${bill}</div>
+                                            </div>
+                                            <div class="btn-div d-flex justify-content-start align-items-start">
+                                                <div class="me-2">
+                                                    <button class="btn btn-warning" onclick="handleDelivery('${order._id}')">Not Delivered</button>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                                }
+                                else {
+                                    html2 +=
+                                        `<div class="order-div my-3 py-2 px-2 rounded" style="width=100%;background:#D5CEA3;">
+                                            <div class="row d-flex justify-content-between align-items-start">
+                                                <div class="row item-parent-div d-flex justify-content-start align-items-center col-6">${left_cards}</div>
+                                                <div class="row bill-parent-div d-flex justify-content-center align-items-center col-6">${bill}</div>
+                                            </div>
+                                            <div class="btn-div d-flex justify-content-start align-items-start">
+                                                <div class="me-2">
+                                                    <button class="btn btn-info" onclick="handleUncheck('${order._id}')">Delivered</button>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                                }
+                            }
+
+                            $(".not-deliver-orders-div").html(html1);
+                            $(".deliver-orders-div").html(html2);
+                        });
+                    });
+                });
+            }
+
+            function handleDelivery(oid) {
+                let body = { oid };
+
+                $.post("/deliver-order", body, function (data, status) {
+                    console.log(body);
+                    display_orders();
+                });
+            }
+
+            function handleUncheck(oid) {
+                let body = { oid };
+
+                $.post("/deliver-order-uncheck", body, function (data, status) {
+                    console.log(body);
+                    display_orders();
+                });
+            }
+
+        </script>
 </head>
-<body>
-    <%- include('../../partials/navbar')%>
 
-    <h3>This is Order Page...</h3>
+
+<body>
+    <%- include ('../../partials/navbar') %>
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Orders
+                <hr>
+            </h4>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid mx-auto mt-4 headingDiv">
+                <h5 class="headings">
+                    Not Delivered !!!
+                    <hr>
+                </h5>
+            </div>
+            <div class="container not-deliver-orders-div"></div>
+            <hr class="container">
+            <div class="container-fluid mx-auto mt-4 headingDiv">
+                <h5 class="headings">
+                    Delivered !!!
+                    <hr>
+                </h5>
+            </div>
+            <div class="container deliver-orders-div"></div>
+        </div>
 </body>
+
 </html>

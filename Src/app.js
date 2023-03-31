@@ -178,9 +178,14 @@ app.post("/product/wardrobe/edit/:pid", product_update_routers);
 app.get("/product/:category/delete/:pid", product_delete_routers);
 
 //trading
+app.get("/get-all-orders", order_routers);
+app.get("/orders", order_routers);
+app.post('/deliver-order', order_routers);
+app.post('/deliver-order-uncheck', order_routers);
+
+
 app.get("/sells", sell_routers);
 app.get("/all-sells", sell_routers);
-app.get("/admin/orders", order_routers);
 
 // purchase
 //fav
@@ -198,6 +203,7 @@ app.post('/update-cart', purchase_routers);
 app.post('/create-order', purchase_routers);
 app.get('/get-orders', purchase_routers);
 app.get('/my-orders', purchase_routers);
+app.post('/cancel-order', purchase_routers);
 //payment
 app.post("/api/payment/orders", purchase_routers);
 app.post("/api/payment/verify", purchase_routers);
