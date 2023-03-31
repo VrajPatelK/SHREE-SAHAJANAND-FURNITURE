@@ -17,9 +17,12 @@ const CartItemCollection = require("../../Src/Models/customers/cartItems-schema"
 const CartCollection = require("../../Src/Models/customers/cart-schema");
 const OrderItemCollection = require("../../Src/Models/customers/orderItems-schema");
 const OrderCollection = require("../../Src/Models/customers/orders-schema");
+const SellCollection = require("../../Src/Models/system-users/sells-schema");
+const SellItemCollection = require("../../Src/Models/system-users/sellItems-schema");
 
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+const moment = require("moment/moment");
 
 
 module.exports = {
@@ -230,11 +233,13 @@ module.exports = {
                 cart = await CartCollection.findOne({ customer: cid });
                 if (cart === null) return res.json({ error: "cart doesn't found" });
 
-                // delete the cart on success payment
-                await CartCollection.findByIdAndDelete(cart._id);
-
                 let cartid = req.body.id;
                 items = await CartItemCollection.find({ cart: cartid }).populate('product');
+
+
+                // clear the cart on success payment
+                await CartCollection.findByIdAndDelete(cart._id);
+                await CartItemCollection.deleteMany({ cart: cart._id });
 
             }
             else {
@@ -257,7 +262,10 @@ module.exports = {
                 items.push(product);
             }
 
+            // billing... & selling...
             let order = await OrderCollection.create({ customer: cid });
+            let sell = await SellCollection.create({ order: order._id, customer: cid });
+
             let totalBill = 0;
             let totalDiscount = 0;
 
@@ -265,7 +273,6 @@ module.exports = {
 
                 let item = items[i];
 
-                // billing...
                 if (category === "cart") {
                     let order_total = Math.ceil(item.product.price * item.quantity);
                     let order_discount = Math.floor(order_total * (item.product.discount / 100));
@@ -279,8 +286,12 @@ module.exports = {
                         quantity: item.quantity
                     });
 
-                    // delete the cart-items on success payment
-                    await CartItemCollection.findByIdAndDelete(item._id);
+                    let sellItem = await SellItemCollection.create({
+                        sell: sell._id.toString(),
+                        product: item.product._id.toString(),
+                        productType: item.productType,
+                        quantity: item.quantity
+                    });
 
                 } else {
                     let order_total = Math.ceil(item.price * 1);
@@ -294,13 +305,22 @@ module.exports = {
                         productType: item.category,
                         quantity: 1
                     });
+
+                    let sellItem = await SellItemCollection.create({
+                        sell: sell._id.toString(),
+                        product: item._id.toString(),
+                        productType: item.category,
+                        quantity: 1
+                    });
                 }
             }
 
-            order.totalBill = totalBill;
-            order.totalDiscount = totalDiscount;
-            order.orderDate = new Date();
+            sell.totalBill = order.totalBill = totalBill;
+            sell.totalDiscount = order.totalDiscount = totalDiscount;
+            sell.sellDate = order.orderDate = moment(new Date());
+
             await order.save();
+            await sell.save();
 
             return res.status(201).json(order);
 
@@ -310,10 +330,9 @@ module.exports = {
     },
     getOrdersByCustomer: async (req, res) => {
         try {
-            let cid = res.locals.session.user._id.toString() || "640c984d08a3e51047b2419c";
+            let cid = res.locals.session.user._id.toString();
 
-            let temp = await OrderCollection.find({ customer: cid });
-            let orders = temp;
+            let orders = await OrderCollection.find({ customer: cid });
 
             if (orders.length == 0)
                 return res.status(200).json([]);

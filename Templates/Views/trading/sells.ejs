@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,25 @@
     <title>Sells</title>
     <%- include ('../../partials/header-links') %>
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="../JS/product-script.js"></script>
 
 </head>
+
 <body>
     <%- include('../../partials/navbar')%>
 
-    <h3>This is Sells Page...</h3>
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Sells
+                <hr>
+            </h4>
+        </div>
+
+        <div class="mx-auto col-6 d-flex justify-content-center align-items-center rounded p-3" style="background: #E5E5CB;">
+            <canvas id="myChart"></canvas>
+        </div>
 </body>
+
 </html>

@@ -46,7 +46,7 @@ module.exports = {
                 res.cookie("loginAdmin", token, { httpOnly: true });
                 res.locals.session.userType = "admin";
 
-                return res.status(301).redirect("/");
+                return res.status(301).redirect("/sells");
             }
 
             if (system_user === "Accountant") {
@@ -77,7 +77,7 @@ module.exports = {
                 res.cookie("loginAccountant", token, { httpOnly: true });
                 res.locals.session.userType = "accountant";
 
-                return res.status(301).redirect("/admin/sells");
+                return res.status(301).redirect("/sells");
             }
 
             if (system_user === "Manager") {
@@ -108,7 +108,7 @@ module.exports = {
                 res.cookie("loginManager", token, { httpOnly: true });
                 res.locals.session.userType = "manager";
 
-                return res.status(301).redirect("/admin/sells");
+                return res.status(301).redirect("/sells");
             }
 
         } catch (error) {

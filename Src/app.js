@@ -178,7 +178,8 @@ app.post("/product/wardrobe/edit/:pid", product_update_routers);
 app.get("/product/:category/delete/:pid", product_delete_routers);
 
 //trading
-app.get("/admin/sells", sell_routers);
+app.get("/sells", sell_routers);
+app.get("/all-sells", sell_routers);
 app.get("/admin/orders", order_routers);
 
 // purchase

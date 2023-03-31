@@ -18,7 +18,7 @@
                 function display_orders() { //declare ...
                     $(document).ready(() => {
 
-                        getCarts = new Promise((resolve, reject) => {
+                        getOrders = new Promise((resolve, reject) => {
                             $.get('/get-orders', (data, status) => {
 
                                 let itemMap = new Map();

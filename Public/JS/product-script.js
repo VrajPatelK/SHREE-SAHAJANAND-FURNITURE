@@ -175,3 +175,59 @@ function handlePayment(id, amount) {
     });
 }
 
+// selling ...
+if (window.location.pathname === "/sells") {
+    $(document).ready(() => {
+
+        $.get("/all-sells", (data, status) => {
+
+            let itemMap = new Map();
+            let sells = data;
+
+            for (let i = 0; i < sells.length; i++) {
+
+                let sell = sells[i];
+                let key = moment(sell.sellDate).format("MM-YYYY");
+                let val = (sell.totalBill - sell.totalDiscount);
+
+                if (itemMap.get(key))
+                    itemMap[key] += val;
+                else
+                    itemMap.set(key, val);
+
+            }
+
+            // sort the map
+            itemMap = new Map([...itemMap.entries()].sort());
+
+            //create X & Y data
+            let dataX = [];
+            let dataY = [];
+            itemMap.forEach((val, key) => {
+                dataX.push(val);
+                dataY.push(key);
+            });
+
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataY,
+                    datasets: [{
+                        label: 'Sells',
+                        data: dataX,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    });
+}
