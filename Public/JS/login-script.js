@@ -1,5 +1,3 @@
-const { Passport } = require("passport");
-
 $(document).ready(function () {
     $('#btnradio1').click(function () {
         window.location.pathname = "/customer-login"

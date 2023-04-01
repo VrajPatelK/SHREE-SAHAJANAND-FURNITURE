@@ -16,7 +16,6 @@ const {
     displayCarts,
 
     createOrder,
-    getAllOrders,
     getOrdersByCustomer,
     displayOrders,
     cancelOrder,
