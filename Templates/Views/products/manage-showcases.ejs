@@ -146,36 +146,29 @@
 
                     <%if(results.length>0){%>
                         <% results.forEach(result=> { %>
-                            <div class="col-lg-4 col-md-6 col-12 mb-4 card-div">
-                                <div class="card" style="width: 100%;">
+                            <div class="mb-4 product-card-div">
+                                <div class="row mx-auto product-structure-div">
 
-                                    <div class="product-img-div px-4 pt-4">
+                                    <div class="col-lg-5 col-md-8 col-sm-10 col-12 product-img-div px-4 pt-4">
                                         <%if(result.image){%>
                                             <img src="<%= result.image%>" class="card-img-top" alt="...">
                                             <%}else{%>
                                                 <img src="../../../Images/other-images/no-product.png"
                                                     class="card-img-top" alt="">
                                                 <%}%>
-                                    </div>
 
-                                    <div class="col-11 card-body">
+                                    </div>
+                                    <div class="col-lg-6 col-md-8 col-sm-10 col-12 px-lg-2 px-0 card-body">
                                         <div class="info-structure">
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Name : </p>
-                                                <p class="value-para px-2 py-2">
+                                            <div class="row mx-auto info-div my-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Name : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.name%>
                                                 </p>
                                             </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Description : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.description%>
-                                                </p>
-                                            </div>
-
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-1 py-2">Dimensions : </p>
-                                                <p class="value-para px-2 py-2">
+                                            <div class="row mx-auto info-div my-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Dimensions : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     Length : <%=result.dimensions.length%>
                                                         <br>
                                                         Height : <%=result.dimensions.height%>
@@ -183,30 +176,39 @@
                                                             Width : <%=result.dimensions.width%>
                                                 </p>
                                             </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Availability : </p>
-                                                <p class="value-para px-2 py-2">
+                                            <div class="row mx-auto info-div my-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Availability : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.availability%>
                                                 </p>
                                             </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">#Cupboards : </p>
-                                                <p class="value-para px-2 py-2">
+                                            <div class="row mx-auto info-div my-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">#Cupboards : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.no_of_cupboards%>
                                                 </p>
                                             </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Price : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.price%>
+                                            <div class="row mx-auto info-div my-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Description : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
+                                                    <%=result.description%>
                                                 </p>
                                             </div>
-                                            <div class="info-div my-2">
-                                                <p class="key-para px-2 py-2">Discount : </p>
-                                                <p class="value-para px-2 py-2">
-                                                    <%=result.discount%>
-                                                </p>
+                                            <div class="inner-div">
+                                                <div class="row mx-auto info-div my-2">
+                                                    <p class="col-12 key-para px-2 py-2">Price : </p>
+                                                    <p class="col-12 value-para px-2 py-2">
+                                                        <%=result.price%>
+                                                    </p>
+                                                </div>
+                                                <div class="row mx-auto info-div my-2">
+                                                    <p class="col-12 key-para px-2 py-2">Discount : </p>
+                                                    <p class="col-12 value-para px-2 py-2">
+                                                        <%=result.discount%>
+                                                    </p>
+                                                </div>
                                             </div>
+
                                         </div>
                                         <% if(session.userType==="customer" ){%>
 
@@ -250,6 +252,13 @@
                                                 </div>
 
                                                 <div class="mt-4 btn-div" id="cart-btn-div-<%=result._id%>">
+                                                </div>
+
+                                                <div class="mt-4 ms-auto btn-div" id="#">
+                                                    <button class="btn btn-outline-success"
+                                                        onclick="handlePayment('<%=result._id%>','<%=result.price%>')">
+                                                        <i class="fa-solid fa-bag-shopping fa-beat fa-sm"></i>
+                                                        Buy</button>
                                                 </div>
                                             </div>
 

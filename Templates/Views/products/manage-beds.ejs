@@ -146,7 +146,7 @@
                     <%if(results.length>0){%>
                         <% results.forEach(result=> { %>
                             <div class="mb-4 product-card-div">
-                                <div class="row mx-auto" style="width: 80%;">
+                                <div class="row mx-auto product-structure-div">
 
                                     <div class="col-lg-5 col-md-8 col-sm-10 col-12 product-img-div px-4 pt-4">
                                         <%if(result.image){%>
@@ -157,17 +157,17 @@
                                                 <%}%>
 
                                     </div>
-                                    <div class="col-lg-6 col-md-8 col-sm-10 col-12 card-body">
+                                    <div class="col-lg-6 col-md-8 col-sm-10 col-12 px-lg-2 px-0 card-body">
                                         <div class="info-structure">
                                             <div class="row mx-auto info-div my-2">
-                                                <p class="col-4 key-para px-2 py-2">Name : </p>
-                                                <p class="col-8 value-para px-2 py-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Name : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.name%>
                                                 </p>
                                             </div>
                                             <div class="row mx-auto info-div my-2">
-                                                <p class="col-4 key-para px-1 py-2">Dimensions : </p>
-                                                <p class="col-8 value-para px-2 py-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Dimensions : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     Length : <%=result.dimensions.length%>
                                                         <br>
                                                         Height : <%=result.dimensions.height%>
@@ -176,32 +176,32 @@
                                                 </p>
                                             </div>
                                             <div class="row mx-auto info-div my-2">
-                                                <p class="col-4 key-para px-2 py-2">Availability : </p>
-                                                <p class="col-8 value-para px-2 py-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Availability : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.availability%>
                                                 </p>
                                             </div>
                                             <div class="row mx-auto info-div my-2">
-                                                <p class="col-4 key-para px-2 py-2">Brand : </p>
-                                                <p class="col-8 value-para px-2 py-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Brand : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.brand%>
                                                 </p>
                                             </div>
                                             <div class="row mx-auto info-div my-2">
-                                                <p class="col-4 key-para px-2 py-2">Storage : </p>
-                                                <p class="col-8 value-para px-2 py-2">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Storage : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.storage%>
                                                 </p>
                                             </div>
                                             <div class="row mx-auto info-div my-2">
-                                                <p class="col-4 key-para px-2 py-2">Description : </p>
-                                                <p class="col-8 value-para px-2 py-2 desc-para">
+                                                <p class="col-lg-4 col-12 key-para px-2 py-2">Description : </p>
+                                                <p class="col-lg-8 col-12 value-para px-2 py-2">
                                                     <%=result.description%>
                                                 </p>
                                             </div>
                                             <div class="inner-div">
                                                 <div class="row mx-auto info-div my-2">
-                                                    <p class="col-12 key-para px-2 py-2">Max. Load : </p>
+                                                    <p class="col-12 key-para px-2 py-2">Max. Load : (KG) </p>
                                                     <p class="col-12 value-para px-2 py-2">
                                                         <%=result.max_load%>
                                                     </p>
