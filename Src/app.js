@@ -77,12 +77,17 @@ app.get("/customer-register", customer_routers);
 app.post("/customer-register", customer_routers);
 app.get("/customer-login", customer_routers);
 app.post("/customer-login", customer_routers);
-app.post("/payment", customer_routers);
 app.get("/customer-profile", customer_routers);
 app.get("/customer-profile/edit", customer_routers);
 app.post("/customer-profile/edit", customer_routers);
 app.get("/customer-logout", customer_routers);
 app.get("/customer-delete", customer_routers);
+
+// change-pass
+app.get("/send-mail", customer_routers);
+app.post("/send-mail", customer_routers);
+app.get("/reset-password/:id/:makeid", customer_routers);
+app.post("/reset-password", customer_routers);
 
 //sys-user-login
 app.get("/sys-user/login", system_user_login_routers);

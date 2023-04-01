@@ -54,7 +54,7 @@ const TvUnitsSchema = new mongoose.Schema({
         default: 0 //Exact disc.%
     },
     no_of_drawers: {
-        type: String,
+        type: Number,
         default: 0
     }
 });

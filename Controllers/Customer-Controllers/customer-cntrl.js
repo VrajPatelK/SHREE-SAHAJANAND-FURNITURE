@@ -1,6 +1,7 @@
+const { sendMail } = require("../../Src/Helpers/mail");
+const { makeid } = require("../../src/Helpers/other-helpers");
 const CustomerCollection = require("../../src/Models/customers/customer-schema");
 const Bcrypt = require("bcryptjs");
-const { payment } = require("../../Src/Helpers/payment");
 
 module.exports = {
     getCreateCustomer: async (req, res) => {
@@ -197,16 +198,54 @@ module.exports = {
             console.log(error);
         }
     },
+    SendMailGet: async (req, res) => {
+        try {
+            return res.render("customer/send-mail", { msg: [undefined] });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    SendMailPost: async (req, res) => {
+        try {
+            let email = req.body.email;
 
-    Payment: async (req, res) => {
+            let customer = await CustomerCollection.findOne({ email: email });
+            if (customer === null)
+                return res.render("customer/send-mail", { msg: [404, "Email id doesn't exist"], email });
 
-        let amount = req.body.amount;
-        payment(amount)
-            .then((data) => {
-                return res.status(200).send(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+            // sendmail
+            let mid = await makeid(23);
+
+            sendMail(customer.email, customer.id, mid)
+                .then(result => {
+                    return res.render("customer/send-mail", { msg: [201, `Email-sent.... on ${email}`], email });
+                })
+                .catch((error) => console.log(error.message));
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    changePasswordGet: async (req, res) => {
+        try {
+            return res.render("customer/reset-pass");
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    changePasswordPost: async (req, res) => {
+        try {
+            let id = req.body.path.split("/")[2];
+            let pass = req.body.pass;
+
+            let customer = await CustomerCollection.findById(id);
+            customer.pass = Bcrypt.hashSync(pass);
+            await customer.save();
+            return res.json({ msg: "Password is updated successfully !!!" });
+
+        } catch (error) {
+            console.log(error);
+        }
     }
-};
+}

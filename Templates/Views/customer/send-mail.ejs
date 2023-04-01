@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Send Mail</title>
+    <%- include ('../../Partials/header-links') %>
+
+        <link rel="stylesheet" href="../CSS/index.css">
+        <link rel="stylesheet" href="../CSS/system-user-login.css">
+</head>
+
+<body>
+    <div class="row mx-auto main-login-div">
+        <div class="col-lg-6 col-md-10 col-12 mx-auto" id="login-form-cnt">
+            <% if(msg[0]===404) {%>
+                <div class="container alert alert-danger alert-dismissible fade show" role="alert">
+                    <%=msg[1]%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <%}%>
+                    <% if(msg[0]===201) {%>
+                        <div class="container alert alert-success alert-dismissible fade show" role="alert">
+                            <%=msg[1]%>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                        <%}%>
+
+                            <form class="col-lg-8 col-sm-10 col-12 px-3 py-4 rounded" method="post">
+                                <caption> <span class="caption"> Send Mail
+                                        <hr>
+                                    </span></caption>
+                                <% if(msg[0]===404) {%>
+                                    <div class="my-2 input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </span>
+                                        <input type="email" class="form-control login-input" id="email" name="email"
+                                            placeholder="email" value="<%=email%>" required>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="my-2 input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-envelope"></i>
+                                            </span>
+                                            <input type="email" class="form-control login-input" id="email" name="email"
+                                                placeholder="email" value="vraj.patel4801@gmail.com" required>
+                                        </div>
+                                        <%}%>
+                                            <div class="mt-3 mb-0 mx-auto d-flex justify-content-center ">
+                                                <button type="submit" class="btn btn-type-1" id="proceed"
+                                                    name="proceed">
+                                                    Send Mail
+                                                </button>
+                                            </div>
+                                            <div class="mt-3 mb-2 px-2 d-flex justify-content-center">
+                                                <a href="/customer-login">Back To Login</a>
+                                            </div>
+                            </form>
+        </div>
+    </div>
+    <%- include('../../partials/script-link')%>
+</body>
+
+</html>
