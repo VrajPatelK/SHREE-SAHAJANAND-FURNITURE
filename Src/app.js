@@ -59,6 +59,7 @@ const product_read_routers = require("./Routers/Product-Routers/product-read-rou
 const product_update_routers = require("./Routers/Product-Routers/product-update-routers");
 const product_delete_routers = require("./Routers/Product-Routers/product-delete-routers");
 
+const review_routers = require("./Routers/Customer-Routers/review-routers");
 
 // sys-user-req ,products-req
 app.get("/admin/manage", request_manager_routers);
@@ -87,6 +88,17 @@ app.get("/send-mail", customer_routers);
 app.post("/send-mail", customer_routers);
 app.get("/reset-password/:id/:makeid", customer_routers);
 app.post("/reset-password", customer_routers);
+
+// reviews
+app.get('/create-review', review_routers);
+app.post('/create-review', review_routers);
+app.get('/my-reviews', review_routers);
+app.get('/get-reviews', review_routers);
+app.get('/get-review-set', review_routers);
+app.get('/edit-review', review_routers);
+app.post('/edit-review', review_routers);
+app.get('/delete-review', review_routers);
+
 
 //sys-user-login
 app.get("/sys-user/login", system_user_login_routers);
@@ -206,8 +218,12 @@ app.post('/update-cart', purchase_routers);
 //order
 app.post('/create-order', purchase_routers);
 app.get('/get-orders', purchase_routers);
+app.get('/get-order-history', purchase_routers);
 app.get('/my-orders', purchase_routers);
+app.get('/my-order-history', purchase_routers);
 app.post('/cancel-order', purchase_routers);
+
+
 //payment
 app.post("/api/payment/orders", purchase_routers);
 app.post("/api/payment/verify", purchase_routers);

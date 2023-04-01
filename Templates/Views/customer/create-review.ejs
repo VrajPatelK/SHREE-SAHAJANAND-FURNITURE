@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Create Review</title>
+    <%- include ('../../Partials/header-links') %>
+
+        <link rel="stylesheet" href="../CSS/index.css">
+        <link rel="stylesheet" href="../CSS/system-user-login.css">
+</head>
+
+<body>
+    <div class="row mx-auto main-login-div">
+        <div class="col-lg-6 col-md-10 col-12 mx-auto" id="login-form-cnt">
+            <form class="col-xl-8 col-lg-10 col-12 px-3 py-4 rounded" method="post">
+                <div class="my-2 star-div">
+                    <input class="form-control" list="datalistOptions" name="star" id="starDataList"
+                        placeholder="Give Star 5 /...">
+                </div>
+                <div class="my-2 msg-div">
+                    <textarea class="form-control" name="msg" id="" cols="30" rows="2"
+                        placeholder="Review Msg ..."></textarea>
+                </div>
+                <div class=" mt-3 mb-0 mx-auto d-flex justify-content-center modal-footer">
+                    <button type="submit" class="btn btn-type-1" id="proceed" name="proceed">
+                        Submit
+                    </button>
+                </div>
+            </form>
+
+            <!-- datalist -->
+            <datalist id="datalistOptions">
+                <option value="1">
+                <option value="2">
+                <option value="3">
+                <option value="4">
+                <option value="5">
+            </datalist>
+        </div>
+    </div>
+    <%- include('../../partials/script-link')%>
+</body>
+
+</html>

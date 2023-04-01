@@ -349,9 +349,38 @@ module.exports = {
             return res.status(401).send(error);
         }
     },
+    getOrderHistoryByCustomer: async (req, res) => {
+        try {
+            let cid = res.locals.session.user._id.toString();
+
+            let orders = await OrderCollection.find({ customer: cid, isReached: true });
+
+            if (orders.length == 0)
+                return res.status(200).json([]);
+
+            let items = [];
+            for (let i = 0; i < orders.length; i++) {
+                let orderItems = await OrderItemCollection.find({ order: orders[i]._id }).populate('product');
+                items.push({ oid: orders[i]._id.toString(), orderItems: orderItems });
+            }
+
+            return res.status(201).json({ orders: orders, itemArr: items });
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
     displayOrders: async (req, res) => {
         try {
             return res.status(200).render("customer/my-orders");
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    displayOrderHistory: async (req, res) => {
+        try {
+            return res.status(200).render("customer/my-orderhistory");
 
         } catch (error) {
             return res.status(401).send(error);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        SSF - My Reviews
+    </title>
+    <%- include ('../../partials/header-links') %>
+
+        <script>
+
+            display_reviews(); // calling ...
+
+            function display_reviews() { //declare ...
+                $(document).ready(() => {
+
+                    getOrders = new Promise((resolve, reject) => {
+                        $.get('/get-reviews', (data, status) => {
+                            console.log(data);
+                            // $(".my-reviews-div").html(html);
+                        });
+                    });
+                });
+            }
+
+        </script>
+</head>
+
+
+<body>
+    <%- include ('../../partials/navbar') %>
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                My Reviews
+                <hr>
+            </h4>
+        </div>
+
+        <div class="container-fluid">
+            <div class="container my-reviews-div"></div>
+        </div>
+</body>
+
+</html>

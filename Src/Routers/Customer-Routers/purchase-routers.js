@@ -17,7 +17,9 @@ const {
 
     createOrder,
     getOrdersByCustomer,
+    getOrderHistoryByCustomer,
     displayOrders,
+    displayOrderHistory,
     cancelOrder,
 
     paymentOrder,
@@ -40,7 +42,9 @@ router.get('/carts', displayCarts);
 
 router.post('/create-order', createOrder);
 router.get('/get-orders', getOrdersByCustomer);
+router.get('/get-order-history', getOrderHistoryByCustomer);
 router.get('/my-orders', displayOrders);
+router.get('/my-order-history', displayOrderHistory);
 router.post('/cancel-order', cancelOrder);
 
 
