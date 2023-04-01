@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SSF - Create Review</title>
+    <title>SSF - Edit Review</title>
     <%- include ('../../Partials/header-links') %>
 
         <link rel="stylesheet" href="../CSS/index.css">
@@ -15,16 +15,16 @@
     <div class="row mx-auto main-login-div">
         <div class="col-lg-6 col-md-10 col-12 mx-auto" id="login-form-cnt">
             <form class="col-xl-8 col-lg-10 col-12 px-3 py-4 rounded" method="post">
-                <caption> <span class="caption"> Give Review <i class="fa-solid fa-star fa-beat"></i>
+                <caption> <span class="caption"> Edit Review <i class="fa-solid fa-pen-to-square"></i>
                         <hr>
                     </span></caption>
                 <div class="my-2 star-div">
-                    <input class="form-control" list="datalistOptions" name="star" id="starDataList"
-                        placeholder="Give Star 5 /...">
+                    <input class="form-control" list="datalistOptions" value="<%=review.star%>" name="star"
+                        id="starDataList" placeholder="Give Star 5 /...">
                 </div>
                 <div class="my-2 msg-div">
                     <textarea class="form-control" name="msg" id="" cols="30" rows="2"
-                        placeholder="Review Msg ..."></textarea>
+                        placeholder="Review Msg ..."><%=review.msg%></textarea>
                 </div>
                 <div class=" mt-3 mb-0 mx-auto d-flex justify-content-center modal-footer">
                     <button type="submit" class="btn btn-type-1" id="proceed" name="proceed">

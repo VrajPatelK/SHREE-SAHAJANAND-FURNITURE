@@ -13,10 +13,11 @@ module.exports = {
         try {
             let product = req.query.pid;
             let customer = res.locals.session.user._id.toString();
-            let star = req.query.star;
-            let msg = req.query.msg;
+            let productType = req.query.category;
+            let star = req.body.star;
+            let msg = req.body.msg;
 
-            await ReviewCollection.create({ customer, product, star, msg });
+            await ReviewCollection.create({ customer, product, productType, star, msg });
 
             return res.redirect("/my-reviews");
 
@@ -35,7 +36,7 @@ module.exports = {
     getAllReviews: async (req, res) => {
         try {
             let customer = res.locals.session.user._id.toString();
-            let reviews = await ReviewCollection.find({ customer });
+            let reviews = await ReviewCollection.find({ customer }).populate('product');
 
             // logic
             return res.json({ reviews });
@@ -46,15 +47,10 @@ module.exports = {
     },
     getReviewSet: async (req, res) => {
         try {
-            let cid = res.locals.session.user._id.toString();
-            let reviews = await ReviewCollection.find({ customer });
+            let customer = res.locals.session.user._id.toString();
+            let reviewProducts = await ReviewCollection.find({ customer }).select({ _id: 0, product: 1 });
 
-            let reviewSet = new Set();
-            reviews.forEach((ele, indx) => {
-                reviewSet.add(ele.product.toString());
-            });
-
-            return res.json({ reviewSet });
+            return res.json({ reviewProducts });
 
         } catch (error) {
             console.log(error);
@@ -89,7 +85,7 @@ module.exports = {
     },
     deleteReview: async (req, res) => {
         try {
-            let rid = req.body.rid;
+            let rid = req.query.rid;
             await ReviewCollection.findOneAndDelete(rid);
             return res.redirect("/my-reviews");
 
