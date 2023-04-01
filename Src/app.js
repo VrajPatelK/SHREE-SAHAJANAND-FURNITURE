@@ -58,7 +58,6 @@ const product_create_routers = require("./Routers/Product-Routers/product-create
 const product_read_routers = require("./Routers/Product-Routers/product-read-routers");
 const product_update_routers = require("./Routers/Product-Routers/product-update-routers");
 const product_delete_routers = require("./Routers/Product-Routers/product-delete-routers");
-const ManagerCollection = require("./Models/system-users/manager-schema");
 
 
 // sys-user-req ,products-req
@@ -214,31 +213,7 @@ app.post("/api/payment/orders", purchase_routers);
 app.post("/api/payment/verify", purchase_routers);
 
 //searchin ...
-app.get('/autocomplete/', (req, res) => {
-
-    var regex = new RegExp(req.query['term'], 'i');
-    var managers = ManagerCollection.find(
-        { manager_email: regex },
-        { 'manager_email': 1 },
-    )
-        .sort({ 'updated_at': -1 })
-        .sort({ 'created_at': -1 })
-        .limit(20);
-
-    managers.exec(function (err, data) {
-
-        var result = [];
-        if (!err) {
-            if (data && data.length && data.length > 0) {
-                data.forEach((user) => {
-                    let Obj = { id: user._id, label: user.manager_email };
-                    result.push(Obj);
-                });
-            }
-            res.jsonp(result);
-        }
-    })
-});
+// app.get('/autocomplete/', product_read_routers);
 
 app.post("/filter-products", product_read_routers);
 
