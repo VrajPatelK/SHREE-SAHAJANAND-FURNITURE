@@ -24,7 +24,7 @@
     color: #fff;
 }
 
-#login-form-cnt form {
+#login-form-cnt>form {
     /* border: 2px solid blue; */
     background: #E5E5CB;
     text-align: center;
