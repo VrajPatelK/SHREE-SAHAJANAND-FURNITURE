@@ -1,5 +1,5 @@
-const ExportCollection = require('../../src/Models/system-users/export-schema');
-const VendorCollection = require('../../src/Models/system-users/vendor-schema');
+const ExportCollection = require('../../Src/Models/system-users/export-schema');
+const VendorCollection = require('../../Src/Models/system-users/vendor-schema');
 
 
 module.exports = {

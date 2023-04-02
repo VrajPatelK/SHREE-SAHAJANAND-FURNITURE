@@ -1,5 +1,5 @@
-const ImportCollection = require('../../src/Models/system-users/import-schema');
-const ManuFacturerCollection = require('../../src/Models/system-users/manufacturer-schema');
+const ImportCollection = require('../../Src/Models/system-users/import-schema');
+const ManuFacturerCollection = require('../../Src/Models/system-users/manufacturer-schema');
 
 module.exports = {
     createManufacturer: async (req, res) => {
