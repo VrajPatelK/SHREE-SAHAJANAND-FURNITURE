@@ -203,9 +203,7 @@ h3 {
 }
 
 .footer-h5-heading {
-    color: #fff;
-    text-shadow: 1px 1px #ffffff;
-    color: #1A120B;
+    color: #fff !important;
 }
 
 .footer-item a {
@@ -217,7 +215,7 @@ h3 {
 
 .footer-item a:hover {
     border-radius: .5rem;
-    color: #1A120B;
+    color: #1A120B !important;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -100px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
 }
 
@@ -241,7 +239,7 @@ h3 {
 
 .subscribe-bar {
     background: rgb(255, 242, 237) !important;
-    border: 2px solid #fff !important;
+    border: .5px solid #1A120B !important;
     color: #1A120B;
     outline: unset !important;
     box-shadow: unset !important;
