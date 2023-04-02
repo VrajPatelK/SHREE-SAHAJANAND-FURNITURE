@@ -104,6 +104,7 @@ app.get('/delete-review', review_routers);
 app.get("/sys-user/login", system_user_login_routers);
 app.post("/sys-user/login", system_user_login_routers);
 app.get("/sys-user/logout", system_user_login_routers);
+app.get("/sys-user-profile", system_user_login_routers);
 
 // admins
 app.get("/admin/admins", admin_routers);

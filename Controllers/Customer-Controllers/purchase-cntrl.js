@@ -10,7 +10,7 @@ const TempaleCollection = require("../../Src/Models/products/tempale-schema");
 const TvUnitCollection = require("../../Src/Models/products/tvunit-schema");
 const WardrobeCollection = require("../../Src/Models/products/wardrobe-schema");
 
-const CustomerCollection = require("../../src/Models/customers/customer-schema");
+const CustomerCollection = require("../../Src/Models/customers/customer-schema");
 const LikeCollection = require("../../Src/Models/customers/like-schema");
 const FavouriteCollection = require("../../Src/Models/customers/favourites-schema");
 const CartItemCollection = require("../../Src/Models/customers/cartItems-schema");

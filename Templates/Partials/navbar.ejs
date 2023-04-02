@@ -168,17 +168,29 @@
                                                                             </button>
                                                                             <ul class="dropdown-menu"
                                                                                 aria-labelledby="dropdownMenuProfile">
-                                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                                        href="/customer-profile">
-                                                                                        My Account <i
-                                                                                            class="fa-solid fa-file-invoice"></i>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a class="dropdown-item d-flex justify-content-between
+                                                                                <%if( session.userType==="manager" ||
+                                                                                    session.userType==="accountant" )
+                                                                                    {%>
+                                                                                    <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                                            href="/sys-user-profile">
+                                                                                            My Account <i
+                                                                                                class="fa-solid fa-file-invoice"></i>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <%}%>
+                                                                                        <%if(session.userType==="admin"){%>
+                                                                                            <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                                                    href="/admin/admins">
+                                                                                                    My Account <i
+                                                                                                        class="fa-solid fa-file-invoice"></i>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <%}%>
+                                                                                                <li>
+                                                                                                    <a class="dropdown-item d-flex justify-content-between
                                                     align-items-center" href="/sys-user/logout">Logout<i class="fa-solid
                                                                     fa-right-from-bracket"></i></a>
-                                                                                </li>
+                                                                                                </li>
                                                                             </ul>
                                                                         </li>
                                                                         <%}%>

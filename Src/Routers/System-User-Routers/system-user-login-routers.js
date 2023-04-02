@@ -6,7 +6,9 @@ const router = express.Router();
 const {
     getLoginSystemUser,
     postLoginSystemUser,
-    logoutSystemUser
+    logoutSystemUser,
+
+    getSystemUser
 
 } = require("../../../Controllers/System-User-Controllers/system-user-login-cntrl");
 
@@ -28,6 +30,6 @@ router.use(function (req, res, next) {
 });
 
 router.get("/sys-user/logout", logoutSystemUser);
-
+router.get("/sys-user-profile", getSystemUser);
 
 module.exports = router;

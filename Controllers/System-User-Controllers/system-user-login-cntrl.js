@@ -1,6 +1,6 @@
-const AdminCollection = require("../../src/Models/system-users/admin-schema");
-const AccountantCollection = require("../../src/Models/system-users/accountant-schema");
-const ManagerCollection = require("../../src/Models/system-users/manager-schema");
+const AdminCollection = require("../../Src/Models/system-users/admin-schema");
+const AccountantCollection = require("../../Src/Models/system-users/accountant-schema");
+const ManagerCollection = require("../../Src/Models/system-users/manager-schema");
 const Bcrypt = require("bcryptjs");
 
 module.exports = {
@@ -18,7 +18,6 @@ module.exports = {
         try {
 
             let system_user = req.body.system_user;
-
             if (system_user === "Admin") {
                 let admin = await AdminCollection.findOne({ admin_email: req.body.sys_user_email });
                 if (admin === null) {
@@ -45,6 +44,7 @@ module.exports = {
                 // cerate a cookie & session
                 res.cookie("loginAdmin", token, { httpOnly: true });
                 res.locals.session.userType = "admin";
+                res.locals.session.user = admin;
 
                 return res.status(301).redirect("/sells");
             }
@@ -76,6 +76,7 @@ module.exports = {
                 // cerate a cookie & session
                 res.cookie("loginAccountant", token, { httpOnly: true });
                 res.locals.session.userType = "accountant";
+                res.locals.session.user = accountant;
 
                 return res.status(301).redirect("/sells");
             }
@@ -107,6 +108,7 @@ module.exports = {
                 // cerate a cookie & session
                 res.cookie("loginManager", token, { httpOnly: true });
                 res.locals.session.userType = "manager";
+                res.locals.session.user = manager;
 
                 return res.status(301).redirect("/sells");
             }
@@ -153,6 +155,39 @@ module.exports = {
                 res.clearCookie("loginAccountant");
                 res.locals.session = null;
                 return res.status(301).redirect("/sys-user/login");
+            }
+
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    getSystemUser: async (req, res) => {
+        try {
+            let id = res.locals.session.user._id.toString();
+
+            if (res.locals.session.userType === 'admin') {
+
+                let admin = await AdminCollection.findById(id);
+                if (admin === null)
+                    return res.status(403).send("account doesn't exist");
+
+                return res.status(200).render("system-users/admin-profile", { result: admin });
+            }
+            else if (res.locals.session.userType === 'manager') {
+
+                let manager = await ManagerCollection.findById(id);
+                if (manager === null)
+                    return res.status(403).send("account doesn't exist");
+
+                return res.status(200).render("system-users/manager-profile", { result: manager });
+            }
+            else if (res.locals.session.userType === 'accountant') {
+
+                let accountant = await AccountantCollection.findById(id);
+                if (accountant === null)
+                    return res.status(403).send("account doesn't exist");
+
+                return res.status(200).render("system-users/accountant-profile", { result: accountant });
             }
 
         } catch (error) {

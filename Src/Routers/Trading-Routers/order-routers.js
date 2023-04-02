@@ -11,7 +11,7 @@ const {
 } = require("../../../Controllers/Trading-Controllers/order-controllers");
 
 
-const { isAdmin } = require('../../Middlewares/isLogin'); // isAccountant
+const { isAdmin,isAccountant } = require('../../Middlewares/isLogin'); // isAccountant
 
 router.use(function (req, res, next) {
 

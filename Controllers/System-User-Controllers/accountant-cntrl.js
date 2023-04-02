@@ -1,4 +1,4 @@
-const AccountantCollection = require("../../src/Models/system-users/accountant-schema");
+const AccountantCollection = require("../../Src/Models/system-users/accountant-schema");
 const Bcrypt = require("bcryptjs");
 
 module.exports = {

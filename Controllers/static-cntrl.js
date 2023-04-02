@@ -1,5 +1,5 @@
 //helpers
-const { getAllFileNames } = require('../src/Helpers/other-helpers');
+const { getAllFileNames } = require('../Src/Helpers/other-helpers');
 const ContactCollection = require('../Src/Models/customers/contact-schema');
 const SubscriberCollection = require('../Src/Models/customers/subscriber-schema');
 

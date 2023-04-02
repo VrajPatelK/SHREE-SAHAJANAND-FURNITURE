@@ -1,6 +1,3 @@
-const CustomerCollection = require('../Models/customers/customer-schema');
-
-
 module.exports = {
 
     getAllFileNames: (dir) => {

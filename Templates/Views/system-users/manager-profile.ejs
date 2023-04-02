@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SSF - <%= result.name%>
+    <title>SSF - <%= result.manager_name%>
     </title>
 
     <!-- custom css -->
@@ -18,7 +18,7 @@
 
         <div class="container-fluid mx-auto mt-4 headingDiv">
             <h4 class="headings">
-                Profile
+                Manager Profile
                 <hr>
             </h4>
         </div>
@@ -31,8 +31,8 @@
                 <div class="row mx-auto profie-card-div py-5 px-2">
 
                     <div class="col-lg-6 col-12 px-2 py-2 my-sm-0 mb-3 card profile-img-div" style="width: 15rem;">
-                        <%if(result.image){%>
-                            <img src="<%= result.image%>" class="card-img-top" alt="...">
+                        <%if(result.manager_image){%>
+                            <img src="<%= result.manager_image%>" class="card-img-top" alt="...">
                             <%}else{%>
                                 <img src="../Images/temporary/profile-pic.jpg" class="card-img-top" alt="...">
                                 <%}%>
@@ -43,51 +43,47 @@
                             <li class="list-group-item my-1">
                                 <p class="col-sm-4 col-12 key-para">Email</p>
                                 <p class="col-sm-8 col-12 py-2 px-2 value-para">
-                                    <%=result.email%>
+                                    <%=result.manager_email%>
                                 </p>
                             </li>
                             <li class="list-group-item my-1">
                                 <p class="col-sm-4 col-12 key-para">Name</p>
                                 <p class="col-sm-8 col-12 py-2 px-2 value-para">
-                                    <%= result.name%>
+                                    <%= result.manager_name%>
                                 </p>
                             </li>
                             <li class="list-group-item my-1">
                                 <p class="col-sm-4 col-12 key-para">Mobile</p>
                                 <p class="col-sm-8 col-12 py-2 px-2 value-para">
-                                    <%= result.mobile%>
+                                    <%= result.manager_mobile%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Experience</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%= result.manager_experience%>
                                 </p>
                             </li>
                             <li class="list-group-item my-1">
                                 <p class="col-sm-4 col-12 key-para">Addresss</p>
                                 <p class="col-sm-8 col-12 py-2 px-2 value-para">
-                                    <%= result.homeNo%>, <%= result.street%> .<br>
-                                            <%= result.pincode%>
+                                    <%= result.manager_address%>
                                 </p>
                             </li>
                             <li class="list-group-item my-1">
-                                <p class="col-sm-4 col-12 key-para">District</p>
+                                <p class="col-sm-4 col-12 key-para">Skill</p>
                                 <p class="col-sm-8 col-12 py-2 px-2 value-para">
-                                    <%=result.district%>
+                                    <%=result.manager_skill%>
                                 </p>
                             </li>
                             <li class="list-group-item my-1">
-                                <p class="col-sm-4 col-12 key-para">State</p>
+                                <p class="col-sm-4 col-12 key-para">Study</p>
                                 <p class="col-sm-8 col-12 py-2 px-2 value-para">
-                                    <%=result.state%>
+                                    <%=result.manager_study%>
                                 </p>
                             </li>
                         </ul>
-
-                        <div class="mt-4 profile-info-btn-div">
-                            <a href="/customer-profile/edit">
-                                <button class="btn btn-type-1 mx-2">
-                                    Edit <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                            </a>
-                        </div>
                     </div>
-
                 </div>
 
             </div>

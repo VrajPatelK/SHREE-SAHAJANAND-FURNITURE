@@ -1,6 +1,6 @@
 const { sendMail } = require("../../Src/Helpers/mail");
-const { makeid } = require("../../src/Helpers/other-helpers");
-const CustomerCollection = require("../../src/Models/customers/customer-schema");
+const { makeid } = require("../../Src/Helpers/other-helpers");
+const CustomerCollection = require("../../Src/Models/customers/customer-schema");
 const Bcrypt = require("bcryptjs");
 
 module.exports = {

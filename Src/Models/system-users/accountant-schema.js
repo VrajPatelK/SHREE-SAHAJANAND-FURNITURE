@@ -35,5 +35,6 @@ AccountantSchema.methods.createToken = async function () {
     }
 }
 
+mongoose.models = {}
 const AccountantCollection = mongoose.model("accountant", AccountantSchema);
 module.exports = AccountantCollection;

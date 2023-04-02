@@ -1,7 +1,5 @@
-const { render } = require('ejs');
-const AdminCollection = require('../../src/Models/system-users/admin-schema');
+const AdminCollection = require("../../Src/Models/system-users/admin-schema");
 const Bcrypt = require("bcryptjs");
-const { on } = require('../../src/Models/system-users/admin-schema');
 
 module.exports = {
 

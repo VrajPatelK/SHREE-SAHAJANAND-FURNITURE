@@ -112,7 +112,7 @@
                 let body = { oid };
 
                 $.post("/deliver-order", body, function (data, status) {
-                    console.log(body);
+                    alert("Order is delivered !!!")
                     display_orders();
                 });
             }
@@ -121,7 +121,7 @@
                 let body = { oid };
 
                 $.post("/deliver-order-uncheck", body, function (data, status) {
-                    console.log(body);
+                    alert("Order is not delivered !!!")
                     display_orders();
                 });
             }
