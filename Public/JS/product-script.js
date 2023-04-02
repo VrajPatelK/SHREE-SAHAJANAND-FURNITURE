@@ -23,13 +23,15 @@ $(function () {
             }
         }
     })
-})
+});
+
+// handle search
+function handleSearch() {
+    console.log($("#search_bar").val());
+    window.location.pathname = "/product/" + $("#search_bar").val();
+}
 
 
-
-// filter logic ....
-if (window.location.pathname === '/product')
-    handleFilter();
 
 function makeProductCards(products) {
 
@@ -79,20 +81,25 @@ function makeProductCards(products) {
 
 function handleFilter() {
 
-    filterDisplayManager();
+    // filterDisplayManager();
 
     $(document).ready(() => {
-        let f1 = $("#prize-filter").val().split("|");
-        let f2 = $("#material-filter").val();
-        let f3 = $("#discount-filter").val();
-        let category = $("#category-filter").val();
-        let body = { f1, f2, f3, category };
+        let f1 = $("#prize-filter").val();
+        let f2 = $("#discount-filter").val();
+        let path = window.location.pathname;
+        let body = { f1, f2, path };
 
         $.post("/filter-products", body, function (data, status) {
             let inner_html = (data.length > 0) ? makeProductCards(data) :
                 '<p class="py-2" style="color: #1A120B; text-align: center; background: #E5E5CB;">Not Matched.</p>';
 
             $(document).ready(() => {
+                if (window.location.pathname.split("/")[2] !== "all") {
+                    let page = window.location.pathname.split("/")[2];
+
+                    $("#page_name").text(page.charAt(0).toUpperCase() + page.slice(1) + 's');
+                }
+
                 $(".card-parent-div").html(inner_html);
             });
         });
@@ -123,7 +130,6 @@ function filterDisplayManager() {
         }
     });
 }
-
 
 // payment-gateway-handler
 function initPayment(id, data) {

@@ -18,7 +18,7 @@ router.use(function (req, res, next) {
 });
 
 router.get("/product/:category/:pid", getProduct);
-router.get("/product", displayProducts);
+router.get("/product/:category", displayProducts);
 router.post("/filter-products", getProductByFilter);
 
 module.exports = router;

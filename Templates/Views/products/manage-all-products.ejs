@@ -27,12 +27,10 @@
                 <%if(session.userType==="admin" || session.userType==="manager" ){%>
                     Manage
                     <%}%>
-                        All Products
-                        <hr>
+                        <span id="page_name"></span>
             </h4>
         </div>
-        <!-- confusion -->
-        <!-- <div class="container-fluid">
+        <div class="container-fluid">
             <div class="accordion container accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
@@ -43,16 +41,46 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample">
-
+                        <!-- content -->
                         <div class="d-flex justify-content-between align-items-center">
+                            <div class="filter-btn-div">
+                                <button class="btn prize-filter-btn">
+                                    <select class="form-select" id="prize-filter">
+                                        <option value="-1|-1" selected>&#x20b9; Price</option>
+                                        <%for(let i=1; i<=20; i+=2) {%>
+                                            <option value="<%=500*i%>|<%=500*(i+2)%>">
+                                                &#x20b9; <%=500*i%> - <%=500*(i+2)%>
+                                            </option>
+                                            <%}%>
+                                    </select>
+                                </button>
+
+                                <button class="btn discount-filter-btn">
+                                    <select class="form-select" id="discount-filter">
+                                        <option value="-1" selected>Discount</option>
+                                        <%for(let i=1; i<=8; i++) {%>
+                                            <option value="<%=i*10%>">
+                                                Up to <%=i*10%>%
+                                            </option>
+                                            <%}%>
+                                    </select>
+                                </button>
+
+                            </div>
+
+                            <div class="filter-req-btn-div">
+                                <button class="btn btn-type-1" onclick="handleFilter()">
+                                    Filter <i class="fa-solid fa-filter fa-beat"></i>
+                                </button>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-        </div> -->
-
-
+        </div>
         <div class="container row mx-auto px-0 py-3 card-parent-div">
+
         </div>
 
 

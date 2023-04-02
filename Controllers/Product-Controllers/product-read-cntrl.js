@@ -63,11 +63,18 @@ module.exports = {
     },
     getProductByFilter: async (req, res) => {
         try {
-            let min = parseInt(req.body.f1[0]);
-            let max = parseInt(req.body.f1[1]);
-            let material = req.body.f2;
-            let discount = parseInt(req.body.f3);
-            let category = req.body.category;
+
+            let prize, min, max, discount;
+            if (req.body.f1) {
+                prize = req.body.f1.split("|");
+                min = parseInt(prize[0]);
+                max = parseInt(prize[1]);
+            }
+            if (req.body.f2) {
+                discount = parseInt(req.body.f2);
+            }
+
+            let category = req.body.path.split("/")[2];
             res.locals.session.page = category;
 
             let result = null;
@@ -209,7 +216,7 @@ module.exports = {
                         discount: { $lte: discount }
                     });
                 } else { //(min === -1 && max === -1 && discount === -1)
-                    result = await ChairCollection.find({});
+                    result = await SofaCollection.find({});
                 }
             }
             else if (category === 'table') {
@@ -320,7 +327,16 @@ module.exports = {
     },
     displayProducts: async (req, res) => {
         try {
-            res.status(200).render('products/manage-all');
+            let category = req.params.category;
+            let productSet = new Set(['bed', 'chair', 'jula', 'mattresse', 'shoerack', 'showcase', 'sofa', 'table', 'tempale', 'tvunit', 'wardrobe']);
+
+            if (category === "all")
+                return res.status(200).render('products/manage-all');
+
+            if (productSet.has(category))
+                return res.status(200).render('products/manage-all-products');
+
+            return res.status(200).json({ msg: "product doesn't found:)" });
 
         } catch (error) {
             console.log(error);
