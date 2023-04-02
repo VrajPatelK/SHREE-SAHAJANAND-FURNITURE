@@ -329,12 +329,14 @@ module.exports = {
         try {
             let category = req.params.category;
             let productSet = new Set(['bed', 'chair', 'jula', 'mattresse', 'shoerack', 'showcase', 'sofa', 'table', 'tempale', 'tvunit', 'wardrobe']);
+            res.locals.session.page = category;
 
             if (category === "all")
                 return res.status(200).render('products/manage-all');
 
-            if (productSet.has(category))
+            if (productSet.has(category)) {
                 return res.status(200).render('products/manage-all-products');
+            }
 
             return res.status(200).json({ msg: "product doesn't found:)" });
 

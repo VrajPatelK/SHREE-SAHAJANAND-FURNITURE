@@ -20,7 +20,7 @@ module.exports = {
 
             await BedCollection.create({
                 name: req.body.add_name,
-                stock: 2,
+                stock: req.body.stock,
                 image: req.body.image,
                 description: req.body.add_description,
                 dimensions: {
