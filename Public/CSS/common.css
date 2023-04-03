@@ -601,7 +601,6 @@ border: 2px solid red;
 .list-group-item input {
     border-radius: .5rem;
     text-align: left;
-    width: 70%;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
