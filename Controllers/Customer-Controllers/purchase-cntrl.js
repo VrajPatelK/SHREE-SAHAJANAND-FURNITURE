@@ -48,10 +48,10 @@ module.exports = {
             else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
             else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
 
-            if (product === null) return res.status(200).send("product doesn't found:)");
+            if (product === null) return res.status(404).render("errorpage/error-page-404");
 
             customer = await CustomerCollection.findOne({ _id: cid });
-            if (customer === null) return res.status(200).send("account doesn't found:)");
+            if (customer === null) return res.status(404).render("errorpage/error-page-404");
 
             let favourite = await FavouriteCollection.findOne({ customer: cid });
             if (favourite === null) favourite = await FavouriteCollection.create({ customer: cid });
@@ -96,7 +96,7 @@ module.exports = {
             let lid = req.body.lid;
 
             likeItem = await LikeCollection.findOne({ _id: lid });
-            if (likeItem === null) return res.status(200).send("product doesn't found:)");
+            if (likeItem === null) return res.status(404).render("errorpage/error-page-404");
             let product = likeItem.product; //for res
 
             await LikeCollection.deleteOne({ _id: lid });
@@ -138,8 +138,8 @@ module.exports = {
             else if (category === 'tvunit') product = await TvUnitCollection.findOne({ _id: pid });
             else if (category === 'wardrobe') product = await WardrobeCollection.findOne({ _id: pid });
 
-            if (customer === null) return res.status(200).send("account doesn't found:)");
-            if (product === null) return res.status(200).send("product doesn't found:)");
+            if (customer === null) return res.status(404).render("errorpage/error-page-404");
+            if (product === null) return res.status(404).render("errorpage/error-page-404");
 
             if (cart === null && cartItem === null) {
                 cart = await CartCollection.create({ customer: cid });
@@ -210,7 +210,7 @@ module.exports = {
             let cartid = req.body.cartid;
 
             cartItem = await CartItemCollection.findOne({ _id: cartid });
-            if (cartItem === null) return res.status(200).send("product doesn't found:)");
+            if (cartItem === null) return res.status(404).render("errorpage/error-page-404");
             let product = cartItem.product;
 
             await CartItemCollection.deleteOne({ _id: cartid });

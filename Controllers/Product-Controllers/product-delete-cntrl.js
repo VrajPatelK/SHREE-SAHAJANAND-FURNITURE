@@ -57,12 +57,12 @@ module.exports = {
                     result = await WardrobeCollection.deleteOne({ _id: target_id });
                 }
                 else {
-                    return res.status(404).json({ error: true, em: "delete operation failed, category doesn't match:)" });
+                    return res.status(404).render("errorpage/error-page-404");
                 }
             }
 
             if (result === null)
-                return res.status(404).json({ error: true, em: "delete operation failed, product is not found:)" });
+                return res.status(500).render("errorpage/error-page-500");
 
             //cascading handle
             await CartItemCollection.deleteMany({ product: target_id });

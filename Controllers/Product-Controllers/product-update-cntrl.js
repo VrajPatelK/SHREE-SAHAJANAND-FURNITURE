@@ -54,12 +54,12 @@ module.exports = {
                     result = await WardrobeCollection.findOne({ _id: target_id });
                 }
                 else {
-                    return res.status(404).json({ error: true, em: "edit operation failed, category doesn't match:)" });
+                    return res.status(404).render("errorpage/error-page-404");
                 }
             }
 
             if (result === null)
-                return res.status(404).json({ error: true, em: "edit operation failed, product is not found:)" });
+                return res.status(500).render("errorpage/error-page-500");
 
             return res.status(201).render(`products/edit-${category}`, { result: result });
 

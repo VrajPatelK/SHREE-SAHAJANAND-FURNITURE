@@ -51,7 +51,7 @@ module.exports = {
                 result = await WardrobeCollection.find({ _id: pid });
             }
             else {
-                return res.status(404).json({ error: true, em: "delete operation failed, category doesn't match:)" });
+                return res.status(404).render("errorpage/error-page-404");
             }
 
             res.locals.session.page = category;
@@ -316,7 +316,7 @@ module.exports = {
                 tmp = await WardrobeCollection.find({}); result = result.concat(tmp);
             }
             else {
-                return res.status(404).json({ error: true, em: "read operation failed, category doesn't match:)" });
+                return res.status(404).render("errorpage/error-page-404");
             }
 
             res.status(200).json(result);
@@ -338,7 +338,7 @@ module.exports = {
                 return res.status(200).render('products/manage-all-products');
             }
 
-            return res.status(404).json({ msg: "product doesn't found:)" });
+            return res.status(404).render("errorpage/error-page-404");
 
         } catch (error) {
             return res.status(500).render("errorpage/error-page-500");
