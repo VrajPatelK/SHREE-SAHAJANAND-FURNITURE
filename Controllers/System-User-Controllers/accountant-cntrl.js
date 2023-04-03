@@ -1,46 +1,43 @@
-const AccountantCollection = require('../../src/Models/admin/accountant-schema');
-const CustomerCollection = require('../../src/Models/customer-schema');
-const UserTypeCollection = require('../../src/Models/user-type-schema');
-const { getAllAccountantData } = require("../../src/Helpers/other-helpers");
+const AccountantCollection = require("../../Src/Models/system-users/accountant-schema");
+const Bcrypt = require("bcryptjs");
 
 module.exports = {
-
-    createAccountant: async (req, res) => {
+    getCreateAccountant: async (req, res) => {
+        try {
+            return res.status(200).render("system-users/create-accountant", {
+                swr: false,
+                errorMsg: "Accountant already exist..."
+            });
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    postCreateAccountant: async (req, res) => {
         try {
 
-            //verify email-id as customer
-            let customer = await CustomerCollection.findOne({ customer_email: req.body.add_accountant_email });
-            if (customer === null) {
-                return res.status(200).send("accounatnt is not registerd !!!");
-            }
+            let accountant = await AccountantCollection.findOne({ accountant_email: req.body.accountant_email });
+            if (accountant !== null)
+                return res.status(200).render("system-users/create-accountant", { result: req.body, swr: true, errorMsg: "Accountant is already with this Email-Id..." });
 
-            //save the accounatant data
-            const accountant = new AccountantCollection({
-                accountant_id: customer._id,
-                accountant_study: req.body.add_accountant_study,
-                accountant_experience: req.body.add_accountant_experience,
-            });
-            await accountant.save();
+            accountant = await AccountantCollection.findOne({ accountant_mobile: req.body.accountant_mobile });
+            if (accountant !== null)
+                return res.status(200).render("system-users/create-accountant", { result: req.body, swr: true, errorMsg: "Accountant is already with this Mobile number..." });
 
-            //set - user type
-            const user = await UserTypeCollection.findOne({ user_id: customer._id });
-            user.user_types.push("accountant");
-            await user.save();
+            req.body.accountant_pass = Bcrypt.hashSync(req.body.accountant_pass);
+            accountant = await AccountantCollection.create(req.body);
 
             return res.status(301).redirect("/admin/accountants");
 
         } catch (error) {
-            return res.status(500).send(error);
+            return res.status(401).send(error);
         }
     },
     getAccountants: async (req, res) => {
         try {
-
             let accountants = await AccountantCollection.find({});
-            let results = await getAllAccountantData(accountants);
 
             //render the page
-            res.status(200).render("admin/manage-accountants", { results: results });
+            res.status(200).render("system-users/manage-accountants", { results: accountants });
 
         } catch (error) {
             console.log(error);
@@ -53,16 +50,11 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "edit" && target_id !== undefined) {
-
-                let accountant = await AccountantCollection.findOne({ accountant_id: target_id });
-                let result = new Object();
-                result.accountant_study = accountant.accountant_study;
-                result.accountant_experience = accountant.accountant_experience;
-
-                return res.status(201).render("admin/edit-accountant", { result: result });
+                let accountant = await AccountantCollection.findOne({ _id: target_id });
+                return res.status(201).render("system-users/edit-accountant", { result: accountant, swr: false, errorMsg: "" });
             }
 
-            return res.status(201).send("page not found ...");
+            return res.status(404).send("page not found ...");
 
         } catch (error) {
             console.log(error);
@@ -71,18 +63,22 @@ module.exports = {
     updateAccountantPost: async (req, res) => {
         try {
 
-            let updated_data = new Object();
-            updated_data = {
-                accountant_study: req.body.update_accountant_study,
-                accountant_experience: req.body.update_accountant_experience,
-            };
+            let accountant = await AccountantCollection.findOne({ accountant_email: req.body.accountant_email });
+            if (accountant !== null && accountant._id.toString() !== req.query._id)
+                return res.status(200).render("system-users/edit-accountant", { result: req.body, swr: true, errorMsg: "Accountant is already with this Email-Id..." });
+
+            accountant = await AccountantCollection.findOne({ accountant_mobile: req.body.accountant_mobile });
+            if (accountant !== null && accountant._id.toString() !== req.query._id)
+                return res.status(200).render("system-users/edit-accountant", { result: req.body, swr: true, errorMsg: "Accountant is already with this Mobile number..." });
+
+            accountant = req.body;
+            accountant.accountant_image = (req.body.rmvImage) ? "" : req.body.accountant_image;
 
             await AccountantCollection.updateOne(
-                { accountant_id: req.query._id },
-                { $set: updated_data }
+                { _id: req.query._id },
+                { $set: accountant }
             );
 
-            console.log("update - accountant successfully ...");
             return res.status(201).redirect("/admin/accountants");
 
         } catch (error) {
@@ -97,7 +93,6 @@ module.exports = {
 
             if (opeartion === "delete" && target_id !== undefined) {
                 await AccountantCollection.deleteOne({ accountant_id: target_id });
-                await UserTypeCollection.deleteOne({ user_id: target_id });
             }
 
             return res.status(201).redirect("/admin/accountants");

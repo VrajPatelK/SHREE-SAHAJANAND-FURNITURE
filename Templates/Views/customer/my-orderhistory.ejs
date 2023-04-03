@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        SSF - My Orders
+    </title>
+    <%- include ('../../partials/header-links') %>
+
+        <script>
+
+            display_orders(); // calling ...
+
+            function display_orders() { //declare ...
+                $(document).ready(() => {
+                    let ProductSet = new Set();
+
+                    getreviewProducts = new Promise((resolve, reject) => {
+                        $.get('/get-review-set', (data, status) => {
+                            let ProductSet = new Set();
+
+                            data.reviewProducts.forEach(ele => {
+                                ProductSet.add(ele.product.toString());
+                            });
+                            resolve(ProductSet);
+                        });
+                    });
+
+                    getreviewProducts.then((ProductSet) => {
+                        console.log(ProductSet);
+
+                        getOrders = new Promise((resolve, reject) => {
+                            $.get('/get-order-history', (data, status) => {
+
+                                let itemMap = new Map();
+
+                                for (let i = 0; i < data.itemArr.length; i++) {
+                                    let item = data.itemArr[i];
+                                    itemMap.set(item.oid, item.orderItems);
+                                }
+
+                                let orders = data.orders;
+                                let html = "";
+                                console.log(orders);
+                                for (let i = 0; i < orders.length; i++) {
+                                    let order = orders[i];
+                                    let left_cards = "";
+                                    let orderItems = itemMap.get(order._id);
+
+                                    for (let i = 0; i < orderItems.length; i++) {
+                                        let item = orderItems[i];
+                                        let dis = item.quantity * item.product.discount;
+                                        let prc = item.quantity * item.product.price;
+
+                                        let btn_html = "";
+                                        if (ProductSet.has(item.product._id)) {
+                                            console.log("h1");
+                                            btn_html = '<span class="badge rounded-pill bg-dark p-2" style="font-weight:200;letter-spacing:.1rem;">Reviewed !!!</span>';
+                                        }
+                                        else {
+                                            console.log("h2");
+                                            btn_html = `<a href="/create-review?pid=${item.product._id}&category=${item.product.category}" class="btn btn-outline-dark">Review <i class="fa-solid fa-star fa-beat"></i></a>`;
+                                        }
+                                        left_cards +=
+                                            `<div class="col-3 card pt-3 my-2 mx-1" style="width: 18rem;">
+                                                <ul class="list-group list-group-flush" style="width:100%;">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Name</span><span class="amount">${item.product.name}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Price</span><span class="amount">${item.product.price}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Bill</span><span class="amount">${prc}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Dioscounts</span><span class="amount">${dis}</span></li>
+                                                </ul>
+                                                <div class="card-footer text-success text-center">
+                                                   ${prc - dis}
+                                                    <div class="me-2 review-btn-div">${btn_html}</div>
+                                                </div>
+                                            </div>`;
+                                    }
+
+                                    let bill =
+                                        `<div class="container d-flex justify-content-end align-items-center">
+                                            <div class="card my-2" style="width: 18rem;">
+                                                <div class="card-header">
+                                                    Bill
+                                                </div>
+                                                <ul class="list-group list-group-flush" id="bill-body" style="width:100%;">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Cart</span><span class="amount">${order.totalBill}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Discounts</span><span class="amount">${order.totalDiscount}</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Delivery Charges</span><span class="amount text-success"><b>FREE</b></span></li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"><span class="detail">Total Amount</span><span class="amount text-success">${order.totalBill - order.totalDiscount}</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>`;
+
+                                    html +=
+                                        `<div class="order-div my-3 py-2 px-2 rounded" style="width=100%;background:#D5CEA3;">
+                                            <div class="row d-flex justify-content-between align-items-start">
+                                                <div class="row item-parent-div d-flex justify-content-start align-items-center col-6">${left_cards}</div>
+                                                <div class="row bill-parent-div d-flex justify-content-center align-items-center col-6">${bill}</div>
+                                            </div>
+                                            <div class="btn-div d-flex justify-content-between align-items-start">
+                                                <div class="me-2">
+                                                    <span class="badge rounded-pill bg-success p-2" style="font-weight:200;letter-spacing:.1rem;">Delivered !!!</span>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                                }
+
+                                $(".my-order-history-div").html(html);
+                            });
+                        });
+                    });
+                });
+            }
+
+        </script>
+</head>
+
+
+<body>
+    <%- include ('../../partials/navbar') %>
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                My Order History
+                <hr>
+            </h4>
+        </div>
+        <div class="container-fluid">
+            <div class="container my-order-history-div"></div>
+        </div>
+</body>
+
+</html>

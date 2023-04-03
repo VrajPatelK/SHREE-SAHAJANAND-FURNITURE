@@ -1,17 +1,14 @@
 //helpers
-const { getAllFileNames } = require('../src/Helpers/other-helpers');
-const express = require('express');
-const app = express();
-
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+const { getAllFileNames } = require('../Src/Helpers/other-helpers');
+const ContactCollection = require('../Src/Models/customers/contact-schema');
+const SubscriberCollection = require('../Src/Models/customers/subscriber-schema');
 
 module.exports = {
 
     getIndexPage: async (req, res) => {
 
         try {
-            res.status(201).render("index", {
+            res.status(201).render("home", {
 
                 // admin: req.session.isAdmin,
                 exploreImg: getAllFileNames("explore"),
@@ -42,34 +39,49 @@ module.exports = {
         try {
 
             // res.status(201).render("contact", { admin: req.session.isAdmin });
+            res.status(201).render("contact", { msg: undefined });
+
 
         } catch (error) {
             console.log(error);
         }
     },
-    getLoginPage: async (req, res) => {
-        try {
-            res.status(200).render("login");
 
+    postContactPage: async (req, res) => {
+        try {
+
+            let name = req.body.contact_name;
+            let email = req.body.contact_email;
+            let mobile = req.body.contact_mobile;
+            let msg = req.body.contact_msg;
+
+            await ContactCollection.create({ name, email, mobile, msg });
+
+            res.status(201).render("contact", {
+                msg: "Message sent Succussfully..."
+            });
         } catch (error) {
-            res.status(401).send(error);
+            console.log(error);
         }
     },
-    doLogout: async (req, res) => {
+
+    createSubscriber: async (req, res) => {
         try {
 
-            let remainTokens = req.customer.loginTokens.filter((token) => {
-                token !== req.token
-            });
-
-            res.clearCookie("loginCookie");
-            req.customer.loginTokens = remainTokens;
-
-            req.customer.save();
-            return res.status(301).redirect("/login");
+            await SubscriberCollection.create({ email: req.body.email });
+            return res.status(200).end();
 
         } catch (error) {
-            res.status(401).send(error);
+            console.log(error);
         }
-    }
+    },
+
+    getLandingPage: async (req, res) => {
+
+        try {
+            res.status(201).render("index");
+        } catch (error) {
+            console.log(error);
+        }
+    },
 };

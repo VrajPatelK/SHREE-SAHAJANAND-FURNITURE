@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - TV Units</title>
+
+    <%- include ('../../partials/header-links') %>
+        <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+        <script src="../JS/image-script.js" defer></script>
+
+
+        <%if(session.userType==="customer" ){%>
+            <script>
+
+                let favouriteMap = new Map();
+                let cartMap = new Map();
+                let getFavourites;
+                let getCarts;
+
+                express_session_update(); // calling ...
+
+                function express_session_update() { //declare ...
+                    $(document).ready(() => {
+
+                        getFavourites = new Promise((resolve, reject) => {
+                            $.get('/get-favourites', (data, status) => {
+
+                                let likeItems = data;
+                                likeItems.forEach((likeItem) => {
+                                    let lid = likeItem._id;
+                                    let pid = likeItem.product._id;
+                                    favouriteMap.set(pid, lid);
+                                });
+
+                                resolve(favouriteMap);
+                            });
+                        });
+
+                        getCarts = new Promise((resolve, reject) => {
+                            $.get('/get-carts', (data, status) => {
+
+                                let cartItems = data;
+                                cartItems.forEach((cartItem) => {
+                                    let cartid = cartItem._id;
+                                    let pid = cartItem.product._id;
+                                    cartMap.set(pid, cartid);
+                                });
+
+                                $("#no_of_carts_badge").text(cartItems.length);
+                                resolve(cartMap);
+                            });
+                        });
+                    });
+                }
+
+                function addFav(pid) {
+                    let body = { pid: pid }
+
+                    $.post("/add-to-fav", body, function (data, status) {
+
+                        let pid = data.product;
+                        let lid = data._id;
+
+                        let rmv_fav_btn = `<button class="btn bg-white rounded mx-2" id="rmv-to-fav-${pid}" onclick="rmvFav('${lid}','${pid}')"><i class="fa-solid fa-heart fa-beat" style="color: #ff3300;"></i></button>`;
+                        $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                        express_session_update();
+                    });
+                }
+
+                function rmvFav(lid, pid) {
+                    let body = { lid: lid, pid: pid }
+
+                    $.post("/rmv-to-fav", body, function (data, status) {
+
+                        let pid = data.toString(); // data = ObjectId(pid)
+                        let add_fav_btn = `<button class="btn bg-white rounded mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')"><i class="fa-regular fa-heart" style="color: #ff0000;"></i></button>`;
+                        $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+
+                        express_session_update();
+                    });
+                }
+
+                function addCart(pid) {
+                    let body = { pid: pid }
+
+                    $.post("/add-to-cart", body, function (data, status) {
+
+                        let pid = data.product;
+                        let cartid = data._id;
+
+                        let add_cart_btn = `<button class="btn bg-white rounded mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')"><i class="fa-solid fa-cart-shopping fa-spin"></i></button>`;
+                        $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+
+                        setTimeout(() => {
+                            let add_cart_btn = `<button class="btn bg-white rounded mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')"><i class="fa-solid fa-cart-shopping"></i></button>`;
+                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                        }, 2000);
+                        express_session_update();
+                    });
+                }
+
+                function addMoreCart(cartid, pid) {
+                    let body = { cartid: cartid, pid: pid }
+
+                    $.post("/add-to-cart", body, function (data, status) {
+
+                        let pid = data.product;
+                        let cartid = data._id;
+
+                        let add_cart_btn = `<button class="btn bg-white rounded mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')"><i class="fa-solid fa-cart-shopping fa-spin"></i></button>`;
+                        $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+
+                        setTimeout(() => {
+                            let add_cart_btn = `<button class="btn bg-white rounded mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')"><i class="fa-solid fa-cart-shopping"></i></button>`;
+                            $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                        }, 2000);
+
+                        express_session_update();
+                    });
+                }
+
+            </script>
+            <%}%>
+
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Tv Units
+                <hr>
+            </h4>
+        </div>
+
+        <div class="container row mx-auto px-0 py-3 card-parent-div">
+
+            <%if(results.length>0){%>
+                <% results.forEach(result=> { %>
+                    <div class="mb-4 product-card-div">
+                        <div class="row mx-auto product-structure-div">
+
+                            <div class="col-lg-5 col-md-8 col-sm-10 col-12 product-img-div px-4 pt-4">
+                                <%if(result.image){%>
+                                    <img src="<%= result.image%>" class="card-img-top" alt="...">
+                                    <%}else{%>
+                                        <img src="../../../Images/other-images/no-product.png" class="card-img-top"
+                                            alt="">
+                                        <%}%>
+
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-10 col-12 px-lg-2 px-0 card-body">
+                                <div class="info-structure">
+                                    <div class="row mx-auto info-div my-2">
+                                        <p class="col-lg-4 col-12 key-para px-2 py-2">Name : </p>
+                                        <p class="col-lg-8 col-12 value-para px-2 py-2">
+                                            <%=result.name%>
+                                        </p>
+                                    </div>
+                                    <div class="row mx-auto info-div my-2">
+                                        <p class="col-lg-4 col-12 key-para px-2 py-2">Dimensions : </p>
+                                        <p class="col-lg-8 col-12 value-para px-2 py-2">
+                                            Length : <%=result.dimensions.length%>
+                                                <br>
+                                                Height : <%=result.dimensions.height%>
+                                                    <br>
+                                                    Width : <%=result.dimensions.width%>
+                                        </p>
+                                    </div>
+                                    <div class="row mx-auto info-div my-2">
+                                        <p class="col-lg-4 col-12 key-para px-2 py-2">Availability : </p>
+                                        <p class="col-lg-8 col-12 value-para px-2 py-2">
+                                            <%=result.availability%>
+                                        </p>
+                                    </div>
+                                    <div class="row mx-auto info-div my-2">
+                                        <p class="col-lg-4 col-12 key-para px-2 py-2">#Drawers : </p>
+                                        <p class="col-lg-8 col-12 value-para px-2 py-2">
+                                            <%=result.no_of_drawers%>
+                                        </p>
+                                    </div>
+                                    <div class="row mx-auto info-div my-2">
+                                        <p class="col-lg-4 col-12 key-para px-2 py-2">Description : </p>
+                                        <p class="col-lg-8 col-12 value-para px-2 py-2">
+                                            <%=result.description%>
+                                        </p>
+                                    </div>
+                                    <div class="info-div my-2">
+                                        <p class="key-para px-2 py-2">Warrenty : </p>
+                                        <p class="value-para px-2 py-2">
+                                            <%=result.warrenty%>
+                                        </p>
+                                    </div>
+                                    <div class="inner-div">
+                                        <div class="row mx-auto info-div my-2">
+                                            <p class="col-12 key-para px-2 py-2">Price : </p>
+                                            <p class="col-12 value-para px-2 py-2">
+                                                <%=result.price%>
+                                            </p>
+                                        </div>
+                                        <div class="row mx-auto info-div my-2">
+                                            <p class="col-12 key-para px-2 py-2">Discount : </p>
+                                            <p class="col-12 value-para px-2 py-2">
+                                                <%=result.discount%>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <% if(session.userType==="customer" ){%>
+
+                                    <!-- script -->
+                                    <script>
+                                        $(document).ready(() => {
+                                            getFavourites.then((favouriteMap) => {
+                                                let pid = "<%=result._id%>";
+                                                let lid = favouriteMap.get(pid);
+
+                                                if (lid) {
+
+                                                    let rmv_fav_btn = `<button class="btn bg-white mx-2" id="rmv-to-fav-${pid}" onclick="rmvFav('${lid}','${pid}')"><i class="fa-solid fa-heart fa-beat" style="color: #ff3300;"></i></button>`;
+                                                    $(`#fav-btn-div-${pid}`).html(rmv_fav_btn);
+                                                }
+                                                else {
+                                                    let add_fav_btn = `<button class="btn bg-white rounded mx-2" id="add-to-fav-${pid}" onclick="addFav('${pid}')"><i class="fa-regular fa-heart" style="color: #ff0000;"></i></button>`;
+                                                    $(`#fav-btn-div-${pid}`).html(add_fav_btn);
+                                                }
+                                            });
+
+                                            getCarts.then((cartMap) => {
+                                                let pid = "<%=result._id%>";
+                                                let cartid = cartMap.get(pid);
+
+                                                if (cartid) {
+                                                    let add_cart_btn = `<button class="btn bg-white rounded mx-2" id="add-to-cart-${pid}" onclick="addMoreCart('${cartid}','${pid}')"><i class="fa-solid fa-cart-shopping"></i></button>`;
+                                                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                }
+                                                else {
+                                                    let add_cart_btn = `<button class="btn bg-white rounded mx-2" id="add-to-cart-${pid}" onclick="addCart('${pid}')"><i class="fa-solid fa-cart-shopping"></i></button>`;
+                                                    $(`#cart-btn-div-${pid}`).html(add_cart_btn);
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <!-- script -->
+
+                                    <div class="d-flex justify-content-start align-items-center">
+                                        <div class="mt-4 btn-div" id="fav-btn-div-<%=result._id%>">
+                                        </div>
+
+                                        <div class="mt-4 btn-div" id="cart-btn-div-<%=result._id%>">
+                                        </div>
+
+                                        <div class="mt-4 ms-auto btn-div" id="#">
+                                            <button class="btn btn-outline-success"
+                                                onclick="handlePayment('<%=result._id%>','<%=result.price%>')">
+                                                <i class="fa-solid fa-bag-shopping fa-beat fa-sm"></i>
+                                                Buy</button>
+                                        </div>
+                                    </div>
+
+                                    <%}else if(session.userType==="admin" || session.userType==="manager" ){%>
+                                        <div class="mt-4 btn-div">
+                                            <a href="/product/tvunit/edit/<%=result._id%>">
+                                                <button class="btn mx-2 btn-type-2">
+                                                    Edit <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            </a>
+                                            <a href="/product/tvunit/delete/<%=result._id%>">
+                                                <button class="btn mx-2 btn-type-2">
+                                                    Delete <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <%}%>
+                            </div>
+                        </div>
+                    </div>
+                    <%});%>
+                        <%}else{%>
+                            <p class="py-2" style="color: #1A120B; text-align: center; background: #E5E5CB;">
+                                You
+                                have not add any item yet.</p>
+                            <%}%>
+        </div>
+
+
+        <!-- footer -->
+        <%- include('../../partials/footer')%>
+
+</body>
+
+</html>

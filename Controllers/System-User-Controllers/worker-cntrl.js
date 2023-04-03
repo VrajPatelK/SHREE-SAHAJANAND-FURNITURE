@@ -1,11 +1,11 @@
-const WorkerCollection = require('../../src/Models/admin/worker-schema');
+const WorkerCollection = require('../../Src/Models/system-users/worker-schema');
 
 
 module.exports = {
 
     createWorker: async (req, res) => {
         try {
-            console.log(req.body);
+
             await WorkerCollection.insertMany([{
                 worker_email: req.body.add_worker_email,
                 worker_name: req.body.add_worker_name,
@@ -25,7 +25,7 @@ module.exports = {
 
             //render the page
             const results = await WorkerCollection.find({});
-            res.status(201).render("admin/manage-workers", { results: results });
+            res.status(201).render("system-users/manage-workers", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -40,7 +40,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await WorkerCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-worker", { result: result });
+                return res.status(201).render("system-users/edit-worker", { result: result });
             }
 
             res.status(201).send("page not found ...");
@@ -67,7 +67,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - worker successfully ...");
             return res.status(201).redirect("/admin/workers");
 
         } catch (error) {

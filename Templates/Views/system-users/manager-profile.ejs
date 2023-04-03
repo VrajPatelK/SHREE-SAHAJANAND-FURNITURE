@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - <%= result.manager_name%>
+    </title>
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="../css/manage-admin.css">
+
+    <%- include ('../../partials/header-links') %>
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manager Profile
+                <hr>
+            </h4>
+        </div>
+
+        <!-- profile-card -->
+        <div class="container-fluid my-2 mb-4 profile-card-grant-parent-div">
+
+            <div class="container px-sm-2 px-0 profile-card-parent-div">
+
+                <div class="row mx-auto profie-card-div py-5 px-2">
+
+                    <div class="col-lg-6 col-12 px-2 py-2 my-sm-0 mb-3 card profile-img-div" style="width: 15rem;">
+                        <%if(result.manager_image){%>
+                            <img src="<%= result.manager_image%>" class="card-img-top" alt="...">
+                            <%}else{%>
+                                <img src="../Images/temporary/profile-pic.jpg" class="card-img-top" alt="...">
+                                <%}%>
+                    </div>
+
+                    <div class="col-lg-6 col-12 px-3 py-3 profile-info-div">
+                        <ul class="list-group profile-info-grp">
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Email</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%=result.manager_email%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Name</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%= result.manager_name%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Mobile</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%= result.manager_mobile%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Experience</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%= result.manager_experience%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Addresss</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%= result.manager_address%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Skill</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%=result.manager_skill%>
+                                </p>
+                            </li>
+                            <li class="list-group-item my-1">
+                                <p class="col-sm-4 col-12 key-para">Study</p>
+                                <p class="col-sm-8 col-12 py-2 px-2 value-para">
+                                    <%=result.manager_study%>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../../partials/footer')%>
+</body>
+
+</html>

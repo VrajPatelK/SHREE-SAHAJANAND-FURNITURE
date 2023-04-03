@@ -1,11 +1,9 @@
-const VendorCollection = require('../../src/Models/admin/vendor-schema');
+const ExportCollection = require('../../Src/Models/system-users/export-schema');
+const VendorCollection = require('../../Src/Models/system-users/vendor-schema');
 
 module.exports = {
     createVendor: async (req, res) => {
         try {
-            console.log(req.body);
-            console.log("hello");
-
             await VendorCollection.insertMany([{
                 vendor_email: req.body.add_vendor_email,
                 vendor_name: req.body.add_vendor_name,
@@ -24,7 +22,7 @@ module.exports = {
 
             //render the page
             const results = await VendorCollection.find({});
-            res.status(201).render("admin/manage-vendors", { results: results });
+            res.status(201).render("system-users/manage-vendors", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -39,7 +37,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await VendorCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-vendor", { result: result });
+                return res.status(201).render("system-users/edit-vendor", { result: result });
             }
 
             res.status(201).send("page not found ...");
@@ -64,7 +62,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - vendor successfully ...");
             return res.status(201).redirect("/admin/vendors");
 
         } catch (error) {
@@ -78,6 +75,9 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "delete" && target_id !== undefined) {
+
+                // cascading handle
+                await ExportCollection.deleteMany({ vendor: target_id });
                 await VendorCollection.deleteOne({ _id: target_id });
             }
 

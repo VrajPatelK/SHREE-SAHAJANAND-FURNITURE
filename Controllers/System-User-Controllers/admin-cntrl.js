@@ -1,40 +1,14 @@
-const AdminCollection = require('../../src/Models/admin/admin-schema');
-const CustomerCollection = require('../../src/Models/customer-schema');
+const AdminCollection = require("../../Src/Models/system-users/admin-schema");
+const Bcrypt = require("bcryptjs");
 
 module.exports = {
 
-    createAdmin: async (req, res) => {
-        try {
-
-            let newAdmin = await CustomerCollection.findOne({
-                customer_email: req.body.add_admin_email
-            });
-
-            if (newAdmin === null) {
-                return res.status(200).send("user not found:) to add as a admin:)");
-            }
-
-            let admin = new AdminCollection({
-                admins: [{
-                    admin_email: newAdmin.customer_email,
-                    admin_name: newAdmin.customer_name,
-                    admin_img: newAdmin.customer_image
-                }]
-            });
-
-            await admin.save();
-            return res.status(201).redirect("/admin/admins");
-
-        } catch (error) {
-            console.log(error);
-        }
-    },
-
     getAdmins: async (req, res) => {
         try {
+
             //render the page
-            const result = await AdminCollection.findOne({});
-            res.status(201).render("admin/manage-admins", { results: result.admins });
+            const results = await AdminCollection.find({});
+            res.status(201).render("system-users/manage-admins", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -50,7 +24,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await AdminCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-admin", { result: result });
+                return res.status(201).render("system-users/edit-admin", { result: result, swr: false, errorMsg: "admin doesn't exist" });
             }
 
             res.status(201).send("page not found ...");
@@ -62,18 +36,22 @@ module.exports = {
 
     updateAdminPost: async (req, res) => {
         try {
-            let updated_data = new Object();
-            updated_data.admin_email = req.body.update_admin_email;
-            updated_data.admin_name = req.body.update_admin_name;
-            updated_data.admin_pass = req.body.update_admin_pass;
 
-            if (req.body.update_admin_img !== "") {
-                updated_data.admin_img = req.body.update_admin_img;
+            let admin = await AdminCollection.findOne({ admin_email: req.body.admin_email });
+            if (admin === null) {
+                return res.status(200).render("system-users/edit-admin", { result: req.body, swr: true, errorMsg: "Admin doesn't exist, check Email-Id" });
             }
 
+            admin.admin_email = req.body.admin_email;
+            admin.admin_name = req.body.admin_name;
+            admin.admin_img = (req.body.rmvImage === "on") ? "" : req.body.admin_img;
+
+            if (req.body.admin_pass)
+                admin.admin_pass = Bcrypt.hashSync(req.body.admin_pass);
+
             await AdminCollection.updateOne(
-                { _id: req.query._id },
-                { $set: updated_data }
+                { _id: admin._id },
+                { $set: admin }
             );
 
             return res.status(201).redirect("/admin/admins");

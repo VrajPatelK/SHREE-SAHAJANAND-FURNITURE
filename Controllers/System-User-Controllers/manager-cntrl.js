@@ -1,49 +1,46 @@
-const ManagerCollection = require('../../src/Models/admin/manager-schema');
-const CustomerCollection = require('../../src/Models/customer-schema');
-const UserTypeCollection = require('../../src/Models/user-type-schema');
-const { getAllManagerData } = require("../../src/Helpers/other-helpers");
+const ManagerCollection = require('../../Src/Models/system-users/manager-schema');
+const Bcrypt = require("bcryptjs")
 
 module.exports = {
 
-    createManager: async (req, res) => {
+    getCreateManager: async (req, res) => {
+        try {
+            return res.status(200).render("system-users/create-manager", {
+                swr: false,
+                errorMsg: "Manager already exist..."
+            });
+        } catch (error) {
+            return res.status(401).send(error);
+        }
+    },
+    postCreateManager: async (req, res) => {
         try {
 
+            let manager = await ManagerCollection.findOne({ manager_email: req.body.manager_email });
+            if (manager !== null)
+                return res.status(200).render("system-users/create-manager", { result: req.body, swr: true, errorMsg: "Manager is already with this Email-Id..." });
 
-            //verify email-id as customer
-            let customer = await CustomerCollection.findOne({ customer_email: req.body.add_manager_email });
-            if (customer === null) {
-                return res.status(403).send("manager is not registerd !!!");
-            }
+            manager = await ManagerCollection.findOne({ manager_mobile: req.body.manager_mobile });
+            if (manager !== null)
+                return res.status(200).render("system-users/create-manager", { result: req.body, swr: true, errorMsg: "Manager is already with this Mobile number..." });
 
+            req.body.manager_pass = Bcrypt.hashSync(req.body.manager_pass);
 
-            //save the manager data
-            const manager = new ManagerCollection({
-                manager_id: customer._id,
-                manager_skill: req.body.add_manager_skill,
-                manager_study: req.body.add_manager_study,
-                manager_experience: req.body.add_manager_experience,
-            });
-            await manager.save();
-
-            //set - user type
-            const user = await UserTypeCollection.findOne({ user_id: customer._id });
-            user.user_types.push("manager");
-            await user.save();
+            manager = await ManagerCollection.create(req.body);
 
             return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
-            return res.status(500).send(error);
+            return res.status(401).send(error);
         }
     },
     getManagers: async (req, res) => {
         try {
 
             let managers = await ManagerCollection.find({});
-            let results = await getAllManagerData(managers);
-            
+
             //render the page
-            res.status(201).render("admin/manage-managers", { results: results });
+            res.status(200).render("system-users/manage-managers", { results: managers });
 
         } catch (error) {
             console.log(error);
@@ -56,39 +53,34 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "edit" && target_id !== undefined) {
-
-                let manager = await ManagerCollection.findOne({ manager_id: target_id });
-
-                let result = new Object();
-                result.manager_skill = manager.manager_skill;
-                result.manager_study = manager.manager_study;
-                result.manager_experience = manager.manager_experience;
-
-                return res.status(201).render("admin/edit-manager", { result: result });
+                let manager = await ManagerCollection.findOne({ _id: target_id });
+                return res.status(201).render("system-users/edit-manager", { result: manager, swr: false, errorMsg: "" });
             }
 
-            res.status(201).send("page not found ...");
-
+            return res.status(404).send("page not found ...");
         } catch (error) {
             console.log(error);
         }
     },
     updateManagerPost: async (req, res) => {
         try {
-            let updated_data = new Object();
 
-            updated_data = {
-                manager_study: req.body.update_manager_study,
-                manager_experience: req.body.update_manager_experience,
-                manager_skill: req.body.update_manager_skill
-            };
+            let manager = await ManagerCollection.findOne({ manager_email: req.body.manager_email });
+            if (manager !== null && manager._id.toString() !== req.query._id)
+                return res.status(200).render("system-users/edit-manager", { result: req.body, swr: true, errorMsg: "Manager is already with this Email-Id..." });
+
+            manager = await ManagerCollection.findOne({ manager_mobile: req.body.manager_mobile });
+            if (manager !== null && manager._id.toString() !== req.query._id)
+                return res.status(200).render("system-users/edit-manager", { result: req.body, swr: true, errorMsg: "Manager is already with this Mobile number..." });
+
+            manager = req.body;
+            manager.manager_image = (req.body.rmvImage) ? "" : req.body.manager_image;
 
             await ManagerCollection.updateOne(
-                { manager_id: req.query._id },
-                { $set: updated_data }
+                { _id: req.query._id },
+                { $set: manager }
             );
 
-            console.log("update - manager successfully ...");
             return res.status(201).redirect("/admin/managers");
 
         } catch (error) {
@@ -103,10 +95,9 @@ module.exports = {
 
             if (opeartion === "delete" && target_id !== undefined) {
                 await ManagerCollection.deleteOne({ manager_id: target_id });
-                await UserTypeCollection.deleteOne({ user_id: target_id });
             }
 
-            return res.status(201).redirect("/admin/managers");
+            return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
             console.log(error);

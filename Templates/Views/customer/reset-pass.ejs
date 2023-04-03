@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Reset Password </title>
+    <%- include ('../../Partials/header-links') %>
+
+        <link rel="stylesheet" href="../../CSS/index.css">
+        <link rel="stylesheet" href="../../CSS/system-user-login.css">
+        <script src="../../JS/login-script.js"></script>
+</head>
+
+<body>
+    <div class="row mx-auto main-login-div">
+        <div class="col-lg-6 col-md-10 col-12 mx-auto" id="login-form-cnt">
+            <span id="msg-div"></span>
+            <form class="col-lg-8 col-sm-10 col-12 px-3 py-4 rounded" method="post">
+                <caption> <span class="caption"> Enter New Password <i class="fa-solid fa-key"></i>
+                        <hr>
+                    </span></caption>
+                <div class="my-2 input-group">
+                    <span class="input-group-text" id="basic-addon2">
+                        <i class="fa-solid fa-key"></i>
+                    </span>
+                    <input type="text" class="form-control login-input" id="pass" name="pass" placeholder="new password"
+                        required>
+                </div>
+                <div class="mt-3 mb-0 mx-auto d-flex justify-content-start">
+                    <button type="button" class="btn btn-type-1" id="proceed" name="proceed"
+                        onclick="handleResetPass()">
+                        Save <i class="fa-solid fa-right-to-bracket"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include('../../partials/script-link')%>
+</body>
+
+</html>

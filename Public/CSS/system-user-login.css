@@ -1,0 +1,101 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.headDiv {
+    color: #1A120B;
+    text-align: center;
+}
+
+.admin-loign-main-div {
+    height: 65vh;
+    display: flex;
+    align-items: end;
+}
+
+#login-form-cnt {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    color: #fff;
+}
+
+#login-form-cnt>form {
+    /* border: 2px solid blue; */
+    background: #E5E5CB;
+    text-align: center;
+}
+
+input,
+select {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* border: .01rem solid #3C2A21 !important; */
+    color: #1A120B !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    text-align: center;
+}
+
+input:hover,
+select {
+    box-shadow: none;
+}
+
+input::placeholder {
+    color: rgb(134, 133, 133);
+}
+
+.input-group-text {
+    background: #fff !important;
+    color: #1A120B !important;
+    border: none !important;
+}
+
+
+/* customer-login */
+
+.main-login-div {
+    height: 100vh !important;
+}
+
+.img-div {
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.img-div img {
+    height: inherit;
+}
+
+.caption {
+    color: #1A120B;
+    font-size: 1.2rem;
+}
+
+.btn-outline-primary {
+    background: #fff;
+    color: #1A120B;
+    border-color: #3C2A21;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary:hover {
+    background-color: #3C2A21 !important;
+    color: #fff !important;
+    border-color: #3C2A21 !important;
+}
+
+.btn-check:checked+.btn-outline-primary {
+    background-color: #3C2A21 !important;
+    color: #fff !important;
+    border-color: #3C2A21 !important;
+}

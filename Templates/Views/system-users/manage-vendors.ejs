@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Manage Vendors</title>
+    <%- include ('../../partials/header-links') %>
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="../css/manage-admin.css">
+
+
+
+        <style>
+            #item_name {
+                color: #1A120B;
+                font-weight: 500;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            #item_name>option {
+                color: #1A120B !important;
+                background: rgb(255, 240, 235);
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                Manage Vendors
+                <hr>
+            </h4>
+        </div>
+        <div class="container plus-btn-div">
+            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addVendorModal">
+                <i class="fa-solid fa-plus"></i> Add Vendor
+            </button>
+        </div>
+
+
+        <!-- profile-card -->
+        <div class="container-fluid my-5 profile-card-grant-parent-div">
+
+            <div class="container px-sm-2 px-0 profile-card-parent-div">
+                <%if(results.length>0){%>
+                    <% results.forEach(result=> { %>
+
+                        <div class="row mx-auto profie-card-div py-5 mt-5">
+                            <div class="col-10 px-3 py-3 profile-info-div">
+
+                                <ul class="list-group profile-info-grp">
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Vendor - Email</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.vendor_email%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Vendor - Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.vendor_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Vendor - Mobile</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.vendor_mobile%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Vendor - Shop Name</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.vendor_shop_name%>
+                                        </p>
+                                    </li>
+
+                                    <li class="list-group-item my-1">
+                                        <p class="col-sm-4 col-12 key-para">Vendor - Shop Address</p>
+                                        <p class="col-sm-8 col-12 value-para">
+                                            <%= result.vendor_shop_address%>
+                                        </p>
+                                    </li>
+
+                                </ul>
+
+                                <div class="mt-4 profile-info-btn-div">
+                                    <a href="/admin/edit-vendor?op=edit&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Edit <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/admin/delete-vendor?op=delete&_id=<%=result._id%>">
+                                        <button class="btn mx-2 btn-type-2">
+                                            Delete <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <%});%>
+                            <%}else{%>
+                                <p class="py-2" style="color: #1A120B; text-align: center; background: #E5E5CB;">You
+                                    have not add any vendor yet.</p>
+                                <%}%>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <%- include('../../partials/footer')%>
+</body>
+
+</html>
+
+
+<!-- modal for add vendor -->
+
+<div class="modal fade" id="addVendorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addVendorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addVendorModalLabel">Add Vendor
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/vendors" method="post" class="row g-3">
+
+                    <div class="col-12">
+                        <input type="email" class="form-control" id="add_vendor_email" name="add_vendor_email"
+                            placeholder="Vendor Email..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_vendor_name" name="add_vendor_name"
+                            placeholder="Vendor Name..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="tel" class="form-control" id="add_vendor_mobile" name="add_vendor_mobile"
+                            placeholder="Vendor Mobile..." required>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="add_vendor_shop_name" name="add_vendor_shop_name"
+                            placeholder="Vendor Shop Name..." required>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <textarea type="text" class="form-control" id="add_vendor_shop_address" cols="30" rows="10"
+                            name="add_vendor_shop_address" placeholder="Vendor Shop Address..." required> </textarea>
+                        <label for="add_vendor_shop_address">Vendor Shop Address...</label>
+                    </div>
+
+
+                    <div class="col-12 modal-footer">
+                        <button type="submit" id="myform" class="btn btn-type-2">
+                            <i class="fa-solid fa-plus"></i> Add
+                        </button>
+                        <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

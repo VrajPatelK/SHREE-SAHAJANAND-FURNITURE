@@ -1,5 +1,5 @@
-const ExportCollection = require('../../src/Models/admin/export-schema');
-const { addVendorDetails } = require('../../src/Helpers/import-export-helpers');
+const ExportCollection = require('../../Src/Models/system-users/export-schema');
+const VendorCollection = require('../../Src/Models/system-users/vendor-schema');
 
 
 module.exports = {
@@ -7,9 +7,9 @@ module.exports = {
         try {
 
             //check whether vendor is exist
-            let vendor_data = await VendorCollection.findOne({ vendor_email: req.body.key_vendor_email });
+            let vendor = await VendorCollection.findOne({ vendor_email: req.body.key_vendor_email });
 
-            if (vendor_data === null) {
+            if (vendor === null) {
                 return res.send("vendor doesn't exist ...");
             }
 
@@ -20,7 +20,7 @@ module.exports = {
             // insert a data
             await ExportCollection.insertMany([{
 
-                key_vendor_email: req.body.key_vendor_email,
+                vendor: vendor._id,
                 item_info: {
                     item_name: req.body.add_item_name,
                     item_price: req.body.add_item_price,
@@ -42,10 +42,8 @@ module.exports = {
         try {
 
             //render the page
-            let results = await ExportCollection.find({});
-
-            results = await addVendorDetails(results);
-            res.status(201).render("admin/manage-exports", { results: results });
+            let results = await ExportCollection.find({}).populate('vendor');
+            res.status(201).render("system-users/manage-exports", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -60,7 +58,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await ExportCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-export", { result: result });
+                return res.status(201).render("system-users/edit-export", { result: result });
             }
 
             res.status(201).send("page not found ...");
@@ -73,9 +71,9 @@ module.exports = {
         try {
 
             //check whether vendor is exist
-            let vendor_data = await VendorCollection.findOne({ vendor_email: req.body.update_key_vendor_email });
+            let vendor = await VendorCollection.findOne({ vendor_email: req.body.update_key_vendor_email });
 
-            if (vendor_data === null) {
+            if (vendor === null) {
                 return res.send("vendor doesn't exist ...");
             }
 
@@ -85,7 +83,7 @@ module.exports = {
 
             let updated_data = new Object();
             updated_data = {
-                key_vendor_email: req.body.update_key_vendor_email,
+                vendor: vendor._id,
                 item_info: {
                     item_name: req.body.update_item_name,
                     item_price: req.body.update_item_price,
@@ -100,7 +98,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - exports-data successfully ...");
             return res.status(201).redirect("/admin/exports");
 
         } catch (error) {

@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - All Products</title>
+
+    <%- include ('../../partials/header-links') %>
+        <link rel="stylesheet" href="../../../CSS/manage-admin.css">
+
+
+        <%if(session.userType==="customer" || session.userType==="admin" || session.userType==="manager" ){%>
+            <script src="../JS/product-script.js" defer></script>
+            <script>
+                handleFilter();
+            </script>
+            <%}%>
+
+</head>
+
+<body>
+    <%- include('../../partials/navbar')%>
+
+        <div class="container-fluid mx-auto mt-4 headingDiv">
+            <h4 class="headings">
+                <%if(session.userType==="admin" || session.userType==="manager" ){%>
+                    Manage
+                    <%}%>
+
+                        <!-- <span id="page_name"></span> -->
+                        <%=session.page.charAt(0).toUpperCase() + session.page.slice(1) + 's' %>
+            </h4>
+        </div>
+
+        <%if(session.userType==="admin" || session.userType==="manager" ){%>
+
+            <div class="container plus-btn-div">
+                <%if(session.page==="bed" ){%>
+                    <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addBedModal">
+                        <i class="fa-solid fa-plus"></i> Add Bed
+                    </button>
+                    <%} else if(session.page==="chair" ){%>
+                        <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addChairModal">
+                            <i class="fa-solid fa-plus"></i> Add Chair
+                        </button>
+                        <%} else if(session.page==="jula" ){%>
+                            <button class="btn py-2 btn-type-1" data-bs-toggle="modal" data-bs-target="#addJulaModal">
+                                <i class="fa-solid fa-plus"></i> Add Jula
+                            </button>
+                            <%} else if(session.page==="mattresse" ){%>
+                                <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                    data-bs-target="#addMattressesModal">
+                                    <i class="fa-solid fa-plus"></i> Add Mattresses
+                                </button>
+                                <%} else if(session.page==="shoerack" ){%>
+                                    <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                        data-bs-target="#addTvUnitModal">
+                                        <i class="fa-solid fa-plus"></i> Add Shoeracks
+                                    </button>
+                                    <%} else if(session.page==="showcase" ){%>
+                                        <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                            data-bs-target="#addTvUnitModal">
+                                            <i class="fa-solid fa-plus"></i> Add Showcases
+                                        </button>
+                                        <%} else if(session.page==="sofa" ){%>
+                                            <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                                data-bs-target="#addSofaModal">
+                                                <i class="fa-solid fa-plus"></i> Add Sofa
+                                            </button>
+                                            <%} else if(session.page==="table" ){%>
+                                                <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                                    data-bs-target="#addTableModal">
+                                                    <i class="fa-solid fa-plus"></i> Add Table
+                                                </button>
+                                                <%} else if(session.page==="tempale" ){%>
+                                                    <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                                        data-bs-target="#addTvUnitModal">
+                                                        <i class="fa-solid fa-plus"></i> Add Tempales
+                                                    </button>
+                                                    <%} else if(session.page==="tvunit" ){%>
+                                                        <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                                            data-bs-target="#addTvUnitModal">
+                                                            <i class="fa-solid fa-plus"></i> Add Tv Unit
+                                                        </button>
+                                                        <%} else if(session.page==="wardrobe" ){%>
+                                                            <button class="btn py-2 btn-type-1" data-bs-toggle="modal"
+                                                                data-bs-target="#addTvUnitModal">
+                                                                <i class="fa-solid fa-plus"></i> Add Wardrobes
+                                                            </button>
+                                                            <%}%>
+            </div>
+
+            <%}%>
+
+                <div class="container-fluid">
+                    <div class="accordion container accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    Filter
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <!-- content -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="filter-btn-div">
+                                        <button class="btn prize-filter-btn">
+                                            <select class="form-select" id="prize-filter">
+                                                <option value="-1|-1" selected>
+                                                    &#x20b9;
+                                                    Price</option>
+                                                <%for(let i=1; i<=20; i+=2) {%>
+                                                    <option value="<%=500*i%>|<%=500*(i+2)%>">
+                                                        &#x20b9;
+                                                        <%=500*i%> -
+                                                            <%=500*(i+2)%>
+                                                    </option>
+                                                    <%}%>
+                                            </select>
+                                        </button>
+
+                                        <button class="btn discount-filter-btn">
+                                            <select class="form-select" id="discount-filter">
+                                                <option value="-1" selected>
+                                                    Discount
+                                                </option>
+                                                <%for(let i=1; i<=8; i++) {%>
+                                                    <option value="<%=i*10%>">
+                                                        Up to <%=i*10%>%
+                                                    </option>
+                                                    <%}%>
+                                            </select>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="filter-req-btn-div">
+                                        <button class="btn btn-type-1" onclick="handleFilter()">
+                                            Filter <i class="fa-solid fa-filter fa-beat"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container row mx-auto px-0 py-3 card-parent-div">
+
+                </div>
+
+
+                <!-- footer -->
+                <%- include('../../partials/footer')%>
+
+</body>
+
+</html>
+
+<%if(session.userType==="admin" || session.userType==="manager" ){%>
+
+    <!-- modal for add beds -->
+    <div class="modal fade" id="addBedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addBedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addBedModalLabel">Add Bed
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" value="BD-201"
+                                placeholder="Name" required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description">THIS IS Description</textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" value="32" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" value="7" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" value="23" name="add_width"
+                                placeholder="Width" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" value="120" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_warrenty" value="2" name="add_warrenty"
+                                placeholder="Warrenty (Years)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" value="16" name="add_discount"
+                                placeholder="Discount (%)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_max_load" value="550" name="add_max_load"
+                                placeholder="Max. Load (kg)">
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_capacity" value="2" name="add_capacity"
+                                placeholder="Capacity (#People)">
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_storage" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Have Storage
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_storage" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Haven't Storage
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add chairs -->
+    <div class="modal fade" id="addChairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addChairModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addChairModalLabel">Add Chair
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_warrenty" name="add_warrenty"
+                                placeholder="Warrenty (Years)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount (%)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_max_load" name="add_max_load"
+                                placeholder="Max. Load (kg)">
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_backrest_type" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Adjustable
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_backrest_type" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not - Adjustable
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_hasWheels" id="flexRadioDefault3"
+                                    value="on" checked>
+                                <label class="form-check-label" for="flexRadioDefault3" style="color: #fff !important;">
+                                    Has Wheels
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_hasWheels" id="flexRadioDefault4"
+                                    value="off">
+                                <label class="form-check-label" for="flexRadioDefault4" style="color: #fff !important;">
+                                    Hasn't Wheels
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault5" checked>
+                                <label class="form-check-label" for="flexRadioDefault5" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault6">
+                                <label class="form-check-label" for="flexRadioDefault6" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add julas -->
+    <div class="modal fade" id="addJulaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addJulaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addJulaModalLabel">Add Jula
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_colors" name="add_color">
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_seaters" name="add_seaters"
+                                placeholder="Seaters" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_max_load" name="add_max_load"
+                                placeholder="Max.Load (KG)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount(%)" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add mattressess -->
+    <div class="modal fade" id="addMattressesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addMattressesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMattressesModalLabel">Add Mattresses
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_colors" name="add_color">
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_material" name="add_material"
+                                placeholder="Material">
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount (%)" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add shoeracks -->
+    <div class="modal fade" id="addTvUnitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addTvUnitModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTvUnitModalLabel">Add Tv Unit
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_no_of_shelves" name="add_no_of_shelves"
+                                placeholder="No. Of Shelves" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add showcases -->
+    <div class="modal fade" id="addTvUnitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addTvUnitModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTvUnitModalLabel">Add Tv Unit
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_no_of_cupboards"
+                                name="add_no_of_cupboards" placeholder="No. Of Cupboards" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add sofas -->
+    <div class="modal fade" id="addSofaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addSofaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSofaModalLabel">Add Sofa
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_colors" name="add_color"
+                                placeholder="Color">
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_material" name="add_material"
+                                placeholder="Material" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_seaters" name="add_seaters"
+                                placeholder="Seaters" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_warrenty" name="add_warrenty"
+                                placeholder="Warrenty (Years)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount(%)" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add tables -->
+    <div class="modal fade" id="addTableModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addTableModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTableModalLabel">Add Table
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12" id="add_material_div">
+                            <input type="text" class="form-control" id="add_material" name="add_material"
+                                placeholder="Material">
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_warrenty" name="add_warrenty"
+                                placeholder="Warrenty (Years)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_max_load" name="add_max_load"
+                                placeholder="Max. Load (kg)">
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_storage" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Have Storage
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_storage" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Haven't Storage
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add tempales -->
+    <div class="modal fade" id="addTvUnitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addTvUnitModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTvUnitModalLabel">Add Tv Unit
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_no_of_drawers" name="add_no_of_drawers"
+                                placeholder="No. Of Drawers" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add tvunits -->
+    <div class="modal fade" id="addTvUnitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addTvUnitModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTvUnitModalLabel">Add Tv Unit
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_no_of_drawers" name="add_no_of_drawers"
+                                placeholder="No. Of Drawers" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_warrenty" name="add_warrenty"
+                                placeholder="Warrenty (Years)" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for add wardrobes -->
+    <div class="modal fade" id="addTvUnitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="addTvUnitModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTvUnitModalLabel">Add Tv Unit
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control" type="file" id="image_file" name="image_file"
+                                accept=".jpeg, .jpg, .png" onchange="convertToBase64()">
+                            <input type="text" name="image" id="image" hidden>
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_stock" name="add_stock" value="3"
+                                placeholder="Stock" required>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="add_description" name="add_description" class="form-control" rows="3"
+                                required="required" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_color" name="add_color" placeholder="Color"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_length" name="add_length"
+                                placeholder="Length" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_height" name="add_height"
+                                placeholder="Height" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="add_width" name="add_width" placeholder="Width"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_no_of_drawers" name="add_no_of_drawers"
+                                placeholder="No. Of Drawers" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_no_of_cupboards"
+                                name="add_no_of_cupboards" placeholder="No. Of Cupboards" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_price" name="add_price"
+                                placeholder="Price" required>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" id="add_discount" name="add_discount"
+                                placeholder="Discount" required>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-around align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="on"
+                                    id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1" style="color: #fff !important;">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="add_availability" value="off"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2" style="color: #fff !important;">
+                                    Not Available
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 modal-footer">
+                            <button type="submit" id="myform" class="btn btn-type-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-type-1" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%}%>

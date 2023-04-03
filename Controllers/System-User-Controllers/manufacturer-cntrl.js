@@ -1,9 +1,10 @@
-const ManuFacturerCollection = require('../../src/Models/admin/manufacturer-schema');
+const ImportCollection = require('../../Src/Models/system-users/import-schema');
+const ManuFacturerCollection = require('../../Src/Models/system-users/manufacturer-schema');
 
 module.exports = {
     createManufacturer: async (req, res) => {
         try {
-            console.log(req.body);
+
             await ManuFacturerCollection.insertMany([{
                 manufacturer_email: req.body.add_manufacturer_email,
                 manufacturer_name: req.body.add_manufacturer_name,
@@ -22,7 +23,7 @@ module.exports = {
 
             //render the page
             const results = await ManuFacturerCollection.find({});
-            res.status(201).render("admin/manage-manufacturers", { results: results });
+            res.status(201).render("system-users/manage-manufacturers", { results: results });
 
         } catch (error) {
             console.log(error);
@@ -37,7 +38,7 @@ module.exports = {
             if (opeartion === "edit" && target_id !== undefined) {
 
                 const result = await ManuFacturerCollection.findOne({ _id: target_id });
-                return res.status(201).render("admin/edit-manufacturer", { result: result });
+                return res.status(201).render("system-users/edit-manufacturer", { result: result });
             }
 
             res.status(201).send("page not found ...");
@@ -62,7 +63,6 @@ module.exports = {
                 { _id: req.query._id },
                 { $set: updated_data }
             );
-            console.log("update - manufacturer successfully ...");
             return res.status(201).redirect("/admin/manufacturers");
 
         } catch (error) {
@@ -76,6 +76,8 @@ module.exports = {
             let target_id = req.query._id;
 
             if (opeartion === "delete" && target_id !== undefined) {
+                //cascading handle
+                await ImportCollection.deleteMany({ manufacturer: target_id });
                 await ManuFacturerCollection.deleteOne({ _id: target_id });
             }
 
