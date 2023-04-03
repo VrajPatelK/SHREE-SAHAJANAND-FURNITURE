@@ -18,7 +18,7 @@ module.exports = {
             });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -31,7 +31,7 @@ module.exports = {
             });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -43,7 +43,7 @@ module.exports = {
 
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -61,7 +61,7 @@ module.exports = {
                 msg: "Message sent Succussfully..."
             });
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -72,7 +72,7 @@ module.exports = {
             return res.status(200).end();
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -81,7 +81,7 @@ module.exports = {
         try {
             res.status(201).render("index");
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

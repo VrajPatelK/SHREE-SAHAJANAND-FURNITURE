@@ -62,7 +62,7 @@ module.exports = {
             return res.status(201).json(like);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getFavouriteByCustomer: async (req, res) => {
@@ -78,7 +78,7 @@ module.exports = {
             return res.status(200).json(likeItems);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     displayFavourites: async (req, res) => {
@@ -86,7 +86,7 @@ module.exports = {
             return res.status(200).render("customer/my-favs");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     removeFavourite: async (req, res) => {
@@ -103,7 +103,7 @@ module.exports = {
             return res.status(201).json(product);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     createCart: async (req, res) => {
@@ -158,7 +158,7 @@ module.exports = {
             return res.status(201).json(cartItem);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getCartsByCustomer: async (req, res) => {
@@ -173,7 +173,7 @@ module.exports = {
             return res.status(201).json(cartItems);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     displayCarts: async (req, res) => {
@@ -182,7 +182,7 @@ module.exports = {
             return res.status(200).render("customer/add-to-cart");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateCart: async (req, res) => {
@@ -200,7 +200,7 @@ module.exports = {
             return res.status(201).json(cartItem);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     removeCart: async (req, res) => {
@@ -217,7 +217,7 @@ module.exports = {
             return res.status(201).json(product);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -325,7 +325,7 @@ module.exports = {
             return res.status(201).json(order);
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getOrdersByCustomer: async (req, res) => {
@@ -346,7 +346,7 @@ module.exports = {
             return res.status(201).json({ orders: orders, itemArr: items });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getOrderHistoryByCustomer: async (req, res) => {
@@ -367,7 +367,7 @@ module.exports = {
             return res.status(201).json({ orders: orders, itemArr: items });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     displayOrders: async (req, res) => {
@@ -375,7 +375,7 @@ module.exports = {
             return res.status(200).render("customer/my-orders");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     displayOrderHistory: async (req, res) => {
@@ -383,7 +383,7 @@ module.exports = {
             return res.status(200).render("customer/my-orderhistory");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     cancelOrder: async (req, res) => {
@@ -406,7 +406,7 @@ module.exports = {
             return res.json({ msg: "Order Cancelled !!!", oid });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     paymentOrder: async (req, res) => {
@@ -430,8 +430,7 @@ module.exports = {
                 res.status(200).json({ data: order });
             });
         } catch (error) {
-            res.status(500).json({ message: "Internal Server Error!" });
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     paymentVerify: async (req, res) => {
@@ -452,8 +451,7 @@ module.exports = {
                 return res.status(400).json({ message: "Invalid signature sent!" });
             }
         } catch (error) {
-            res.status(500).json({ message: "Internal Server Error!" });
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     }
 };

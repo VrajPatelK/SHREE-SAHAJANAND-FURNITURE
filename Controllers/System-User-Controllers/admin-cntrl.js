@@ -11,7 +11,7 @@ module.exports = {
             res.status(201).render("system-users/manage-admins", { results: results });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -30,7 +30,7 @@ module.exports = {
             res.status(201).send("page not found ...");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -57,7 +57,7 @@ module.exports = {
             return res.status(201).redirect("/admin/admins");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -74,7 +74,7 @@ module.exports = {
             return res.status(201).redirect("/admin/admins");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

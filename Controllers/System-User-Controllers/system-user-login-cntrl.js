@@ -11,7 +11,7 @@ module.exports = {
             return res.status(200).render("system-users/system-user-login", { swr: false });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     postLoginSystemUser: async (req, res) => {
@@ -114,7 +114,7 @@ module.exports = {
             }
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     logoutSystemUser: async (req, res) => {
@@ -158,7 +158,7 @@ module.exports = {
             }
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getSystemUser: async (req, res) => {
@@ -169,7 +169,7 @@ module.exports = {
 
                 let admin = await AdminCollection.findById(id);
                 if (admin === null)
-                    return res.status(403).send("account doesn't exist");
+                    return res.status(404).json({ error: "account doesn't exist" });("account doesn't exist");
 
                 return res.status(200).render("system-users/admin-profile", { result: admin });
             }
@@ -177,7 +177,7 @@ module.exports = {
 
                 let manager = await ManagerCollection.findById(id);
                 if (manager === null)
-                    return res.status(403).send("account doesn't exist");
+                    return res.status(404).json({ error: "account doesn't exist" });("account doesn't exist");
 
                 return res.status(200).render("system-users/manager-profile", { result: manager });
             }
@@ -185,13 +185,13 @@ module.exports = {
 
                 let accountant = await AccountantCollection.findById(id);
                 if (accountant === null)
-                    return res.status(403).send("account doesn't exist");
+                    return res.status(404).json({ error: "account doesn't exist" });
 
                 return res.status(200).render("system-users/accountant-profile", { result: accountant });
             }
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

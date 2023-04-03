@@ -21,7 +21,7 @@ AdminLoginSchema.methods.createToken = async function () {
         return token;
 
     } catch (error) {
-        return res.status(401).send(error);
+        return res.status(500).render("errorpage/error-page-500");
     }
 }
 

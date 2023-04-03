@@ -9,7 +9,8 @@ module.exports = {
             return res.status(200).render("trading/sells");
 
         } catch (error) {
-            return res.status(401).send(error);
+                        return res.status(500).render("errorpage/error-page-500");
+
         }
     },
     getAllSells: async (req, res) => {
@@ -19,7 +20,8 @@ module.exports = {
             return res.status(201).json(sells);
 
         } catch (error) {
-            return res.status(401).send(error);
+                        return res.status(500).render("errorpage/error-page-500");
+
         }
     },
 };

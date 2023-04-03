@@ -57,12 +57,12 @@ module.exports = {
                     result = await WardrobeCollection.deleteOne({ _id: target_id });
                 }
                 else {
-                    return res.status(401).json({ error: true, em: "delete operation failed:)" });
+                    return res.status(404).json({ error: true, em: "delete operation failed, category doesn't match:)" });
                 }
             }
 
             if (result === null)
-                return res.status(401).json({ error: true, em: "delete operation failed, product is not found:)" });
+                return res.status(404).json({ error: true, em: "delete operation failed, product is not found:)" });
 
             //cascading handle
             await CartItemCollection.deleteMany({ product: target_id });
@@ -72,7 +72,7 @@ module.exports = {
 
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 

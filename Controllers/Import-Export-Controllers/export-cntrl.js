@@ -35,7 +35,7 @@ module.exports = {
             return res.status(201).redirect("/admin/exports");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getExports: async (req, res) => {
@@ -46,7 +46,7 @@ module.exports = {
             res.status(201).render("system-users/manage-exports", { results: results });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateExportGet: async (req, res) => {
@@ -64,7 +64,7 @@ module.exports = {
             res.status(201).send("page not found ...");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateExportPost: async (req, res) => {
@@ -101,7 +101,7 @@ module.exports = {
             return res.status(201).redirect("/admin/exports");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteExport: async (req, res) => {
@@ -117,7 +117,7 @@ module.exports = {
             return res.status(201).redirect("/admin/exports");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

@@ -9,7 +9,7 @@ module.exports = {
 
             return res.status(200).render("customer/customer-register", { swr: false });
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     postCreateCustomer: async (req, res) => {
@@ -38,15 +38,7 @@ module.exports = {
             return res.status(301).redirect("/customer-login");
 
         } catch (error) {
-            console.log(error);
-        }
-    },
-    getCustomers: async (req, res) => {
-        try {
-
-
-        } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getCustomer: async (req, res) => {
@@ -60,14 +52,14 @@ module.exports = {
             });
 
             if (customer === null)
-                return res.status(403).send("account doesn't exist");
+                return res.status(404).json({ error: "account doesn't exist" });
 
             return res.status(200).render("customer/customer-profile", {
                 result: customer
             });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getUpdateCustomer: async (req, res) => {
@@ -80,10 +72,10 @@ module.exports = {
                 return res.status(201).render("customer/customer-edit", { result: customer, swr: false });
             }
 
-            return res.status(404).send("page not found ...");
+            return res.status(404).render("errorpage/error-page-404");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     postUpdateCustomer: async (req, res) => {
@@ -119,7 +111,7 @@ module.exports = {
             return res.status(301).redirect("/customer-profile");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteCustomer: async (req, res) => {
@@ -135,7 +127,7 @@ module.exports = {
             return res.status(301).redirect("/customer-register");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getLoginCustomer: async (req, res) => {
@@ -143,7 +135,7 @@ module.exports = {
 
             return res.status(200).render("index", { swr: false });
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     postLoginCustomer: async (req, res) => {
@@ -177,7 +169,7 @@ module.exports = {
             return res.status(301).redirect("/customer-profile");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     logoutCustomer: async (req, res) => {
@@ -195,14 +187,14 @@ module.exports = {
             return res.status(301).redirect("/customer-login");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     SendMailGet: async (req, res) => {
         try {
             return res.render("customer/send-mail", { msg: [undefined] });
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     SendMailPost: async (req, res) => {
@@ -224,14 +216,14 @@ module.exports = {
 
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     changePasswordGet: async (req, res) => {
         try {
             return res.render("customer/reset-pass");
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     changePasswordPost: async (req, res) => {
@@ -245,7 +237,7 @@ module.exports = {
             return res.json({ msg: "Password is updated successfully !!!" });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     }
 }

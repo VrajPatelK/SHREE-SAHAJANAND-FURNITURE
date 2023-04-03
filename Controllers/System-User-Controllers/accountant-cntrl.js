@@ -9,7 +9,7 @@ module.exports = {
                 errorMsg: "Accountant already exist..."
             });
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     postCreateAccountant: async (req, res) => {
@@ -29,7 +29,7 @@ module.exports = {
             return res.status(301).redirect("/admin/accountants");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getAccountants: async (req, res) => {
@@ -40,7 +40,7 @@ module.exports = {
             res.status(200).render("system-users/manage-accountants", { results: accountants });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateAccountantGet: async (req, res) => {
@@ -54,10 +54,10 @@ module.exports = {
                 return res.status(201).render("system-users/edit-accountant", { result: accountant, swr: false, errorMsg: "" });
             }
 
-            return res.status(404).send("page not found ...");
+            return res.status(404).render("errorpage/error-page-404");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateAccountantPost: async (req, res) => {
@@ -82,7 +82,7 @@ module.exports = {
             return res.status(201).redirect("/admin/accountants");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteAccountant: async (req, res) => {
@@ -98,7 +98,7 @@ module.exports = {
             return res.status(201).redirect("/admin/accountants");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

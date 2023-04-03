@@ -56,7 +56,7 @@ module.exports = {
             }
             return result;
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     }
 };

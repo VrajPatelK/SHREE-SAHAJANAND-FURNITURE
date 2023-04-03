@@ -21,8 +21,7 @@ module.exports = {
             if (error.name === "JsonWebTokenError") {
                 return res.status(301).redirect("/sys-user/login");
             }
-            console.log(error);
-            return res.status(401).json(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     isManager: async (req, res, next) => {
@@ -39,8 +38,7 @@ module.exports = {
             if (error.name === "JsonWebTokenError") {
                 return res.status(301).redirect("/sys-user/login");
             }
-            console.log(error);
-            return res.status(401).json(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     isAccountant: async (req, res, next) => {
@@ -58,8 +56,7 @@ module.exports = {
             if (error.name === "JsonWebTokenError") {
                 return res.status(301).redirect("/sys-user/login");
             }
-            console.log(error);
-            return res.status(401).json(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     isCustomer: async (req, res, next) => {
@@ -76,8 +73,7 @@ module.exports = {
             if (error.name === "JsonWebTokenError") {
                 return res.status(301).redirect("/customer-login");
             }
-            console.log(error);
-            return res.status(401).json(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     customerNotLoggedIn: async (req, res, next) => {
@@ -97,7 +93,7 @@ module.exports = {
                     return res.status(201).render("index", { swr: false });
 
             }
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     }
 }

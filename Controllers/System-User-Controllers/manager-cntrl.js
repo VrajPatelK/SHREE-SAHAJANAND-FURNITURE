@@ -10,7 +10,7 @@ module.exports = {
                 errorMsg: "Manager already exist..."
             });
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     postCreateManager: async (req, res) => {
@@ -31,7 +31,7 @@ module.exports = {
             return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getManagers: async (req, res) => {
@@ -43,7 +43,7 @@ module.exports = {
             res.status(200).render("system-users/manage-managers", { results: managers });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateManagerGet: async (req, res) => {
@@ -57,9 +57,9 @@ module.exports = {
                 return res.status(201).render("system-users/edit-manager", { result: manager, swr: false, errorMsg: "" });
             }
 
-            return res.status(404).send("page not found ...");
+            return res.status(404).render("errorpage/error-page-404");
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateManagerPost: async (req, res) => {
@@ -84,7 +84,7 @@ module.exports = {
             return res.status(201).redirect("/admin/managers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteManager: async (req, res) => {
@@ -100,7 +100,7 @@ module.exports = {
             return res.status(301).redirect("/admin/managers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

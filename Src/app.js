@@ -229,10 +229,17 @@ app.post('/cancel-order', purchase_routers);
 app.post("/api/payment/orders", purchase_routers);
 app.post("/api/payment/verify", purchase_routers);
 
-//searchin ...
-// app.get('/autocomplete/', product_read_routers);
-
+//filter-product
 app.post("/filter-products", product_read_routers);
+
+// error-page
+app.get("*", (req, res) => {
+    return res.status(404).render("errorpage/error-page-404");
+});
+
+app.post("*", (req, res) => {
+    return res.status(404).render("errorpage/error-page-404");
+});
 
 app.listen(PORT, () => {
     console.log(`connection successfully... at http://127.0.0.1:${PORT}`);

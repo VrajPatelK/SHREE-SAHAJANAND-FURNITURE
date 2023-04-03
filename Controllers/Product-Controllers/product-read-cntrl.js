@@ -51,14 +51,14 @@ module.exports = {
                 result = await WardrobeCollection.find({ _id: pid });
             }
             else {
-                return res.status(401).json({ error: true, em: "page not found" });
+                return res.status(404).json({ error: true, em: "delete operation failed, category doesn't match:)" });
             }
 
             res.locals.session.page = category;
             res.status(200).render(`products/manage-${category}s`, { results: result });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getProductByFilter: async (req, res) => {
@@ -316,13 +316,13 @@ module.exports = {
                 tmp = await WardrobeCollection.find({}); result = result.concat(tmp);
             }
             else {
-                return res.status(401).json([{ error: true, em: "page not found" }]);
+                return res.status(404).json({ error: true, em: "read operation failed, category doesn't match:)" });
             }
 
             res.status(200).json(result);
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     displayProducts: async (req, res) => {
@@ -338,10 +338,10 @@ module.exports = {
                 return res.status(200).render('products/manage-all-products');
             }
 
-            return res.status(200).json({ msg: "product doesn't found:)" });
+            return res.status(404).json({ msg: "product doesn't found:)" });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

@@ -17,7 +17,7 @@ module.exports = {
             return res.status(201).redirect("/admin/workers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getWorkers: async (req, res) => {
@@ -28,7 +28,7 @@ module.exports = {
             res.status(201).render("system-users/manage-workers", { results: results });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateWorkerGet: async (req, res) => {
@@ -46,7 +46,7 @@ module.exports = {
             res.status(201).send("page not found ...");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateWorkerPost: async (req, res) => {
@@ -70,7 +70,7 @@ module.exports = {
             return res.status(201).redirect("/admin/workers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteWorker: async (req, res) => {
@@ -86,7 +86,7 @@ module.exports = {
             return res.status(201).redirect("/admin/workers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

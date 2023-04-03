@@ -8,7 +8,7 @@ module.exports = {
             return res.status(200).render("trading/orders");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getAllOrders: async (req, res) => {
@@ -28,7 +28,7 @@ module.exports = {
             return res.status(201).json({ orders: orders, itemArr: items });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deliverOrder: async (req, res) => {
@@ -42,7 +42,7 @@ module.exports = {
             return res.json({ status: "ok" });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deliverOrderUncheck: async (req, res) => {
@@ -56,7 +56,7 @@ module.exports = {
             return res.json({ status: "ok" });
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

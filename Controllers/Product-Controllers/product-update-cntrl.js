@@ -54,16 +54,17 @@ module.exports = {
                     result = await WardrobeCollection.findOne({ _id: target_id });
                 }
                 else {
-                    return res.status(401).json({ error: true, em: "edit operation failed:)" });
+                    return res.status(404).json({ error: true, em: "edit operation failed, category doesn't match:)" });
                 }
             }
 
             if (result === null)
-                return res.status(401).json({ error: true, em: "edit operation failed, product is not found:)" });
+                return res.status(404).json({ error: true, em: "edit operation failed, product is not found:)" });
+
             return res.status(201).render(`products/edit-${category}`, { result: result });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -103,7 +104,7 @@ module.exports = {
             return res.status(301).redirect("/product/bed");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -144,7 +145,7 @@ module.exports = {
             return res.status(301).redirect("/product/chair");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -182,7 +183,7 @@ module.exports = {
             return res.status(301).redirect("/product/jula");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -219,7 +220,7 @@ module.exports = {
             return res.status(301).redirect("/product/mattresse");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -255,7 +256,7 @@ module.exports = {
             return res.status(301).redirect("/product/shoerack");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -291,7 +292,7 @@ module.exports = {
             return res.status(301).redirect("/product/showcase");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -330,7 +331,7 @@ module.exports = {
             return res.status(301).redirect("/product/sofa");
 
         } catch (error) {
-            return res.status(401).send(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -370,7 +371,7 @@ module.exports = {
             return res.status(301).redirect("/product/table");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -406,7 +407,7 @@ module.exports = {
             return res.status(301).redirect("/product/tempale");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -443,7 +444,7 @@ module.exports = {
             return res.status(301).redirect("/product/tvunit");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -481,7 +482,7 @@ module.exports = {
             return res.status(301).redirect("/product/wardrobe");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

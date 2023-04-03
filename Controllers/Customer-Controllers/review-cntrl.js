@@ -6,7 +6,7 @@ module.exports = {
 
             return res.render("customer/create-review");
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     createReviewPost: async (req, res) => {
@@ -22,7 +22,7 @@ module.exports = {
             return res.redirect("/my-reviews");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     displayReviews: async (req, res) => {
@@ -30,7 +30,7 @@ module.exports = {
             return res.render("customer/my-reviews");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getAllReviews: async (req, res) => {
@@ -42,7 +42,7 @@ module.exports = {
             return res.json({ reviews });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getReviewSet: async (req, res) => {
@@ -53,7 +53,7 @@ module.exports = {
             return res.json({ reviewProducts });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     editReviewGet: async (req, res) => {
@@ -63,7 +63,7 @@ module.exports = {
 
             return res.render("customer/edit-review", { review });
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     editReviewPost: async (req, res) => {
@@ -80,7 +80,7 @@ module.exports = {
             return res.redirect("/my-reviews");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteReview: async (req, res) => {
@@ -90,7 +90,7 @@ module.exports = {
             return res.redirect("/my-reviews");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 }

@@ -15,7 +15,7 @@ module.exports = {
             return res.status(201).redirect("/admin/manufacturers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getManufacturers: async (req, res) => {
@@ -26,7 +26,7 @@ module.exports = {
             res.status(201).render("system-users/manage-manufacturers", { results: results });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateManufacturerGet: async (req, res) => {
@@ -44,7 +44,7 @@ module.exports = {
             res.status(201).send("page not found ...");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateManufacturerPost: async (req, res) => {
@@ -66,7 +66,7 @@ module.exports = {
             return res.status(201).redirect("/admin/manufacturers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteManufacturer: async (req, res) => {
@@ -84,7 +84,7 @@ module.exports = {
             return res.status(201).redirect("/admin/manufacturers");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

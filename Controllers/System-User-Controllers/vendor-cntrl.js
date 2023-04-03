@@ -14,7 +14,7 @@ module.exports = {
             return res.status(201).redirect("/admin/vendors");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     getVendors: async (req, res) => {
@@ -25,7 +25,7 @@ module.exports = {
             res.status(201).render("system-users/manage-vendors", { results: results });
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateVendorGet: async (req, res) => {
@@ -43,7 +43,7 @@ module.exports = {
             res.status(201).send("page not found ...");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     updateVendorPost: async (req, res) => {
@@ -65,7 +65,7 @@ module.exports = {
             return res.status(201).redirect("/admin/vendors");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
     deleteVendor: async (req, res) => {
@@ -84,7 +84,7 @@ module.exports = {
             return res.status(201).redirect("/admin/vendors");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 };

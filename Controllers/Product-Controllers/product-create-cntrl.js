@@ -40,7 +40,7 @@ module.exports = {
             return res.status(301).redirect("/product/bed");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -73,7 +73,7 @@ module.exports = {
             return res.status(301).redirect("/product/chair");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -103,7 +103,7 @@ module.exports = {
             return res.status(301).redirect("/product/jula");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -132,7 +132,7 @@ module.exports = {
             return res.status(301).redirect("/product/mattresse");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -160,7 +160,7 @@ module.exports = {
             return res.status(301).redirect("/product/shoerack");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -188,7 +188,7 @@ module.exports = {
             return res.status(301).redirect("/product/showcase");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -219,7 +219,7 @@ module.exports = {
             return res.status(301).redirect("/product/sofa");
 
         } catch (error) {
-            return res.status(500).json({ error: true, em: `product post request failed:)` });
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -253,7 +253,7 @@ module.exports = {
             return res.status(301).redirect("/product/table");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -281,7 +281,7 @@ module.exports = {
             return res.status(301).redirect("/product/tempale");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -310,7 +310,7 @@ module.exports = {
             return res.status(301).redirect("/product/tvunit");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 
@@ -340,7 +340,7 @@ module.exports = {
             return res.status(301).redirect("/product/wardrobe");
 
         } catch (error) {
-            console.log(error);
+            return res.status(500).render("errorpage/error-page-500");
         }
     },
 

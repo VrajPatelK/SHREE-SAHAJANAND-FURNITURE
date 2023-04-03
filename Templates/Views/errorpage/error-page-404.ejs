@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSF - Page Not Found</title>
+
+    <%- include ('../../partials/header-links') %>
+        <style>
+            /* error-page code */
+            body {
+                height: 100vh;
+                background: #fafafa;
+                display: flex;
+                align-items: center;
+            }
+
+            .img-div {
+                background: #E5E5CB;
+                border-radius: .5rem;
+            }
+
+            .img-div img {
+                width: 35rem;
+                filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+            }
+
+
+            .txt-head {
+                color: #1A120B;
+                text-shadow: 3px 5px 2px rgb(0 0 0 / 0.4);
+            }
+
+            @media (max-width:576px) {
+                .img-div img {
+                    width: 25rem;
+                }
+            }
+
+            @media (max-width:400px) {
+                .img-div img {
+                    width: 18rem;
+                }
+            }
+        </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div
+            class="col-lg-6 col-md-10 col-12 mx-auto d-flex flex-column justify-content-center align-items-center img-div">
+            <img src="../../Images/other-images/error-page-404.png" alt="">
+            <h3 class="txt-head mt-2 mb-3">Page Not Found 404</h3>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
