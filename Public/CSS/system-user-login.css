@@ -65,8 +65,6 @@ input::placeholder {
 
 .img-div {
     height: inherit;
-    display: flex;
-    align-items: center;
 }
 
 .img-div img {

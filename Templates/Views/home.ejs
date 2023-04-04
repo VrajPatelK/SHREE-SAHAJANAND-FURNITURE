@@ -112,43 +112,6 @@
         </div>
         <!-- BIG DISCOUNT FURNITURE id="discount" -->
 
-        <!-- REVIEW -->
-        <div id="review-div" class="container-fluid">
-            <div class="col-12 py-3 headingDiv">
-                <h1 class="headings">
-                    Customer Reviews
-                    <hr>
-                </h1>
-            </div>
-            <div class="row reviews-card-parent-div">
-
-                <% reviewImg.forEach(element=> { %>
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 my-2 reviews-card-div">
-                        <div class="card col-10 review-card p-3">
-                            <div class="my-3 review-img-div">
-                                <img src="<%=element.link%>" class="card-img-top" alt="..." height="200px"
-                                    width="200px">
-                            </div>
-                            <div class="review-para-div">
-                                <h5 class="text-center review-name py-2">
-                                    <%=element.name%>
-                                </h5>
-                                <p class="review-para">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore ut
-                                    inventore perspiciatis
-                                    dolores impedit enim modi. Voluptate hic nesciunt facere, inventore
-                                    pariatur,
-                                    commodi
-                                    ea,
-                                    nisi quibusdam harum rerum dolores in.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <%});%>
-
-            </div>
-        </div>
 
         <!-- Footer -->
         <%- include('../partials/footer')%>
