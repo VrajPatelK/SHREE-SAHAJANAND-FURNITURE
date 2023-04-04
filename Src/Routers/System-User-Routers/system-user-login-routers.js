@@ -22,10 +22,7 @@ router.use(function (req, res, next) {
     if (res.locals.session.userType === 'admin') { isAdmin(req, res, next); }
     else if (res.locals.session.userType === 'manager') { isManager(req, res, next); }
     else if (res.locals.session.userType === 'accountant') { isAccountant(req, res, next); }
-    else if (res.locals.session.userType === 'customer') {
-        isCustomer(req, res, next);
-        return res.status(301).redirect("/customer-profile");
-    }
+    else { isCustomer(req, res, next); }
 
 });
 

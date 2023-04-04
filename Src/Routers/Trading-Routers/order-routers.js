@@ -11,12 +11,13 @@ const {
 } = require("../../../Controllers/Trading-Controllers/order-controllers");
 
 
-const { isAdmin,isAccountant } = require('../../Middlewares/isLogin'); // isAccountant
+const { isAdmin, isAccountant } = require('../../Middlewares/isLogin'); // isAccountant
 
 router.use(function (req, res, next) {
 
     if (res.locals.session.userType === "admin") { isAdmin(req, res, next); }
     else if (res.locals.session.userType === "accountant") { isAccountant(req, res, next); }
+    else { isAdmin(req, res, next); }
 });
 
 router.get("/orders", displayOrders);

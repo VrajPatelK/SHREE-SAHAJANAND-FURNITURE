@@ -2,7 +2,13 @@
 <div class="top-header row mx-auto px-2 pt-2">
     <div class="d-flex justify-content-between align-items-center">
         <div class="col-1 logo-div d-flex justify-content-center align-items-center">
-            <img src="../../Images/other-images/logo.png" style="width:3rem" alt=" logo..." srcset="">
+            <!-- <img src="../../Images/other-images/logo.png" style="width:3rem" alt=" logo..." srcset=""> -->
+            <div class="logo-text-div">S.S.F</div>
+            <button type="button" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse"
+                aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle Navbar"
+                style="border: 1px solid brown;">
+                <i class="fa-solid fa-bars fa-spin"></i>
+            </button>
         </div>
 
         <%if(session.userType==="customer" || session.userType==="admin" || session.userType==="manager" ){%>
@@ -149,14 +155,14 @@
                                                                 aria-labelledby="dropdownMenuProfile">
                                                                 <li><a class="dropdown-item d-flex justify-content-between align-items-center"
                                                                         href="/customer-login">
-                                                                        Customer Login <i
-                                                                            class="fa-solid fa-file-invoice"></i>
+                                                                        Customer Site
+                                                                        <i class="fa-solid fa-file-invoice"></i>
                                                                     </a>
                                                                 </li>
                                                                 <li><a class="dropdown-item d-flex justify-content-between align-items-center"
                                                                         href="/customer-login">
-                                                                        Admin Login <i
-                                                                            class="fa-solid fa-file-invoice"></i>
+                                                                        Admin Site
+                                                                        <i class="fa-solid fa-file-invoice"></i>
                                                                     </a>
                                                                 </li>
                                                                 <%}%>

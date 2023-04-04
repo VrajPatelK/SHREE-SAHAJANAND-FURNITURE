@@ -27,6 +27,11 @@ const {
 
 } = require("../../../Controllers/Customer-Controllers/purchase-cntrl");
 
+const { isCustomer } = require('../../Middlewares/isLogin');
+
+router.use(function (req, res, next) {
+    isCustomer(req, res, next);
+});
 
 router.post('/add-to-fav', createFavourite);
 router.post('/rmv-to-fav', removeFavourite);

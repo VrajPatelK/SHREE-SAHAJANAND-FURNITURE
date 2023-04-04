@@ -15,6 +15,12 @@ const {
 
 } = require('../../../Controllers/Customer-Controllers/review-cntrl');
 
+const { isCustomer } = require('../../Middlewares/isLogin');
+
+router.use(function (req, res, next) {
+    isCustomer(req, res, next);
+});
+
 router.get('/create-review', createReviewGet);
 router.post('/create-review', createReviewPost);
 router.get('/my-reviews', displayReviews);

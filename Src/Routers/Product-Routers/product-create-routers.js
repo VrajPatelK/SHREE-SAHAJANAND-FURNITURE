@@ -17,11 +17,12 @@ const {
 
 } = require('../../../Controllers/Product-Controllers/product-create-cntrl');
 
-const { isAdmin,isManager } = require('../../Middlewares/isLogin');
+const { isAdmin, isManager } = require('../../Middlewares/isLogin');
 
 router.use(function (req, res, next) {
     if (res.locals.session.userType === 'admin') { isAdmin(req, res, next); }
     else if (res.locals.session.userType === 'manager') { isManager(req, res, next); }
+    else { isAdmin(req, res, next); }
 });
 
 router.post("/product/bed", createBed);
