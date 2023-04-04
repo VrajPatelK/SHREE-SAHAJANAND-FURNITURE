@@ -78,9 +78,6 @@ body {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-#sec-nav {
-    display: flex;
-}
 
 #searchForm {
     display: flex;
@@ -166,6 +163,53 @@ h3 {
     background: #E5E5CB;
 }
 
+/* -============== */
+/* below navbar */
+.below-navbar {
+    width: 100%;
+    position: fixed;
+    bottom: 0%;
+    z-index: 2;
+}
+
+.below-navbar .below-nav-div {
+    /*border: .1rem solid darkorange; */
+    width: 100%;
+    background: #0c0d16;
+    opacity: 80%;
+    border-radius: 10rem;
+    box-shadow: 4px 3px 16px 0px rgba(0, 0, 0, 0.46);
+}
+
+.below-navbar-nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.below-nav-item .below-nav-link {
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    max-width: 2.5rem;
+}
+
+.below-nav-item .below-nav-link:hover {
+    color: #1d1e33 !important;
+}
+
+.below-nav-item:hover {
+    background: #fff;
+    border-radius: 50%;
+}
+
+.cnt-span {
+    background: #fff;
+    border: 2px solid #1A120B;
+    color: #1A120B;
+}
 
 
 /* HEADINGS----------------- */
@@ -366,7 +410,22 @@ h3 {
     }
 }
 
+@media screen and (min-width:767px) {
+
+
+    #toggler-btn-div {
+        display: none !important;
+    }
+
+    /* below navbar */
+    .below-navbar {
+        display: none !important;
+    }
+
+}
+
 @media screen and (min-width:768px) {
+
     .carousel-item img {
         width: 40rem;
         height: 25rem;
@@ -444,6 +503,13 @@ h3 {
 @media screen and (max-width:768px) {
 
     /* navbar */
+    .head-div {
+        display: none !important;
+    }
+
+    .header-icon-div {
+        display: none !important;
+    }
 
     .items-dropdonw,
     .items-dropdonw ul {
@@ -458,6 +524,18 @@ h3 {
         text-align: center;
     }
 
+
+    #toggler-btn-div {
+        display: block !important;
+    }
+
+    /* below navbar */
+    .below-navbar {
+        display: block;
+    }
+
+
+    /* product */
     .product-structure-div {
         width: 100% !important;
     }

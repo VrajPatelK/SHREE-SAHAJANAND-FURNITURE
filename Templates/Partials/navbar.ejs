@@ -2,11 +2,12 @@
 <div class="top-header row mx-auto px-2 pt-2">
     <div class="d-flex justify-content-between align-items-center">
         <div class="col-1 logo-div d-flex justify-content-center align-items-center">
-            <!-- <img src="../../Images/other-images/logo.png" style="width:3rem" alt=" logo..." srcset=""> -->
             <div class="logo-text-div">S.S.F</div>
+        </div>
+        <div id="toggler-btn-div" class="ms-auto px-0 pt-2">
             <button type="button" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse"
                 aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle Navbar"
-                style="border: 1px solid brown;">
+                style="background: #a52a2a4d; color: brown !important;">
                 <i class="fa-solid fa-bars fa-spin"></i>
             </button>
         </div>
@@ -69,13 +70,7 @@
 <!-- SECOND NAVBAR BAR -->
 <nav class="navbar py-0 sticky-top navbar-expand-lg navbar-expand-md">
     <div class="row mx-auto" id="parent-navs">
-        <div id="sec-nav" class="container px-0 pt-2">
-            <!-- togller btn -->
-            <button type="button" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navbar">
-                <span class="navbar-toggler-icon mi-auto d-md-block d-lg-none "></span>
-            </button>
-        </div>
+
         <div id="third-nav" class="container px-0 py-2">
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav nav-fill">
@@ -97,33 +92,34 @@
                             <%if(session.userType==="customer" || session.userType==="admin" ||
                                 session.userType==="manager" ){%>
 
-                                <li class=" dropdown items-dropdown">
+                                <li class=" dropdown items-dropdown d-flex flex-column justify-content-center">
                                     <button class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2" type="button"
                                         id="dropdownMenuProducts" data-bs-toggle="dropdown" aria-expanded="false">
                                         Products <i class="fa-brands fa-product-hunt"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuProducts">
-                                        <li><a class="dropdown-item" href="/product/sofa">Sofas </a>
+                                        <li><a class="dropdown-item text-center" href="/product/sofa">Sofas </a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/bed">Beds </a>
+                                        <li><a class="dropdown-item text-center" href="/product/bed">Beds </a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/mattresse">Mattresses </a>
+                                        <li><a class="dropdown-item text-center" href="/product/mattresse">Mattresses
+                                            </a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/chair">Chairs</a>
+                                        <li><a class="dropdown-item text-center" href="/product/chair">Chairs</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/table">Tables</a>
+                                        <li><a class="dropdown-item text-center" href="/product/table">Tables</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/tvunit">TV Units</a>
+                                        <li><a class="dropdown-item text-center" href="/product/tvunit">TV Units</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/tempale">Tempales</a>
+                                        <li><a class="dropdown-item text-center" href="/product/tempale">Tempales</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/shoerack">Shoeracks</a>
+                                        <li><a class="dropdown-item text-center" href="/product/shoerack">Shoeracks</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/showcase">Showcases</a>
+                                        <li><a class="dropdown-item text-center" href="/product/showcase">Showcases</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/jula">Julas</a>
+                                        <li><a class="dropdown-item text-center" href="/product/jula">Julas</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/product/wardrobe">Wardrobes</a>
+                                        <li><a class="dropdown-item text-center" href="/product/wardrobe">Wardrobes</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -144,7 +140,8 @@
                                                     <%if(session.userType!=="customer" && session.userType!=="admin" &&
                                                         session.userType!=="accountant" && session.userType!=="manager"
                                                         ){%>
-                                                        <li class="dropdown items-dropdown">
+                                                        <li
+                                                            class="dropdown items-dropdown d-flex flex-column justify-content-center">
                                                             <button
                                                                 class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
                                                                 type="button" id="dropdownMenuProfile"
@@ -153,22 +150,21 @@
                                                             </button>
                                                             <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuProfile">
-                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                <li><a class="dropdown-item text-center"
                                                                         href="/customer-login">
-                                                                        Customer Site
-                                                                        <i class="fa-solid fa-file-invoice"></i>
+                                                                        Customer
                                                                     </a>
                                                                 </li>
-                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                <li><a class="dropdown-item text-center"
                                                                         href="/customer-login">
                                                                         Admin Site
-                                                                        <i class="fa-solid fa-file-invoice"></i>
                                                                     </a>
                                                                 </li>
                                                                 <%}%>
                                                                     <!-- profile-dropdown -->
                                                                     <%if(session.userType==="customer" ){%>
-                                                                        <li class="dropdown items-dropdown">
+                                                                        <li
+                                                                            class="dropdown items-dropdown d-flex flex-column justify-content-center">
                                                                             <button
                                                                                 class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
                                                                                 type="button" id="dropdownMenuProfile"
@@ -178,40 +174,43 @@
                                                                             </button>
                                                                             <ul class="dropdown-menu"
                                                                                 aria-labelledby="dropdownMenuProfile">
-                                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                                <li><a class="dropdown-item d-flex justify-content-center align-items-center"
                                                                                         href="/customer-profile">
-                                                                                        My Account <i
+                                                                                        My Account &nbsp;&nbsp;<i
                                                                                             class="fa-solid fa-file-invoice"></i>
                                                                                     </a>
                                                                                 </li>
-                                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                                        href="/my-orders">My Orders <i
+                                                                                <li><a class="dropdown-item d-flex justify-content-center align-items-center"
+                                                                                        href="/my-orders">My Orders
+                                                                                        &nbsp;&nbsp;<i
                                                                                             class="fa-solid fa-bag-shopping"></i></a>
                                                                                 </li>
-                                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                                <li><a class="dropdown-item d-flex justify-content-center align-items-center"
                                                                                         href="/my-order-history">Order
                                                                                         History
-                                                                                        <i
+                                                                                        &nbsp;&nbsp;<i
                                                                                             class="fa-solid fa-clock"></i></a>
                                                                                 </li>
-                                                                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
-                                                                                        href="/my-reviews">My Reviews <i
+                                                                                <li><a class="dropdown-item d-flex justify-content-center align-items-center"
+                                                                                        href="/my-reviews">My Reviews
+                                                                                        &nbsp;&nbsp;<i
                                                                                             class="fa-solid fa-star"></i></a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <hr class="dropdown-divider">
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a class="dropdown-item d-flex justify-content-between
-                                                            align-items-center" href="/customer-logout">Logout<i class="fa-solid
+                                                                                    <a class="dropdown-item d-flex justify-content-center
+                                                            align-items-center" href="/customer-logout">Logout
+                                                                                        &nbsp;&nbsp;<i class="fa-solid
                                                                             fa-right-from-bracket"></i></a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <hr class="dropdown-divider">
                                                                                 </li>
-                                                                                <li><a class="dropdown-item text-danger d-flex justify-content-between align-items-center"
+                                                                                <li><a class="dropdown-item text-danger d-flex justify-content-center align-items-center"
                                                                                         href="/customer-delete">
-                                                                                        Delete Account <i
+                                                                                        Delete Account &nbsp;&nbsp;<i
                                                                                             class="fa-solid fa-trash"></i>
                                                                                     </a>
                                                                                 </li>
@@ -221,7 +220,8 @@
                                                                             <%if( session.userType==="admin" ||
                                                                                 session.userType==="manager" ||
                                                                                 session.userType==="accountant" ) {%>
-                                                                                <li class="dropdown items-dropdown">
+                                                                                <li
+                                                                                    class="dropdown items-dropdown d-flex flex-column justify-content-center">
                                                                                     <button
                                                                                         class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
                                                                                         type="button"
@@ -238,26 +238,28 @@
                                                                                             ||
                                                                                             session.userType==="accountant"
                                                                                             ) {%>
-                                                                                            <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                                            <li><a class="dropdown-item d-flex justify-content-center align-items-center"
                                                                                                     href="/sys-user-profile">
-                                                                                                    My Account <i
+                                                                                                    My Account
+                                                                                                    &nbsp;&nbsp;<i
                                                                                                         class="fa-solid fa-file-invoice"></i>
                                                                                                 </a>
                                                                                             </li>
                                                                                             <%}%>
                                                                                                 <%if(session.userType==="admin"){%>
-                                                                                                    <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                                                                                    <li><a class="dropdown-item d-flex justify-content-center align-items-center"
                                                                                                             href="/admin/admins">
                                                                                                             My Account
-                                                                                                            <i
+                                                                                                            &nbsp;&nbsp;<i
                                                                                                                 class="fa-solid fa-file-invoice"></i>
                                                                                                         </a>
                                                                                                     </li>
                                                                                                     <%}%>
                                                                                                         <li>
-                                                                                                            <a class="dropdown-item d-flex justify-content-between
-                                                    align-items-center" href="/sys-user/logout">Logout<i class="fa-solid
-                                                                    fa-right-from-bracket"></i></a>
+                                                                                                            <a class="dropdown-item d-flex justify-content-center
+                                                    align-items-center" href="/sys-user/logout">Logout &nbsp;&nbsp;
+                                                                                                                <i
+                                                                                                                    class="fa-solid fa-right-from-bracket"></i></a>
                                                                                                         </li>
                                                                                     </ul>
                                                                                 </li>
@@ -266,7 +268,7 @@
                                                                                     <!-- System-users-drop-down -->
                                                                                     <%if(session.userType==="admin" ){%>
                                                                                         <li
-                                                                                            class="dropdown items-dropdown">
+                                                                                            class="dropdown items-dropdown d-flex flex-column justify-content-center">
                                                                                             <button
                                                                                                 class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
                                                                                                 type="button"
@@ -277,33 +279,33 @@
                                                                                             </button>
                                                                                             <ul class="dropdown-menu"
                                                                                                 aria-labelledby="dropdownMenuSysUsers">
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=admins">Admin</a>
                                                                                                 </li>
                                                                                                 <li>
                                                                                                     <hr
                                                                                                         class="dropdown-divider">
                                                                                                 </li>
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=accountants">Accountants</a>
                                                                                                 </li>
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=managers">Managers</a>
                                                                                                 </li>
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=workers">Workers</a>
                                                                                                 </li>
                                                                                                 <li>
                                                                                                     <hr
                                                                                                         class="dropdown-divider">
                                                                                                 </li>
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=manufacturers">Manufacturers</a>
                                                                                                 </li>
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=vendors">Vendors</a>
                                                                                                 </li>
-                                                                                                <li><a class="dropdown-item"
+                                                                                                <li><a class="dropdown-item text-center"
                                                                                                         href="/admin/manage?manage_type=customers">Customers</a>
                                                                                                 </li>
                                                                                             </ul>
@@ -315,7 +317,7 @@
                                                                                                 session.userType==="manager"
                                                                                                 ){%>
                                                                                                 <li
-                                                                                                    class=" dropdown items-dropdown">
+                                                                                                    class=" dropdown items-dropdown d-flex flex-column justify-content-center">
                                                                                                     <button
                                                                                                         class="btn dropdown-toggle btn-type-1-inverse mx-2 py-2"
                                                                                                         type="button"
@@ -326,14 +328,14 @@
                                                                                                     </button>
                                                                                                     <ul class="dropdown-menu"
                                                                                                         aria-labelledby="dropdownMenuImportExport">
-                                                                                                        <li><a class="dropdown-item"
+                                                                                                        <li><a class="dropdown-item text-center"
                                                                                                                 href="/admin/manage?manage_type=import">Import</a>
                                                                                                         </li>
                                                                                                         <li>
                                                                                                             <hr
                                                                                                                 class="dropdown-divider">
                                                                                                         </li>
-                                                                                                        <li><a class="dropdown-item"
+                                                                                                        <li><a class="dropdown-item text-center"
                                                                                                                 href="/admin/manage?manage_type=export">Export</a>
                                                                                                         </li>
                                                                                                     </ul>
@@ -346,4 +348,54 @@
     </div>
 </nav>
 
+
+
 <%=session.userType%>
+    <%if(session.userType==="customer" ){%>
+
+
+        <nav class="navbar below-navbar navbar-expand">
+            <div class="container row mx-auto px-1 below-nav-div">
+                <ul class="navbar-nav below-navbar-nav mx-auto px-2 py-2">
+                    <li class="nav-item mx-2 below-nav-item">
+                        <a class=" nav-link below-nav-link active nav-a selected-a" aria-current="page"
+                            href="/my-orders">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2 below-nav-item">
+                        <a class=" nav-link below-nav-link active nav-a" aria-current="page" href="/my-reviews">
+                            <i class="fa-solid fa-star"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2 below-nav-item">
+                        <a class="nav-link below-nav-link active nav-a position-relative" aria-current="page"
+                            href="/favourites">
+                            <i class="fa-solid fa-heart"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle p-1 rounded-circle cnt-span">
+                                13
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2 below-nav-item">
+                        <a class="nav-link below-nav-link active nav-a position-relative" aria-current="page"
+                            href="/carts">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle p-1 rounded-circle cnt-span">
+                                13
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2 below-nav-item">
+                        <a class="nav-link below-nav-link active nav-a" aria-current="page" href="/customer-profile">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <%}%>
