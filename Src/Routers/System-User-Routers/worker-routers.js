@@ -15,7 +15,7 @@ const {
 const { isAdmin } = require('../../Middlewares/isLogin');
 
 //Middlewares
-router.use(function (req, res, next) { isAdmin(req, res, next); });
+router.use(function (req, res, next) { return res.status(404).render("errorpage/error-page-404"); });
 
 router.post("/admin/workers", createWorker);
 router.get("/admin/workers", getWorkers);

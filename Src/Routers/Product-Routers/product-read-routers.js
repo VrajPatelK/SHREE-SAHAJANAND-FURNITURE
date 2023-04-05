@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
     if (res.locals.session.userType === 'admin') { isAdmin(req, res, next); }
     else if (res.locals.session.userType === 'manager') { isManager(req, res, next); }
     else if (res.locals.session.userType === 'customer') { isCustomer(req, res, next); }
-    else { isCustomer(req, res, next); }
+    else { return res.status(404).render("errorpage/error-page-404"); }
 
 });
 
