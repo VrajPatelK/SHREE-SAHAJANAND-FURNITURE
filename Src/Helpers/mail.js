@@ -2,11 +2,11 @@ const nodemailer = require('nodemailer');
 const { google } = require('googleapis'); // must not be wrote like this const google = require('googleapis');--> it will not work
 const fs = require('fs');
 
-const OWNER = process.env.OWNER;
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
-const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
+// const OWNER = process.env.OWNER;
+// const CLIENT_ID = process.env.CLIENT_ID;
+// const CLIENT_SECRET = process.env.CLIENT_SECRET;
+// const REDIRECT_URI = process.env.REDIRECT_URI;
+// const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const oAuth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
@@ -15,7 +15,6 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 
 oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
-// const PASSWORD = "";
 // const htmlContent = fs.readFileSync('doc.html', 'utf-8');
 
 module.exports = {

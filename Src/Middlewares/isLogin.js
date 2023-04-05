@@ -19,7 +19,7 @@ module.exports = {
 
         } catch (error) {
             if (error.name === "JsonWebTokenError") {
-                return res.status(301).redirect("/sys-user/login");
+                return res.status(404).render("errorpage/error-page-404");
             }
             return res.status(500).render("errorpage/error-page-500");
         }
@@ -36,7 +36,7 @@ module.exports = {
 
         } catch (error) {
             if (error.name === "JsonWebTokenError") {
-                return res.status(301).redirect("/sys-user/login");
+                return res.status(404).render("errorpage/error-page-404");
             }
             return res.status(500).render("errorpage/error-page-500");
         }
@@ -54,7 +54,7 @@ module.exports = {
 
         } catch (error) {
             if (error.name === "JsonWebTokenError") {
-                return res.status(301).redirect("/sys-user/login");
+                return res.status(404).render("errorpage/error-page-404");
             }
             return res.status(500).render("errorpage/error-page-500");
         }
@@ -71,7 +71,7 @@ module.exports = {
 
         } catch (error) {
             if (error.name === "JsonWebTokenError") {
-                return res.status(301).redirect("/customer-login");
+                return res.status(404).render("errorpage/error-page-404");
             }
             return res.status(500).render("errorpage/error-page-500");
         }

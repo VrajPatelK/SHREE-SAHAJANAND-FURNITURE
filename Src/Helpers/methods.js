@@ -1,7 +1,5 @@
 const jsonwebtoken = require("jsonwebtoken");
 const fs = require('fs');
-const VendorCollection = require('../Models/admin/vendor-schema');
-const ManuFacturerCollection = require("../Models/admin/manufacturer-schema");
 
 function getMin(number) {
     return (number * 60 * 1e3);
@@ -27,6 +25,4 @@ module.exports = {
     getMin,
     findAdmin,
     createToken,
-    also_add_vendor_details,
-    also_add_manufacturer_details
 };
