@@ -413,11 +413,6 @@ h3 {
 
 @media screen and (min-width:767px) {
 
-
-    #toggler-btn-div {
-        display: none !important;
-    }
-
     /* below navbar */
     .below-navbar {
         display: none !important;
@@ -438,6 +433,11 @@ h3 {
 }
 
 @media screen and (min-width:992px) {
+
+    #toggler-btn-div {
+        display: none !important;
+    }
+
     .carousel-item img {
         width: 45rem;
         height: 25rem;
@@ -494,6 +494,18 @@ h3 {
 
 @media screen and (max-width:992px) {
 
+    .head-div {
+        display: none !important;
+    }
+
+    .header-icon-div {
+        display: none !important;
+    }
+
+    #toggler-btn-div {
+        display: block !important;
+    }
+
     /*footer*/
     #footer-cr-container {
         font-size: 1.3vw !important;
@@ -504,13 +516,6 @@ h3 {
 @media screen and (max-width:768px) {
 
     /* navbar */
-    .head-div {
-        display: none !important;
-    }
-
-    .header-icon-div {
-        display: none !important;
-    }
 
     .items-dropdonw,
     .items-dropdonw ul {
@@ -523,11 +528,6 @@ h3 {
         align-items: center;
         justify-content: center;
         text-align: center;
-    }
-
-
-    #toggler-btn-div {
-        display: block !important;
     }
 
     /* below navbar */
