@@ -1,4 +1,4 @@
-const ManagerCollection = require('../../Src/Models/system-users/manager-schema');
+const ManagerCollection = require('../../src/Models/system-users/manager-schema');
 const Bcrypt = require("bcryptjs")
 
 module.exports = {

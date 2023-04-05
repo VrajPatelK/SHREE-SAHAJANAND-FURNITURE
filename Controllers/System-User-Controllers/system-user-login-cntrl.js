@@ -1,6 +1,6 @@
-const AdminCollection = require("../../Src/Models/system-users/admin-schema");
-const AccountantCollection = require("../../Src/Models/system-users/accountant-schema");
-const ManagerCollection = require("../../Src/Models/system-users/manager-schema");
+const AdminCollection = require("../../src/Models/system-users/admin-schema");
+const AccountantCollection = require("../../src/Models/system-users/accountant-schema");
+const ManagerCollection = require("../../src/Models/system-users/manager-schema");
 const Bcrypt = require("bcryptjs");
 
 module.exports = {

@@ -25,5 +25,6 @@ AdminLoginSchema.methods.createToken = async function () {
     }
 }
 
+mongoose.models = {}
 const AdminCollection = mongoose.model("admin", AdminLoginSchema);
 module.exports = AdminCollection;

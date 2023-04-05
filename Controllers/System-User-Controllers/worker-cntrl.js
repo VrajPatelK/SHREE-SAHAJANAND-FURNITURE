@@ -1,4 +1,4 @@
-const WorkerCollection = require('../../Src/Models/system-users/worker-schema');
+const WorkerCollection = require('../../src/Models/system-users/worker-schema');
 
 
 module.exports = {

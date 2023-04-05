@@ -35,5 +35,6 @@ ManagerSchema.methods.createToken = async function () {
     }
 }
 
+mongoose.models = {}
 const ManagerCollection = mongoose.model("manager", ManagerSchema);
 module.exports = ManagerCollection;
