@@ -34,6 +34,8 @@
                                     favouriteMap.set(pid, lid);
                                 });
 
+                                $("#no_of_favs_badge").text(likeItems.length);
+                                $("#no_of_favs_").text(data.length);
                                 resolve(favouriteMap);
                             });
                         });
@@ -49,6 +51,7 @@
                                 });
 
                                 $("#no_of_carts_badge").text(cartItems.length);
+                                $("#no_of_carts_").text(data.length);
                                 resolve(cartMap);
                             });
                         });
@@ -272,12 +275,12 @@
 
                                     <%}else if(session.userType==="admin" || session.userType==="manager" ){%>
                                         <div class="mt-4 btn-div">
-                                            <a href="/product/mattress/edit/<%=result._id%>">
+                                            <a href="/product/mattresse/edit/<%=result._id%>">
                                                 <button class="btn mx-2 btn-type-2">
                                                     Edit <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
                                             </a>
-                                            <a href="/product/mattress/delete/<%=result._id%>">
+                                            <a href="/product/mattresse/delete/<%=result._id%>">
                                                 <button class="btn mx-2 btn-type-2">
                                                     Delete <i class="fa-solid fa-trash"></i>
                                                 </button>

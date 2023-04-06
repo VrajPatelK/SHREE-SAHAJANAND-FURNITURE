@@ -12,7 +12,7 @@ const MattressesSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        default: "mattress"
+        default: "mattresse"
     },
     description: {
         type: String,

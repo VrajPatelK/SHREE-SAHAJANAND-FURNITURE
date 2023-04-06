@@ -117,7 +117,7 @@ function filterDisplayManager() {
         }
         else {
 
-            if (category === "sofa" || category === "table" || category === "mattress") {
+            if (category === "sofa" || category === "table" || category === "mattresse") {
                 $(".prize-filter-btn").show();
                 $(".material-filter-btn").show();
                 $(".discount-filter-btn").show();

@@ -31,7 +31,7 @@
                                 class="btn bg-none outline-none rounded border position-relative">
                                 <i class="fa-sharp fa-solid fa-heart" id="favourite-i"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                                    id="no_of_favs_badge">0
+                                    id="no_of_favs_badge">
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
@@ -41,7 +41,7 @@
                                 class="btn bg-none outline-none rounded border position-relative">
                                 <i class="fa-solid fa-cart-shopping" id="cart-i"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                                    id="no_of_carts_badge">0
+                                    id="no_of_carts_badge">
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
@@ -373,8 +373,8 @@
                             href="/favourites">
                             <i class="fa-solid fa-heart"></i>
                             <span
-                                class="position-absolute top-0 start-100 translate-middle p-1 rounded-circle cnt-span">
-                                13
+                                class="position-absolute top-0 start-100 translate-middle py-1 px-2 rounded-circle cnt-span"
+                                id="no_of_favs_">
                                 <span class="visually-hidden">New alerts</span>
                             </span>
                         </a>
@@ -384,9 +384,8 @@
                             href="/carts">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <span
-                                class="position-absolute top-0 start-100 translate-middle p-1 rounded-circle cnt-span">
-                                13
-                                <span class="visually-hidden">New alerts</span>
+                                class="position-absolute top-0 start-100 translate-middle py-1 px-2 rounded-circle cnt-span cnt-span-fav"
+                                id="no_of_carts_"><span class="visually-hidden">New alerts</span>
                             </span>
                         </a>
                     </li>
@@ -398,4 +397,19 @@
                 </ul>
             </div>
         </nav>
+
+        <script>
+
+            $(document).ready(() => {
+
+                $.get('/get-favourites', (data, status) => {
+                    $("#no_of_favs_badge").text(data.length);
+                    $("#no_of_favs_").text(data.length);
+                });
+                $.get('/get-carts', (data, status) => {
+                    $("#no_of_carts_badge").text(data.length);
+                    $("#no_of_carts_").text(data.length);
+                });
+            });
+        </script>
         <%}%>

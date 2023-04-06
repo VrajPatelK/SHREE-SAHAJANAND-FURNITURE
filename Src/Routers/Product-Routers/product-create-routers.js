@@ -28,7 +28,7 @@ router.use(function (req, res, next) {
 router.post("/product/bed", createBed);
 router.post("/product/chair", createChair);
 router.post("/product/jula", createJula);
-router.post("/product/mattresses", createMattresses);
+router.post("/product/mattresse", createMattresses);
 router.post("/product/shoerack", createShoerack);
 router.post("/product/showcase", createShowcase);
 router.post("/product/sofa", createSofa);

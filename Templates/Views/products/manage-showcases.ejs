@@ -34,6 +34,8 @@
                                     favouriteMap.set(pid, lid);
                                 });
 
+                                $("#no_of_favs_badge").text(likeItems.length);
+                                $("#no_of_favs_").text(data.length);
                                 resolve(favouriteMap);
                             });
                         });
@@ -49,6 +51,7 @@
                                 });
 
                                 $("#no_of_carts_badge").text(cartItems.length);
+                                $("#no_of_carts_").text(data.length);
                                 resolve(cartMap);
                             });
                         });

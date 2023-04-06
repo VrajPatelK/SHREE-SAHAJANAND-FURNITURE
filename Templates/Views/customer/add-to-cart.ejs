@@ -25,6 +25,7 @@
                             $.get('/get-carts', (data, status) => {
                                 let cartItems = data;
                                 $("#no_of_carts_badge").text(cartItems.length);
+                                $("#no_of_carts_").text(data.length);
 
                                 //options
                                 let optionsArr = new Array();

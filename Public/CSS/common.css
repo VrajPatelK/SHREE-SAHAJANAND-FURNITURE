@@ -206,9 +206,9 @@ h3 {
 }
 
 .cnt-span {
-    background: #fff;
-    border: 2px solid #1A120B;
-    color: #1A120B;
+    background: #fff !important;
+    border: 2px solid #1A120B !important;
+    color: #1A120B !important;
     font-size: .9rem !important;
 }
 

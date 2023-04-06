@@ -32,7 +32,7 @@ router.get("/product/:category/edit/:pid", updateProductGet);
 router.post("/product/bed/edit/:pid", updateBedPost);
 router.post("/product/chair/edit/:pid", updateChairPost);
 router.post("/product/jula/edit/:pid", updateJulaPost);
-router.post("/product/mattresses/edit/:pid", updateMattressesPost);
+router.post("/product/mattresse/edit/:pid", updateMattressesPost);
 router.post("/product/shoerack/edit/:pid", updateShoerackPost);
 router.post("/product/showcase/edit/:pid", updateShowcasePost);
 router.post("/product/sofa/edit/:pid", updateSofaPost);
