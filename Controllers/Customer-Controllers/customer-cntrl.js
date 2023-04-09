@@ -33,7 +33,7 @@ module.exports = {
                 });
             }
 
-            req.body.pass = Bcrypt.hashSync(req.body.pass); console.log(req.body.image);
+            req.body.pass = Bcrypt.hashSync(req.body.pass);
             customer = await CustomerCollection.create(req.body);
             return res.status(301).redirect("/customer-login");
 
@@ -212,7 +212,7 @@ module.exports = {
                 .then(result => {
                     return res.render("customer/send-mail", { msg: [201, `Email-sent.... on ${email}`], email });
                 })
-                .catch((error) => console.log(error.message));
+                .catch((error) => res.json({ email_err_msg: error.message }));
 
 
         } catch (error) {

@@ -14,7 +14,6 @@ function findAdmin(array, target) {
 }
 
 function createToken(_id, secret_key) {
-    console.log(secret_key);
     return jsonwebtoken.sign({ _id: _id }, secret_key);
 }
 

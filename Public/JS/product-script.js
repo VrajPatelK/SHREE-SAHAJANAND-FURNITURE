@@ -27,7 +27,6 @@ $(function () {
 
 // handle search
 function handleSearch() {
-    console.log($("#search_bar").val());
     window.location.pathname = "/product/" + $("#search_bar").val();
 }
 
@@ -153,9 +152,8 @@ function initPayment(id, data) {
                 $.post("/api/payment/verify", response, (data, status) => {
 
                     if (data.paymentStatus) { // if payment successfull ...
-                        console.log(data);
+                        ;
                         let body = { id };
-                        console.log("body : ", body);
 
                         $.post("/create-order", body, (data, status) => {
                             window.location.pathname = "/my-orders";
@@ -181,7 +179,7 @@ function handlePayment(id, amount) {
         let body = { amount: parseInt(amount) };
 
         $.post("/api/payment/orders", body, (data, status) => {
-            console.log(data);
+            ;
             initPayment(id, data.data);
         });
     });

@@ -25,6 +25,6 @@ function handleResetPass() {
         setTimeout(() => {
             window.location = "/customer-login"
         }, 5000)
-        console.log(data);
+        ;
     });
 }

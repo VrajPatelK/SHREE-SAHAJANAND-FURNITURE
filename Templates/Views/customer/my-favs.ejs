@@ -20,7 +20,7 @@
 
                         getFavs = new Promise((resolve, reject) => {
                             $.get('/get-favourites', (data, status) => {
-                                console.log(data);
+                                ;
                                 let favItems = data;
                                 $("#no_of_favs_badge").text(favItems.length);
                                 let html = "";

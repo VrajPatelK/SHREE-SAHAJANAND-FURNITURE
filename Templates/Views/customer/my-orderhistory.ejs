@@ -30,7 +30,6 @@
                     });
 
                     getreviewProducts.then((ProductSet) => {
-                        console.log(ProductSet);
 
                         getOrders = new Promise((resolve, reject) => {
                             $.get('/get-order-history', (data, status) => {
@@ -44,7 +43,6 @@
 
                                 let orders = data.orders;
                                 let html = "";
-                                console.log(orders);
                                 for (let i = 0; i < orders.length; i++) {
                                     let order = orders[i];
                                     let left_cards = "";
@@ -57,11 +55,9 @@
 
                                         let btn_html = "";
                                         if (ProductSet.has(item.product._id)) {
-                                            console.log("h1");
                                             btn_html = '<span class="badge rounded-pill bg-dark p-2" style="font-weight:200;letter-spacing:.1rem;">Reviewed !!!</span>';
                                         }
                                         else {
-                                            console.log("h2");
                                             btn_html = `<a href="/create-review?pid=${item.product._id}&category=${item.product.category}" class="btn btn-outline-dark">Review <i class="fa-solid fa-star fa-beat"></i></a>`;
                                         }
                                         left_cards +=

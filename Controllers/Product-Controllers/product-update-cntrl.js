@@ -70,7 +70,7 @@ module.exports = {
 
     updateBedPost: async (req, res) => {
         try {
-            console.log(req.body.image);
+            
             let updated_data = new Object();
             const availability = (req.body.update_availability === "on") ? true : false;
             const storage = (req.body.update_storage === "on") ? true : false;
