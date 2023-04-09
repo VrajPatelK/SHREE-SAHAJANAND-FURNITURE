@@ -14,7 +14,10 @@ const {
 const { isAdmin } = require('../../Middlewares/isLogin');
 
 //Middlewares
-router.use(function (req, res, next) { return res.status(404).render("errorpage/error-page-404"); });
+router.use(function (req, res, next) {
+    if (res.locals.session.userType === "admin") { isAdmin(req, res, next); }
+    else return res.status(404).render("errorpage/error-page-404");
+});
 
 router.get("/admin/admins", getAdmins);
 router.get("/admin/edit-admin", updateAdminGet);
