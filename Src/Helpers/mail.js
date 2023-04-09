@@ -21,7 +21,6 @@ module.exports = {
     sendMail: async (mail, cid, makeid) => {
         try {
             const accessToken = await oAuth2Client.getAccessToken();
-            // const accessToken = "ya29.a0AX9GBdU-WGCjpARufbYmxvUhI0J5gcJ4Y0yqXnFEKnqr_8dL2mwZYi0Cn4MT2UenRSvbKlSQAHUbwTeSFl6na7OyMmGd3wIdxVV5oeKAtHrSLSDzvHDroseSs6zex8bVgJDoFOf_1MJDnw1qR15Dpov2Z_4s29saCgYKARESAQASFQHUCsbCGM63SWTwC3TA9KPpSlgSpQ0166";
 
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
