@@ -37,6 +37,6 @@ CustomerSchema.methods.createToken = async function () {
     }
 }
 
-mongoose.models = {}
+// mongoose.models = {}
 const CustomerCollection = mongoose.model("customer", CustomerSchema);
 module.exports = CustomerCollection;
