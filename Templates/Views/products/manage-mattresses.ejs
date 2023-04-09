@@ -173,9 +173,13 @@
                                         </p>
                                     </div>
                                     <div class="row mx-auto info-div my-2">
-                                        <p class="col-lg-4 col-12 key-para px-2 py-2">Availability : </p>
+                                        <p class="col-lg-4 col-12 key-para px-2 py-2">Stock : </p>
                                         <p class="col-lg-8 col-12 value-para px-2 py-2">
-                                            <%=result.availability%>
+                                            <%if(result.stock> 0){%>
+                                                <%=result.stock%>
+                                                    <%}else{%>
+                                                        <span class="text-danger">out of stock!!!</span>
+                                                        <%}%>
                                         </p>
                                     </div>
                                     <div class="row mx-auto info-div my-2">

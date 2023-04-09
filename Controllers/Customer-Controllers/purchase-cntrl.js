@@ -293,6 +293,15 @@ module.exports = {
                         quantity: item.quantity
                     });
 
+                    //stock updatation
+                    if (item.product.stock >= item.quantity) {
+                        item.product.stock -= item.quantity;
+                        await item.product.save();
+                    } else {
+                        item.product.stock = 0;
+                        await item.product.save();
+                    }
+
                 } else {
                     let order_total = Math.ceil(item.price * 1);
                     let order_discount = Math.floor(order_total * (item.discount / 100));
@@ -312,6 +321,16 @@ module.exports = {
                         productType: item.category,
                         quantity: 1
                     });
+
+                    //stock updatation
+                    if (item.stock >= 1) {
+                        item.stock -= 1;
+                        await item.save();
+                    }
+                    else {
+                        item.stock = 0;
+                        await item.save();
+                    }
                 }
             }
 

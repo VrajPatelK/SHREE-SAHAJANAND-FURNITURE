@@ -93,7 +93,7 @@
                 let body = { oid };
 
                 $.post("/cancel-order", body, function (data, status) {
-                    console.log(body);
+                    alert("Order is cancelled !!!");
                     display_orders();
                 });
             }

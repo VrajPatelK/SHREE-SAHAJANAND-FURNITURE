@@ -100,7 +100,7 @@
                     let body = { cartid: cartid };
 
                     $.post("/rmv-to-cart", body, function (data, status) {
-                        console.log(body);
+    
                         display_carts();
                     });
                 }
