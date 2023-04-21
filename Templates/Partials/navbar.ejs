@@ -74,17 +74,17 @@
         <div id="third-nav" class="container px-0 py-2">
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav nav-fill">
-
-                    <li class="nav-item btn-type-1-inverse mx-2">
-                        <a class="nav-link" aria-current="page" href="/">Home <i class="fa-solid fa-house"></i></a>
-                    </li>
-                    <li class="nav-item btn-type-1-inverse mx-2">
-                        <a class="nav-link" href="/about">About Us <i class="fa-solid fa-address-card"></i></a>
-                    </li>
-                    <li class="nav-item btn-type-1-inverse mx-2">
-                        <a class="nav-link" href="/contact">Contact Us <i class="fa-solid fa-phone"></i></a>
-                    </li>
                     <%if(session.userType==="customer"){%>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link" aria-current="page" href="/">Home <i class="fa-solid fa-house"></i></a>
+                        </li>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link" href="/about">About Us <i class="fa-solid fa-address-card"></i></a>
+                        </li>
+                        <li class="nav-item btn-type-1-inverse mx-2">
+                            <a class="nav-link" href="/contact">Contact Us <i class="fa-solid fa-phone"></i></a>
+                        </li>
+
                         <li class="nav-item btn-type-1-inverse mx-2">
                             <a class="nav-link" href="/product/all">All Furniture <i class="fa-solid fa-chair"></i></a>
                         </li>

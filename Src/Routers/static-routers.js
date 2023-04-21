@@ -7,9 +7,14 @@ const {
     getAboutPage,
     getContactPage,
     postContactPage,
-    getLandingPage,
     createSubscriber
 } = require("../../Controllers/static-cntrl");
+
+const { isCustomer } = require('../Middlewares/isLogin');
+
+router.use(function (req, res, next) {
+    isCustomer(req, res, next);
+});
 
 router.get("/", getIndexPage);
 router.get("/about", getAboutPage);

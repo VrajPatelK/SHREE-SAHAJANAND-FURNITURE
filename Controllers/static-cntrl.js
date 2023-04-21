@@ -75,13 +75,4 @@ module.exports = {
             return res.status(500).render("errorpage/error-page-500");
         }
     },
-
-    getLandingPage: async (req, res) => {
-
-        try {
-            res.status(201).render("index");
-        } catch (error) {
-            return res.status(500).render("errorpage/error-page-500");
-        }
-    },
 };
