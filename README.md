@@ -65,12 +65,16 @@ https://github.com/VrajPatelK/SHREE-SAHAJANAND-FURNITURE.git
 ```
 cd SHREE-SAHAJANAND-FURNITURE
 ```
-3. Open a web browser and navigate to (If live server plugin installed)
+3. Run command to install npm package
+```
+npm install 
+```
+4. manage .env file
+5. Connect to the DB (MongoDB)
+6. Open a web browser and navigate to
 ``` 
 http://localhost:8500 
 ```
-4. Connect to the DB (MongoDB)
-
 ### Certificate
 
 This is to certify that the project entitled <b>“Furniture Showroom web application”</b> is a Bonafide report of the work carried out by ```Patel Vraj (Roll No. IT117 ID No: 20ITUOS071) ```and ```Patel Yashvi (Roll No. IT120 ID No: 20ITUBS129)``` of the Department of Information Technology, semester VI. They were involved in Project work during the academic year ```2022-2023```.
