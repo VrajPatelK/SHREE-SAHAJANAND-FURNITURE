@@ -1,3 +1,4 @@
+const { parseTwoDigitYear } = require('moment/moment');
 const mongoose = require('mongoose');
 
 const FavouriteSchema = new mongoose.Schema({
@@ -10,3 +11,5 @@ const FavouriteSchema = new mongoose.Schema({
 
 const FavouriteCollection = mongoose.model("favourite", FavouriteSchema);
 module.exports = FavouriteCollection;
+
+

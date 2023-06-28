@@ -65,11 +65,17 @@ https://github.com/VrajPatelK/SHREE-SAHAJANAND-FURNITURE.git
 ```
 cd SHREE-SAHAJANAND-FURNITURE
 ```
-3. Open a web browser and navigate to (If live server plugin installed)
+
+3. Import node packages
+```
+npm install
+```
+4. Manage .env file
+5. Connect to the DB (MongoDB)
+6. Open a web browser and navigate to (If live server plugin installed)
 ``` 
 http://localhost:8500 
 ```
-4. Connect to the DB (MongoDB)
 
 ### Certificate
 

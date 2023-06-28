@@ -12,11 +12,12 @@ const {
 
 const { isCustomer } = require('../Middlewares/isLogin');
 
+router.get("/", getIndexPage);
+
 router.use(function (req, res, next) {
     isCustomer(req, res, next);
 });
 
-router.get("/", getIndexPage);
 router.get("/about", getAboutPage);
 router.get("/contact", getContactPage);
 router.post("/contact", postContactPage);
