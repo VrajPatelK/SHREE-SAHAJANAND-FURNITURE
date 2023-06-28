@@ -83,7 +83,6 @@ npm install
 ``` 
 http://localhost:8500 
 ```
-
 ### Certificate
 
 This is to certify that the project entitled <b>“Furniture Showroom web application”</b> is a Bonafide report of the work carried out by ```Patel Vraj (Roll No. IT117 ID No: 20ITUOS071) ```and ```Patel Yashvi (Roll No. IT120 ID No: 20ITUBS129)``` of the Department of Information Technology, semester VI. They were involved in Project work during the academic year ```2022-2023```.
