@@ -73,6 +73,13 @@ npm install
 4. Manage .env file
 5. Connect to the DB (MongoDB)
 6. Open a web browser and navigate to (If live server plugin installed)
+3. Run command to install npm package
+```
+npm install 
+```
+4. manage .env file
+5. Connect to the DB (MongoDB)
+6. Open a web browser and navigate to
 ``` 
 http://localhost:8500 
 ```
